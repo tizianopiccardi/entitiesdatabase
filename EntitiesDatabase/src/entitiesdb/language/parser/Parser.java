@@ -509,10 +509,10 @@ public class Parser
         PPattern ppatternNode1;
         {
             // Block
-        PEntity pentityNode2;
-        pentityNode2 = (PEntity)nodeArrayList1.get(0);
+        PValuetype pvaluetypeNode2;
+        pvaluetypeNode2 = (PValuetype)nodeArrayList1.get(0);
 
-        ppatternNode1 = new ASinglePattern(pentityNode2);
+        ppatternNode1 = new ASinglePattern(pvaluetypeNode2);
         }
 	nodeList.add(ppatternNode1);
         return nodeList;
@@ -531,14 +531,14 @@ public class Parser
         PPattern ppatternNode1;
         {
             // Block
-        PEntity pentityNode2;
+        PValuetype pvaluetypeNode2;
         TComa tcomaNode3;
         PPattern ppatternNode4;
-        pentityNode2 = (PEntity)nodeArrayList1.get(0);
+        pvaluetypeNode2 = (PValuetype)nodeArrayList1.get(0);
         tcomaNode3 = (TComa)nodeArrayList2.get(0);
         ppatternNode4 = (PPattern)nodeArrayList3.get(0);
 
-        ppatternNode1 = new AListPattern(pentityNode2, tcomaNode3, ppatternNode4);
+        ppatternNode1 = new AListPattern(pvaluetypeNode2, tcomaNode3, ppatternNode4);
         }
 	nodeList.add(ppatternNode1);
         return nodeList;
@@ -651,43 +651,43 @@ public class Parser
 			{{-1, ERROR, 2}, {10, ACCEPT, -1}, },
 			{{-1, ERROR, 3}, {2, SHIFT, 5}, },
 			{{-1, ERROR, 4}, {5, SHIFT, 6}, },
-			{{-1, ERROR, 5}, {5, SHIFT, 1}, },
-			{{-1, ERROR, 6}, {1, SHIFT, 11}, },
-			{{-1, ERROR, 7}, {4, SHIFT, 12}, },
-			{{-1, REDUCE, 9}, {0, SHIFT, 13}, },
-			{{-1, REDUCE, 0}, },
-			{{-1, REDUCE, 12}, {8, SHIFT, 14}, },
-			{{-1, ERROR, 11}, {5, SHIFT, 16}, {6, SHIFT, 17}, {7, SHIFT, 18}, },
-			{{-1, REDUCE, 1}, },
-			{{-1, ERROR, 13}, {5, SHIFT, 1}, },
-			{{-1, ERROR, 14}, {5, SHIFT, 16}, {6, SHIFT, 17}, {7, SHIFT, 18}, },
-			{{-1, REDUCE, 8}, },
+			{{-1, ERROR, 5}, {5, SHIFT, 8}, {6, SHIFT, 9}, {7, SHIFT, 10}, },
+			{{-1, ERROR, 6}, {1, SHIFT, 15}, },
+			{{-1, ERROR, 7}, {4, SHIFT, 16}, },
 			{{-1, REDUCE, 5}, {3, SHIFT, 4}, },
 			{{-1, REDUCE, 6}, },
 			{{-1, REDUCE, 4}, },
 			{{-1, REDUCE, 7}, },
+			{{-1, REDUCE, 9}, {0, SHIFT, 17}, },
+			{{-1, REDUCE, 0}, },
+			{{-1, REDUCE, 12}, {8, SHIFT, 18}, },
+			{{-1, ERROR, 15}, {5, SHIFT, 8}, {6, SHIFT, 9}, {7, SHIFT, 10}, },
+			{{-1, REDUCE, 1}, },
+			{{-1, ERROR, 17}, {5, SHIFT, 8}, {6, SHIFT, 9}, {7, SHIFT, 10}, },
+			{{-1, ERROR, 18}, {5, SHIFT, 8}, {6, SHIFT, 9}, {7, SHIFT, 10}, },
+			{{-1, REDUCE, 8}, },
 			{{-1, REDUCE, 2}, {0, SHIFT, 24}, },
 			{{-1, REDUCE, 10}, },
 			{{-1, ERROR, 22}, {9, SHIFT, 25}, },
 			{{-1, REDUCE, 11}, {0, SHIFT, 26}, },
 			{{-1, ERROR, 24}, {5, SHIFT, 6}, },
-			{{-1, ERROR, 25}, {5, SHIFT, 16}, {6, SHIFT, 17}, {7, SHIFT, 18}, },
-			{{-1, ERROR, 26}, {5, SHIFT, 16}, {6, SHIFT, 17}, {7, SHIFT, 18}, },
+			{{-1, ERROR, 25}, {5, SHIFT, 8}, {6, SHIFT, 9}, {7, SHIFT, 10}, },
+			{{-1, ERROR, 26}, {5, SHIFT, 8}, {6, SHIFT, 9}, {7, SHIFT, 10}, },
 			{{-1, REDUCE, 3}, },
 			{{-1, REDUCE, 13}, },
 			{{-1, ERROR, 29}, {9, SHIFT, 30}, },
-			{{-1, ERROR, 30}, {5, SHIFT, 16}, {6, SHIFT, 17}, {7, SHIFT, 18}, },
+			{{-1, ERROR, 30}, {5, SHIFT, 8}, {6, SHIFT, 9}, {7, SHIFT, 10}, },
 			{{-1, REDUCE, 14}, },
         };*/
     private static int[][][] gotoTable;
 /*      {
 			{{-1, 2}, },
-			{{-1, 19}, {0, 3}, {5, 8}, {13, 8}, },
+			{{-1, 11}, {0, 3}, },
 			{{-1, 7}, {24, 27}, },
-			{{-1, 20}, {14, 22}, {25, 28}, {26, 29}, {30, 31}, },
-			{{-1, 9}, },
-			{{-1, 10}, {13, 21}, },
-			{{-1, 15}, },
+			{{-1, 12}, {15, 20}, {18, 22}, {25, 28}, {26, 29}, {30, 31}, },
+			{{-1, 13}, },
+			{{-1, 14}, {17, 21}, },
+			{{-1, 19}, },
 			{{-1, 23}, },
         };*/
     private static String[] errorMessages;
@@ -696,21 +696,21 @@ public class Parser
 			"expecting: '('",
 			"expecting: EOF",
 			"expecting: ':-'",
+			"expecting: identifier, variable, string",
 			"expecting: ':'",
 			"expecting: ')'",
+			"expecting: ',', '(', ')', '?', '=', EOF",
+			"expecting: ',', ')', '?', '=', EOF",
 			"expecting: ',', '?', EOF",
 			"expecting: '?', EOF",
-			"expecting: identifier, variable, string",
 			"expecting: ',', ':-', ')', '?', '=', EOF",
-			"expecting: ',', '(', ')', '=', EOF",
-			"expecting: ',', ')', '=', EOF",
 			"expecting: ',', ')'",
 			"expecting: '='",
 			"expecting: ',', EOF",
         };*/
     private static int[] errors;
 /*      {
-			0, 1, 2, 3, 0, 0, 4, 5, 6, 2, 7, 8, 9, 0, 8, 2, 10, 11, 11, 11, 12, 7, 13, 14, 0, 8, 8, 5, 14, 13, 8, 14, 
+			0, 1, 2, 3, 0, 4, 5, 6, 7, 8, 8, 8, 9, 2, 10, 4, 11, 4, 4, 2, 12, 10, 13, 14, 0, 4, 4, 6, 14, 13, 4, 14, 
         };*/
 
     static 

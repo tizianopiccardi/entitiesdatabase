@@ -287,9 +287,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseASinglePattern(ASinglePattern node)
     {
         inASinglePattern(node);
-        if(node.getEntity() != null)
+        if(node.getValuetype() != null)
         {
-            node.getEntity().apply(this);
+            node.getValuetype().apply(this);
         }
         outASinglePattern(node);
     }
@@ -316,9 +316,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getComa().apply(this);
         }
-        if(node.getEntity() != null)
+        if(node.getValuetype() != null)
         {
-            node.getEntity().apply(this);
+            node.getValuetype().apply(this);
         }
         outAListPattern(node);
     }

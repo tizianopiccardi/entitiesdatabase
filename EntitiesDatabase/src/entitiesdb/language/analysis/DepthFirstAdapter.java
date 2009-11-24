@@ -287,9 +287,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseASinglePattern(ASinglePattern node)
     {
         inASinglePattern(node);
-        if(node.getEntity() != null)
+        if(node.getValuetype() != null)
         {
-            node.getEntity().apply(this);
+            node.getValuetype().apply(this);
         }
         outASinglePattern(node);
     }
@@ -308,9 +308,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseAListPattern(AListPattern node)
     {
         inAListPattern(node);
-        if(node.getEntity() != null)
+        if(node.getValuetype() != null)
         {
-            node.getEntity().apply(this);
+            node.getValuetype().apply(this);
         }
         if(node.getComa() != null)
         {
