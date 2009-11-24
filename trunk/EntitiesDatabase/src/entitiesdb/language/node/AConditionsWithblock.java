@@ -7,7 +7,7 @@ import entitiesdb.language.analysis.*;
 @SuppressWarnings("nls")
 public final class AConditionsWithblock extends PWithblock
 {
-    private TWith _with_;
+    private TQmark _qmark_;
     private PConditions _conditions_;
 
     public AConditionsWithblock()
@@ -16,11 +16,11 @@ public final class AConditionsWithblock extends PWithblock
     }
 
     public AConditionsWithblock(
-        @SuppressWarnings("hiding") TWith _with_,
+        @SuppressWarnings("hiding") TQmark _qmark_,
         @SuppressWarnings("hiding") PConditions _conditions_)
     {
         // Constructor
-        setWith(_with_);
+        setQmark(_qmark_);
 
         setConditions(_conditions_);
 
@@ -30,7 +30,7 @@ public final class AConditionsWithblock extends PWithblock
     public Object clone()
     {
         return new AConditionsWithblock(
-            cloneNode(this._with_),
+            cloneNode(this._qmark_),
             cloneNode(this._conditions_));
     }
 
@@ -39,16 +39,16 @@ public final class AConditionsWithblock extends PWithblock
         ((Analysis) sw).caseAConditionsWithblock(this);
     }
 
-    public TWith getWith()
+    public TQmark getQmark()
     {
-        return this._with_;
+        return this._qmark_;
     }
 
-    public void setWith(TWith node)
+    public void setQmark(TQmark node)
     {
-        if(this._with_ != null)
+        if(this._qmark_ != null)
         {
-            this._with_.parent(null);
+            this._qmark_.parent(null);
         }
 
         if(node != null)
@@ -61,7 +61,7 @@ public final class AConditionsWithblock extends PWithblock
             node.parent(this);
         }
 
-        this._with_ = node;
+        this._qmark_ = node;
     }
 
     public PConditions getConditions()
@@ -93,7 +93,7 @@ public final class AConditionsWithblock extends PWithblock
     public String toString()
     {
         return ""
-            + toString(this._with_)
+            + toString(this._qmark_)
             + toString(this._conditions_);
     }
 
@@ -101,9 +101,9 @@ public final class AConditionsWithblock extends PWithblock
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._with_ == child)
+        if(this._qmark_ == child)
         {
-            this._with_ = null;
+            this._qmark_ = null;
             return;
         }
 
@@ -120,9 +120,9 @@ public final class AConditionsWithblock extends PWithblock
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._with_ == oldChild)
+        if(this._qmark_ == oldChild)
         {
-            setWith((TWith) newChild);
+            setQmark((TQmark) newChild);
             return;
         }
 

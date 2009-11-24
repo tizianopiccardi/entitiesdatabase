@@ -5,19 +5,19 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ARequest extends PRequest
+public final class AEntity extends PEntity
 {
     private TIdentifier _identifier_;
     private TLbracket _lbracket_;
     private PAttributes _attributes_;
     private TRbracket _rbracket_;
 
-    public ARequest()
+    public AEntity()
     {
         // Constructor
     }
 
-    public ARequest(
+    public AEntity(
         @SuppressWarnings("hiding") TIdentifier _identifier_,
         @SuppressWarnings("hiding") TLbracket _lbracket_,
         @SuppressWarnings("hiding") PAttributes _attributes_,
@@ -37,7 +37,7 @@ public final class ARequest extends PRequest
     @Override
     public Object clone()
     {
-        return new ARequest(
+        return new AEntity(
             cloneNode(this._identifier_),
             cloneNode(this._lbracket_),
             cloneNode(this._attributes_),
@@ -46,7 +46,7 @@ public final class ARequest extends PRequest
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseARequest(this);
+        ((Analysis) sw).caseAEntity(this);
     }
 
     public TIdentifier getIdentifier()

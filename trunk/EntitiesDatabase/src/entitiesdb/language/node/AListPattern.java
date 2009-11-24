@@ -7,7 +7,7 @@ import entitiesdb.language.analysis.*;
 @SuppressWarnings("nls")
 public final class AListPattern extends PPattern
 {
-    private PRequest _request_;
+    private PEntity _entity_;
     private TComa _coma_;
     private PPattern _pattern_;
 
@@ -17,12 +17,12 @@ public final class AListPattern extends PPattern
     }
 
     public AListPattern(
-        @SuppressWarnings("hiding") PRequest _request_,
+        @SuppressWarnings("hiding") PEntity _entity_,
         @SuppressWarnings("hiding") TComa _coma_,
         @SuppressWarnings("hiding") PPattern _pattern_)
     {
         // Constructor
-        setRequest(_request_);
+        setEntity(_entity_);
 
         setComa(_coma_);
 
@@ -34,7 +34,7 @@ public final class AListPattern extends PPattern
     public Object clone()
     {
         return new AListPattern(
-            cloneNode(this._request_),
+            cloneNode(this._entity_),
             cloneNode(this._coma_),
             cloneNode(this._pattern_));
     }
@@ -44,16 +44,16 @@ public final class AListPattern extends PPattern
         ((Analysis) sw).caseAListPattern(this);
     }
 
-    public PRequest getRequest()
+    public PEntity getEntity()
     {
-        return this._request_;
+        return this._entity_;
     }
 
-    public void setRequest(PRequest node)
+    public void setEntity(PEntity node)
     {
-        if(this._request_ != null)
+        if(this._entity_ != null)
         {
-            this._request_.parent(null);
+            this._entity_.parent(null);
         }
 
         if(node != null)
@@ -66,7 +66,7 @@ public final class AListPattern extends PPattern
             node.parent(this);
         }
 
-        this._request_ = node;
+        this._entity_ = node;
     }
 
     public TComa getComa()
@@ -123,7 +123,7 @@ public final class AListPattern extends PPattern
     public String toString()
     {
         return ""
-            + toString(this._request_)
+            + toString(this._entity_)
             + toString(this._coma_)
             + toString(this._pattern_);
     }
@@ -132,9 +132,9 @@ public final class AListPattern extends PPattern
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._request_ == child)
+        if(this._entity_ == child)
         {
-            this._request_ = null;
+            this._entity_ = null;
             return;
         }
 
@@ -157,9 +157,9 @@ public final class AListPattern extends PPattern
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._request_ == oldChild)
+        if(this._entity_ == oldChild)
         {
-            setRequest((PRequest) newChild);
+            setEntity((PEntity) newChild);
             return;
         }
 

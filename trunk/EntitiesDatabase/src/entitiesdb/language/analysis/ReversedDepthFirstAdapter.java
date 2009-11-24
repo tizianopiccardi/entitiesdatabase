@@ -2,6 +2,7 @@
 
 package entitiesdb.language.analysis;
 
+import java.util.*;
 import entitiesdb.language.node.*;
 
 public class ReversedDepthFirstAdapter extends AnalysisAdapter
@@ -53,31 +54,31 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getBody().apply(this);
         }
-        if(node.getDefined() != null)
+        if(node.getDefinedby() != null)
         {
-            node.getDefined().apply(this);
+            node.getDefinedby().apply(this);
         }
-        if(node.getRequest() != null)
+        if(node.getEntity() != null)
         {
-            node.getRequest().apply(this);
+            node.getEntity().apply(this);
         }
         outADefinitionQuery(node);
     }
 
-    public void inARequest(ARequest node)
+    public void inAEntity(AEntity node)
     {
         defaultIn(node);
     }
 
-    public void outARequest(ARequest node)
+    public void outAEntity(AEntity node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseARequest(ARequest node)
+    public void caseAEntity(AEntity node)
     {
-        inARequest(node);
+        inAEntity(node);
         if(node.getRbracket() != null)
         {
             node.getRbracket().apply(this);
@@ -94,7 +95,7 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getIdentifier().apply(this);
         }
-        outARequest(node);
+        outAEntity(node);
     }
 
     public void inASingleAttributes(ASingleAttributes node)
@@ -226,6 +227,27 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAVarValuetype(node);
     }
 
+    public void inAEntitydefValuetype(AEntitydefValuetype node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAEntitydefValuetype(AEntitydefValuetype node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAEntitydefValuetype(AEntitydefValuetype node)
+    {
+        inAEntitydefValuetype(node);
+        if(node.getEntity() != null)
+        {
+            node.getEntity().apply(this);
+        }
+        outAEntitydefValuetype(node);
+    }
+
     public void inAPatternBody(APatternBody node)
     {
         defaultIn(node);
@@ -265,9 +287,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseASinglePattern(ASinglePattern node)
     {
         inASinglePattern(node);
-        if(node.getRequest() != null)
+        if(node.getEntity() != null)
         {
-            node.getRequest().apply(this);
+            node.getEntity().apply(this);
         }
         outASinglePattern(node);
     }
@@ -294,9 +316,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getComa().apply(this);
         }
-        if(node.getRequest() != null)
+        if(node.getEntity() != null)
         {
-            node.getRequest().apply(this);
+            node.getEntity().apply(this);
         }
         outAListPattern(node);
     }
@@ -319,9 +341,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getConditions().apply(this);
         }
-        if(node.getWith() != null)
+        if(node.getQmark() != null)
         {
-            node.getWith().apply(this);
+            node.getQmark().apply(this);
         }
         outAConditionsWithblock(node);
     }

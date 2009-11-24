@@ -30,7 +30,7 @@ Tokens
   coma = ',';
   
   colon = ':';
-  defined = ':-';
+  definedby = ':-';
   
   lbracket = '(';
   rbracket = ')';
@@ -41,7 +41,7 @@ Tokens
   
   string = ''' s_char_sequence? '''; 
   
-  with = 'with';
+  qmark = '?';
   
   equal = '=';
   
@@ -51,33 +51,35 @@ Ignored Tokens
   
 Productions
 
-	query 		= 	{definition} request defined body;
+	query 		= 	{definition} entity definedby body;
 	
-	request 	= 	identifier lbracket attributes rbracket;
+	entity 		= 	identifier lbracket attributes rbracket;
 	
 	attributes 	= 	{single} identifier colon valuetype
 				  | {list} identifier colon valuetype coma attributes
 				//| {empty}
 				  ;
 	
-	valuetype	=	{atomic} string
-				  | {entity} identifier
-				  | {var}	 variable
+	valuetype	=	{atomic} 	string
+				  | {entity} 	identifier
+				  | {var}	 	variable
+				  | {entitydef} entity
 				  ;
 	
 	body 		=	{pattern}	pattern withblock
 				  ;
 
-	pattern 	=   {single} request
-				  | {list} request coma pattern
+	pattern 	=   {single} entity
+				  | {list} 	 entity coma pattern
 				  ;
 	
-	withblock	=   {conditions} with conditions
+	withblock	=   {conditions} qmark conditions
 				  | {empty}
 				  ;
 	
 	conditions	=	{single} [left]:valuetype equal [right]:valuetype
-				  | {list} conditions coma [left]:valuetype equal [right]:valuetype
+				  | {list}	 conditions coma [left]:valuetype equal [right]:valuetype
+				  //| {empty}
 				  ;
 	
 	

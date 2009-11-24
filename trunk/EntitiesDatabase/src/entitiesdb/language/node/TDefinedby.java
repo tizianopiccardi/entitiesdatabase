@@ -5,14 +5,14 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TDefined extends Token
+public final class TDefinedby extends Token
 {
-    public TDefined()
+    public TDefinedby()
     {
         super.setText(":-");
     }
 
-    public TDefined(int line, int pos)
+    public TDefinedby(int line, int pos)
     {
         super.setText(":-");
         setLine(line);
@@ -22,17 +22,17 @@ public final class TDefined extends Token
     @Override
     public Object clone()
     {
-      return new TDefined(getLine(), getPos());
+      return new TDefinedby(getLine(), getPos());
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTDefined(this);
+        ((Analysis) sw).caseTDefinedby(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TDefined text.");
+        throw new RuntimeException("Cannot change TDefinedby text.");
     }
 }
