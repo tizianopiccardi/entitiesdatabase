@@ -16,7 +16,7 @@ public class LanguageTesting {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String query = "abc():-";
+		String query = "abc(a:$ad, b:'sdsd') :- JBC(a:'ds', b:CC), VC(g:$as) with $as='asd' ";
 		
 		DepthFirstAdapter code = new DepthFirstAdapter();
 		

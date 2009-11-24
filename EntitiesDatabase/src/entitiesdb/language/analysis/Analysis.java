@@ -14,8 +14,18 @@ public interface Analysis extends Switch
     void caseStart(Start node);
     void caseADefinitionQuery(ADefinitionQuery node);
     void caseARequest(ARequest node);
-    void caseAEmptyAttriblist(AEmptyAttriblist node);
-    void caseAEmptyBody(AEmptyBody node);
+    void caseASingleAttributes(ASingleAttributes node);
+    void caseAListAttributes(AListAttributes node);
+    void caseAAtomicValuetype(AAtomicValuetype node);
+    void caseAEntityValuetype(AEntityValuetype node);
+    void caseAVarValuetype(AVarValuetype node);
+    void caseAPatternBody(APatternBody node);
+    void caseASinglePattern(ASinglePattern node);
+    void caseAListPattern(AListPattern node);
+    void caseAConditionsWithblock(AConditionsWithblock node);
+    void caseAEmptyWithblock(AEmptyWithblock node);
+    void caseASingleConditions(ASingleConditions node);
+    void caseAListConditions(AListConditions node);
 
     void caseTNewLine(TNewLine node);
     void caseTBlank(TBlank node);
@@ -28,5 +38,6 @@ public interface Analysis extends Switch
     void caseTVariable(TVariable node);
     void caseTString(TString node);
     void caseTWith(TWith node);
+    void caseTEqual(TEqual node);
     void caseEOF(EOF node);
 }

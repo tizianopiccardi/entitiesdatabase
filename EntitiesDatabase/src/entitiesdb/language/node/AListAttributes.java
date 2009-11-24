@@ -5,48 +5,53 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ARequest extends PRequest
+public final class AListAttributes extends PAttributes
 {
     private TIdentifier _identifier_;
-    private TLbracket _lbracket_;
+    private TColon _colon_;
+    private PValuetype _valuetype_;
+    private TComa _coma_;
     private PAttributes _attributes_;
-    private TRbracket _rbracket_;
 
-    public ARequest()
+    public AListAttributes()
     {
         // Constructor
     }
 
-    public ARequest(
+    public AListAttributes(
         @SuppressWarnings("hiding") TIdentifier _identifier_,
-        @SuppressWarnings("hiding") TLbracket _lbracket_,
-        @SuppressWarnings("hiding") PAttributes _attributes_,
-        @SuppressWarnings("hiding") TRbracket _rbracket_)
+        @SuppressWarnings("hiding") TColon _colon_,
+        @SuppressWarnings("hiding") PValuetype _valuetype_,
+        @SuppressWarnings("hiding") TComa _coma_,
+        @SuppressWarnings("hiding") PAttributes _attributes_)
     {
         // Constructor
         setIdentifier(_identifier_);
 
-        setLbracket(_lbracket_);
+        setColon(_colon_);
+
+        setValuetype(_valuetype_);
+
+        setComa(_coma_);
 
         setAttributes(_attributes_);
-
-        setRbracket(_rbracket_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ARequest(
+        return new AListAttributes(
             cloneNode(this._identifier_),
-            cloneNode(this._lbracket_),
-            cloneNode(this._attributes_),
-            cloneNode(this._rbracket_));
+            cloneNode(this._colon_),
+            cloneNode(this._valuetype_),
+            cloneNode(this._coma_),
+            cloneNode(this._attributes_));
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseARequest(this);
+        ((Analysis) sw).caseAListAttributes(this);
     }
 
     public TIdentifier getIdentifier()
@@ -74,16 +79,16 @@ public final class ARequest extends PRequest
         this._identifier_ = node;
     }
 
-    public TLbracket getLbracket()
+    public TColon getColon()
     {
-        return this._lbracket_;
+        return this._colon_;
     }
 
-    public void setLbracket(TLbracket node)
+    public void setColon(TColon node)
     {
-        if(this._lbracket_ != null)
+        if(this._colon_ != null)
         {
-            this._lbracket_.parent(null);
+            this._colon_.parent(null);
         }
 
         if(node != null)
@@ -96,7 +101,57 @@ public final class ARequest extends PRequest
             node.parent(this);
         }
 
-        this._lbracket_ = node;
+        this._colon_ = node;
+    }
+
+    public PValuetype getValuetype()
+    {
+        return this._valuetype_;
+    }
+
+    public void setValuetype(PValuetype node)
+    {
+        if(this._valuetype_ != null)
+        {
+            this._valuetype_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._valuetype_ = node;
+    }
+
+    public TComa getComa()
+    {
+        return this._coma_;
+    }
+
+    public void setComa(TComa node)
+    {
+        if(this._coma_ != null)
+        {
+            this._coma_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._coma_ = node;
     }
 
     public PAttributes getAttributes()
@@ -124,39 +179,15 @@ public final class ARequest extends PRequest
         this._attributes_ = node;
     }
 
-    public TRbracket getRbracket()
-    {
-        return this._rbracket_;
-    }
-
-    public void setRbracket(TRbracket node)
-    {
-        if(this._rbracket_ != null)
-        {
-            this._rbracket_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._rbracket_ = node;
-    }
-
     @Override
     public String toString()
     {
         return ""
             + toString(this._identifier_)
-            + toString(this._lbracket_)
-            + toString(this._attributes_)
-            + toString(this._rbracket_);
+            + toString(this._colon_)
+            + toString(this._valuetype_)
+            + toString(this._coma_)
+            + toString(this._attributes_);
     }
 
     @Override
@@ -169,21 +200,27 @@ public final class ARequest extends PRequest
             return;
         }
 
-        if(this._lbracket_ == child)
+        if(this._colon_ == child)
         {
-            this._lbracket_ = null;
+            this._colon_ = null;
+            return;
+        }
+
+        if(this._valuetype_ == child)
+        {
+            this._valuetype_ = null;
+            return;
+        }
+
+        if(this._coma_ == child)
+        {
+            this._coma_ = null;
             return;
         }
 
         if(this._attributes_ == child)
         {
             this._attributes_ = null;
-            return;
-        }
-
-        if(this._rbracket_ == child)
-        {
-            this._rbracket_ = null;
             return;
         }
 
@@ -200,21 +237,27 @@ public final class ARequest extends PRequest
             return;
         }
 
-        if(this._lbracket_ == oldChild)
+        if(this._colon_ == oldChild)
         {
-            setLbracket((TLbracket) newChild);
+            setColon((TColon) newChild);
+            return;
+        }
+
+        if(this._valuetype_ == oldChild)
+        {
+            setValuetype((PValuetype) newChild);
+            return;
+        }
+
+        if(this._coma_ == oldChild)
+        {
+            setComa((TComa) newChild);
             return;
         }
 
         if(this._attributes_ == oldChild)
         {
             setAttributes((PAttributes) newChild);
-            return;
-        }
-
-        if(this._rbracket_ == oldChild)
-        {
-            setRbracket((TRbracket) newChild);
             return;
         }
 
