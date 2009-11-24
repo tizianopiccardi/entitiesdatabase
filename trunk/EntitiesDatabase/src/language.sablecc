@@ -25,7 +25,6 @@ Helpers
     
 Tokens
 
- // linecomment = '--' not_cr_lf* nl?;
   new_line = cr | lf | cr lf;
   blank = ' '* | 9;
   coma = ',';
@@ -42,7 +41,9 @@ Tokens
   
   string = ''' s_char_sequence? '''; 
   
-  with = 'WITH';
+  with = 'with';
+  
+  equal = '=';
   
 Ignored Tokens
   blank, 
@@ -52,20 +53,32 @@ Productions
 
 	query 		= 	{definition} request defined body;
 	
-	request 	= 	identifier lbracket attriblist rbracket;
+	request 	= 	identifier lbracket attributes rbracket;
 	
-	attriblist 	= 	
-					{empty};
-					
-	attribute 	=	{single} identifier colon valuetype;
+	attributes 	= 	{single} identifier colon valuetype
+				  | {list} identifier colon valuetype coma attributes
+				//| {empty}
+				  ;
 	
-	valuetype	=	
+	valuetype	=	{atomic} string
+				  | {entity} identifier
+				  | {var}	 variable
+				  ;
 	
-	body = 		
-				{empty};
+	body 		=	{pattern}	pattern withblock
+				  ;
 
+	pattern 	=   {single} request
+				  | {list} request coma pattern
+				  ;
 	
+	withblock	=   {conditions} with conditions
+				  | {empty}
+				  ;
 	
+	conditions	=	{single} [left]:valuetype equal [right]:valuetype
+				  | {list} conditions coma [left]:valuetype equal [right]:valuetype
+				  ;
 	
 	
 	

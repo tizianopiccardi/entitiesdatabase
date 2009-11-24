@@ -79,12 +79,62 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
-    public void caseAEmptyAttriblist(AEmptyAttriblist node)
+    public void caseASingleAttributes(ASingleAttributes node)
     {
         defaultCase(node);
     }
 
-    public void caseAEmptyBody(AEmptyBody node)
+    public void caseAListAttributes(AListAttributes node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAAtomicValuetype(AAtomicValuetype node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAEntityValuetype(AEntityValuetype node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAVarValuetype(AVarValuetype node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAPatternBody(APatternBody node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseASinglePattern(ASinglePattern node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAListPattern(AListPattern node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAConditionsWithblock(AConditionsWithblock node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAEmptyWithblock(AEmptyWithblock node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseASingleConditions(ASingleConditions node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAListConditions(AListConditions node)
     {
         defaultCase(node);
     }
@@ -140,6 +190,11 @@ public class AnalysisAdapter implements Analysis
     }
 
     public void caseTWith(TWith node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTEqual(TEqual node)
     {
         defaultCase(node);
     }

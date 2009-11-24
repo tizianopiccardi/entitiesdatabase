@@ -87,9 +87,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getLbracket().apply(this);
         }
-        if(node.getAttriblist() != null)
+        if(node.getAttributes() != null)
         {
-            node.getAttriblist().apply(this);
+            node.getAttributes().apply(this);
         }
         if(node.getRbracket() != null)
         {
@@ -98,37 +98,315 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outARequest(node);
     }
 
-    public void inAEmptyAttriblist(AEmptyAttriblist node)
+    public void inASingleAttributes(ASingleAttributes node)
     {
         defaultIn(node);
     }
 
-    public void outAEmptyAttriblist(AEmptyAttriblist node)
+    public void outASingleAttributes(ASingleAttributes node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAEmptyAttriblist(AEmptyAttriblist node)
+    public void caseASingleAttributes(ASingleAttributes node)
     {
-        inAEmptyAttriblist(node);
-        outAEmptyAttriblist(node);
+        inASingleAttributes(node);
+        if(node.getIdentifier() != null)
+        {
+            node.getIdentifier().apply(this);
+        }
+        if(node.getColon() != null)
+        {
+            node.getColon().apply(this);
+        }
+        if(node.getValuetype() != null)
+        {
+            node.getValuetype().apply(this);
+        }
+        outASingleAttributes(node);
     }
 
-    public void inAEmptyBody(AEmptyBody node)
+    public void inAListAttributes(AListAttributes node)
     {
         defaultIn(node);
     }
 
-    public void outAEmptyBody(AEmptyBody node)
+    public void outAListAttributes(AListAttributes node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAEmptyBody(AEmptyBody node)
+    public void caseAListAttributes(AListAttributes node)
     {
-        inAEmptyBody(node);
-        outAEmptyBody(node);
+        inAListAttributes(node);
+        if(node.getIdentifier() != null)
+        {
+            node.getIdentifier().apply(this);
+        }
+        if(node.getColon() != null)
+        {
+            node.getColon().apply(this);
+        }
+        if(node.getValuetype() != null)
+        {
+            node.getValuetype().apply(this);
+        }
+        if(node.getComa() != null)
+        {
+            node.getComa().apply(this);
+        }
+        if(node.getAttributes() != null)
+        {
+            node.getAttributes().apply(this);
+        }
+        outAListAttributes(node);
+    }
+
+    public void inAAtomicValuetype(AAtomicValuetype node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAtomicValuetype(AAtomicValuetype node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAtomicValuetype(AAtomicValuetype node)
+    {
+        inAAtomicValuetype(node);
+        if(node.getString() != null)
+        {
+            node.getString().apply(this);
+        }
+        outAAtomicValuetype(node);
+    }
+
+    public void inAEntityValuetype(AEntityValuetype node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAEntityValuetype(AEntityValuetype node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAEntityValuetype(AEntityValuetype node)
+    {
+        inAEntityValuetype(node);
+        if(node.getIdentifier() != null)
+        {
+            node.getIdentifier().apply(this);
+        }
+        outAEntityValuetype(node);
+    }
+
+    public void inAVarValuetype(AVarValuetype node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAVarValuetype(AVarValuetype node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAVarValuetype(AVarValuetype node)
+    {
+        inAVarValuetype(node);
+        if(node.getVariable() != null)
+        {
+            node.getVariable().apply(this);
+        }
+        outAVarValuetype(node);
+    }
+
+    public void inAPatternBody(APatternBody node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAPatternBody(APatternBody node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAPatternBody(APatternBody node)
+    {
+        inAPatternBody(node);
+        if(node.getPattern() != null)
+        {
+            node.getPattern().apply(this);
+        }
+        if(node.getWithblock() != null)
+        {
+            node.getWithblock().apply(this);
+        }
+        outAPatternBody(node);
+    }
+
+    public void inASinglePattern(ASinglePattern node)
+    {
+        defaultIn(node);
+    }
+
+    public void outASinglePattern(ASinglePattern node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseASinglePattern(ASinglePattern node)
+    {
+        inASinglePattern(node);
+        if(node.getRequest() != null)
+        {
+            node.getRequest().apply(this);
+        }
+        outASinglePattern(node);
+    }
+
+    public void inAListPattern(AListPattern node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAListPattern(AListPattern node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAListPattern(AListPattern node)
+    {
+        inAListPattern(node);
+        if(node.getRequest() != null)
+        {
+            node.getRequest().apply(this);
+        }
+        if(node.getComa() != null)
+        {
+            node.getComa().apply(this);
+        }
+        if(node.getPattern() != null)
+        {
+            node.getPattern().apply(this);
+        }
+        outAListPattern(node);
+    }
+
+    public void inAConditionsWithblock(AConditionsWithblock node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAConditionsWithblock(AConditionsWithblock node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAConditionsWithblock(AConditionsWithblock node)
+    {
+        inAConditionsWithblock(node);
+        if(node.getWith() != null)
+        {
+            node.getWith().apply(this);
+        }
+        if(node.getConditions() != null)
+        {
+            node.getConditions().apply(this);
+        }
+        outAConditionsWithblock(node);
+    }
+
+    public void inAEmptyWithblock(AEmptyWithblock node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAEmptyWithblock(AEmptyWithblock node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAEmptyWithblock(AEmptyWithblock node)
+    {
+        inAEmptyWithblock(node);
+        outAEmptyWithblock(node);
+    }
+
+    public void inASingleConditions(ASingleConditions node)
+    {
+        defaultIn(node);
+    }
+
+    public void outASingleConditions(ASingleConditions node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseASingleConditions(ASingleConditions node)
+    {
+        inASingleConditions(node);
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        if(node.getEqual() != null)
+        {
+            node.getEqual().apply(this);
+        }
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        outASingleConditions(node);
+    }
+
+    public void inAListConditions(AListConditions node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAListConditions(AListConditions node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAListConditions(AListConditions node)
+    {
+        inAListConditions(node);
+        if(node.getConditions() != null)
+        {
+            node.getConditions().apply(this);
+        }
+        if(node.getComa() != null)
+        {
+            node.getComa().apply(this);
+        }
+        if(node.getLeft() != null)
+        {
+            node.getLeft().apply(this);
+        }
+        if(node.getEqual() != null)
+        {
+            node.getEqual().apply(this);
+        }
+        if(node.getRight() != null)
+        {
+            node.getRight().apply(this);
+        }
+        outAListConditions(node);
     }
 }

@@ -5,16 +5,16 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TWith extends Token
+public final class TEqual extends Token
 {
-    public TWith()
+    public TEqual()
     {
-        super.setText("with");
+        super.setText("=");
     }
 
-    public TWith(int line, int pos)
+    public TEqual(int line, int pos)
     {
-        super.setText("with");
+        super.setText("=");
         setLine(line);
         setPos(pos);
     }
@@ -22,17 +22,17 @@ public final class TWith extends Token
     @Override
     public Object clone()
     {
-      return new TWith(getLine(), getPos());
+      return new TEqual(getLine(), getPos());
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTWith(this);
+        ((Analysis) sw).caseTEqual(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TWith text.");
+        throw new RuntimeException("Cannot change TEqual text.");
     }
 }
