@@ -2,7 +2,6 @@
 
 package entitiesdb.language.analysis;
 
-import java.util.*;
 import entitiesdb.language.node.*;
 
 public class ReversedDepthFirstAdapter extends AnalysisAdapter
