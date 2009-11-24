@@ -1,0 +1,73 @@
+Package entitiesdb.language;
+ 
+  
+Helpers
+  letter = [['a' .. 'z'] + ['A' .. 'Z']] ;
+  digit = ['0'..'9'];
+  cr = 13;
+  lf = 10;
+  all = [0 .. 127];
+  any_charater = [0x0 .. 0xfffff];
+  not_cr_lf = [any_charater - [cr + lf]];  
+  
+  dollar = '$';
+
+  
+  //nl = [cr + lf];
+  
+  //escape_sequence = '\' ( ''' | '"'  | '\' | '0' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v' );
+
+  //s_char = [any_charater - '"'] | escape_sequence;
+  //s_char_sequence = s_char+;
+  
+   s_char_sequence = [any_charater - ''']+;
+    
+    
+Tokens
+
+ // linecomment = '--' not_cr_lf* nl?;
+  new_line = cr | lf | cr lf;
+  blank = ' '* | 9;
+  coma = ',';
+  
+  colon = ':';
+  defined = ':-';
+  
+  lbracket = '(';
+  rbracket = ')';
+  
+  identifier = letter (letter | digit | '_' )*;
+  
+  variable = dollar letter (letter | digit | '_' )*;
+  
+  string = ''' s_char_sequence? '''; 
+  
+  with = 'WITH';
+  
+Ignored Tokens
+  blank, 
+  new_line;
+  
+Productions
+
+	query 		= 	{definition} request defined body;
+	
+	request 	= 	identifier lbracket attriblist rbracket;
+	
+	attriblist 	= 	
+					{empty};
+					
+	attribute 	=	{single} identifier colon valuetype;
+	
+	valuetype	=	
+	
+	body = 		
+				{empty};
+
+	
+	
+	
+	
+	
+	
+	
