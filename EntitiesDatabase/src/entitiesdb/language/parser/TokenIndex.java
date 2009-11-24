@@ -22,7 +22,7 @@ class TokenIndex extends AnalysisAdapter
     }
 
     @Override
-    public void caseTDefined(@SuppressWarnings("unused") TDefined node)
+    public void caseTDefinedby(@SuppressWarnings("unused") TDefinedby node)
     {
         this.index = 2;
     }
@@ -58,7 +58,7 @@ class TokenIndex extends AnalysisAdapter
     }
 
     @Override
-    public void caseTWith(@SuppressWarnings("unused") TWith node)
+    public void caseTQmark(@SuppressWarnings("unused") TQmark node)
     {
         this.index = 8;
     }

@@ -74,7 +74,7 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
-    public void caseARequest(ARequest node)
+    public void caseAEntity(AEntity node)
     {
         defaultCase(node);
     }
@@ -100,6 +100,11 @@ public class AnalysisAdapter implements Analysis
     }
 
     public void caseAVarValuetype(AVarValuetype node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAEntitydefValuetype(AEntitydefValuetype node)
     {
         defaultCase(node);
     }
@@ -159,7 +164,7 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
-    public void caseTDefined(TDefined node)
+    public void caseTDefinedby(TDefinedby node)
     {
         defaultCase(node);
     }
@@ -189,7 +194,7 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
-    public void caseTWith(TWith node)
+    public void caseTQmark(TQmark node)
     {
         defaultCase(node);
     }

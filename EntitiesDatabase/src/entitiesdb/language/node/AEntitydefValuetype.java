@@ -5,16 +5,16 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ASinglePattern extends PPattern
+public final class AEntitydefValuetype extends PValuetype
 {
     private PEntity _entity_;
 
-    public ASinglePattern()
+    public AEntitydefValuetype()
     {
         // Constructor
     }
 
-    public ASinglePattern(
+    public AEntitydefValuetype(
         @SuppressWarnings("hiding") PEntity _entity_)
     {
         // Constructor
@@ -25,13 +25,13 @@ public final class ASinglePattern extends PPattern
     @Override
     public Object clone()
     {
-        return new ASinglePattern(
+        return new AEntitydefValuetype(
             cloneNode(this._entity_));
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseASinglePattern(this);
+        ((Analysis) sw).caseAEntitydefValuetype(this);
     }
 
     public PEntity getEntity()

@@ -7,8 +7,8 @@ import entitiesdb.language.analysis.*;
 @SuppressWarnings("nls")
 public final class ADefinitionQuery extends PQuery
 {
-    private PRequest _request_;
-    private TDefined _defined_;
+    private PEntity _entity_;
+    private TDefinedby _definedby_;
     private PBody _body_;
 
     public ADefinitionQuery()
@@ -17,14 +17,14 @@ public final class ADefinitionQuery extends PQuery
     }
 
     public ADefinitionQuery(
-        @SuppressWarnings("hiding") PRequest _request_,
-        @SuppressWarnings("hiding") TDefined _defined_,
+        @SuppressWarnings("hiding") PEntity _entity_,
+        @SuppressWarnings("hiding") TDefinedby _definedby_,
         @SuppressWarnings("hiding") PBody _body_)
     {
         // Constructor
-        setRequest(_request_);
+        setEntity(_entity_);
 
-        setDefined(_defined_);
+        setDefinedby(_definedby_);
 
         setBody(_body_);
 
@@ -34,8 +34,8 @@ public final class ADefinitionQuery extends PQuery
     public Object clone()
     {
         return new ADefinitionQuery(
-            cloneNode(this._request_),
-            cloneNode(this._defined_),
+            cloneNode(this._entity_),
+            cloneNode(this._definedby_),
             cloneNode(this._body_));
     }
 
@@ -44,16 +44,16 @@ public final class ADefinitionQuery extends PQuery
         ((Analysis) sw).caseADefinitionQuery(this);
     }
 
-    public PRequest getRequest()
+    public PEntity getEntity()
     {
-        return this._request_;
+        return this._entity_;
     }
 
-    public void setRequest(PRequest node)
+    public void setEntity(PEntity node)
     {
-        if(this._request_ != null)
+        if(this._entity_ != null)
         {
-            this._request_.parent(null);
+            this._entity_.parent(null);
         }
 
         if(node != null)
@@ -66,19 +66,19 @@ public final class ADefinitionQuery extends PQuery
             node.parent(this);
         }
 
-        this._request_ = node;
+        this._entity_ = node;
     }
 
-    public TDefined getDefined()
+    public TDefinedby getDefinedby()
     {
-        return this._defined_;
+        return this._definedby_;
     }
 
-    public void setDefined(TDefined node)
+    public void setDefinedby(TDefinedby node)
     {
-        if(this._defined_ != null)
+        if(this._definedby_ != null)
         {
-            this._defined_.parent(null);
+            this._definedby_.parent(null);
         }
 
         if(node != null)
@@ -91,7 +91,7 @@ public final class ADefinitionQuery extends PQuery
             node.parent(this);
         }
 
-        this._defined_ = node;
+        this._definedby_ = node;
     }
 
     public PBody getBody()
@@ -123,8 +123,8 @@ public final class ADefinitionQuery extends PQuery
     public String toString()
     {
         return ""
-            + toString(this._request_)
-            + toString(this._defined_)
+            + toString(this._entity_)
+            + toString(this._definedby_)
             + toString(this._body_);
     }
 
@@ -132,15 +132,15 @@ public final class ADefinitionQuery extends PQuery
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._request_ == child)
+        if(this._entity_ == child)
         {
-            this._request_ = null;
+            this._entity_ = null;
             return;
         }
 
-        if(this._defined_ == child)
+        if(this._definedby_ == child)
         {
-            this._defined_ = null;
+            this._definedby_ = null;
             return;
         }
 
@@ -157,15 +157,15 @@ public final class ADefinitionQuery extends PQuery
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._request_ == oldChild)
+        if(this._entity_ == oldChild)
         {
-            setRequest((PRequest) newChild);
+            setEntity((PEntity) newChild);
             return;
         }
 
-        if(this._defined_ == oldChild)
+        if(this._definedby_ == oldChild)
         {
-            setDefined((TDefined) newChild);
+            setDefinedby((TDefinedby) newChild);
             return;
         }
 
