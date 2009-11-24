@@ -7,7 +7,7 @@ import entitiesdb.language.analysis.*;
 @SuppressWarnings("nls")
 public final class ASinglePattern extends PPattern
 {
-    private PEntity _entity_;
+    private PValuetype _valuetype_;
 
     public ASinglePattern()
     {
@@ -15,10 +15,10 @@ public final class ASinglePattern extends PPattern
     }
 
     public ASinglePattern(
-        @SuppressWarnings("hiding") PEntity _entity_)
+        @SuppressWarnings("hiding") PValuetype _valuetype_)
     {
         // Constructor
-        setEntity(_entity_);
+        setValuetype(_valuetype_);
 
     }
 
@@ -26,7 +26,7 @@ public final class ASinglePattern extends PPattern
     public Object clone()
     {
         return new ASinglePattern(
-            cloneNode(this._entity_));
+            cloneNode(this._valuetype_));
     }
 
     public void apply(Switch sw)
@@ -34,16 +34,16 @@ public final class ASinglePattern extends PPattern
         ((Analysis) sw).caseASinglePattern(this);
     }
 
-    public PEntity getEntity()
+    public PValuetype getValuetype()
     {
-        return this._entity_;
+        return this._valuetype_;
     }
 
-    public void setEntity(PEntity node)
+    public void setValuetype(PValuetype node)
     {
-        if(this._entity_ != null)
+        if(this._valuetype_ != null)
         {
-            this._entity_.parent(null);
+            this._valuetype_.parent(null);
         }
 
         if(node != null)
@@ -56,23 +56,23 @@ public final class ASinglePattern extends PPattern
             node.parent(this);
         }
 
-        this._entity_ = node;
+        this._valuetype_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._entity_);
+            + toString(this._valuetype_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._entity_ == child)
+        if(this._valuetype_ == child)
         {
-            this._entity_ = null;
+            this._valuetype_ = null;
             return;
         }
 
@@ -83,9 +83,9 @@ public final class ASinglePattern extends PPattern
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._entity_ == oldChild)
+        if(this._valuetype_ == oldChild)
         {
-            setEntity((PEntity) newChild);
+            setValuetype((PValuetype) newChild);
             return;
         }
 

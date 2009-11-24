@@ -69,9 +69,14 @@ Productions
 	body 		=	{pattern}	pattern withblock
 				  ;
 
-	pattern 	=   {single} entity
+	/*pattern 	=   {single} entity
 				  | {list} 	 entity coma pattern
-				  ;
+				  ;*/
+				  
+	pattern 	=   {single} valuetype
+				  | {list} 	 valuetype coma pattern
+				  ;			  
+				  
 	
 	withblock	=   {conditions} qmark conditions
 				  | {empty}

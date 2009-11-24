@@ -7,7 +7,7 @@ import entitiesdb.language.analysis.*;
 @SuppressWarnings("nls")
 public final class AListPattern extends PPattern
 {
-    private PEntity _entity_;
+    private PValuetype _valuetype_;
     private TComa _coma_;
     private PPattern _pattern_;
 
@@ -17,12 +17,12 @@ public final class AListPattern extends PPattern
     }
 
     public AListPattern(
-        @SuppressWarnings("hiding") PEntity _entity_,
+        @SuppressWarnings("hiding") PValuetype _valuetype_,
         @SuppressWarnings("hiding") TComa _coma_,
         @SuppressWarnings("hiding") PPattern _pattern_)
     {
         // Constructor
-        setEntity(_entity_);
+        setValuetype(_valuetype_);
 
         setComa(_coma_);
 
@@ -34,7 +34,7 @@ public final class AListPattern extends PPattern
     public Object clone()
     {
         return new AListPattern(
-            cloneNode(this._entity_),
+            cloneNode(this._valuetype_),
             cloneNode(this._coma_),
             cloneNode(this._pattern_));
     }
@@ -44,16 +44,16 @@ public final class AListPattern extends PPattern
         ((Analysis) sw).caseAListPattern(this);
     }
 
-    public PEntity getEntity()
+    public PValuetype getValuetype()
     {
-        return this._entity_;
+        return this._valuetype_;
     }
 
-    public void setEntity(PEntity node)
+    public void setValuetype(PValuetype node)
     {
-        if(this._entity_ != null)
+        if(this._valuetype_ != null)
         {
-            this._entity_.parent(null);
+            this._valuetype_.parent(null);
         }
 
         if(node != null)
@@ -66,7 +66,7 @@ public final class AListPattern extends PPattern
             node.parent(this);
         }
 
-        this._entity_ = node;
+        this._valuetype_ = node;
     }
 
     public TComa getComa()
@@ -123,7 +123,7 @@ public final class AListPattern extends PPattern
     public String toString()
     {
         return ""
-            + toString(this._entity_)
+            + toString(this._valuetype_)
             + toString(this._coma_)
             + toString(this._pattern_);
     }
@@ -132,9 +132,9 @@ public final class AListPattern extends PPattern
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._entity_ == child)
+        if(this._valuetype_ == child)
         {
-            this._entity_ = null;
+            this._valuetype_ = null;
             return;
         }
 
@@ -157,9 +157,9 @@ public final class AListPattern extends PPattern
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._entity_ == oldChild)
+        if(this._valuetype_ == oldChild)
         {
-            setEntity((PEntity) newChild);
+            setValuetype((PValuetype) newChild);
             return;
         }
 
