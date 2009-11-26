@@ -33,7 +33,7 @@ public class Value {
 	}
 	
 	public static enum ValueType {
-		NOTYPE, ENTITY, ATOM;
+		NOTYPE, ENTITY, ATOM, VARIABLE;
 	};
 	 
 }
