@@ -9,16 +9,24 @@ import com.sleepycat.je.EnvironmentConfig;
 import com.sleepycat.persist.EntityCursor;
 import com.sleepycat.persist.EntityStore;
 import com.sleepycat.persist.PrimaryIndex;
+import com.sleepycat.persist.SecondaryIndex;
 import com.sleepycat.persist.StoreConfig;
 
 import entitiesdb.record.Record;
+import entitiesdb.record.Value;
+import entitiesdb.record.Value.ValueType;
 
 /** Incompleto */
 public class JEDao {
 	private Environment databaseEnvironment;
 	private EntityStore entityStore;
 	private File databaseDirectory;
-	private PrimaryIndex<Long, Record> records;
+	private PrimaryIndex<Long, Record> recordsIndex;
+
+	private SecondaryIndex<String, Long, ?> recordByEntityIndex;
+	private SecondaryIndex<String, Long, ?> recordByAttributeIndex;	
+	private SecondaryIndex<Value, Long, Record> recordByValueIndex;		
+	
 
 	public JEDao(File databaseDirectory) {
 		this.databaseDirectory = databaseDirectory;
@@ -36,17 +44,21 @@ public class JEDao {
 	}
 
 	private void jeOpen() throws DatabaseException {
+
 		EnvironmentConfig environmentConfig = new EnvironmentConfig();
 		environmentConfig.setAllowCreate(true);
 		environmentConfig.setTransactional(true);
+
 		databaseEnvironment = new Environment(databaseDirectory,
 				environmentConfig);
 		StoreConfig storeConfig = new StoreConfig();
 		storeConfig.setAllowCreate(true);
 		storeConfig.setTransactional(true);
-		entityStore = new EntityStore(databaseEnvironment, "jetutorial",
+		entityStore = new EntityStore(databaseEnvironment, "entities_database",
 				storeConfig);
-		records = entityStore.getPrimaryIndex(Long.class, Record.class);
+
+		this.setAllIndexes();
+
 	}
 
 	/** Chiude la base dati. */
@@ -67,25 +79,18 @@ public class JEDao {
 		}
 	}
 
-
-
-/*
-	public void delete(Record record) throws DaoException {
-		try {
-			if (records.delete(record.getId()) == false) {
-				throw new DaoException("No record to remove.");
-			}
-
-		} catch (DatabaseException ex) {
-			throw new DaoException(ex);
-		}
-	}*/
-
+	/*
+	 * public void delete(Record record) throws DaoException { try { if
+	 * (records.delete(record.getId()) == false) { throw new
+	 * DaoException("No record to remove."); }
+	 * 
+	 * } catch (DatabaseException ex) { throw new DaoException(ex); } }
+	 */
 
 	public Collection<? extends Record> getRecords() throws DaoException {
 		try {
 			ArrayList<Record> result = new ArrayList<Record>();
-			EntityCursor<Record> cursor = records.entities();
+			EntityCursor<Record> cursor = recordsIndex.entities();
 			try {
 				jeFill(result, cursor);
 			} finally {
@@ -106,23 +111,79 @@ public class JEDao {
 
 	public void store(Record record) throws DaoException {
 		try {
-			records.putNoReturn(record);
+			recordsIndex.putNoReturn(record);
 		} catch (DatabaseException ex) {
 			throw new DaoException(ex);
 		}
 	}
 
-/*
-	public void update(Record record) throws DaoException {
-		try {
-			if (records.contains(record.getId()) == false) {
-				throw new DaoException("Cannot find a record to update");
-			}
-			records.putNoReturn(record);
+	/*
+	 * public void update(Record record) throws DaoException { try { if
+	 * (records.contains(record.getId()) == false) { throw new
+	 * DaoException("Cannot find a record to update"); }
+	 * records.putNoReturn(record);
+	 * 
+	 * } catch (DatabaseException ex) { throw new DaoException(ex); } }
+	 */
 
-		} catch (DatabaseException ex) {
-			throw new DaoException(ex);
+	@SuppressWarnings("unchecked")
+	public void getRecordByEntity(String eName) {
+
+		EntityCursor<Record> sec_cursor = (EntityCursor<Record>) recordByEntityIndex
+				.subIndex(eName).entities();
+		try {
+			for (Record seci : sec_cursor) {
+				System.out.println(seci);
+			}
+		} finally {
+			sec_cursor.close();
 		}
-	}*/
+
+	}
+	
+	
+	
+	@SuppressWarnings("unchecked")
+	public void getRecordByAttribute(String aName) {
+		
+		EntityCursor<Record> sec_cursor = (EntityCursor<Record>) recordByAttributeIndex
+				.subIndex(aName).entities();
+		try {
+			for (Record seci : sec_cursor) {
+				System.out.println(seci);
+			}
+		} finally {
+			sec_cursor.close();
+		}
+
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void getRecordByValue(Value value) {
+		
+		EntityCursor<Record> sec_cursor = (EntityCursor<Record>) recordByValueIndex.subIndex(value).entities();
+		try {
+			for (Record seci : sec_cursor) {
+				System.out.println(seci);
+			}
+		} finally {
+			sec_cursor.close();
+		}
+
+	}
+
+	private void setAllIndexes() {
+		recordsIndex = entityStore.getPrimaryIndex(Long.class, Record.class);
+
+		recordByEntityIndex = entityStore.getSecondaryIndex(recordsIndex,
+				String.class, "Entity");
+
+		recordByAttributeIndex = entityStore.getSecondaryIndex(recordsIndex,
+				String.class, "Attribute");
+		
+		recordByValueIndex = entityStore.getSecondaryIndex(recordsIndex,
+				Value.class, "Value");
+		
+	}
 
 }
