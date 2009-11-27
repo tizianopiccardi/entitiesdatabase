@@ -89,6 +89,16 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
+    public void caseAIdeEntityid(AIdeEntityid node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAVarEntityid(AVarEntityid node)
+    {
+        defaultCase(node);
+    }
+
     public void caseAAtomicValuetype(AAtomicValuetype node)
     {
         defaultCase(node);

@@ -17,9 +17,9 @@ public class Record {
 	private long id;
 
 	@SecondaryKey(name="Entity", relate=Relationship.MANY_TO_ONE)
-	private String entityId;
+	private EntityId entityId;
 	@SecondaryKey(name="Attribute", relate=Relationship.MANY_TO_ONE)
-	private String attribute;
+	private Attribute attribute;
 	@SecondaryKey(name="Value", relate=Relationship.MANY_TO_ONE)
 	private Value value;
 
@@ -30,10 +30,17 @@ public class Record {
 	}
 	
 	public Record(String e, String a, String v, ValueType t) {
-		this.setEntityId(e);
-		this.setAttribute(a);
+		this.setEntityId(new EntityId(e));
+		this.setAttribute(new Attribute(a));
 		this.setValue(new Value(v, t));
 	}
+	
+	public Record(EntityId e, Attribute a, Value v) {
+		this.setEntityId(e);
+		this.setAttribute(a);
+		this.setValue(v);
+	}
+	
 	
 	
 	public long getId() {
@@ -43,18 +50,24 @@ public class Record {
 		this.id = id;
 	}
 	
-	public String getEntityId() {
+
+
+	public final EntityId getEntityId() {
 		return entityId;
 	}
-	public void setEntityId(String entityId) {
+
+	public final void setEntityId(EntityId entityId) {
 		this.entityId = entityId;
 	}
 
-	public final String getAttribute() {
+
+	
+	
+	public final Attribute getAttribute() {
 		return attribute;
 	}
 
-	public final void setAttribute(String attribute) {
+	public final void setAttribute(Attribute attribute) {
 		this.attribute = attribute;
 	}
 

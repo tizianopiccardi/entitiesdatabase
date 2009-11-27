@@ -53,11 +53,14 @@ Productions
 
 	query 		= 	{definition} entity definedby body;
 	
-	entity 		= 	identifier lbracket attributes rbracket;
+	entity 		= 	entityid lbracket attributes rbracket;
 	
 	attributes 	= 	{single} identifier colon valuetype
 				  | {list} identifier colon valuetype coma attributes
 				//| {empty}
+				  ;
+	entityid	=   {ide} identifier
+				  | {var} variable
 				  ;
 	
 	valuetype	=	{atomic} 	string

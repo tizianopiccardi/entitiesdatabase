@@ -10,6 +10,7 @@ import entitiesdb.language.analysis.DepthFirstAdapter;
 import entitiesdb.language.lexer.Lexer;
 import entitiesdb.language.node.Start;
 import entitiesdb.language.parser.Parser;
+import entitiesdb.query.QueryEngine;
 
 public class LanguageTesting {
 
@@ -27,13 +28,18 @@ public class LanguageTesting {
 		
 		
 		//Prendi la query da linea di comando...
-		System.out.print("Datalog > ");
-		query = in.readLine();
+		//System.out.print("Datalog > ");
+		//query = in.readLine();
 		
 		//o scrivila qui:
 		//query = "I7(name:$x) :- JB(lives:TRC(name:'Trento', locatedIn:TR, country:IT), married:CC), I5(name:$x, works_in: $y) ? $x='John', $y=JB(lives:'Trento')";
 		
-		DepthFirstAdapter code = new DepthFirstAdapter();
+		//Abitanti di trento
+		query = "I7(name:$x) :- $x(lives: TN)";
+		
+		
+		
+		DepthFirstAdapter code = new QueryEngine();
 		
 		Parser p = new Parser(new Lexer(new PushbackReader(new StringReader(query))));
 
