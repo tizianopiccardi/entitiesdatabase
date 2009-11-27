@@ -5,55 +5,55 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AListPattern extends PPattern
+public final class AListBody extends PBody
 {
-    private PValuetype _valuetype_;
+    private PEntity _entity_;
     private TComa _coma_;
-    private PPattern _pattern_;
+    private PBody _body_;
 
-    public AListPattern()
+    public AListBody()
     {
         // Constructor
     }
 
-    public AListPattern(
-        @SuppressWarnings("hiding") PValuetype _valuetype_,
+    public AListBody(
+        @SuppressWarnings("hiding") PEntity _entity_,
         @SuppressWarnings("hiding") TComa _coma_,
-        @SuppressWarnings("hiding") PPattern _pattern_)
+        @SuppressWarnings("hiding") PBody _body_)
     {
         // Constructor
-        setValuetype(_valuetype_);
+        setEntity(_entity_);
 
         setComa(_coma_);
 
-        setPattern(_pattern_);
+        setBody(_body_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AListPattern(
-            cloneNode(this._valuetype_),
+        return new AListBody(
+            cloneNode(this._entity_),
             cloneNode(this._coma_),
-            cloneNode(this._pattern_));
+            cloneNode(this._body_));
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAListPattern(this);
+        ((Analysis) sw).caseAListBody(this);
     }
 
-    public PValuetype getValuetype()
+    public PEntity getEntity()
     {
-        return this._valuetype_;
+        return this._entity_;
     }
 
-    public void setValuetype(PValuetype node)
+    public void setEntity(PEntity node)
     {
-        if(this._valuetype_ != null)
+        if(this._entity_ != null)
         {
-            this._valuetype_.parent(null);
+            this._entity_.parent(null);
         }
 
         if(node != null)
@@ -66,7 +66,7 @@ public final class AListPattern extends PPattern
             node.parent(this);
         }
 
-        this._valuetype_ = node;
+        this._entity_ = node;
     }
 
     public TComa getComa()
@@ -94,16 +94,16 @@ public final class AListPattern extends PPattern
         this._coma_ = node;
     }
 
-    public PPattern getPattern()
+    public PBody getBody()
     {
-        return this._pattern_;
+        return this._body_;
     }
 
-    public void setPattern(PPattern node)
+    public void setBody(PBody node)
     {
-        if(this._pattern_ != null)
+        if(this._body_ != null)
         {
-            this._pattern_.parent(null);
+            this._body_.parent(null);
         }
 
         if(node != null)
@@ -116,25 +116,25 @@ public final class AListPattern extends PPattern
             node.parent(this);
         }
 
-        this._pattern_ = node;
+        this._body_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._valuetype_)
+            + toString(this._entity_)
             + toString(this._coma_)
-            + toString(this._pattern_);
+            + toString(this._body_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._valuetype_ == child)
+        if(this._entity_ == child)
         {
-            this._valuetype_ = null;
+            this._entity_ = null;
             return;
         }
 
@@ -144,9 +144,9 @@ public final class AListPattern extends PPattern
             return;
         }
 
-        if(this._pattern_ == child)
+        if(this._body_ == child)
         {
-            this._pattern_ = null;
+            this._body_ = null;
             return;
         }
 
@@ -157,9 +157,9 @@ public final class AListPattern extends PPattern
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._valuetype_ == oldChild)
+        if(this._entity_ == oldChild)
         {
-            setValuetype((PValuetype) newChild);
+            setEntity((PEntity) newChild);
             return;
         }
 
@@ -169,9 +169,9 @@ public final class AListPattern extends PPattern
             return;
         }
 
-        if(this._pattern_ == oldChild)
+        if(this._body_ == oldChild)
         {
-            setPattern((PPattern) newChild);
+            setBody((PBody) newChild);
             return;
         }
 

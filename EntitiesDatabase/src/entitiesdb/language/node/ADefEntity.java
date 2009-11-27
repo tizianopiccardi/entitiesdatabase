@@ -5,26 +5,26 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AEntity extends PEntity
+public final class ADefEntity extends PEntity
 {
-    private PEntityid _entityid_;
+    private PVartype _vartype_;
     private TLbracket _lbracket_;
     private PAttributes _attributes_;
     private TRbracket _rbracket_;
 
-    public AEntity()
+    public ADefEntity()
     {
         // Constructor
     }
 
-    public AEntity(
-        @SuppressWarnings("hiding") PEntityid _entityid_,
+    public ADefEntity(
+        @SuppressWarnings("hiding") PVartype _vartype_,
         @SuppressWarnings("hiding") TLbracket _lbracket_,
         @SuppressWarnings("hiding") PAttributes _attributes_,
         @SuppressWarnings("hiding") TRbracket _rbracket_)
     {
         // Constructor
-        setEntityid(_entityid_);
+        setVartype(_vartype_);
 
         setLbracket(_lbracket_);
 
@@ -37,8 +37,8 @@ public final class AEntity extends PEntity
     @Override
     public Object clone()
     {
-        return new AEntity(
-            cloneNode(this._entityid_),
+        return new ADefEntity(
+            cloneNode(this._vartype_),
             cloneNode(this._lbracket_),
             cloneNode(this._attributes_),
             cloneNode(this._rbracket_));
@@ -46,19 +46,19 @@ public final class AEntity extends PEntity
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAEntity(this);
+        ((Analysis) sw).caseADefEntity(this);
     }
 
-    public PEntityid getEntityid()
+    public PVartype getVartype()
     {
-        return this._entityid_;
+        return this._vartype_;
     }
 
-    public void setEntityid(PEntityid node)
+    public void setVartype(PVartype node)
     {
-        if(this._entityid_ != null)
+        if(this._vartype_ != null)
         {
-            this._entityid_.parent(null);
+            this._vartype_.parent(null);
         }
 
         if(node != null)
@@ -71,7 +71,7 @@ public final class AEntity extends PEntity
             node.parent(this);
         }
 
-        this._entityid_ = node;
+        this._vartype_ = node;
     }
 
     public TLbracket getLbracket()
@@ -153,7 +153,7 @@ public final class AEntity extends PEntity
     public String toString()
     {
         return ""
-            + toString(this._entityid_)
+            + toString(this._vartype_)
             + toString(this._lbracket_)
             + toString(this._attributes_)
             + toString(this._rbracket_);
@@ -163,9 +163,9 @@ public final class AEntity extends PEntity
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._entityid_ == child)
+        if(this._vartype_ == child)
         {
-            this._entityid_ = null;
+            this._vartype_ = null;
             return;
         }
 
@@ -194,9 +194,9 @@ public final class AEntity extends PEntity
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._entityid_ == oldChild)
+        if(this._vartype_ == oldChild)
         {
-            setEntityid((PEntityid) newChild);
+            setVartype((PVartype) newChild);
             return;
         }
 

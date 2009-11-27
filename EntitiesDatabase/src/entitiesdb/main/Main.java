@@ -1,6 +1,8 @@
 package entitiesdb.main;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.util.Collection;
 
 import entitiesdb.dao.DaoException;
@@ -47,6 +49,8 @@ public class Main {
 			
 			Record record12 = new Record("I5", "", "", ValueType.NOTYPE);
 			
+			Record record13 = new Record("H1", "director_is", "I1", ValueType.ENTITY);
+			
 			if (dao.isEmpty()) {
 				dao.store(record);
 				dao.store(record2);
@@ -60,22 +64,32 @@ public class Main {
 				dao.store(record10);
 				dao.store(record11);
 				dao.store(record12);
+				dao.store(record13);
 			}
-			
+			/*
 			dao.getRecordByEntity(new EntityId("TN"));
 			System.out.print("\n\n\n");
 			dao.getRecordByAttribute(new Attribute("name"));
 			System.out.print("\n\n\n");
 			dao.getRecordByValue(new Value("Mary", ValueType.ATOM));
-			System.out.print("\n\n\n");
-			/*
+			System.out.print("\n\n\n");*/
+			
 			Collection<? extends Record> records;
 			records = dao.getRecords();
 			for (Record r : records) {
 				System.out.println(r);
 			}
-			*/
-		} catch (DaoException e) {
+			System.out.print("\n\n\n");
+			//dao.test();
+			
+			System.out.print(dao.getIdArray(new EntityId("H1"), new Attribute("name"), null));
+			
+			
+			/*
+			InputStreamReader reader = new InputStreamReader(System.in);
+			BufferedReader in = new BufferedReader(reader);
+			dao.getRecordByAttribute(new Attribute(in.readLine()));*/
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		

@@ -31,13 +31,26 @@ public class LanguageTesting {
 		//System.out.print("Datalog > ");
 		//query = in.readLine();
 		
-		//o scrivila qui:
-		//query = "I7(name:$x) :- JB(lives:TRC(name:'Trento', locatedIn:TR, country:IT), married:CC), I5(name:$x, works_in: $y) ? $x='John', $y=JB(lives:'Trento')";
+		//Abitanti maschi di trento con nome
+		query = "TNM(id:$x, name: $z) :- $x( lives: $y(name: 'Trento'), sex: 'M', name: $z )";
 		
-		//Abitanti di trento
-		query = "I7(name:$x) :- $x(lives: TN)";
+		//Tutti gli id degli sposati
+		query = "MAR(id:$x) :- $x(married: $y)";
+
+		//Chi ha un lavoro
+		query = "W(id: $x) :- $x(works: $y)";
+
+		//Trova chi si chiama John, vive a Trento e ha ruolo abc
+		query = "$x :- $x(name: 'John', lives: $y), $z(role: 'abc') ? $z=$y , $y='Trento'";
+		query = "$x :- $x(name: 'John', lives: 'Trento', role: 'abc'), $z(role: 'abc')";
+
+		//Trova chi si chiama John e NON vive a Trento
+		query = "$x :- $x(name: 'John', lives: $y) ? $y!='Trento'";
+
+		//Tutti gli oggetti da uomo che costano più di 100
+		query = "$x(descr: $k) :- $x(price: $y, description: $k, category: $z(for: MALE)) ? $y > 100";
 		
-		
+		query = "$x :- $x(name: $y)";
 		
 		DepthFirstAdapter code = new QueryEngine();
 		

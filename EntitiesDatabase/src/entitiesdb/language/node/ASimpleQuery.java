@@ -5,24 +5,24 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ADefinitionQuery extends PQuery
+public final class ASimpleQuery extends PQuery
 {
-    private PEntity _entity_;
+    private PHead _head_;
     private TDefinedby _definedby_;
     private PBody _body_;
 
-    public ADefinitionQuery()
+    public ASimpleQuery()
     {
         // Constructor
     }
 
-    public ADefinitionQuery(
-        @SuppressWarnings("hiding") PEntity _entity_,
+    public ASimpleQuery(
+        @SuppressWarnings("hiding") PHead _head_,
         @SuppressWarnings("hiding") TDefinedby _definedby_,
         @SuppressWarnings("hiding") PBody _body_)
     {
         // Constructor
-        setEntity(_entity_);
+        setHead(_head_);
 
         setDefinedby(_definedby_);
 
@@ -33,27 +33,27 @@ public final class ADefinitionQuery extends PQuery
     @Override
     public Object clone()
     {
-        return new ADefinitionQuery(
-            cloneNode(this._entity_),
+        return new ASimpleQuery(
+            cloneNode(this._head_),
             cloneNode(this._definedby_),
             cloneNode(this._body_));
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseADefinitionQuery(this);
+        ((Analysis) sw).caseASimpleQuery(this);
     }
 
-    public PEntity getEntity()
+    public PHead getHead()
     {
-        return this._entity_;
+        return this._head_;
     }
 
-    public void setEntity(PEntity node)
+    public void setHead(PHead node)
     {
-        if(this._entity_ != null)
+        if(this._head_ != null)
         {
-            this._entity_.parent(null);
+            this._head_.parent(null);
         }
 
         if(node != null)
@@ -66,7 +66,7 @@ public final class ADefinitionQuery extends PQuery
             node.parent(this);
         }
 
-        this._entity_ = node;
+        this._head_ = node;
     }
 
     public TDefinedby getDefinedby()
@@ -123,7 +123,7 @@ public final class ADefinitionQuery extends PQuery
     public String toString()
     {
         return ""
-            + toString(this._entity_)
+            + toString(this._head_)
             + toString(this._definedby_)
             + toString(this._body_);
     }
@@ -132,9 +132,9 @@ public final class ADefinitionQuery extends PQuery
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._entity_ == child)
+        if(this._head_ == child)
         {
-            this._entity_ = null;
+            this._head_ = null;
             return;
         }
 
@@ -157,9 +157,9 @@ public final class ADefinitionQuery extends PQuery
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._entity_ == oldChild)
+        if(this._head_ == oldChild)
         {
-            setEntity((PEntity) newChild);
+            setHead((PHead) newChild);
             return;
         }
 

@@ -5,45 +5,45 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AVarEntityid extends PEntityid
+public final class AEntityValue extends PValue
 {
-    private TVariable _variable_;
+    private PEntity _entity_;
 
-    public AVarEntityid()
+    public AEntityValue()
     {
         // Constructor
     }
 
-    public AVarEntityid(
-        @SuppressWarnings("hiding") TVariable _variable_)
+    public AEntityValue(
+        @SuppressWarnings("hiding") PEntity _entity_)
     {
         // Constructor
-        setVariable(_variable_);
+        setEntity(_entity_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AVarEntityid(
-            cloneNode(this._variable_));
+        return new AEntityValue(
+            cloneNode(this._entity_));
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAVarEntityid(this);
+        ((Analysis) sw).caseAEntityValue(this);
     }
 
-    public TVariable getVariable()
+    public PEntity getEntity()
     {
-        return this._variable_;
+        return this._entity_;
     }
 
-    public void setVariable(TVariable node)
+    public void setEntity(PEntity node)
     {
-        if(this._variable_ != null)
+        if(this._entity_ != null)
         {
-            this._variable_.parent(null);
+            this._entity_.parent(null);
         }
 
         if(node != null)
@@ -56,23 +56,23 @@ public final class AVarEntityid extends PEntityid
             node.parent(this);
         }
 
-        this._variable_ = node;
+        this._entity_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._variable_);
+            + toString(this._entity_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._variable_ == child)
+        if(this._entity_ == child)
         {
-            this._variable_ = null;
+            this._entity_ = null;
             return;
         }
 
@@ -83,9 +83,9 @@ public final class AVarEntityid extends PEntityid
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._variable_ == oldChild)
+        if(this._entity_ == oldChild)
         {
-            setVariable((TVariable) newChild);
+            setEntity((PEntity) newChild);
             return;
         }
 

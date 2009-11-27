@@ -2,7 +2,7 @@
 
 package entitiesdb.language.node;
 
-public abstract class PPattern extends Node
+public abstract class PValue extends Node
 {
     // Empty body
 }

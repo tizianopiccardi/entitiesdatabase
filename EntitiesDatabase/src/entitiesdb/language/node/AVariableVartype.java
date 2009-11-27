@@ -5,45 +5,45 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AAtomicValuetype extends PValuetype
+public final class AVariableVartype extends PVartype
 {
-    private TString _string_;
+    private TVariable _variable_;
 
-    public AAtomicValuetype()
+    public AVariableVartype()
     {
         // Constructor
     }
 
-    public AAtomicValuetype(
-        @SuppressWarnings("hiding") TString _string_)
+    public AVariableVartype(
+        @SuppressWarnings("hiding") TVariable _variable_)
     {
         // Constructor
-        setString(_string_);
+        setVariable(_variable_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AAtomicValuetype(
-            cloneNode(this._string_));
+        return new AVariableVartype(
+            cloneNode(this._variable_));
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAAtomicValuetype(this);
+        ((Analysis) sw).caseAVariableVartype(this);
     }
 
-    public TString getString()
+    public TVariable getVariable()
     {
-        return this._string_;
+        return this._variable_;
     }
 
-    public void setString(TString node)
+    public void setVariable(TVariable node)
     {
-        if(this._string_ != null)
+        if(this._variable_ != null)
         {
-            this._string_.parent(null);
+            this._variable_.parent(null);
         }
 
         if(node != null)
@@ -56,23 +56,23 @@ public final class AAtomicValuetype extends PValuetype
             node.parent(this);
         }
 
-        this._string_ = node;
+        this._variable_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._string_);
+            + toString(this._variable_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._string_ == child)
+        if(this._variable_ == child)
         {
-            this._string_ = null;
+            this._variable_ = null;
             return;
         }
 
@@ -83,9 +83,9 @@ public final class AAtomicValuetype extends PValuetype
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._string_ == oldChild)
+        if(this._variable_ == oldChild)
         {
-            setString((TString) newChild);
+            setVariable((TVariable) newChild);
             return;
         }
 

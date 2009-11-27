@@ -7,7 +7,7 @@ import entitiesdb.language.analysis.*;
 @SuppressWarnings("nls")
 public final class Start extends Node
 {
-    private PQuery _pQuery_;
+    private PMain _pMain_;
     private EOF _eof_;
 
     public Start()
@@ -16,10 +16,10 @@ public final class Start extends Node
     }
 
     public Start(
-        @SuppressWarnings("hiding") PQuery _pQuery_,
+        @SuppressWarnings("hiding") PMain _pMain_,
         @SuppressWarnings("hiding") EOF _eof_)
     {
-        setPQuery(_pQuery_);
+        setPMain(_pMain_);
         setEOF(_eof_);
     }
 
@@ -27,7 +27,7 @@ public final class Start extends Node
     public Object clone()
     {
         return new Start(
-            cloneNode(this._pQuery_),
+            cloneNode(this._pMain_),
             cloneNode(this._eof_));
     }
 
@@ -36,16 +36,16 @@ public final class Start extends Node
         ((Analysis) sw).caseStart(this);
     }
 
-    public PQuery getPQuery()
+    public PMain getPMain()
     {
-        return this._pQuery_;
+        return this._pMain_;
     }
 
-    public void setPQuery(PQuery node)
+    public void setPMain(PMain node)
     {
-        if(this._pQuery_ != null)
+        if(this._pMain_ != null)
         {
-            this._pQuery_.parent(null);
+            this._pMain_.parent(null);
         }
 
         if(node != null)
@@ -58,7 +58,7 @@ public final class Start extends Node
             node.parent(this);
         }
 
-        this._pQuery_ = node;
+        this._pMain_ = node;
     }
 
     public EOF getEOF()
@@ -89,9 +89,9 @@ public final class Start extends Node
     @Override
     void removeChild(Node child)
     {
-        if(this._pQuery_ == child)
+        if(this._pMain_ == child)
         {
-            this._pQuery_ = null;
+            this._pMain_ = null;
             return;
         }
 
@@ -107,9 +107,9 @@ public final class Start extends Node
     @Override
     void replaceChild(Node oldChild, Node newChild)
     {
-        if(this._pQuery_ == oldChild)
+        if(this._pMain_ == oldChild)
         {
-            setPQuery((PQuery) newChild);
+            setPMain((PMain) newChild);
             return;
         }
 
@@ -126,7 +126,7 @@ public final class Start extends Node
     public String toString()
     {
         return "" +
-            toString(this._pQuery_) +
+            toString(this._pMain_) +
             toString(this._eof_);
     }
 }

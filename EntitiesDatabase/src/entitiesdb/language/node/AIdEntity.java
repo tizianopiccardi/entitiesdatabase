@@ -5,45 +5,45 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ASingleConditions extends PConditions
+public final class AIdEntity extends PEntity
 {
-    private PCondition _condition_;
+    private PVartype _vartype_;
 
-    public ASingleConditions()
+    public AIdEntity()
     {
         // Constructor
     }
 
-    public ASingleConditions(
-        @SuppressWarnings("hiding") PCondition _condition_)
+    public AIdEntity(
+        @SuppressWarnings("hiding") PVartype _vartype_)
     {
         // Constructor
-        setCondition(_condition_);
+        setVartype(_vartype_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ASingleConditions(
-            cloneNode(this._condition_));
+        return new AIdEntity(
+            cloneNode(this._vartype_));
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseASingleConditions(this);
+        ((Analysis) sw).caseAIdEntity(this);
     }
 
-    public PCondition getCondition()
+    public PVartype getVartype()
     {
-        return this._condition_;
+        return this._vartype_;
     }
 
-    public void setCondition(PCondition node)
+    public void setVartype(PVartype node)
     {
-        if(this._condition_ != null)
+        if(this._vartype_ != null)
         {
-            this._condition_.parent(null);
+            this._vartype_.parent(null);
         }
 
         if(node != null)
@@ -56,23 +56,23 @@ public final class ASingleConditions extends PConditions
             node.parent(this);
         }
 
-        this._condition_ = node;
+        this._vartype_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._condition_);
+            + toString(this._vartype_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._condition_ == child)
+        if(this._vartype_ == child)
         {
-            this._condition_ = null;
+            this._vartype_ = null;
             return;
         }
 
@@ -83,9 +83,9 @@ public final class ASingleConditions extends PConditions
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._condition_ == oldChild)
+        if(this._vartype_ == oldChild)
         {
-            setCondition((PCondition) newChild);
+            setVartype((PVartype) newChild);
             return;
         }
 

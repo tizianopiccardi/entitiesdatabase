@@ -2,7 +2,7 @@
 
 package entitiesdb.language.node;
 
-public abstract class PWithblock extends Node
+public abstract class PHead extends Node
 {
     // Empty body
 }
