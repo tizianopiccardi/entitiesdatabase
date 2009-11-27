@@ -12,19 +12,20 @@ import com.sleepycat.persist.PrimaryIndex;
 import com.sleepycat.persist.SecondaryIndex;
 import com.sleepycat.persist.StoreConfig;
 
+import entitiesdb.record.Attribute;
+import entitiesdb.record.EntityId;
 import entitiesdb.record.Record;
 import entitiesdb.record.Value;
-import entitiesdb.record.Value.ValueType;
 
-/** Incompleto */
+
 public class JEDao {
 	private Environment databaseEnvironment;
 	private EntityStore entityStore;
 	private File databaseDirectory;
 	private PrimaryIndex<Long, Record> recordsIndex;
 
-	private SecondaryIndex<String, Long, ?> recordByEntityIndex;
-	private SecondaryIndex<String, Long, ?> recordByAttributeIndex;	
+	private SecondaryIndex<EntityId, Long, ?> recordByEntityIndex;
+	private SecondaryIndex<Attribute, Long, ?> recordByAttributeIndex;	
 	private SecondaryIndex<Value, Long, Record> recordByValueIndex;		
 	
 
@@ -127,10 +128,10 @@ public class JEDao {
 	 */
 
 	@SuppressWarnings("unchecked")
-	public void getRecordByEntity(String eName) {
+	public void getRecordByEntity(EntityId id) {
 
 		EntityCursor<Record> sec_cursor = (EntityCursor<Record>) recordByEntityIndex
-				.subIndex(eName).entities();
+				.subIndex(id).entities();
 		try {
 			for (Record seci : sec_cursor) {
 				System.out.println(seci);
@@ -144,10 +145,10 @@ public class JEDao {
 	
 	
 	@SuppressWarnings("unchecked")
-	public void getRecordByAttribute(String aName) {
+	public void getRecordByAttribute(Attribute attribute) {
 		
 		EntityCursor<Record> sec_cursor = (EntityCursor<Record>) recordByAttributeIndex
-				.subIndex(aName).entities();
+				.subIndex(attribute).entities();
 		try {
 			for (Record seci : sec_cursor) {
 				System.out.println(seci);
@@ -158,7 +159,6 @@ public class JEDao {
 
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void getRecordByValue(Value value) {
 		
 		EntityCursor<Record> sec_cursor = (EntityCursor<Record>) recordByValueIndex.subIndex(value).entities();
@@ -176,14 +176,19 @@ public class JEDao {
 		recordsIndex = entityStore.getPrimaryIndex(Long.class, Record.class);
 
 		recordByEntityIndex = entityStore.getSecondaryIndex(recordsIndex,
-				String.class, "Entity");
+				EntityId.class, "Entity");
 
 		recordByAttributeIndex = entityStore.getSecondaryIndex(recordsIndex,
-				String.class, "Attribute");
+				Attribute.class, "Attribute");
 		
 		recordByValueIndex = entityStore.getSecondaryIndex(recordsIndex,
 				Value.class, "Value");
 		
+	}
+	
+	
+	public boolean isEmpty() {
+		return recordsIndex.count() == 0;
 	}
 
 }

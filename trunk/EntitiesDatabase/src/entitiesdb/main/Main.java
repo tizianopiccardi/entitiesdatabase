@@ -5,6 +5,8 @@ import java.util.Collection;
 
 import entitiesdb.dao.DaoException;
 import entitiesdb.dao.JEDao;
+import entitiesdb.record.Attribute;
+import entitiesdb.record.EntityId;
 import entitiesdb.record.Record;
 import entitiesdb.record.Value;
 import entitiesdb.record.Value.ValueType;
@@ -45,22 +47,24 @@ public class Main {
 			
 			Record record12 = new Record("I5", "", "", ValueType.NOTYPE);
 			
-			dao.store(record);
-			dao.store(record2);
-			dao.store(record3);
-			dao.store(record4);
-			dao.store(record5);
-			dao.store(record6);
-			dao.store(record7);
-			dao.store(record8);
-			dao.store(record9);
-			dao.store(record10);
-			dao.store(record11);
-			dao.store(record12);
+			if (dao.isEmpty()) {
+				dao.store(record);
+				dao.store(record2);
+				dao.store(record3);
+				dao.store(record4);
+				dao.store(record5);
+				dao.store(record6);
+				dao.store(record7);
+				dao.store(record8);
+				dao.store(record9);
+				dao.store(record10);
+				dao.store(record11);
+				dao.store(record12);
+			}
 			
-			dao.getRecordByEntity("TN");
+			dao.getRecordByEntity(new EntityId("TN"));
 			System.out.print("\n\n\n");
-			dao.getRecordByAttribute("name");
+			dao.getRecordByAttribute(new Attribute("name"));
 			System.out.print("\n\n\n");
 			dao.getRecordByValue(new Value("Mary", ValueType.ATOM));
 			System.out.print("\n\n\n");

@@ -91,9 +91,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getLbracket().apply(this);
         }
-        if(node.getIdentifier() != null)
+        if(node.getEntityid() != null)
         {
-            node.getIdentifier().apply(this);
+            node.getEntityid().apply(this);
         }
         outAEntity(node);
     }
@@ -162,6 +162,48 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
             node.getIdentifier().apply(this);
         }
         outAListAttributes(node);
+    }
+
+    public void inAIdeEntityid(AIdeEntityid node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAIdeEntityid(AIdeEntityid node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAIdeEntityid(AIdeEntityid node)
+    {
+        inAIdeEntityid(node);
+        if(node.getIdentifier() != null)
+        {
+            node.getIdentifier().apply(this);
+        }
+        outAIdeEntityid(node);
+    }
+
+    public void inAVarEntityid(AVarEntityid node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAVarEntityid(AVarEntityid node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAVarEntityid(AVarEntityid node)
+    {
+        inAVarEntityid(node);
+        if(node.getVariable() != null)
+        {
+            node.getVariable().apply(this);
+        }
+        outAVarEntityid(node);
     }
 
     public void inAAtomicValuetype(AAtomicValuetype node)

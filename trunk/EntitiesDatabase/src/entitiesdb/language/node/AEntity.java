@@ -7,7 +7,7 @@ import entitiesdb.language.analysis.*;
 @SuppressWarnings("nls")
 public final class AEntity extends PEntity
 {
-    private TIdentifier _identifier_;
+    private PEntityid _entityid_;
     private TLbracket _lbracket_;
     private PAttributes _attributes_;
     private TRbracket _rbracket_;
@@ -18,13 +18,13 @@ public final class AEntity extends PEntity
     }
 
     public AEntity(
-        @SuppressWarnings("hiding") TIdentifier _identifier_,
+        @SuppressWarnings("hiding") PEntityid _entityid_,
         @SuppressWarnings("hiding") TLbracket _lbracket_,
         @SuppressWarnings("hiding") PAttributes _attributes_,
         @SuppressWarnings("hiding") TRbracket _rbracket_)
     {
         // Constructor
-        setIdentifier(_identifier_);
+        setEntityid(_entityid_);
 
         setLbracket(_lbracket_);
 
@@ -38,7 +38,7 @@ public final class AEntity extends PEntity
     public Object clone()
     {
         return new AEntity(
-            cloneNode(this._identifier_),
+            cloneNode(this._entityid_),
             cloneNode(this._lbracket_),
             cloneNode(this._attributes_),
             cloneNode(this._rbracket_));
@@ -49,16 +49,16 @@ public final class AEntity extends PEntity
         ((Analysis) sw).caseAEntity(this);
     }
 
-    public TIdentifier getIdentifier()
+    public PEntityid getEntityid()
     {
-        return this._identifier_;
+        return this._entityid_;
     }
 
-    public void setIdentifier(TIdentifier node)
+    public void setEntityid(PEntityid node)
     {
-        if(this._identifier_ != null)
+        if(this._entityid_ != null)
         {
-            this._identifier_.parent(null);
+            this._entityid_.parent(null);
         }
 
         if(node != null)
@@ -71,7 +71,7 @@ public final class AEntity extends PEntity
             node.parent(this);
         }
 
-        this._identifier_ = node;
+        this._entityid_ = node;
     }
 
     public TLbracket getLbracket()
@@ -153,7 +153,7 @@ public final class AEntity extends PEntity
     public String toString()
     {
         return ""
-            + toString(this._identifier_)
+            + toString(this._entityid_)
             + toString(this._lbracket_)
             + toString(this._attributes_)
             + toString(this._rbracket_);
@@ -163,9 +163,9 @@ public final class AEntity extends PEntity
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._identifier_ == child)
+        if(this._entityid_ == child)
         {
-            this._identifier_ = null;
+            this._entityid_ = null;
             return;
         }
 
@@ -194,9 +194,9 @@ public final class AEntity extends PEntity
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._identifier_ == oldChild)
+        if(this._entityid_ == oldChild)
         {
-            setIdentifier((TIdentifier) newChild);
+            setEntityid((PEntityid) newChild);
             return;
         }
 
