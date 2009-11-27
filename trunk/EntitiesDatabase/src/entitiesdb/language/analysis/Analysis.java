@@ -12,23 +12,29 @@ public interface Analysis extends Switch
     void setOut(Node node, Object o);
 
     void caseStart(Start node);
-    void caseADefinitionQuery(ADefinitionQuery node);
-    void caseAEntity(AEntity node);
-    void caseASingleAttributes(ASingleAttributes node);
-    void caseAListAttributes(AListAttributes node);
-    void caseAIdeEntityid(AIdeEntityid node);
-    void caseAVarEntityid(AVarEntityid node);
-    void caseAAtomicValuetype(AAtomicValuetype node);
-    void caseAEntityValuetype(AEntityValuetype node);
-    void caseAVarValuetype(AVarValuetype node);
-    void caseAEntitydefValuetype(AEntitydefValuetype node);
-    void caseAPatternBody(APatternBody node);
-    void caseASinglePattern(ASinglePattern node);
-    void caseAListPattern(AListPattern node);
-    void caseAConditionsWithblock(AConditionsWithblock node);
-    void caseAEmptyWithblock(AEmptyWithblock node);
+    void caseAQueryMain(AQueryMain node);
+    void caseASimpleQuery(ASimpleQuery node);
+    void caseAComplexQuery(AComplexQuery node);
+    void caseAHead(AHead node);
+    void caseASingleBody(ASingleBody node);
+    void caseAListBody(AListBody node);
     void caseASingleConditions(ASingleConditions node);
     void caseAListConditions(AListConditions node);
+    void caseAEqualCondition(AEqualCondition node);
+    void caseADifferentCondition(ADifferentCondition node);
+    void caseAGraterCondition(AGraterCondition node);
+    void caseALessCondition(ALessCondition node);
+    void caseAStringValue(AStringValue node);
+    void caseANumberValue(ANumberValue node);
+    void caseAVarValue(AVarValue node);
+    void caseAEntityValue(AEntityValue node);
+    void caseAIdEntity(AIdEntity node);
+    void caseADefEntity(ADefEntity node);
+    void caseAIdeVartype(AIdeVartype node);
+    void caseAVariableVartype(AVariableVartype node);
+    void caseASingleAttributes(ASingleAttributes node);
+    void caseAListAttributes(AListAttributes node);
+    void caseAElementAttribute(AElementAttribute node);
 
     void caseTNewLine(TNewLine node);
     void caseTBlank(TBlank node);
@@ -40,7 +46,11 @@ public interface Analysis extends Switch
     void caseTIdentifier(TIdentifier node);
     void caseTVariable(TVariable node);
     void caseTString(TString node);
+    void caseTNumber(TNumber node);
     void caseTQmark(TQmark node);
     void caseTEqual(TEqual node);
+    void caseTDifferent(TDifferent node);
+    void caseTGreater(TGreater node);
+    void caseTLess(TLess node);
     void caseEOF(EOF node);
 }

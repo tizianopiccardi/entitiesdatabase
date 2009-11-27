@@ -5,45 +5,45 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AVarValuetype extends PValuetype
+public final class ANumberValue extends PValue
 {
-    private TVariable _variable_;
+    private TNumber _number_;
 
-    public AVarValuetype()
+    public ANumberValue()
     {
         // Constructor
     }
 
-    public AVarValuetype(
-        @SuppressWarnings("hiding") TVariable _variable_)
+    public ANumberValue(
+        @SuppressWarnings("hiding") TNumber _number_)
     {
         // Constructor
-        setVariable(_variable_);
+        setNumber(_number_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AVarValuetype(
-            cloneNode(this._variable_));
+        return new ANumberValue(
+            cloneNode(this._number_));
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAVarValuetype(this);
+        ((Analysis) sw).caseANumberValue(this);
     }
 
-    public TVariable getVariable()
+    public TNumber getNumber()
     {
-        return this._variable_;
+        return this._number_;
     }
 
-    public void setVariable(TVariable node)
+    public void setNumber(TNumber node)
     {
-        if(this._variable_ != null)
+        if(this._number_ != null)
         {
-            this._variable_.parent(null);
+            this._number_.parent(null);
         }
 
         if(node != null)
@@ -56,23 +56,23 @@ public final class AVarValuetype extends PValuetype
             node.parent(this);
         }
 
-        this._variable_ = node;
+        this._number_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._variable_);
+            + toString(this._number_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._variable_ == child)
+        if(this._number_ == child)
         {
-            this._variable_ = null;
+            this._number_ = null;
             return;
         }
 
@@ -83,9 +83,9 @@ public final class AVarValuetype extends PValuetype
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._variable_ == oldChild)
+        if(this._number_ == oldChild)
         {
-            setVariable((TVariable) newChild);
+            setNumber((TNumber) newChild);
             return;
         }
 

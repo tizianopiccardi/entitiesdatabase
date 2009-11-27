@@ -5,45 +5,45 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AEntityValuetype extends PValuetype
+public final class AQueryMain extends PMain
 {
-    private TIdentifier _identifier_;
+    private PQuery _query_;
 
-    public AEntityValuetype()
+    public AQueryMain()
     {
         // Constructor
     }
 
-    public AEntityValuetype(
-        @SuppressWarnings("hiding") TIdentifier _identifier_)
+    public AQueryMain(
+        @SuppressWarnings("hiding") PQuery _query_)
     {
         // Constructor
-        setIdentifier(_identifier_);
+        setQuery(_query_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AEntityValuetype(
-            cloneNode(this._identifier_));
+        return new AQueryMain(
+            cloneNode(this._query_));
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAEntityValuetype(this);
+        ((Analysis) sw).caseAQueryMain(this);
     }
 
-    public TIdentifier getIdentifier()
+    public PQuery getQuery()
     {
-        return this._identifier_;
+        return this._query_;
     }
 
-    public void setIdentifier(TIdentifier node)
+    public void setQuery(PQuery node)
     {
-        if(this._identifier_ != null)
+        if(this._query_ != null)
         {
-            this._identifier_.parent(null);
+            this._query_.parent(null);
         }
 
         if(node != null)
@@ -56,23 +56,23 @@ public final class AEntityValuetype extends PValuetype
             node.parent(this);
         }
 
-        this._identifier_ = node;
+        this._query_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._identifier_);
+            + toString(this._query_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._identifier_ == child)
+        if(this._query_ == child)
         {
-            this._identifier_ = null;
+            this._query_ = null;
             return;
         }
 
@@ -83,9 +83,9 @@ public final class AEntityValuetype extends PValuetype
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._identifier_ == oldChild)
+        if(this._query_ == oldChild)
         {
-            setIdentifier((TIdentifier) newChild);
+            setQuery((PQuery) newChild);
             return;
         }
 

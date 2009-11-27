@@ -5,45 +5,45 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AIdeEntityid extends PEntityid
+public final class AVarValue extends PValue
 {
-    private TIdentifier _identifier_;
+    private TVariable _variable_;
 
-    public AIdeEntityid()
+    public AVarValue()
     {
         // Constructor
     }
 
-    public AIdeEntityid(
-        @SuppressWarnings("hiding") TIdentifier _identifier_)
+    public AVarValue(
+        @SuppressWarnings("hiding") TVariable _variable_)
     {
         // Constructor
-        setIdentifier(_identifier_);
+        setVariable(_variable_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AIdeEntityid(
-            cloneNode(this._identifier_));
+        return new AVarValue(
+            cloneNode(this._variable_));
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAIdeEntityid(this);
+        ((Analysis) sw).caseAVarValue(this);
     }
 
-    public TIdentifier getIdentifier()
+    public TVariable getVariable()
     {
-        return this._identifier_;
+        return this._variable_;
     }
 
-    public void setIdentifier(TIdentifier node)
+    public void setVariable(TVariable node)
     {
-        if(this._identifier_ != null)
+        if(this._variable_ != null)
         {
-            this._identifier_.parent(null);
+            this._variable_.parent(null);
         }
 
         if(node != null)
@@ -56,23 +56,23 @@ public final class AIdeEntityid extends PEntityid
             node.parent(this);
         }
 
-        this._identifier_ = node;
+        this._variable_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._identifier_);
+            + toString(this._variable_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._identifier_ == child)
+        if(this._variable_ == child)
         {
-            this._identifier_ = null;
+            this._variable_ = null;
             return;
         }
 
@@ -83,9 +83,9 @@ public final class AIdeEntityid extends PEntityid
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._identifier_ == oldChild)
+        if(this._variable_ == oldChild)
         {
-            setIdentifier((TIdentifier) newChild);
+            setVariable((TVariable) newChild);
             return;
         }
 

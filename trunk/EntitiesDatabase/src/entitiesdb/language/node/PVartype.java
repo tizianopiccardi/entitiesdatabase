@@ -2,7 +2,7 @@
 
 package entitiesdb.language.node;
 
-public abstract class PValuetype extends Node
+public abstract class PVartype extends Node
 {
     // Empty body
 }

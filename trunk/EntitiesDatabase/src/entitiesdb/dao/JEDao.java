@@ -3,11 +3,16 @@ package entitiesdb.dao;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Vector;
+
+import com.sleepycat.je.Cursor;
 import com.sleepycat.je.DatabaseException;
 import com.sleepycat.je.Environment;
 import com.sleepycat.je.EnvironmentConfig;
 import com.sleepycat.persist.EntityCursor;
+import com.sleepycat.persist.EntityJoin;
 import com.sleepycat.persist.EntityStore;
+import com.sleepycat.persist.ForwardCursor;
 import com.sleepycat.persist.PrimaryIndex;
 import com.sleepycat.persist.SecondaryIndex;
 import com.sleepycat.persist.StoreConfig;
@@ -16,7 +21,7 @@ import entitiesdb.record.Attribute;
 import entitiesdb.record.EntityId;
 import entitiesdb.record.Record;
 import entitiesdb.record.Value;
-
+import entitiesdb.record.Value.ValueType;
 
 public class JEDao {
 	private Environment databaseEnvironment;
@@ -25,9 +30,8 @@ public class JEDao {
 	private PrimaryIndex<Long, Record> recordsIndex;
 
 	private SecondaryIndex<EntityId, Long, ?> recordByEntityIndex;
-	private SecondaryIndex<Attribute, Long, ?> recordByAttributeIndex;	
-	private SecondaryIndex<Value, Long, Record> recordByValueIndex;		
-	
+	private SecondaryIndex<Attribute, Long, ?> recordByAttributeIndex;
+	private SecondaryIndex<Value, Long, Record> recordByValueIndex;
 
 	public JEDao(File databaseDirectory) {
 		this.databaseDirectory = databaseDirectory;
@@ -132,6 +136,7 @@ public class JEDao {
 
 		EntityCursor<Record> sec_cursor = (EntityCursor<Record>) recordByEntityIndex
 				.subIndex(id).entities();
+
 		try {
 			for (Record seci : sec_cursor) {
 				System.out.println(seci);
@@ -141,12 +146,10 @@ public class JEDao {
 		}
 
 	}
-	
-	
-	
+
 	@SuppressWarnings("unchecked")
 	public void getRecordByAttribute(Attribute attribute) {
-		
+
 		EntityCursor<Record> sec_cursor = (EntityCursor<Record>) recordByAttributeIndex
 				.subIndex(attribute).entities();
 		try {
@@ -158,10 +161,11 @@ public class JEDao {
 		}
 
 	}
-	
+
 	public void getRecordByValue(Value value) {
-		
-		EntityCursor<Record> sec_cursor = (EntityCursor<Record>) recordByValueIndex.subIndex(value).entities();
+
+		EntityCursor<Record> sec_cursor = (EntityCursor<Record>) recordByValueIndex
+				.subIndex(value).entities();
 		try {
 			for (Record seci : sec_cursor) {
 				System.out.println(seci);
@@ -180,15 +184,60 @@ public class JEDao {
 
 		recordByAttributeIndex = entityStore.getSecondaryIndex(recordsIndex,
 				Attribute.class, "Attribute");
-		
+
 		recordByValueIndex = entityStore.getSecondaryIndex(recordsIndex,
 				Value.class, "Value");
+
+	}
+
+	public boolean isEmpty() {
+		return recordsIndex.count() == 0;
+	}
+
+	@SuppressWarnings("unchecked")
+	public void test() {
+		
+		Attribute married = new Attribute("married");
+		Value I1 = new Value("I1", ValueType.ENTITY);
+		
+		EntityJoin join = new EntityJoin(recordsIndex);
+		join.addCondition(recordByAttributeIndex, married);
+		join.addCondition(recordByValueIndex, I1);
+		
+
+		
+		ForwardCursor<Record> c = join.entities();
+		
+		for (Record seci : c) {
+			System.out.println(seci);
+		}
 		
 	}
 	
+	public Vector<Long> getIdArray(Record r) {
+		return getIdArray(r.getEntityId(), r.getAttribute(), r.getValue());
+	}
 	
-	public boolean isEmpty() {
-		return recordsIndex.count() == 0;
+	
+	@SuppressWarnings("unchecked")
+	public Vector<Long> getIdArray(EntityId e, Attribute a, Value v) {
+
+		Vector<Long> out = new Vector<Long>();
+		
+		EntityJoin join = new EntityJoin(recordsIndex);
+		
+		if (e!=null)
+		join.addCondition(recordByEntityIndex, e);
+		if (a!=null)
+		join.addCondition(recordByAttributeIndex, a);
+		if (v!=null)
+		join.addCondition(recordByValueIndex, v);
+
+		ForwardCursor<Record> c = join.entities();
+		for (Record foundRec : c) {
+			out.add(foundRec.getId());
+		}
+		return out;
 	}
 
 }

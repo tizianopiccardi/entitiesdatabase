@@ -69,12 +69,102 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
-    public void caseADefinitionQuery(ADefinitionQuery node)
+    public void caseAQueryMain(AQueryMain node)
     {
         defaultCase(node);
     }
 
-    public void caseAEntity(AEntity node)
+    public void caseASimpleQuery(ASimpleQuery node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAComplexQuery(AComplexQuery node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAHead(AHead node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseASingleBody(ASingleBody node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAListBody(AListBody node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseASingleConditions(ASingleConditions node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAListConditions(AListConditions node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAEqualCondition(AEqualCondition node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseADifferentCondition(ADifferentCondition node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAGraterCondition(AGraterCondition node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseALessCondition(ALessCondition node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAStringValue(AStringValue node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseANumberValue(ANumberValue node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAVarValue(AVarValue node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAEntityValue(AEntityValue node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAIdEntity(AIdEntity node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseADefEntity(ADefEntity node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAIdeVartype(AIdeVartype node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAVariableVartype(AVariableVartype node)
     {
         defaultCase(node);
     }
@@ -89,67 +179,7 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
-    public void caseAIdeEntityid(AIdeEntityid node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAVarEntityid(AVarEntityid node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAAtomicValuetype(AAtomicValuetype node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAEntityValuetype(AEntityValuetype node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAVarValuetype(AVarValuetype node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAEntitydefValuetype(AEntitydefValuetype node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAPatternBody(APatternBody node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseASinglePattern(ASinglePattern node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAListPattern(AListPattern node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAConditionsWithblock(AConditionsWithblock node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAEmptyWithblock(AEmptyWithblock node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseASingleConditions(ASingleConditions node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAListConditions(AListConditions node)
+    public void caseAElementAttribute(AElementAttribute node)
     {
         defaultCase(node);
     }
@@ -204,12 +234,32 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
+    public void caseTNumber(TNumber node)
+    {
+        defaultCase(node);
+    }
+
     public void caseTQmark(TQmark node)
     {
         defaultCase(node);
     }
 
     public void caseTEqual(TEqual node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTDifferent(TDifferent node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTGreater(TGreater node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTLess(TLess node)
     {
         defaultCase(node);
     }

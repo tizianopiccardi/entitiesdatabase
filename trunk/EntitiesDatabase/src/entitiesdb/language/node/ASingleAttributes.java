@@ -7,9 +7,7 @@ import entitiesdb.language.analysis.*;
 @SuppressWarnings("nls")
 public final class ASingleAttributes extends PAttributes
 {
-    private TIdentifier _identifier_;
-    private TColon _colon_;
-    private PValuetype _valuetype_;
+    private PAttribute _attribute_;
 
     public ASingleAttributes()
     {
@@ -17,16 +15,10 @@ public final class ASingleAttributes extends PAttributes
     }
 
     public ASingleAttributes(
-        @SuppressWarnings("hiding") TIdentifier _identifier_,
-        @SuppressWarnings("hiding") TColon _colon_,
-        @SuppressWarnings("hiding") PValuetype _valuetype_)
+        @SuppressWarnings("hiding") PAttribute _attribute_)
     {
         // Constructor
-        setIdentifier(_identifier_);
-
-        setColon(_colon_);
-
-        setValuetype(_valuetype_);
+        setAttribute(_attribute_);
 
     }
 
@@ -34,9 +26,7 @@ public final class ASingleAttributes extends PAttributes
     public Object clone()
     {
         return new ASingleAttributes(
-            cloneNode(this._identifier_),
-            cloneNode(this._colon_),
-            cloneNode(this._valuetype_));
+            cloneNode(this._attribute_));
     }
 
     public void apply(Switch sw)
@@ -44,16 +34,16 @@ public final class ASingleAttributes extends PAttributes
         ((Analysis) sw).caseASingleAttributes(this);
     }
 
-    public TIdentifier getIdentifier()
+    public PAttribute getAttribute()
     {
-        return this._identifier_;
+        return this._attribute_;
     }
 
-    public void setIdentifier(TIdentifier node)
+    public void setAttribute(PAttribute node)
     {
-        if(this._identifier_ != null)
+        if(this._attribute_ != null)
         {
-            this._identifier_.parent(null);
+            this._attribute_.parent(null);
         }
 
         if(node != null)
@@ -66,87 +56,23 @@ public final class ASingleAttributes extends PAttributes
             node.parent(this);
         }
 
-        this._identifier_ = node;
-    }
-
-    public TColon getColon()
-    {
-        return this._colon_;
-    }
-
-    public void setColon(TColon node)
-    {
-        if(this._colon_ != null)
-        {
-            this._colon_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._colon_ = node;
-    }
-
-    public PValuetype getValuetype()
-    {
-        return this._valuetype_;
-    }
-
-    public void setValuetype(PValuetype node)
-    {
-        if(this._valuetype_ != null)
-        {
-            this._valuetype_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._valuetype_ = node;
+        this._attribute_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._identifier_)
-            + toString(this._colon_)
-            + toString(this._valuetype_);
+            + toString(this._attribute_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._identifier_ == child)
+        if(this._attribute_ == child)
         {
-            this._identifier_ = null;
-            return;
-        }
-
-        if(this._colon_ == child)
-        {
-            this._colon_ = null;
-            return;
-        }
-
-        if(this._valuetype_ == child)
-        {
-            this._valuetype_ = null;
+            this._attribute_ = null;
             return;
         }
 
@@ -157,21 +83,9 @@ public final class ASingleAttributes extends PAttributes
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._identifier_ == oldChild)
+        if(this._attribute_ == oldChild)
         {
-            setIdentifier((TIdentifier) newChild);
-            return;
-        }
-
-        if(this._colon_ == oldChild)
-        {
-            setColon((TColon) newChild);
-            return;
-        }
-
-        if(this._valuetype_ == oldChild)
-        {
-            setValuetype((PValuetype) newChild);
+            setAttribute((PAttribute) newChild);
             return;
         }
 

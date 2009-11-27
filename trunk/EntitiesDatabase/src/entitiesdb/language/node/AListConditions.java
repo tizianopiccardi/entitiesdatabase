@@ -7,11 +7,9 @@ import entitiesdb.language.analysis.*;
 @SuppressWarnings("nls")
 public final class AListConditions extends PConditions
 {
-    private PConditions _conditions_;
+    private PCondition _condition_;
     private TComa _coma_;
-    private PValuetype _left_;
-    private TEqual _equal_;
-    private PValuetype _right_;
+    private PConditions _conditions_;
 
     public AListConditions()
     {
@@ -19,22 +17,16 @@ public final class AListConditions extends PConditions
     }
 
     public AListConditions(
-        @SuppressWarnings("hiding") PConditions _conditions_,
+        @SuppressWarnings("hiding") PCondition _condition_,
         @SuppressWarnings("hiding") TComa _coma_,
-        @SuppressWarnings("hiding") PValuetype _left_,
-        @SuppressWarnings("hiding") TEqual _equal_,
-        @SuppressWarnings("hiding") PValuetype _right_)
+        @SuppressWarnings("hiding") PConditions _conditions_)
     {
         // Constructor
-        setConditions(_conditions_);
+        setCondition(_condition_);
 
         setComa(_coma_);
 
-        setLeft(_left_);
-
-        setEqual(_equal_);
-
-        setRight(_right_);
+        setConditions(_conditions_);
 
     }
 
@@ -42,11 +34,9 @@ public final class AListConditions extends PConditions
     public Object clone()
     {
         return new AListConditions(
-            cloneNode(this._conditions_),
+            cloneNode(this._condition_),
             cloneNode(this._coma_),
-            cloneNode(this._left_),
-            cloneNode(this._equal_),
-            cloneNode(this._right_));
+            cloneNode(this._conditions_));
     }
 
     public void apply(Switch sw)
@@ -54,16 +44,16 @@ public final class AListConditions extends PConditions
         ((Analysis) sw).caseAListConditions(this);
     }
 
-    public PConditions getConditions()
+    public PCondition getCondition()
     {
-        return this._conditions_;
+        return this._condition_;
     }
 
-    public void setConditions(PConditions node)
+    public void setCondition(PCondition node)
     {
-        if(this._conditions_ != null)
+        if(this._condition_ != null)
         {
-            this._conditions_.parent(null);
+            this._condition_.parent(null);
         }
 
         if(node != null)
@@ -76,7 +66,7 @@ public final class AListConditions extends PConditions
             node.parent(this);
         }
 
-        this._conditions_ = node;
+        this._condition_ = node;
     }
 
     public TComa getComa()
@@ -104,16 +94,16 @@ public final class AListConditions extends PConditions
         this._coma_ = node;
     }
 
-    public PValuetype getLeft()
+    public PConditions getConditions()
     {
-        return this._left_;
+        return this._conditions_;
     }
 
-    public void setLeft(PValuetype node)
+    public void setConditions(PConditions node)
     {
-        if(this._left_ != null)
+        if(this._conditions_ != null)
         {
-            this._left_.parent(null);
+            this._conditions_.parent(null);
         }
 
         if(node != null)
@@ -126,77 +116,25 @@ public final class AListConditions extends PConditions
             node.parent(this);
         }
 
-        this._left_ = node;
-    }
-
-    public TEqual getEqual()
-    {
-        return this._equal_;
-    }
-
-    public void setEqual(TEqual node)
-    {
-        if(this._equal_ != null)
-        {
-            this._equal_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._equal_ = node;
-    }
-
-    public PValuetype getRight()
-    {
-        return this._right_;
-    }
-
-    public void setRight(PValuetype node)
-    {
-        if(this._right_ != null)
-        {
-            this._right_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._right_ = node;
+        this._conditions_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._conditions_)
+            + toString(this._condition_)
             + toString(this._coma_)
-            + toString(this._left_)
-            + toString(this._equal_)
-            + toString(this._right_);
+            + toString(this._conditions_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._conditions_ == child)
+        if(this._condition_ == child)
         {
-            this._conditions_ = null;
+            this._condition_ = null;
             return;
         }
 
@@ -206,21 +144,9 @@ public final class AListConditions extends PConditions
             return;
         }
 
-        if(this._left_ == child)
+        if(this._conditions_ == child)
         {
-            this._left_ = null;
-            return;
-        }
-
-        if(this._equal_ == child)
-        {
-            this._equal_ = null;
-            return;
-        }
-
-        if(this._right_ == child)
-        {
-            this._right_ = null;
+            this._conditions_ = null;
             return;
         }
 
@@ -231,9 +157,9 @@ public final class AListConditions extends PConditions
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._conditions_ == oldChild)
+        if(this._condition_ == oldChild)
         {
-            setConditions((PConditions) newChild);
+            setCondition((PCondition) newChild);
             return;
         }
 
@@ -243,21 +169,9 @@ public final class AListConditions extends PConditions
             return;
         }
 
-        if(this._left_ == oldChild)
+        if(this._conditions_ == oldChild)
         {
-            setLeft((PValuetype) newChild);
-            return;
-        }
-
-        if(this._equal_ == oldChild)
-        {
-            setEqual((TEqual) newChild);
-            return;
-        }
-
-        if(this._right_ == oldChild)
-        {
-            setRight((PValuetype) newChild);
+            setConditions((PConditions) newChild);
             return;
         }
 

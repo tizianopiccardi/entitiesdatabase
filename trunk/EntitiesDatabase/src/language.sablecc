@@ -8,7 +8,9 @@ Helpers
   lf = 10;
   all = [0 .. 127];
   any_charater = [0x0 .. 0xfffff];
-  not_cr_lf = [any_charater - [cr + lf]];  
+  not_cr_lf = [any_charater - [cr + lf]]; 
+  
+
   
   dollar = '$';
 
@@ -41,56 +43,62 @@ Tokens
   
   string = ''' s_char_sequence? '''; 
   
+  number = digit+;
+  
   qmark = '?';
   
   equal = '=';
+  different = '!=';
+  greater = '>';
+  less = '<';
   
 Ignored Tokens
   blank, 
   new_line;
   
 Productions
-
-	query 		= 	{definition} entity definedby body;
 	
-	entity 		= 	entityid lbracket attributes rbracket;
+	main 		=   {query} query
+				  ; 
 	
-	attributes 	= 	{single} identifier colon valuetype
-				  | {list} identifier colon valuetype coma attributes
-				//| {empty}
-				  ;
-	entityid	=   {ide} identifier
-				  | {var} variable
+	query		=   {simple} head definedby body
+				  | {complex} head definedby body qmark conditions
 				  ;
 	
-	valuetype	=	{atomic} 	string
-				  | {entity} 	identifier
-				  | {var}	 	variable
-				  | {entitydef} entity
+	head 		=	entity
 				  ;
-	
-	body 		=	{pattern}	pattern withblock
+			
+	body 		=	{single} entity
+				  | {list}	 entity coma body
 				  ;
-
-	/*pattern 	=   {single} entity
-				  | {list} 	 entity coma pattern
-				  ;*/
 				  
-	pattern 	=   {single} valuetype
-				  | {list} 	 valuetype coma pattern
-				  ;			  
+	conditions	=	{single} condition
+				  | {list}	 condition coma conditions
+				  ;
 				  
-	
-	withblock	=   {conditions} qmark conditions
-				  | {empty}
+	condition	=   {equal} 	[left]:value equal [right]:value
+				  | {different} [left]:value different [right]:value
+				  | {grater} 	[left]:value greater [right]:value
+				  | {less} 		[left]:value less [right]:value
+				  ;
+				  
+	value		=	{string} string
+				  | {number} number
+				  | {var}	 variable
+				  | {entity} entity
+				  ;
+				  
+	entity		=   {id}  vartype
+				  | {def} vartype lbracket attributes rbracket
 				  ;
 	
-	conditions	=	{single} [left]:valuetype equal [right]:valuetype
-				  | {list}	 conditions coma [left]:valuetype equal [right]:valuetype
-				  //| {empty}
+	vartype		=	{ide}		 identifier
+				  | {variable}	 variable
 				  ;
 	
-	
-	
-	
-	
+	attributes  =	{single} attribute
+				  | {list}	 attribute coma attributes
+				  ;
+				  
+	attribute	= 	{element} vartype colon value
+				  ;
