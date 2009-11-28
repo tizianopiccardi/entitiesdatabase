@@ -17,11 +17,11 @@ public class Record {
 	private long id;
 
 	@SecondaryKey(name="Entity", relate=Relationship.MANY_TO_ONE)
-	private EntityId entityId;
+	private EntityId entityId = null;
 	@SecondaryKey(name="Attribute", relate=Relationship.MANY_TO_ONE)
-	private Attribute attribute;
+	private Attribute attribute = null;
 	@SecondaryKey(name="Value", relate=Relationship.MANY_TO_ONE)
-	private Value value;
+	private Value value = null;
 
 	
 	
@@ -80,11 +80,16 @@ public class Record {
 	
 	
 	public String toString() {
-		
 		return "ID: " + id+ " | Entity: " + entityId + " | Attribute: " + attribute + 
 				" | Value: " + value.getValue() + " | ValueType: "+ value.getType();
-		
 	}
 
+	
+	public boolean equals(Object o) {
+		Record r = (Record)o;
+		return r.getEntityId().equals(this.getEntityId()) &&
+				r.getAttribute().equals(this.getAttribute()) &&
+				r.getValue().equals(this.getValue());
+	}
 
 }

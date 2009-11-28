@@ -29,5 +29,8 @@ public class EntityId {
 		return id;
 	}
 	
+	public boolean equals(Object o) {
+		return ((EntityId)o).getId().equals(this.getId());
+	}
 	
 }

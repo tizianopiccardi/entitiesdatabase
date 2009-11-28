@@ -35,5 +35,10 @@ public class Value {
 	public static enum ValueType {
 		NOTYPE, ENTITY, ATOM, VARIABLE;
 	};
+	
+	public boolean equals(Object o) {
+		Value v = (Value)o;
+		return v.getType() == this.getType() && v.getValue().endsWith(this.getValue());
+	}
 	 
 }

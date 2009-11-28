@@ -1,11 +1,8 @@
 package entitiesdb.main;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStreamReader;
-import java.util.Collection;
 
-import entitiesdb.dao.DaoException;
+import java.io.File;
+import java.util.Collection;
 import entitiesdb.dao.JEDao;
 import entitiesdb.record.Attribute;
 import entitiesdb.record.EntityId;
@@ -25,73 +22,67 @@ public class Main {
 		try {
 			dao.open();
 			
-			Record record = new Record("I1", "name", "John", ValueType.ATOM);
-			
-			Record record2 = new Record("I1", "works", "H1", ValueType.ENTITY);
+			Record [] storeList = {
+					new Record("I1", "", "", ValueType.NOTYPE),
+					new Record("I1", "name", "John", ValueType.ATOM),
+					new Record("I1", "works", "H1", ValueType.ENTITY),
+					new Record("H1", "name", "Hospital 123", ValueType.ATOM),					
+					new Record("H1", "city", "TN", ValueType.ENTITY),	
+					new Record("I2", "", "", ValueType.NOTYPE),
+					new Record("I2", "name", "Mary", ValueType.ATOM),					
+					new Record("I2", "married", "I1", ValueType.ENTITY),					
+					new Record("I1", "married", "I2", ValueType.ENTITY),					
+					new Record("I2", "live_near", "H1", ValueType.ENTITY),			
+					new Record("TN", "", "", ValueType.NOTYPE),
+					new Record("TN", "name", "Trento", ValueType.ATOM),					
+					new Record("I1", "lives", "TN", ValueType.ENTITY),					
+					new Record("I2", "lives", "TN", ValueType.ENTITY),					
+					new Record("I5", "", "", ValueType.NOTYPE),					
+					new Record("H1", "director_is", "I1", ValueType.ENTITY),					
+					new Record("H1", "name", "Ospedale 123", ValueType.ATOM),
+					new Record("E1", "", "", ValueType.NOTYPE),
+					new Record("I2", "works", "E1", ValueType.ENTITY),
+					new Record("E1", "city", "TN", ValueType.ENTITY),
+					new Record("E1", "name", "Airport", ValueType.ATOM)
+			};
 
-			Record record3 = new Record("H1", "name", "Hospital 123", ValueType.ATOM);
-			
-			Record record4 = new Record("H1", "city", "TN", ValueType.ENTITY);
-			
-			Record record5 = new Record("I2", "name", "Mary", ValueType.ATOM);
-			
-			Record record6 = new Record("I2", "married", "I1", ValueType.ENTITY);
-			
-			Record record7 = new Record("I1", "married", "I2", ValueType.ENTITY);
-			
-			Record record8 = new Record("I2", "live_near", "H1", ValueType.ENTITY);
-			
-			Record record9 = new Record("TN", "name", "Trento", ValueType.ATOM);
-			
-			Record record10 = new Record("I1", "lives", "TN", ValueType.ENTITY);
-			
-			Record record11 = new Record("I2", "lives", "TN", ValueType.ENTITY);
-			
-			Record record12 = new Record("I5", "", "", ValueType.NOTYPE);
-			
-			Record record13 = new Record("H1", "director_is", "I1", ValueType.ENTITY);
-			
 			if (dao.isEmpty()) {
-				dao.store(record);
-				dao.store(record2);
-				dao.store(record3);
-				dao.store(record4);
-				dao.store(record5);
-				dao.store(record6);
-				dao.store(record7);
-				dao.store(record8);
-				dao.store(record9);
-				dao.store(record10);
-				dao.store(record11);
-				dao.store(record12);
-				dao.store(record13);
+				for (int i = 0 ; i < storeList.length ; i++)
+					dao.store(storeList[i]);
 			}
-			/*
-			dao.getRecordByEntity(new EntityId("TN"));
-			System.out.print("\n\n\n");
-			dao.getRecordByAttribute(new Attribute("name"));
-			System.out.print("\n\n\n");
-			dao.getRecordByValue(new Value("Mary", ValueType.ATOM));
-			System.out.print("\n\n\n");*/
 			
+			
+			System.out.println("Contenuto completo:");
 			Collection<? extends Record> records;
 			records = dao.getRecords();
 			for (Record r : records) {
 				System.out.println(r);
 			}
 			System.out.print("\n\n\n");
-			//dao.test();
+
 			
-			System.out.print(dao.getIdArray(new EntityId("H1"), new Attribute("name"), null));
+			//$x(name: $y, city: 'TN')
+			Record [] rArray = {
+					new Record(null, new Attribute("name"), null),
+					new Record(null, new Attribute("city"), new Value("TN", ValueType.ENTITY))
+			};
+			System.out.println(dao.getEntities(rArray));
+			
+			//$z(works: $j)
+			Record [] rArray2 = {
+					new Record(null, new Attribute("works"), null)
+			};
+			System.out.println(dao.getEntities(rArray2));
+			
+			//$x(name: $y, city: 'TN'), $z(works: $j)
 			
 			
-			/*
-			InputStreamReader reader = new InputStreamReader(System.in);
-			BufferedReader in = new BufferedReader(reader);
-			dao.getRecordByAttribute(new Attribute(in.readLine()));*/
+			dao.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+
 		
 	}
 

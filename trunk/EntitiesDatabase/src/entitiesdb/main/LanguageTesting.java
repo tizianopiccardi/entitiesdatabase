@@ -52,6 +52,8 @@ public class LanguageTesting {
 		
 		query = "$x :- $x(name: $y)";
 		
+		query = "$x :- $x(name: 'John', lives: TN)";
+		
 		DepthFirstAdapter code = new QueryEngine();
 		
 		Parser p = new Parser(new Lexer(new PushbackReader(new StringReader(query))));
