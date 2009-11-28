@@ -31,5 +31,9 @@ public class Attribute {
 		return label;
 	}
 	
+	public boolean equals(Object o) {
+		return ((Attribute)o).getLabel().equals(this.getLabel());
+	}
+	
 	
 }

@@ -1,6 +1,5 @@
 package entitiesdb.query;
 
-import java.util.Hashtable;
 
 import entitiesdb.language.analysis.DepthFirstAdapter;
 import entitiesdb.language.node.*;

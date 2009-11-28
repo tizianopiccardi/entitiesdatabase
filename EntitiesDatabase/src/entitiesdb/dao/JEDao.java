@@ -3,25 +3,10 @@ package entitiesdb.dao;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Vector;
+import com.sleepycat.je.*;
+import com.sleepycat.persist.*;
+import entitiesdb.record.*;
 
-import com.sleepycat.je.Cursor;
-import com.sleepycat.je.DatabaseException;
-import com.sleepycat.je.Environment;
-import com.sleepycat.je.EnvironmentConfig;
-import com.sleepycat.persist.EntityCursor;
-import com.sleepycat.persist.EntityJoin;
-import com.sleepycat.persist.EntityStore;
-import com.sleepycat.persist.ForwardCursor;
-import com.sleepycat.persist.PrimaryIndex;
-import com.sleepycat.persist.SecondaryIndex;
-import com.sleepycat.persist.StoreConfig;
-
-import entitiesdb.record.Attribute;
-import entitiesdb.record.EntityId;
-import entitiesdb.record.Record;
-import entitiesdb.record.Value;
-import entitiesdb.record.Value.ValueType;
 
 public class JEDao {
 	private Environment databaseEnvironment;
@@ -194,48 +179,64 @@ public class JEDao {
 		return recordsIndex.count() == 0;
 	}
 
-	@SuppressWarnings("unchecked")
-	public void test() {
+	
+	
+	public ArrayList<EntityId> getEntities(Record [] rArray) {
 		
-		Attribute married = new Attribute("married");
-		Value I1 = new Value("I1", ValueType.ENTITY);
+		//No Conditions
+		if (rArray.length == 0) return this.getAllEntities();	
 		
-		EntityJoin join = new EntityJoin(recordsIndex);
-		join.addCondition(recordByAttributeIndex, married);
-		join.addCondition(recordByValueIndex, I1);
-		
+		ArrayList<EntityId> out = this.getEntities(rArray[0]); 
 
-		
-		ForwardCursor<Record> c = join.entities();
-		
-		for (Record seci : c) {
-			System.out.println(seci);
+		for (int i = 1 ; i < rArray.length ; i++) {
+			 out.retainAll(this.getEntities(rArray[i]));
 		}
 		
+		return out;
 	}
 	
-	public Vector<Long> getIdArray(Record r) {
-		return getIdArray(r.getEntityId(), r.getAttribute(), r.getValue());
+	
+	
+	public ArrayList<EntityId> getEntities(Record r) {
+		return getEntities(r.getEntityId(), r.getAttribute(), r.getValue());
 	}
 	
 	
 	@SuppressWarnings("unchecked")
-	public Vector<Long> getIdArray(EntityId e, Attribute a, Value v) {
+	public ArrayList<EntityId> getEntities(EntityId e, Attribute a, Value v) {
 
-		Vector<Long> out = new Vector<Long>();
+		//no join required: select entity from tbl
+		if(e == null && a == null && v == null)
+			return this.getAllEntities();
 		
 		EntityJoin join = new EntityJoin(recordsIndex);
-		
+			
 		if (e!=null)
-		join.addCondition(recordByEntityIndex, e);
+			join.addCondition(recordByEntityIndex, e);
 		if (a!=null)
-		join.addCondition(recordByAttributeIndex, a);
+			join.addCondition(recordByAttributeIndex, a);
 		if (v!=null)
-		join.addCondition(recordByValueIndex, v);
+			join.addCondition(recordByValueIndex, v);
 
-		ForwardCursor<Record> c = join.entities();
-		for (Record foundRec : c) {
-			out.add(foundRec.getId());
+		ForwardCursor<Record> cursor = join.entities();
+		ArrayList<EntityId> out = getEntityList(cursor);
+		cursor.close();
+		return out;
+	}
+	
+	public ArrayList<EntityId> getAllEntities() {
+		EntityCursor<Record> cursor = recordsIndex.entities();
+		
+		ArrayList<EntityId> out = getEntityList(cursor);
+		cursor.close();
+		return out;
+	}
+	
+	private ArrayList<EntityId> getEntityList(Iterable<Record> c) {
+		ArrayList<EntityId> out = new ArrayList<EntityId>();
+		for (Record r : c) {
+			if (!out.contains(r.getEntityId()))
+				out.add(r.getEntityId());
 		}
 		return out;
 	}

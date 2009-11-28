@@ -58,7 +58,8 @@ Ignored Tokens
   
 Productions
 	
-	main 		=   {query} query
+	main 		=   {query}  query
+		//			{insert} insert
 				  ; 
 	
 	query		=   {simple} head definedby body
@@ -102,3 +103,7 @@ Productions
 				  
 	attribute	= 	{element} vartype colon value
 				  ;
+				  
+	/////////////////////////////////////////////////////////////////////////
+	
+	//insert		= 
