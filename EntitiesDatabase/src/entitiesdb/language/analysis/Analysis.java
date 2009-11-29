@@ -13,6 +13,7 @@ public interface Analysis extends Switch
 
     void caseStart(Start node);
     void caseAQueryMain(AQueryMain node);
+    void caseAInsertMain(AInsertMain node);
     void caseASimpleQuery(ASimpleQuery node);
     void caseAComplexQuery(AComplexQuery node);
     void caseAHead(AHead node);
@@ -25,7 +26,6 @@ public interface Analysis extends Switch
     void caseAGraterCondition(AGraterCondition node);
     void caseALessCondition(ALessCondition node);
     void caseAStringValue(AStringValue node);
-    void caseANumberValue(ANumberValue node);
     void caseAVarValue(AVarValue node);
     void caseAEntityValue(AEntityValue node);
     void caseAIdEntity(AIdEntity node);
@@ -35,6 +35,9 @@ public interface Analysis extends Switch
     void caseASingleAttributes(ASingleAttributes node);
     void caseAListAttributes(AListAttributes node);
     void caseAElementAttribute(AElementAttribute node);
+    void caseASimpleInsert(ASimpleInsert node);
+    void caseAAttributeInsertbody(AAttributeInsertbody node);
+    void caseAEmptyInsertbody(AEmptyInsertbody node);
 
     void caseTNewLine(TNewLine node);
     void caseTBlank(TBlank node);
@@ -46,7 +49,6 @@ public interface Analysis extends Switch
     void caseTIdentifier(TIdentifier node);
     void caseTVariable(TVariable node);
     void caseTString(TString node);
-    void caseTNumber(TNumber node);
     void caseTQmark(TQmark node);
     void caseTEqual(TEqual node);
     void caseTDifferent(TDifferent node);

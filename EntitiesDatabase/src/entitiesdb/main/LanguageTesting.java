@@ -1,11 +1,14 @@
 package entitiesdb.main;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.io.PushbackReader;
 import java.io.StringReader;
 
 
+import entitiesdb.dao.DaoException;
+import entitiesdb.dao.JEDao;
 import entitiesdb.language.analysis.DepthFirstAdapter;
 import entitiesdb.language.lexer.Lexer;
 import entitiesdb.language.node.Start;
@@ -20,13 +23,15 @@ public class LanguageTesting {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
+		
+		
 		try {
 			
 		String query = "";
 		InputStreamReader reader = new InputStreamReader(System.in);
 		BufferedReader in = new BufferedReader(reader);
 		
-		
+		/*
 		//Prendi la query da linea di comando...
 		//System.out.print("Datalog > ");
 		//query = in.readLine();
@@ -50,11 +55,16 @@ public class LanguageTesting {
 		//Tutti gli oggetti da uomo che costano più di 100
 		query = "$x(descr: $k) :- $x(price: $y, description: $k, category: $z(for: MALE)) ? $y > 100";
 		
-		query = "$x :- $x(name: $y)";
+		//query = "$x :- $x(name: $y)";
 		
-		query = "$x :- $x(name: 'John', lives: TN)";
+		//query = "$x :- $x(name: 'John', lives: TN)";*/
 		
-		DepthFirstAdapter code = new QueryEngine();
+		query = "> ID3(name: 'Pincopallo', lives: TN, abc: 'ciao')";
+		
+		JEDao dao = new JEDao(new File("db/"));
+		//dao.open();
+		
+		DepthFirstAdapter code = new QueryEngine(dao);
 		
 		Parser p = new Parser(new Lexer(new PushbackReader(new StringReader(query))));
 
@@ -63,10 +73,14 @@ public class LanguageTesting {
 			tree = p.parse();
 			tree.apply(code);
 			System.out.println("SINTAX OK!");
+			
+		dao.close();
+			
 		} catch (Exception e) {
 			System.out.println("SINTAX ERROR ON: \n\t" +e.getMessage());
-			
+			e.printStackTrace();
 		} 
+
 		
 		
 	}

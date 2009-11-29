@@ -43,7 +43,7 @@ Tokens
   
   string = ''' s_char_sequence? '''; 
   
-  number = digit+;
+  //number = digit+;
   
   qmark = '?';
   
@@ -59,7 +59,8 @@ Ignored Tokens
 Productions
 	
 	main 		=   {query}  query
-		//			{insert} insert
+				  |	{insert} greater insert
+				 // | {delete} delete
 				  ; 
 	
 	query		=   {simple} head definedby body
@@ -84,7 +85,7 @@ Productions
 				  ;
 				  
 	value		=	{string} string
-				  | {number} number
+				  //| {number} number
 				  | {var}	 variable
 				  | {entity} entity
 				  ;
@@ -98,7 +99,7 @@ Productions
 				  ;
 	
 	attributes  =	{single} attribute
-				  | {list}	 attribute coma attributes
+				  | {list}	 [list]:attributes coma attribute
 				  ;
 				  
 	attribute	= 	{element} vartype colon value
@@ -106,4 +107,13 @@ Productions
 				  
 	/////////////////////////////////////////////////////////////////////////
 	
-	//insert		= 
+	insert		=   {simple} identifier insertbody
+				  ;
+	
+	insertbody  =   {attribute} lbracket attributes rbracket
+				  | {empty}
+				  ;
+
+	
+	
+	
