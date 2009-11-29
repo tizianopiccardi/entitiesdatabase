@@ -101,7 +101,8 @@ public class JEDao {
 
 	public void store(Record record) throws DaoException {
 		try {
-			recordsIndex.putNoReturn(record);
+			if (getEntities(record).size() == 0)
+				recordsIndex.putNoReturn(record);
 		} catch (DatabaseException ex) {
 			throw new DaoException(ex);
 		}

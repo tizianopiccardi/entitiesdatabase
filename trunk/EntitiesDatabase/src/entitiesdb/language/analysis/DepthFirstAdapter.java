@@ -57,6 +57,31 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAQueryMain(node);
     }
 
+    public void inAInsertMain(AInsertMain node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAInsertMain(AInsertMain node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAInsertMain(AInsertMain node)
+    {
+        inAInsertMain(node);
+        if(node.getGreater() != null)
+        {
+            node.getGreater().apply(this);
+        }
+        if(node.getInsert() != null)
+        {
+            node.getInsert().apply(this);
+        }
+        outAInsertMain(node);
+    }
+
     public void inASimpleQuery(ASimpleQuery node)
     {
         defaultIn(node);
@@ -381,27 +406,6 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAStringValue(node);
     }
 
-    public void inANumberValue(ANumberValue node)
-    {
-        defaultIn(node);
-    }
-
-    public void outANumberValue(ANumberValue node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseANumberValue(ANumberValue node)
-    {
-        inANumberValue(node);
-        if(node.getNumber() != null)
-        {
-            node.getNumber().apply(this);
-        }
-        outANumberValue(node);
-    }
-
     public void inAVarValue(AVarValue node)
     {
         defaultIn(node);
@@ -575,17 +579,17 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseAListAttributes(AListAttributes node)
     {
         inAListAttributes(node);
-        if(node.getAttribute() != null)
+        if(node.getList() != null)
         {
-            node.getAttribute().apply(this);
+            node.getList().apply(this);
         }
         if(node.getComa() != null)
         {
             node.getComa().apply(this);
         }
-        if(node.getAttributes() != null)
+        if(node.getAttribute() != null)
         {
-            node.getAttributes().apply(this);
+            node.getAttribute().apply(this);
         }
         outAListAttributes(node);
     }
@@ -617,5 +621,76 @@ public class DepthFirstAdapter extends AnalysisAdapter
             node.getValue().apply(this);
         }
         outAElementAttribute(node);
+    }
+
+    public void inASimpleInsert(ASimpleInsert node)
+    {
+        defaultIn(node);
+    }
+
+    public void outASimpleInsert(ASimpleInsert node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseASimpleInsert(ASimpleInsert node)
+    {
+        inASimpleInsert(node);
+        if(node.getIdentifier() != null)
+        {
+            node.getIdentifier().apply(this);
+        }
+        if(node.getInsertbody() != null)
+        {
+            node.getInsertbody().apply(this);
+        }
+        outASimpleInsert(node);
+    }
+
+    public void inAAttributeInsertbody(AAttributeInsertbody node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAttributeInsertbody(AAttributeInsertbody node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAttributeInsertbody(AAttributeInsertbody node)
+    {
+        inAAttributeInsertbody(node);
+        if(node.getLbracket() != null)
+        {
+            node.getLbracket().apply(this);
+        }
+        if(node.getAttributes() != null)
+        {
+            node.getAttributes().apply(this);
+        }
+        if(node.getRbracket() != null)
+        {
+            node.getRbracket().apply(this);
+        }
+        outAAttributeInsertbody(node);
+    }
+
+    public void inAEmptyInsertbody(AEmptyInsertbody node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAEmptyInsertbody(AEmptyInsertbody node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAEmptyInsertbody(AEmptyInsertbody node)
+    {
+        inAEmptyInsertbody(node);
+        outAEmptyInsertbody(node);
     }
 }

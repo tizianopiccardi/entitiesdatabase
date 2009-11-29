@@ -58,44 +58,38 @@ class TokenIndex extends AnalysisAdapter
     }
 
     @Override
-    public void caseTNumber(@SuppressWarnings("unused") TNumber node)
+    public void caseTQmark(@SuppressWarnings("unused") TQmark node)
     {
         this.index = 8;
     }
 
     @Override
-    public void caseTQmark(@SuppressWarnings("unused") TQmark node)
+    public void caseTEqual(@SuppressWarnings("unused") TEqual node)
     {
         this.index = 9;
     }
 
     @Override
-    public void caseTEqual(@SuppressWarnings("unused") TEqual node)
+    public void caseTDifferent(@SuppressWarnings("unused") TDifferent node)
     {
         this.index = 10;
     }
 
     @Override
-    public void caseTDifferent(@SuppressWarnings("unused") TDifferent node)
+    public void caseTGreater(@SuppressWarnings("unused") TGreater node)
     {
         this.index = 11;
     }
 
     @Override
-    public void caseTGreater(@SuppressWarnings("unused") TGreater node)
+    public void caseTLess(@SuppressWarnings("unused") TLess node)
     {
         this.index = 12;
     }
 
     @Override
-    public void caseTLess(@SuppressWarnings("unused") TLess node)
-    {
-        this.index = 13;
-    }
-
-    @Override
     public void caseEOF(@SuppressWarnings("unused") EOF node)
     {
-        this.index = 14;
+        this.index = 13;
     }
 }

@@ -74,6 +74,11 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
+    public void caseAInsertMain(AInsertMain node)
+    {
+        defaultCase(node);
+    }
+
     public void caseASimpleQuery(ASimpleQuery node)
     {
         defaultCase(node);
@@ -134,11 +139,6 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
-    public void caseANumberValue(ANumberValue node)
-    {
-        defaultCase(node);
-    }
-
     public void caseAVarValue(AVarValue node)
     {
         defaultCase(node);
@@ -180,6 +180,21 @@ public class AnalysisAdapter implements Analysis
     }
 
     public void caseAElementAttribute(AElementAttribute node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseASimpleInsert(ASimpleInsert node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAAttributeInsertbody(AAttributeInsertbody node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAEmptyInsertbody(AEmptyInsertbody node)
     {
         defaultCase(node);
     }
@@ -230,11 +245,6 @@ public class AnalysisAdapter implements Analysis
     }
 
     public void caseTString(TString node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseTNumber(TNumber node)
     {
         defaultCase(node);
     }

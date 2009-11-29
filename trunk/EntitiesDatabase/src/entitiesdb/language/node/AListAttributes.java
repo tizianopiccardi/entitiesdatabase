@@ -7,9 +7,9 @@ import entitiesdb.language.analysis.*;
 @SuppressWarnings("nls")
 public final class AListAttributes extends PAttributes
 {
-    private PAttribute _attribute_;
+    private PAttributes _list_;
     private TComa _coma_;
-    private PAttributes _attributes_;
+    private PAttribute _attribute_;
 
     public AListAttributes()
     {
@@ -17,16 +17,16 @@ public final class AListAttributes extends PAttributes
     }
 
     public AListAttributes(
-        @SuppressWarnings("hiding") PAttribute _attribute_,
+        @SuppressWarnings("hiding") PAttributes _list_,
         @SuppressWarnings("hiding") TComa _coma_,
-        @SuppressWarnings("hiding") PAttributes _attributes_)
+        @SuppressWarnings("hiding") PAttribute _attribute_)
     {
         // Constructor
-        setAttribute(_attribute_);
+        setList(_list_);
 
         setComa(_coma_);
 
-        setAttributes(_attributes_);
+        setAttribute(_attribute_);
 
     }
 
@@ -34,9 +34,9 @@ public final class AListAttributes extends PAttributes
     public Object clone()
     {
         return new AListAttributes(
-            cloneNode(this._attribute_),
+            cloneNode(this._list_),
             cloneNode(this._coma_),
-            cloneNode(this._attributes_));
+            cloneNode(this._attribute_));
     }
 
     public void apply(Switch sw)
@@ -44,16 +44,16 @@ public final class AListAttributes extends PAttributes
         ((Analysis) sw).caseAListAttributes(this);
     }
 
-    public PAttribute getAttribute()
+    public PAttributes getList()
     {
-        return this._attribute_;
+        return this._list_;
     }
 
-    public void setAttribute(PAttribute node)
+    public void setList(PAttributes node)
     {
-        if(this._attribute_ != null)
+        if(this._list_ != null)
         {
-            this._attribute_.parent(null);
+            this._list_.parent(null);
         }
 
         if(node != null)
@@ -66,7 +66,7 @@ public final class AListAttributes extends PAttributes
             node.parent(this);
         }
 
-        this._attribute_ = node;
+        this._list_ = node;
     }
 
     public TComa getComa()
@@ -94,16 +94,16 @@ public final class AListAttributes extends PAttributes
         this._coma_ = node;
     }
 
-    public PAttributes getAttributes()
+    public PAttribute getAttribute()
     {
-        return this._attributes_;
+        return this._attribute_;
     }
 
-    public void setAttributes(PAttributes node)
+    public void setAttribute(PAttribute node)
     {
-        if(this._attributes_ != null)
+        if(this._attribute_ != null)
         {
-            this._attributes_.parent(null);
+            this._attribute_.parent(null);
         }
 
         if(node != null)
@@ -116,25 +116,25 @@ public final class AListAttributes extends PAttributes
             node.parent(this);
         }
 
-        this._attributes_ = node;
+        this._attribute_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._attribute_)
+            + toString(this._list_)
             + toString(this._coma_)
-            + toString(this._attributes_);
+            + toString(this._attribute_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._attribute_ == child)
+        if(this._list_ == child)
         {
-            this._attribute_ = null;
+            this._list_ = null;
             return;
         }
 
@@ -144,9 +144,9 @@ public final class AListAttributes extends PAttributes
             return;
         }
 
-        if(this._attributes_ == child)
+        if(this._attribute_ == child)
         {
-            this._attributes_ = null;
+            this._attribute_ = null;
             return;
         }
 
@@ -157,9 +157,9 @@ public final class AListAttributes extends PAttributes
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._attribute_ == oldChild)
+        if(this._list_ == oldChild)
         {
-            setAttribute((PAttribute) newChild);
+            setList((PAttributes) newChild);
             return;
         }
 
@@ -169,9 +169,9 @@ public final class AListAttributes extends PAttributes
             return;
         }
 
-        if(this._attributes_ == oldChild)
+        if(this._attribute_ == oldChild)
         {
-            setAttributes((PAttributes) newChild);
+            setAttribute((PAttribute) newChild);
             return;
         }
 
