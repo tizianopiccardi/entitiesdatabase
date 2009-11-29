@@ -6,6 +6,7 @@ import java.util.Collection;
 import com.sleepycat.je.*;
 import com.sleepycat.persist.*;
 import entitiesdb.record.*;
+import entitiesdb.record.Value.ValueType;
 
 
 public class JEDao {
@@ -101,8 +102,11 @@ public class JEDao {
 
 	public void store(Record record) throws DaoException {
 		try {
-			if (getEntities(record).size() == 0)
+			if (getEntities(record).size() == 0) {
+				if (getEntities(record.getEntityId(), null, null).size()==0) //non esiste l'entità
+					recordsIndex.putNoReturn(new Record(record.getEntityId(), new Attribute(""), Value.DEFAULT()));
 				recordsIndex.putNoReturn(record);
+			}
 		} catch (DatabaseException ex) {
 			throw new DaoException(ex);
 		}

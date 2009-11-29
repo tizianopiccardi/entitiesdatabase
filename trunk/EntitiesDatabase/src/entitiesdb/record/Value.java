@@ -15,6 +15,11 @@ public class Value {
 		
 	}
 	
+	
+	public static final Value DEFAULT() {
+		return new Value("", ValueType.NOTYPE);
+	}
+	
 	public Value(String s, ValueType valueType) {
 		value = s;
 		type = valueType;
