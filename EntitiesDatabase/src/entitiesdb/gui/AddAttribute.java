@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -20,6 +21,7 @@ public class AddAttribute extends JPanel {
     private JTextField entityname = null;
     private JTextField attributename = null;
     private JTextField attributevalue = null;
+    private JCheckBox  valueType = null;
 
     public AddAttribute() {
         this.setLayout(new BorderLayout());
@@ -29,8 +31,8 @@ public class AddAttribute extends JPanel {
 
         entityname = new JTextField(20);
         attributename = new JTextField(20);
-        attributevalue = new JTextField(20);
-
+        attributevalue = new JTextField(10);
+        valueType = new JCheckBox("isEntity");
         JButton run = new JButton("Add");
 
         JPanel zero = new JPanel();
@@ -68,6 +70,8 @@ public class AddAttribute extends JPanel {
         
         due.add(Box.createVerticalStrut(18));
         due.add(run);
+        due.add(Box.createVerticalStrut(1));
+        due.add(valueType);
 
         creation.add(zero,BorderLayout.WEST);
         creation.add(uno, BorderLayout.CENTER);
@@ -95,8 +99,12 @@ public class AddAttribute extends JPanel {
             	String ename = entityname.getText();
             	String aname = attributename.getText();
             	String avalue= attributevalue.getText();
-            	
-                String testo = "You want to create an attribute called "+aname+" with value "+avalue+" for the entity "+ename;
+            	boolean entiytype = valueType.isSelected();
+            	String etype;
+            	if (entiytype) etype="";
+            	else etype="not ";
+                String testo = "You want to create an attribute called "+aname+" with value "+avalue+" for the entity "+ename+"\n"
+                			   + "The Attribute Value is "+etype+"an entity.";
                
                 text.setText(testo);
             }
