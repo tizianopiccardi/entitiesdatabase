@@ -5,24 +5,24 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AElementAttribute extends PAttribute
+public final class AAttribute extends PAttribute
 {
-    private PVartype _vartype_;
+    private PAttributetype _attributetype_;
     private TColon _colon_;
     private PValue _value_;
 
-    public AElementAttribute()
+    public AAttribute()
     {
         // Constructor
     }
 
-    public AElementAttribute(
-        @SuppressWarnings("hiding") PVartype _vartype_,
+    public AAttribute(
+        @SuppressWarnings("hiding") PAttributetype _attributetype_,
         @SuppressWarnings("hiding") TColon _colon_,
         @SuppressWarnings("hiding") PValue _value_)
     {
         // Constructor
-        setVartype(_vartype_);
+        setAttributetype(_attributetype_);
 
         setColon(_colon_);
 
@@ -33,27 +33,27 @@ public final class AElementAttribute extends PAttribute
     @Override
     public Object clone()
     {
-        return new AElementAttribute(
-            cloneNode(this._vartype_),
+        return new AAttribute(
+            cloneNode(this._attributetype_),
             cloneNode(this._colon_),
             cloneNode(this._value_));
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAElementAttribute(this);
+        ((Analysis) sw).caseAAttribute(this);
     }
 
-    public PVartype getVartype()
+    public PAttributetype getAttributetype()
     {
-        return this._vartype_;
+        return this._attributetype_;
     }
 
-    public void setVartype(PVartype node)
+    public void setAttributetype(PAttributetype node)
     {
-        if(this._vartype_ != null)
+        if(this._attributetype_ != null)
         {
-            this._vartype_.parent(null);
+            this._attributetype_.parent(null);
         }
 
         if(node != null)
@@ -66,7 +66,7 @@ public final class AElementAttribute extends PAttribute
             node.parent(this);
         }
 
-        this._vartype_ = node;
+        this._attributetype_ = node;
     }
 
     public TColon getColon()
@@ -123,7 +123,7 @@ public final class AElementAttribute extends PAttribute
     public String toString()
     {
         return ""
-            + toString(this._vartype_)
+            + toString(this._attributetype_)
             + toString(this._colon_)
             + toString(this._value_);
     }
@@ -132,9 +132,9 @@ public final class AElementAttribute extends PAttribute
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._vartype_ == child)
+        if(this._attributetype_ == child)
         {
-            this._vartype_ = null;
+            this._attributetype_ = null;
             return;
         }
 
@@ -157,9 +157,9 @@ public final class AElementAttribute extends PAttribute
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._vartype_ == oldChild)
+        if(this._attributetype_ == oldChild)
         {
-            setVartype((PVartype) newChild);
+            setAttributetype((PAttributetype) newChild);
             return;
         }
 

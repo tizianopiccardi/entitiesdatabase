@@ -15,6 +15,7 @@ import entitiesdb.language.node.Start;
 import entitiesdb.language.parser.Parser;
 import entitiesdb.query.QueryEngine;
 
+
 public class LanguageTesting {
 
 	/**
@@ -56,15 +57,16 @@ public class LanguageTesting {
 		query = "$x(descr: $k) :- $x(price: $y, description: $k, category: $z(for: MALE)) ? $y > 100";
 		
 		//query = "$x :- $x(name: $y)";
+		*/
+		//query = ":- $x(name: 'John', lives: TN(a:$s))";
 		
-		//query = "$x :- $x(name: 'John', lives: TN)";*/
+		//query = "> ID3(name: 'Pincopallo', lives: TN, abc: 'ciao')";
 		
-		query = "> ID3(name: 'Pincopallo', lives: TN, abc: 'ciao')";
+		query = ":- $a(lives: $x, works: H1)";
 		
-		JEDao dao = new JEDao(new File("db/"));
-		//dao.open();
+		JEDao.open();
 		
-		DepthFirstAdapter code = new QueryEngine(dao);
+		DepthFirstAdapter code = new QueryEngine();
 		
 		Parser p = new Parser(new Lexer(new PushbackReader(new StringReader(query))));
 
@@ -74,8 +76,8 @@ public class LanguageTesting {
 			tree.apply(code);
 			System.out.println("SINTAX OK!");
 			
-		dao.close();
-			
+		JEDao.close();
+		
 		} catch (Exception e) {
 			System.out.println("SINTAX ERROR ON: \n\t" +e.getMessage());
 			e.printStackTrace();
@@ -86,3 +88,4 @@ public class LanguageTesting {
 	}
 
 }
+

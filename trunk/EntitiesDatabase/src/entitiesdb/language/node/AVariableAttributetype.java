@@ -5,16 +5,16 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AVarValue extends PValue
+public final class AVariableAttributetype extends PAttributetype
 {
     private TVariable _variable_;
 
-    public AVarValue()
+    public AVariableAttributetype()
     {
         // Constructor
     }
 
-    public AVarValue(
+    public AVariableAttributetype(
         @SuppressWarnings("hiding") TVariable _variable_)
     {
         // Constructor
@@ -25,13 +25,13 @@ public final class AVarValue extends PValue
     @Override
     public Object clone()
     {
-        return new AVarValue(
+        return new AVariableAttributetype(
             cloneNode(this._variable_));
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAVarValue(this);
+        ((Analysis) sw).caseAVariableAttributetype(this);
     }
 
     public TVariable getVariable()

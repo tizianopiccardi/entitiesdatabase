@@ -2,7 +2,7 @@
 
 package entitiesdb.language.node;
 
-public abstract class PEntity extends Node
+public abstract class POptdefinition extends Node
 {
     // Empty body
 }

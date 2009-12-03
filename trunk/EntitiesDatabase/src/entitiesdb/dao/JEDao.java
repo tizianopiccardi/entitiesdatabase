@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import com.sleepycat.je.*;
 import com.sleepycat.persist.*;
+
+import entitiesdb.query.EntitiesArrayList;
 import entitiesdb.record.*;
 import entitiesdb.record.Value.ValueType;
 
@@ -12,27 +14,54 @@ import entitiesdb.record.Value.ValueType;
 public class JEDao {
 	private Environment databaseEnvironment;
 	private EntityStore entityStore;
-	private File databaseDirectory;
+	private File databaseDirectory = new File("db/");
 	private PrimaryIndex<Long, Record> recordsIndex;
 
 	private SecondaryIndex<EntityId, Long, ?> recordByEntityIndex;
 	private SecondaryIndex<Attribute, Long, ?> recordByAttributeIndex;
 	private SecondaryIndex<Value, Long, Record> recordByValueIndex;
 
+	private static JEDao dao = null;
+	
+	
+	private JEDao() {
+		
+	}
+	
+	public static JEDao getInstance() {
+		//if (dao == null) {
+		//	dao = new JEDao();
+		//}
+		return dao;
+	}
+	
+	public static void open() throws DaoException {
+		try {
+			if (dao == null) {
+				dao = new JEDao();
+			}
+			dao.jeOpen();
+		} catch (DatabaseException ex) {
+			throw new DaoException(ex);
+		}
+	}
+	
+	
+	/*
 	public JEDao(File databaseDirectory) {
 		this.databaseDirectory = databaseDirectory;
-	}
+	}*/
 
 	/**
 	 * Apre la base dati. Se la base dati non è già stata creata, la crea.
 	 */
-	public void open() throws DaoException {
+	/*public void open() throws DaoException {
 		try {
 			jeOpen();
 		} catch (DatabaseException ex) {
 			throw new DaoException(ex);
 		}
-	}
+	}*/
 
 	private void jeOpen() throws DatabaseException {
 
@@ -53,9 +82,9 @@ public class JEDao {
 	}
 
 	/** Chiude la base dati. */
-	public void close() throws DaoException {
+	public static void close() throws DaoException {
 		try {
-			jeClose();
+			dao.jeClose();
 		} catch (DatabaseException ex) {
 			throw new DaoException(ex);
 		}
@@ -191,10 +220,10 @@ public class JEDao {
 		//No Conditions
 		if (rArray.length == 0) return this.getAllEntities();	
 		
-		ArrayList<EntityId> out = this.getEntities(rArray[0]); 
+		ArrayList<EntityId> out = JEDao.getEntities(rArray[0]); 
 
 		for (int i = 1 ; i < rArray.length ; i++) {
-			 out.retainAll(this.getEntities(rArray[i]));
+			 out.retainAll(JEDao.getEntities(rArray[i]));
 		}
 		
 		return out;
@@ -202,48 +231,166 @@ public class JEDao {
 	
 	
 	
-	public ArrayList<EntityId> getEntities(Record r) {
+	public static EntitiesArrayList getEntities(Record r) {
 		return getEntities(r.getEntityId(), r.getAttribute(), r.getValue());
 	}
 	
 	
 	@SuppressWarnings("unchecked")
-	public ArrayList<EntityId> getEntities(EntityId e, Attribute a, Value v) {
+	public static EntitiesArrayList getEntities(EntityId e, Attribute a, Value v) {
 
 		//no join required: select entity from tbl
 		if(e == null && a == null && v == null)
-			return this.getAllEntities();
+			return dao.getAllEntities();
 		
-		EntityJoin join = new EntityJoin(recordsIndex);
+		EntityJoin join = new EntityJoin(dao.recordsIndex);
 			
 		if (e!=null)
-			join.addCondition(recordByEntityIndex, e);
+			join.addCondition(dao.recordByEntityIndex, e);
 		if (a!=null)
-			join.addCondition(recordByAttributeIndex, a);
+			join.addCondition(dao.recordByAttributeIndex, a);
 		if (v!=null)
-			join.addCondition(recordByValueIndex, v);
+			join.addCondition(dao.recordByValueIndex, v);
 
 		ForwardCursor<Record> cursor = join.entities();
-		ArrayList<EntityId> out = getEntityList(cursor);
+		EntitiesArrayList out = dao.getEntityList(cursor);
 		cursor.close();
 		return out;
 	}
 	
-	public ArrayList<EntityId> getAllEntities() {
+	public EntitiesArrayList getAllEntities() {
 		EntityCursor<Record> cursor = recordsIndex.entities();
 		
-		ArrayList<EntityId> out = getEntityList(cursor);
+		EntitiesArrayList out =  getEntityList(cursor);
 		cursor.close();
 		return out;
 	}
 	
-	private ArrayList<EntityId> getEntityList(Iterable<Record> c) {
-		ArrayList<EntityId> out = new ArrayList<EntityId>();
+	private EntitiesArrayList getEntityList(Iterable<Record> c) {
+		EntitiesArrayList out = new EntitiesArrayList();
 		for (Record r : c) {
 			if (!out.contains(r.getEntityId()))
 				out.add(r.getEntityId());
 		}
 		return out;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public ArrayList<Value> getAllValues() {
+		EntityCursor<Record> cursor = recordsIndex.entities();
+		
+		ArrayList<Value> out = getValuesList(cursor);
+		cursor.close();
+		return out;
+	}
+	
+	
+	
+	@SuppressWarnings("unchecked")
+	public static ArrayList<Value> getValues(EntityId e, Attribute a, Value v) {
+
+		//no join required: select entity from tbl
+		if(e == null && a == null && v == null)
+			return dao.getAllValues();
+		
+		EntityJoin join = new EntityJoin(dao.recordsIndex);
+			
+		if (e!=null)
+			join.addCondition(dao.recordByEntityIndex, e);
+		if (a!=null)
+			join.addCondition(dao.recordByAttributeIndex, a);
+		if (v!=null)
+			join.addCondition(dao.recordByValueIndex, v);
+
+		ForwardCursor<Record> cursor = join.entities();
+		ArrayList<Value> out = dao.getValuesList(cursor);
+		cursor.close();
+		return out;
+	}
+	
+	
+	private ArrayList<Value> getValuesList(Iterable<Record> c) {
+		ArrayList<Value> out = new ArrayList<Value>();
+		for (Record r : c) {
+			if (!out.contains(r.getEntityId()))
+				out.add(r.getValue());
+		}
+		return out;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public ArrayList<Record> getAllRecords() {
+		EntityCursor<Record> cursor = recordsIndex.entities();
+		
+		ArrayList<Record> out = getRecordsList(cursor);
+		cursor.close();
+		return out;
+	}	
+	
+	public static ArrayList<Record> getRecords(Record r) {
+		return getRecords(r.getEntityId(), r.getAttribute(), r.getValue());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static ArrayList<Record> getRecords(EntityId e, Attribute a, Value v) {
+
+		//no join required: select entity from tbl
+		if(e == null && a == null && v == null)
+			return dao.getAllRecords();
+		
+		EntityJoin join = new EntityJoin(dao.recordsIndex);
+			
+		if (e!=null)
+			join.addCondition(dao.recordByEntityIndex, e);
+		if (a!=null)
+			join.addCondition(dao.recordByAttributeIndex, a);
+		if (v!=null)
+			join.addCondition(dao.recordByValueIndex, v);
+
+		ForwardCursor<Record> cursor = join.entities();
+		ArrayList<Record> out = dao.getRecordsList(cursor);
+		cursor.close();
+		return out;
+	}
+	
+	
+	private ArrayList<Record> getRecordsList(Iterable<Record> c) {
+		ArrayList<Record> out = new ArrayList<Record>();
+		for (Record r : c) {
+			//if (!out.contains(r))
+				out.add(r);
+		}
+		return out;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

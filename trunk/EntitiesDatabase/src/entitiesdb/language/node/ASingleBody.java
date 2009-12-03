@@ -7,7 +7,7 @@ import entitiesdb.language.analysis.*;
 @SuppressWarnings("nls")
 public final class ASingleBody extends PBody
 {
-    private PEntity _entity_;
+    private PEntitypattern _entitypattern_;
 
     public ASingleBody()
     {
@@ -15,10 +15,10 @@ public final class ASingleBody extends PBody
     }
 
     public ASingleBody(
-        @SuppressWarnings("hiding") PEntity _entity_)
+        @SuppressWarnings("hiding") PEntitypattern _entitypattern_)
     {
         // Constructor
-        setEntity(_entity_);
+        setEntitypattern(_entitypattern_);
 
     }
 
@@ -26,7 +26,7 @@ public final class ASingleBody extends PBody
     public Object clone()
     {
         return new ASingleBody(
-            cloneNode(this._entity_));
+            cloneNode(this._entitypattern_));
     }
 
     public void apply(Switch sw)
@@ -34,16 +34,16 @@ public final class ASingleBody extends PBody
         ((Analysis) sw).caseASingleBody(this);
     }
 
-    public PEntity getEntity()
+    public PEntitypattern getEntitypattern()
     {
-        return this._entity_;
+        return this._entitypattern_;
     }
 
-    public void setEntity(PEntity node)
+    public void setEntitypattern(PEntitypattern node)
     {
-        if(this._entity_ != null)
+        if(this._entitypattern_ != null)
         {
-            this._entity_.parent(null);
+            this._entitypattern_.parent(null);
         }
 
         if(node != null)
@@ -56,23 +56,23 @@ public final class ASingleBody extends PBody
             node.parent(this);
         }
 
-        this._entity_ = node;
+        this._entitypattern_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._entity_);
+            + toString(this._entitypattern_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._entity_ == child)
+        if(this._entitypattern_ == child)
         {
-            this._entity_ = null;
+            this._entitypattern_ = null;
             return;
         }
 
@@ -83,9 +83,9 @@ public final class ASingleBody extends PBody
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._entity_ == oldChild)
+        if(this._entitypattern_ == oldChild)
         {
-            setEntity((PEntity) newChild);
+            setEntitypattern((PEntitypattern) newChild);
             return;
         }
 

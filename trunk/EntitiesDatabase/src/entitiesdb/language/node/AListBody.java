@@ -7,7 +7,7 @@ import entitiesdb.language.analysis.*;
 @SuppressWarnings("nls")
 public final class AListBody extends PBody
 {
-    private PEntity _entity_;
+    private PEntitypattern _entitypattern_;
     private TComa _coma_;
     private PBody _body_;
 
@@ -17,12 +17,12 @@ public final class AListBody extends PBody
     }
 
     public AListBody(
-        @SuppressWarnings("hiding") PEntity _entity_,
+        @SuppressWarnings("hiding") PEntitypattern _entitypattern_,
         @SuppressWarnings("hiding") TComa _coma_,
         @SuppressWarnings("hiding") PBody _body_)
     {
         // Constructor
-        setEntity(_entity_);
+        setEntitypattern(_entitypattern_);
 
         setComa(_coma_);
 
@@ -34,7 +34,7 @@ public final class AListBody extends PBody
     public Object clone()
     {
         return new AListBody(
-            cloneNode(this._entity_),
+            cloneNode(this._entitypattern_),
             cloneNode(this._coma_),
             cloneNode(this._body_));
     }
@@ -44,16 +44,16 @@ public final class AListBody extends PBody
         ((Analysis) sw).caseAListBody(this);
     }
 
-    public PEntity getEntity()
+    public PEntitypattern getEntitypattern()
     {
-        return this._entity_;
+        return this._entitypattern_;
     }
 
-    public void setEntity(PEntity node)
+    public void setEntitypattern(PEntitypattern node)
     {
-        if(this._entity_ != null)
+        if(this._entitypattern_ != null)
         {
-            this._entity_.parent(null);
+            this._entitypattern_.parent(null);
         }
 
         if(node != null)
@@ -66,7 +66,7 @@ public final class AListBody extends PBody
             node.parent(this);
         }
 
-        this._entity_ = node;
+        this._entitypattern_ = node;
     }
 
     public TComa getComa()
@@ -123,7 +123,7 @@ public final class AListBody extends PBody
     public String toString()
     {
         return ""
-            + toString(this._entity_)
+            + toString(this._entitypattern_)
             + toString(this._coma_)
             + toString(this._body_);
     }
@@ -132,9 +132,9 @@ public final class AListBody extends PBody
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._entity_ == child)
+        if(this._entitypattern_ == child)
         {
-            this._entity_ = null;
+            this._entitypattern_ = null;
             return;
         }
 
@@ -157,9 +157,9 @@ public final class AListBody extends PBody
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._entity_ == oldChild)
+        if(this._entitypattern_ == oldChild)
         {
-            setEntity((PEntity) newChild);
+            setEntitypattern((PEntitypattern) newChild);
             return;
         }
 

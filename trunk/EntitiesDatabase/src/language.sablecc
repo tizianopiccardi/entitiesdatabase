@@ -57,7 +57,7 @@ Ignored Tokens
   new_line;
   
 Productions
-	
+	/*
 	main 		=   {query}  query
 				  |	{insert} greater insert
 				 // | {delete} delete
@@ -80,18 +80,18 @@ Productions
 				  
 	condition	=   {equal} 	[left]:value equal [right]:value
 				  | {different} [left]:value different [right]:value
-				  | {grater} 	[left]:value greater [right]:value
-				  | {less} 		[left]:value less [right]:value
+				  //| {grater} 	[left]:value greater [right]:value
+				  //| {less} 		[left]:value less [right]:value
 				  ;
 				  
 	value		=	{string} string
 				  //| {number} number
-				  | {var}	 variable
+				  | {var}	 variable //NON LO RAGGIUNGE
 				  | {entity} entity
 				  ;
 				  
-	entity		=   {id}  vartype
-				  | {def} vartype lbracket attributes rbracket
+	entity		= //  {id}  vartype //FORSE LO RISOLVE
+				   {def} vartype lbracket attributes rbracket
 				  ;
 	
 	vartype		=	{ide}		 identifier
@@ -100,9 +100,12 @@ Productions
 	
 	attributes  =	{single} attribute
 				  | {list}	 [list]:attributes coma attribute
+				  | {empty}
 				  ;
 				  
-	attribute	= 	{element} vartype colon value
+	attribute	= 	{string} 	vartype colon string
+				  | {variable}	vartype colon variable
+				  | {entity}	vartype colon entity
 				  ;
 				  
 	/////////////////////////////////////////////////////////////////////////
@@ -113,7 +116,107 @@ Productions
 	insertbody  =   {attribute} lbracket attributes rbracket
 				  | {empty}
 				  ;
+*/
 
+
+	main 		=   {query}  query
+				  //|	{insert} greater insert
+				  ; 
 	
+	query		=   {simple} head definedby body
+				  | {complex} head definedby body qmark conditions
+				  ;
 	
+	head 		=	{empty}
+				  ;
+				  
+	conditions	=	{empty}
+				  ;
+			
+	body 		=	{single} entitypattern
+				  | {list}	 entitypattern coma body
+				  ;
+				  
+				  
+	entitypattern =  entitytype entitybody
+				  ;
+					
+	entitytype    =	{ide}		 identifier
+				  | {variable}	 variable
+				  ;
+	
+
+	entitybody		 =  lbracket attributes rbracket
+					;	
+					
+					
+
+
+	attributes  =	{single} attribute
+				  | {list}	 [list]:attributes coma attribute
+				  | {empty}//se succede (,a:d,b:c) casino
+				  ;
+
+
+	attribute	= 	attributetype colon value
+				  ;
+				  
+	attributetype    =	{ide}		 identifier
+				  | {variable}	 variable
+				  ;	
+	
+	value		=   {string} 	string
+				  | {entity}	identifier optdefinition
+				  | {variable}	variable optdefinition
+				  ;
+
+	optdefinition = {empty} //is a simple var
+				   | {body}   entitybody
+				   ;
+				   
+
+
+					
+	/*
+	conditions	=	{single} condition
+				  | {list}	 condition coma conditions
+				  ;
+				  
+	condition	=   {equal} 	[left]:value equal [right]:value
+				  | {different} [left]:value different [right]:value
+				  //| {grater} 	[left]:value greater [right]:value
+				  //| {less} 		[left]:value less [right]:value
+				  ;
+				  
+	value		=	{string} string
+				  | {var}	 variable optionalbody //NON LO RAGGIUNGE
+				  | {entity} identifier entitybody
+				  ;
+				  
+	optionalbody = 	 {empty}
+				   | {entitydef} entitybody
+				   ;
+				
+	/*entity		= //  {id}  vartype //FORSE LO RISOLVE
+				   {def} vartype lbracket attributes rbracket
+				  ;*/
+	
+
+/*
+				  
+	attribute	= 	{string} 	vartype colon string
+				  | {variable}	vartype colon variable
+				  | {entity}	vartype colon entity
+				  ;
+				  
+	/////////////////////////////////////////////////////////////////////////
+	
+	insert		=   {simple} identifier insertbody
+				  ;
+	
+	insertbody  =   {attribute} lbracket attributes rbracket
+				  | {empty}
+				  ;
+	
+	*/
 	

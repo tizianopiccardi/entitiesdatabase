@@ -42,7 +42,7 @@ public class Value {
 	};
 	
 	public String toString() {
-		return value + "("+type.toString()+")";
+		return value + "["+type.toString()+"]";
 	}
 	
 	public boolean equals(Object o) {

@@ -5,18 +5,18 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AAttributeInsertbody extends PInsertbody
+public final class AEntitybody extends PEntitybody
 {
     private TLbracket _lbracket_;
     private PAttributes _attributes_;
     private TRbracket _rbracket_;
 
-    public AAttributeInsertbody()
+    public AEntitybody()
     {
         // Constructor
     }
 
-    public AAttributeInsertbody(
+    public AEntitybody(
         @SuppressWarnings("hiding") TLbracket _lbracket_,
         @SuppressWarnings("hiding") PAttributes _attributes_,
         @SuppressWarnings("hiding") TRbracket _rbracket_)
@@ -33,7 +33,7 @@ public final class AAttributeInsertbody extends PInsertbody
     @Override
     public Object clone()
     {
-        return new AAttributeInsertbody(
+        return new AEntitybody(
             cloneNode(this._lbracket_),
             cloneNode(this._attributes_),
             cloneNode(this._rbracket_));
@@ -41,7 +41,7 @@ public final class AAttributeInsertbody extends PInsertbody
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAAttributeInsertbody(this);
+        ((Analysis) sw).caseAEntitybody(this);
     }
 
     public TLbracket getLbracket()

@@ -5,38 +5,33 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ASimpleInsert extends PInsert
+public final class AIdeAttributetype extends PAttributetype
 {
     private TIdentifier _identifier_;
-    private PInsertbody _insertbody_;
 
-    public ASimpleInsert()
+    public AIdeAttributetype()
     {
         // Constructor
     }
 
-    public ASimpleInsert(
-        @SuppressWarnings("hiding") TIdentifier _identifier_,
-        @SuppressWarnings("hiding") PInsertbody _insertbody_)
+    public AIdeAttributetype(
+        @SuppressWarnings("hiding") TIdentifier _identifier_)
     {
         // Constructor
         setIdentifier(_identifier_);
-
-        setInsertbody(_insertbody_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ASimpleInsert(
-            cloneNode(this._identifier_),
-            cloneNode(this._insertbody_));
+        return new AIdeAttributetype(
+            cloneNode(this._identifier_));
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseASimpleInsert(this);
+        ((Analysis) sw).caseAIdeAttributetype(this);
     }
 
     public TIdentifier getIdentifier()
@@ -64,37 +59,11 @@ public final class ASimpleInsert extends PInsert
         this._identifier_ = node;
     }
 
-    public PInsertbody getInsertbody()
-    {
-        return this._insertbody_;
-    }
-
-    public void setInsertbody(PInsertbody node)
-    {
-        if(this._insertbody_ != null)
-        {
-            this._insertbody_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._insertbody_ = node;
-    }
-
     @Override
     public String toString()
     {
         return ""
-            + toString(this._identifier_)
-            + toString(this._insertbody_);
+            + toString(this._identifier_);
     }
 
     @Override
@@ -104,12 +73,6 @@ public final class ASimpleInsert extends PInsert
         if(this._identifier_ == child)
         {
             this._identifier_ = null;
-            return;
-        }
-
-        if(this._insertbody_ == child)
-        {
-            this._insertbody_ = null;
             return;
         }
 
@@ -123,12 +86,6 @@ public final class ASimpleInsert extends PInsert
         if(this._identifier_ == oldChild)
         {
             setIdentifier((TIdentifier) newChild);
-            return;
-        }
-
-        if(this._insertbody_ == oldChild)
-        {
-            setInsertbody((PInsertbody) newChild);
             return;
         }
 
