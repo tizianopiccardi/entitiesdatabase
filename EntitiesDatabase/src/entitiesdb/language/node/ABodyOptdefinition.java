@@ -5,45 +5,45 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AVariableVartype extends PVartype
+public final class ABodyOptdefinition extends POptdefinition
 {
-    private TVariable _variable_;
+    private PEntitybody _entitybody_;
 
-    public AVariableVartype()
+    public ABodyOptdefinition()
     {
         // Constructor
     }
 
-    public AVariableVartype(
-        @SuppressWarnings("hiding") TVariable _variable_)
+    public ABodyOptdefinition(
+        @SuppressWarnings("hiding") PEntitybody _entitybody_)
     {
         // Constructor
-        setVariable(_variable_);
+        setEntitybody(_entitybody_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AVariableVartype(
-            cloneNode(this._variable_));
+        return new ABodyOptdefinition(
+            cloneNode(this._entitybody_));
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAVariableVartype(this);
+        ((Analysis) sw).caseABodyOptdefinition(this);
     }
 
-    public TVariable getVariable()
+    public PEntitybody getEntitybody()
     {
-        return this._variable_;
+        return this._entitybody_;
     }
 
-    public void setVariable(TVariable node)
+    public void setEntitybody(PEntitybody node)
     {
-        if(this._variable_ != null)
+        if(this._entitybody_ != null)
         {
-            this._variable_.parent(null);
+            this._entitybody_.parent(null);
         }
 
         if(node != null)
@@ -56,23 +56,23 @@ public final class AVariableVartype extends PVartype
             node.parent(this);
         }
 
-        this._variable_ = node;
+        this._entitybody_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._variable_);
+            + toString(this._entitybody_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._variable_ == child)
+        if(this._entitybody_ == child)
         {
-            this._variable_ = null;
+            this._entitybody_ = null;
             return;
         }
 
@@ -83,9 +83,9 @@ public final class AVariableVartype extends PVartype
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._variable_ == oldChild)
+        if(this._entitybody_ == oldChild)
         {
-            setVariable((TVariable) newChild);
+            setEntitybody((PEntitybody) newChild);
             return;
         }
 

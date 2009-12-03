@@ -2,7 +2,7 @@
 
 package entitiesdb.language.node;
 
-public abstract class PCondition extends Node
+public abstract class PEntitybody extends Node
 {
     // Empty body
 }

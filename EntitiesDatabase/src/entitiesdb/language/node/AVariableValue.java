@@ -5,22 +5,22 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AEntityValue extends PValue
+public final class AVariableValue extends PValue
 {
-    private TIdentifier _identifier_;
+    private TVariable _variable_;
     private POptdefinition _optdefinition_;
 
-    public AEntityValue()
+    public AVariableValue()
     {
         // Constructor
     }
 
-    public AEntityValue(
-        @SuppressWarnings("hiding") TIdentifier _identifier_,
+    public AVariableValue(
+        @SuppressWarnings("hiding") TVariable _variable_,
         @SuppressWarnings("hiding") POptdefinition _optdefinition_)
     {
         // Constructor
-        setIdentifier(_identifier_);
+        setVariable(_variable_);
 
         setOptdefinition(_optdefinition_);
 
@@ -29,26 +29,26 @@ public final class AEntityValue extends PValue
     @Override
     public Object clone()
     {
-        return new AEntityValue(
-            cloneNode(this._identifier_),
+        return new AVariableValue(
+            cloneNode(this._variable_),
             cloneNode(this._optdefinition_));
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAEntityValue(this);
+        ((Analysis) sw).caseAVariableValue(this);
     }
 
-    public TIdentifier getIdentifier()
+    public TVariable getVariable()
     {
-        return this._identifier_;
+        return this._variable_;
     }
 
-    public void setIdentifier(TIdentifier node)
+    public void setVariable(TVariable node)
     {
-        if(this._identifier_ != null)
+        if(this._variable_ != null)
         {
-            this._identifier_.parent(null);
+            this._variable_.parent(null);
         }
 
         if(node != null)
@@ -61,7 +61,7 @@ public final class AEntityValue extends PValue
             node.parent(this);
         }
 
-        this._identifier_ = node;
+        this._variable_ = node;
     }
 
     public POptdefinition getOptdefinition()
@@ -93,7 +93,7 @@ public final class AEntityValue extends PValue
     public String toString()
     {
         return ""
-            + toString(this._identifier_)
+            + toString(this._variable_)
             + toString(this._optdefinition_);
     }
 
@@ -101,9 +101,9 @@ public final class AEntityValue extends PValue
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._identifier_ == child)
+        if(this._variable_ == child)
         {
-            this._identifier_ = null;
+            this._variable_ = null;
             return;
         }
 
@@ -120,9 +120,9 @@ public final class AEntityValue extends PValue
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._identifier_ == oldChild)
+        if(this._variable_ == oldChild)
         {
-            setIdentifier((TIdentifier) newChild);
+            setVariable((TVariable) newChild);
             return;
         }
 

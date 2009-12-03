@@ -74,11 +74,6 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
-    public void caseAInsertMain(AInsertMain node)
-    {
-        defaultCase(node);
-    }
-
     public void caseASimpleQuery(ASimpleQuery node)
     {
         defaultCase(node);
@@ -89,7 +84,12 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
-    public void caseAHead(AHead node)
+    public void caseAEmptyHead(AEmptyHead node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAEmptyConditions(AEmptyConditions node)
     {
         defaultCase(node);
     }
@@ -104,67 +104,22 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
-    public void caseASingleConditions(ASingleConditions node)
+    public void caseAEntitypattern(AEntitypattern node)
     {
         defaultCase(node);
     }
 
-    public void caseAListConditions(AListConditions node)
+    public void caseAIdeEntitytype(AIdeEntitytype node)
     {
         defaultCase(node);
     }
 
-    public void caseAEqualCondition(AEqualCondition node)
+    public void caseAVariableEntitytype(AVariableEntitytype node)
     {
         defaultCase(node);
     }
 
-    public void caseADifferentCondition(ADifferentCondition node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAGraterCondition(AGraterCondition node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseALessCondition(ALessCondition node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAStringValue(AStringValue node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAVarValue(AVarValue node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAEntityValue(AEntityValue node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAIdEntity(AIdEntity node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseADefEntity(ADefEntity node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAIdeVartype(AIdeVartype node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAVariableVartype(AVariableVartype node)
+    public void caseAEntitybody(AEntitybody node)
     {
         defaultCase(node);
     }
@@ -179,22 +134,47 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
-    public void caseAElementAttribute(AElementAttribute node)
+    public void caseAEmptyAttributes(AEmptyAttributes node)
     {
         defaultCase(node);
     }
 
-    public void caseASimpleInsert(ASimpleInsert node)
+    public void caseAAttribute(AAttribute node)
     {
         defaultCase(node);
     }
 
-    public void caseAAttributeInsertbody(AAttributeInsertbody node)
+    public void caseAIdeAttributetype(AIdeAttributetype node)
     {
         defaultCase(node);
     }
 
-    public void caseAEmptyInsertbody(AEmptyInsertbody node)
+    public void caseAVariableAttributetype(AVariableAttributetype node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAStringValue(AStringValue node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAEntityValue(AEntityValue node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAVariableValue(AVariableValue node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAEmptyOptdefinition(AEmptyOptdefinition node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseABodyOptdefinition(ABodyOptdefinition node)
     {
         defaultCase(node);
     }

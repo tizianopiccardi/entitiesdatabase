@@ -18,10 +18,10 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		JEDao dao = new JEDao(new File("db/"));
+		
 		try {
-			dao.open();
-			
+			JEDao.open();
+			JEDao dao = JEDao.getInstance();
 			Record [] storeList = {
 					new Record("I1", "", "", ValueType.NOTYPE),
 					new Record("I1", "name", "John", ValueType.ATOM),
@@ -43,7 +43,12 @@ public class Main {
 					new Record("E1", "", "", ValueType.NOTYPE),
 					new Record("I2", "works", "E1", ValueType.ENTITY),
 					new Record("E1", "city", "TN", ValueType.ENTITY),
-					new Record("E1", "name", "Airport", ValueType.ATOM)
+					new Record("E1", "name", "Airport", ValueType.ATOM),
+					new Record("JB", "married", "CC", ValueType.ENTITY),
+					new Record("JB", "lives", "TRC", ValueType.ENTITY),
+					new Record("TRC", "name", "Trento", ValueType.ATOM),
+					new Record("TRC", "locatedIn", "TR", ValueType.ENTITY),
+					new Record("TRC", "country", "IT", ValueType.ENTITY)
 			};
 
 			if (dao.isEmpty()) {
@@ -77,7 +82,7 @@ public class Main {
 			//$x(name: $y, city: 'TN'), $z(works: $j)
 			
 			
-			dao.close();
+			JEDao.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

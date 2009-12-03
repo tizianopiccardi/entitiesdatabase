@@ -5,45 +5,45 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ASingleConditions extends PConditions
+public final class AIdeEntitytype extends PEntitytype
 {
-    private PCondition _condition_;
+    private TIdentifier _identifier_;
 
-    public ASingleConditions()
+    public AIdeEntitytype()
     {
         // Constructor
     }
 
-    public ASingleConditions(
-        @SuppressWarnings("hiding") PCondition _condition_)
+    public AIdeEntitytype(
+        @SuppressWarnings("hiding") TIdentifier _identifier_)
     {
         // Constructor
-        setCondition(_condition_);
+        setIdentifier(_identifier_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ASingleConditions(
-            cloneNode(this._condition_));
+        return new AIdeEntitytype(
+            cloneNode(this._identifier_));
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseASingleConditions(this);
+        ((Analysis) sw).caseAIdeEntitytype(this);
     }
 
-    public PCondition getCondition()
+    public TIdentifier getIdentifier()
     {
-        return this._condition_;
+        return this._identifier_;
     }
 
-    public void setCondition(PCondition node)
+    public void setIdentifier(TIdentifier node)
     {
-        if(this._condition_ != null)
+        if(this._identifier_ != null)
         {
-            this._condition_.parent(null);
+            this._identifier_.parent(null);
         }
 
         if(node != null)
@@ -56,23 +56,23 @@ public final class ASingleConditions extends PConditions
             node.parent(this);
         }
 
-        this._condition_ = node;
+        this._identifier_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._condition_);
+            + toString(this._identifier_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._condition_ == child)
+        if(this._identifier_ == child)
         {
-            this._condition_ = null;
+            this._identifier_ = null;
             return;
         }
 
@@ -83,9 +83,9 @@ public final class ASingleConditions extends PConditions
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._condition_ == oldChild)
+        if(this._identifier_ == oldChild)
         {
-            setCondition((PCondition) newChild);
+            setIdentifier((TIdentifier) newChild);
             return;
         }
 

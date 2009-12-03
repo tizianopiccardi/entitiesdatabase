@@ -5,10 +5,10 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AEmptyInsertbody extends PInsertbody
+public final class AEmptyConditions extends PConditions
 {
 
-    public AEmptyInsertbody()
+    public AEmptyConditions()
     {
         // Constructor
     }
@@ -16,12 +16,12 @@ public final class AEmptyInsertbody extends PInsertbody
     @Override
     public Object clone()
     {
-        return new AEmptyInsertbody();
+        return new AEmptyConditions();
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAEmptyInsertbody(this);
+        ((Analysis) sw).caseAEmptyConditions(this);
     }
 
     @Override

@@ -5,45 +5,45 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AHead extends PHead
+public final class AVariableEntitytype extends PEntitytype
 {
-    private PEntity _entity_;
+    private TVariable _variable_;
 
-    public AHead()
+    public AVariableEntitytype()
     {
         // Constructor
     }
 
-    public AHead(
-        @SuppressWarnings("hiding") PEntity _entity_)
+    public AVariableEntitytype(
+        @SuppressWarnings("hiding") TVariable _variable_)
     {
         // Constructor
-        setEntity(_entity_);
+        setVariable(_variable_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AHead(
-            cloneNode(this._entity_));
+        return new AVariableEntitytype(
+            cloneNode(this._variable_));
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAHead(this);
+        ((Analysis) sw).caseAVariableEntitytype(this);
     }
 
-    public PEntity getEntity()
+    public TVariable getVariable()
     {
-        return this._entity_;
+        return this._variable_;
     }
 
-    public void setEntity(PEntity node)
+    public void setVariable(TVariable node)
     {
-        if(this._entity_ != null)
+        if(this._variable_ != null)
         {
-            this._entity_.parent(null);
+            this._variable_.parent(null);
         }
 
         if(node != null)
@@ -56,23 +56,23 @@ public final class AHead extends PHead
             node.parent(this);
         }
 
-        this._entity_ = node;
+        this._variable_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._entity_);
+            + toString(this._variable_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._entity_ == child)
+        if(this._variable_ == child)
         {
-            this._entity_ = null;
+            this._variable_ = null;
             return;
         }
 
@@ -83,9 +83,9 @@ public final class AHead extends PHead
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._entity_ == oldChild)
+        if(this._variable_ == oldChild)
         {
-            setEntity((PEntity) newChild);
+            setVariable((TVariable) newChild);
             return;
         }
 

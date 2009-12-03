@@ -5,50 +5,50 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AInsertMain extends PMain
+public final class AEntitypattern extends PEntitypattern
 {
-    private TGreater _greater_;
-    private PInsert _insert_;
+    private PEntitytype _entitytype_;
+    private PEntitybody _entitybody_;
 
-    public AInsertMain()
+    public AEntitypattern()
     {
         // Constructor
     }
 
-    public AInsertMain(
-        @SuppressWarnings("hiding") TGreater _greater_,
-        @SuppressWarnings("hiding") PInsert _insert_)
+    public AEntitypattern(
+        @SuppressWarnings("hiding") PEntitytype _entitytype_,
+        @SuppressWarnings("hiding") PEntitybody _entitybody_)
     {
         // Constructor
-        setGreater(_greater_);
+        setEntitytype(_entitytype_);
 
-        setInsert(_insert_);
+        setEntitybody(_entitybody_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AInsertMain(
-            cloneNode(this._greater_),
-            cloneNode(this._insert_));
+        return new AEntitypattern(
+            cloneNode(this._entitytype_),
+            cloneNode(this._entitybody_));
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAInsertMain(this);
+        ((Analysis) sw).caseAEntitypattern(this);
     }
 
-    public TGreater getGreater()
+    public PEntitytype getEntitytype()
     {
-        return this._greater_;
+        return this._entitytype_;
     }
 
-    public void setGreater(TGreater node)
+    public void setEntitytype(PEntitytype node)
     {
-        if(this._greater_ != null)
+        if(this._entitytype_ != null)
         {
-            this._greater_.parent(null);
+            this._entitytype_.parent(null);
         }
 
         if(node != null)
@@ -61,19 +61,19 @@ public final class AInsertMain extends PMain
             node.parent(this);
         }
 
-        this._greater_ = node;
+        this._entitytype_ = node;
     }
 
-    public PInsert getInsert()
+    public PEntitybody getEntitybody()
     {
-        return this._insert_;
+        return this._entitybody_;
     }
 
-    public void setInsert(PInsert node)
+    public void setEntitybody(PEntitybody node)
     {
-        if(this._insert_ != null)
+        if(this._entitybody_ != null)
         {
-            this._insert_.parent(null);
+            this._entitybody_.parent(null);
         }
 
         if(node != null)
@@ -86,30 +86,30 @@ public final class AInsertMain extends PMain
             node.parent(this);
         }
 
-        this._insert_ = node;
+        this._entitybody_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._greater_)
-            + toString(this._insert_);
+            + toString(this._entitytype_)
+            + toString(this._entitybody_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._greater_ == child)
+        if(this._entitytype_ == child)
         {
-            this._greater_ = null;
+            this._entitytype_ = null;
             return;
         }
 
-        if(this._insert_ == child)
+        if(this._entitybody_ == child)
         {
-            this._insert_ = null;
+            this._entitybody_ = null;
             return;
         }
 
@@ -120,15 +120,15 @@ public final class AInsertMain extends PMain
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._greater_ == oldChild)
+        if(this._entitytype_ == oldChild)
         {
-            setGreater((TGreater) newChild);
+            setEntitytype((PEntitytype) newChild);
             return;
         }
 
-        if(this._insert_ == oldChild)
+        if(this._entitybody_ == oldChild)
         {
-            setInsert((PInsert) newChild);
+            setEntitybody((PEntitybody) newChild);
             return;
         }
 

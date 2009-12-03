@@ -2,7 +2,7 @@
 
 package entitiesdb.language.node;
 
-public abstract class PInsertbody extends Node
+public abstract class PEntitytype extends Node
 {
     // Empty body
 }

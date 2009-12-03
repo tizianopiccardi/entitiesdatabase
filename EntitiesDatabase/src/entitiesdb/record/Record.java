@@ -81,7 +81,7 @@ public class Record {
 	
 	public String toString() {
 		return "ID: " + id+ " | Entity: " + entityId + " | Attribute: " + attribute + 
-				" | Value: " + value.getValue() + " | ValueType: "+ value.getType();
+				" | Value: " + ((value == null) ? "null" : value.getValue() + " | ValueType: "+ value.getType());
 	}
 
 	
