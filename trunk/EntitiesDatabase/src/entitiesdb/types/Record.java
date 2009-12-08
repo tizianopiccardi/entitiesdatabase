@@ -1,14 +1,9 @@
-package entitiesdb.record;
+package entitiesdb.types;
 
 import com.sleepycat.persist.model.Entity;
 import com.sleepycat.persist.model.PrimaryKey;
 import com.sleepycat.persist.model.Relationship;
 import com.sleepycat.persist.model.SecondaryKey;
-
-import entitiesdb.record.Value.ValueType;
-
-
-
 
 @Entity
 public class Record {
@@ -17,11 +12,11 @@ public class Record {
 	private long id;
 
 	@SecondaryKey(name="Entity", relate=Relationship.MANY_TO_ONE)
-	private EntityId entityId = null;
+	private String entityId = null;
 	@SecondaryKey(name="Attribute", relate=Relationship.MANY_TO_ONE)
-	private Attribute attribute = null;
+	private String attribute = null;
 	@SecondaryKey(name="Value", relate=Relationship.MANY_TO_ONE)
-	private Value value = null;
+	private String value = null;
 
 	
 	
@@ -29,20 +24,40 @@ public class Record {
 		
 	}
 	
-	public Record(String e, String a, String v, ValueType t) {
-		this.setEntityId(new EntityId(e));
-		this.setAttribute(new Attribute(a));
-		this.setValue(new Value(v, t));
+	public Record(String e, String a, String v) {
+		entityId = e;
+		attribute = a;
+		value = v;
 	}
 	
-	public Record(EntityId e, Attribute a, Value v) {
-		this.setEntityId(e);
-		this.setAttribute(a);
-		this.setValue(v);
+
+	
+	
+	
+	public String getEntityId() {
+		return entityId;
 	}
-	
-	
-	
+
+	public void setEntityId(String entityId) {
+		this.entityId = entityId;
+	}
+
+	public String getAttribute() {
+		return attribute;
+	}
+
+	public void setAttribute(String attribute) {
+		this.attribute = attribute;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -52,36 +67,10 @@ public class Record {
 	
 
 
-	public final EntityId getEntityId() {
-		return entityId;
-	}
-
-	public final void setEntityId(EntityId entityId) {
-		this.entityId = entityId;
-	}
-
-
-	
-	
-	public final Attribute getAttribute() {
-		return attribute;
-	}
-
-	public final void setAttribute(Attribute attribute) {
-		this.attribute = attribute;
-	}
-
-	public Value getValue() {
-		return value;
-	}
-	public void setValue(Value value) {
-		this.value = value;
-	}
-	
 	
 	public String toString() {
 		return "ID: " + id+ " | Entity: " + entityId + " | Attribute: " + attribute + 
-				" | Value: " + ((value == null) ? "null" : value.getValue() + " | ValueType: "+ value.getType());
+				" | Value: " + value;
 	}
 
 	
