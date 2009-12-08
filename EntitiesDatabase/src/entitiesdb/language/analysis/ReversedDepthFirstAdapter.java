@@ -123,38 +123,29 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAComplexQuery(node);
     }
 
-    public void inAEmptyHead(AEmptyHead node)
+    public void inAHead(AHead node)
     {
         defaultIn(node);
     }
 
-    public void outAEmptyHead(AEmptyHead node)
+    public void outAHead(AHead node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAEmptyHead(AEmptyHead node)
+    public void caseAHead(AHead node)
     {
-        inAEmptyHead(node);
-        outAEmptyHead(node);
-    }
-
-    public void inAEmptyConditions(AEmptyConditions node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAEmptyConditions(AEmptyConditions node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAEmptyConditions(AEmptyConditions node)
-    {
-        inAEmptyConditions(node);
-        outAEmptyConditions(node);
+        inAHead(node);
+        if(node.getEntitybody() != null)
+        {
+            node.getEntitybody().apply(this);
+        }
+        if(node.getEntitytype() != null)
+        {
+            node.getEntitytype().apply(this);
+        }
+        outAHead(node);
     }
 
     public void inASingleBody(ASingleBody node)
@@ -353,23 +344,6 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAListAttributes(node);
     }
 
-    public void inAEmptyAttributes(AEmptyAttributes node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAEmptyAttributes(AEmptyAttributes node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAEmptyAttributes(AEmptyAttributes node)
-    {
-        inAEmptyAttributes(node);
-        outAEmptyAttributes(node);
-    }
-
     public void inAAttribute(AAttribute node)
     {
         defaultIn(node);
@@ -548,5 +522,84 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
             node.getEntitybody().apply(this);
         }
         outABodyOptdefinition(node);
+    }
+
+    public void inASingleConditions(ASingleConditions node)
+    {
+        defaultIn(node);
+    }
+
+    public void outASingleConditions(ASingleConditions node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseASingleConditions(ASingleConditions node)
+    {
+        inASingleConditions(node);
+        if(node.getCondition() != null)
+        {
+            node.getCondition().apply(this);
+        }
+        outASingleConditions(node);
+    }
+
+    public void inAListConditions(AListConditions node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAListConditions(AListConditions node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAListConditions(AListConditions node)
+    {
+        inAListConditions(node);
+        if(node.getConditions() != null)
+        {
+            node.getConditions().apply(this);
+        }
+        if(node.getComa() != null)
+        {
+            node.getComa().apply(this);
+        }
+        if(node.getCondition() != null)
+        {
+            node.getCondition().apply(this);
+        }
+        outAListConditions(node);
+    }
+
+    public void inAEqualCondition(AEqualCondition node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAEqualCondition(AEqualCondition node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAEqualCondition(AEqualCondition node)
+    {
+        inAEqualCondition(node);
+        if(node.getValue() != null)
+        {
+            node.getValue().apply(this);
+        }
+        if(node.getEqual() != null)
+        {
+            node.getEqual().apply(this);
+        }
+        if(node.getVariable() != null)
+        {
+            node.getVariable().apply(this);
+        }
+        outAEqualCondition(node);
     }
 }

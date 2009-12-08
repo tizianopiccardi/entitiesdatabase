@@ -15,8 +15,7 @@ public interface Analysis extends Switch
     void caseAQueryMain(AQueryMain node);
     void caseASimpleQuery(ASimpleQuery node);
     void caseAComplexQuery(AComplexQuery node);
-    void caseAEmptyHead(AEmptyHead node);
-    void caseAEmptyConditions(AEmptyConditions node);
+    void caseAHead(AHead node);
     void caseASingleBody(ASingleBody node);
     void caseAListBody(AListBody node);
     void caseAEntitypattern(AEntitypattern node);
@@ -25,7 +24,6 @@ public interface Analysis extends Switch
     void caseAEntitybody(AEntitybody node);
     void caseASingleAttributes(ASingleAttributes node);
     void caseAListAttributes(AListAttributes node);
-    void caseAEmptyAttributes(AEmptyAttributes node);
     void caseAAttribute(AAttribute node);
     void caseAIdeAttributetype(AIdeAttributetype node);
     void caseAVariableAttributetype(AVariableAttributetype node);
@@ -34,6 +32,9 @@ public interface Analysis extends Switch
     void caseAVariableValue(AVariableValue node);
     void caseAEmptyOptdefinition(AEmptyOptdefinition node);
     void caseABodyOptdefinition(ABodyOptdefinition node);
+    void caseASingleConditions(ASingleConditions node);
+    void caseAListConditions(AListConditions node);
+    void caseAEqualCondition(AEqualCondition node);
 
     void caseTNewLine(TNewLine node);
     void caseTBlank(TBlank node);
