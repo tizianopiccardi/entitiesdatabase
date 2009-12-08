@@ -1,32 +1,34 @@
-package entitiesdb.query;
+package entitiesdb.query.evaluators;
 
 import java.util.ArrayList;
-import entitiesdb.dao.JEDao;
+
 import entitiesdb.language.analysis.DepthFirstAdapter;
 import entitiesdb.language.node.*;
+import entitiesdb.query.EntitiesArrayList;
 import entitiesdb.query.QueryEnvironment;
-import entitiesdb.record.Attribute;
-import entitiesdb.record.EntityId;
-import entitiesdb.record.Record;
-import entitiesdb.record.Value;
-import entitiesdb.record.Value.ValueType;
+import entitiesdb.query.QueryProperty;
+import entitiesdb.query.tables.DynamicTable;
+import entitiesdb.query.tables.QueryRecordTable;
+import entitiesdb.types.Variable;
+
 
 
 
 public class QueryEngine extends DepthFirstAdapter {
 
+	
+	private DynamicTable resultEnvironment = new DynamicTable();
 
 	private QueryEnvironment env = new QueryEnvironment();
-	//private JEDao dao;
 	
 	public QueryEngine() {
 		super();
-	//	this.dao = dao;
 	}
 	
 	
 	public void caseAQueryMain(AQueryMain node) {
 		node.getQuery().apply(this);
+		System.out.println(this.resultEnvironment);
 	}
 	
 	
@@ -74,7 +76,42 @@ public class QueryEngine extends DepthFirstAdapter {
 		node.getEntitytype().apply(this);
 		node.getEntitybody().apply(this);
 		
+		//Ottengo il riferimento al entity
+		Object entity = env.getNodeVal(node.getEntitytype());
+
+		//Ottengo la lista delle proprietà che deve avere
+		ArrayList<QueryProperty> propertyList = (ArrayList<QueryProperty>) env.getNodeVal(node.getEntitybody());
 		
+		EntitiesArrayList matchingEntities = new EntitiesArrayList();
+		
+		for (int i = 0 ; i < propertyList.size() ; i++) {
+			Object attribute = propertyList.get(i).getAttribute();
+			Object value = propertyList.get(i).getValue();
+			
+			QueryRecordTable matchingRecords = new QueryRecordTable(entity, attribute, value);
+			
+			//resultTable.process(matchingRecords);
+			
+			resultEnvironment.join(matchingRecords);
+			
+			//matchingEntities.doIntersection(matchingRecords.getEntitiesSet());
+			//System.out.println(matchingEntities);
+		}
+		
+		env.setNodeVal(node, matchingEntities);
+		
+		//System.out.println(matchingEntities);
+		
+		//System.out.println(resultTable);
+		/*if (entity instanceof String)
+			System.out.println(entity);*/
+		
+		
+		
+		
+		
+		
+		/*
 		QueryEntityElement entityElement = (QueryEntityElement) env.getNodeVal(node.getEntitytype());
 		ArrayList<QueryProperty> attributeList = (ArrayList<QueryProperty>) env.getNodeVal(node.getEntitybody());
 		
@@ -116,17 +153,17 @@ public class QueryEngine extends DepthFirstAdapter {
 					matchingEntities.add(records.get(j).getEntityId());
 				}
 			}*/
-			EntitiesArrayList entities = JEDao.getEntities(new Record(entity, attribute, value));
+		//	EntitiesArrayList entities = JEDao.getEntities(new Record(entity.getId(), attribute.getLabel(), value.getValue(),ValueType.ATOM));
 			
 			
-			matchingEntities.addAll(entities);
+			//matchingEntities.addAll(entities);
 			
-			matchingEntities.retainAll(entities);
+		//	matchingEntities.retainAll(entities);
 			
 			//System.out.println(new Record(entity, attribute, value));
 			
 			//System.out.println(entities);
-		}
+		/*}
 		System.out.println(matchingEntities);
 		/*EntityId e = (EntityId) env.getNodeVal(node.getEntitytype());
 		ArrayList<Property> b = (ArrayList<Property>) env.getNodeVal(node.getEntitybody());
@@ -204,8 +241,7 @@ public class QueryEngine extends DepthFirstAdapter {
 	
 	public void caseAIdeAttributetype(AIdeAttributetype node) {
 		
-		Attribute a = new Attribute(node.getIdentifier().getText());
-		env.setNodeVal(node, new QueryAttributeElement(a, QueryElementTypes.IDE));
+		env.setNodeVal(node, node.getIdentifier().getText());
 		
 		System.out.println("QueryEngine.caseAIdeAttributetype()");
 		
@@ -216,7 +252,7 @@ public class QueryEngine extends DepthFirstAdapter {
 		System.out.println("QueryEngine.caseAVariableAttributetype()");
 		
 		String e = node.getVariable().getText();
-		env.setNodeVal(node, new QueryAttributeElement(e, QueryElementTypes.VAR));
+		env.setNodeVal(node, new Variable(e));
 	}	
 	
 	
@@ -231,10 +267,7 @@ public class QueryEngine extends DepthFirstAdapter {
 		
 		if (optBody==null) {
 			//NO FORMA x(...)
-			//String v = node.getIdentifier().getText();
-			Value v = new Value(node.getIdentifier().getText(), ValueType.ENTITY);
-			env.setNodeVal(node, new QueryValueElement(v, QueryElementTypes.IDE));
-			
+			env.setNodeVal(node, node.getIdentifier().getText());
 		}
 		else {
 			//riproduci quello che c'è all'inizio per creare il set di entity
@@ -247,10 +280,8 @@ public class QueryEngine extends DepthFirstAdapter {
 	public void caseAStringValue(AStringValue node) {
 		
 		System.out.println("QueryEngine.caseAStringValue()");
-		//System.out.println("SONO QUI");
-		String value = node.getString().getText();
-		Value v = new Value(value.substring(1, value.length()-1), ValueType.ATOM);
-		env.setNodeVal(node, new QueryValueElement(v, QueryElementTypes.STRING));
+
+		env.setNodeVal(node, node.getString().getText());
 		
 	}	
 	
@@ -267,8 +298,8 @@ public class QueryEngine extends DepthFirstAdapter {
 		
 		if (optBody==null) {
 			//NO FORMA x(...)
-			String v = node.getVariable().getText();
-			env.setNodeVal(node, new QueryValueElement(v, QueryElementTypes.VAR));
+
+			env.setNodeVal(node, new Variable(node.getVariable().getText()));
 			
 		}
 		else {
@@ -295,7 +326,7 @@ public class QueryEngine extends DepthFirstAdapter {
 		
 		System.out.println("QueryEngine.caseAVariableEntitytype()");
 		String e = node.getVariable().getText();
-		env.setNodeVal(node, new QueryEntityElement(e, QueryElementTypes.VAR));
+		env.setNodeVal(node, new Variable(e));
 		
 	}
 	
@@ -303,8 +334,7 @@ public class QueryEngine extends DepthFirstAdapter {
 		
 		System.out.println("QueryEngine.caseAIdeEntitytype()");
 		
-		EntityId e = new EntityId(node.getIdentifier().getText());
-		env.setNodeVal(node, new QueryEntityElement(e, QueryElementTypes.IDE));
+		env.setNodeVal(node, node.getIdentifier().getText());
 		
 	}
 	

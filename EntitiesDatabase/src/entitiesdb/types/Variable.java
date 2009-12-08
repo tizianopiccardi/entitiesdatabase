@@ -1,7 +1,26 @@
-package entitiesdb.record;
+package entitiesdb.types;
 
 public class Variable {
+	
+	String name;
+	
+	public Variable(String n) {
+		name = n;
+	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
+	
+	
+	
+/*
 	Object value = null;
 	String name;
 	boolean bounded = false;
@@ -37,10 +56,10 @@ public class Variable {
 	public final void setBounded(boolean bounded) {
 		this.bounded = bounded;
 	}
-
+*/
 	@Override
 	public String toString() {
-		return (value == null) ? null : value.toString();
+		return name.toString();
 	}
 
 
