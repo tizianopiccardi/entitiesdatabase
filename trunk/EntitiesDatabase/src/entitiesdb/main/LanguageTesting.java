@@ -30,7 +30,7 @@ public class LanguageTesting {
 		
 
 		
-		query = ":- $a(lives: $x)";
+		query = "$x(has_attribute:$y):- $x(lives: $y) ? $x=$z";
 		//query = ":- $a(lives: $x, married: I1, works: $y)";
 		
 		JEDao.open();

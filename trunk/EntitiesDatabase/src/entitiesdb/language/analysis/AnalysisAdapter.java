@@ -84,12 +84,7 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
-    public void caseAEmptyHead(AEmptyHead node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseAEmptyConditions(AEmptyConditions node)
+    public void caseAHead(AHead node)
     {
         defaultCase(node);
     }
@@ -134,11 +129,6 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
-    public void caseAEmptyAttributes(AEmptyAttributes node)
-    {
-        defaultCase(node);
-    }
-
     public void caseAAttribute(AAttribute node)
     {
         defaultCase(node);
@@ -175,6 +165,21 @@ public class AnalysisAdapter implements Analysis
     }
 
     public void caseABodyOptdefinition(ABodyOptdefinition node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseASingleConditions(ASingleConditions node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAListConditions(AListConditions node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAEqualCondition(AEqualCondition node)
     {
         defaultCase(node);
     }

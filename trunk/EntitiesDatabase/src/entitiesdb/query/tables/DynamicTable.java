@@ -1,10 +1,7 @@
 package entitiesdb.query.tables;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
-
 import entitiesdb.query.tables.QueryRecordTable.VarsBounder;
-import entitiesdb.types.*;
 
 
 public class DynamicTable {
