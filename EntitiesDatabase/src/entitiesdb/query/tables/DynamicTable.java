@@ -24,10 +24,10 @@ public class DynamicTable {
 		
 		
 		
-		//System.out.println(recordsListObject.getBounds());
-		
-		
-		
+
+		//String [][] a = new String[10][10];
+		//arra
+		//table.get(0).set(1, "ciao");
 		
 		if (empty) {
 			//bla bla

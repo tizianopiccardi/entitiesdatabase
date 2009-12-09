@@ -25,13 +25,10 @@ public class LanguageTesting {
 		try {
 			
 		String query = "";
-		InputStreamReader reader = new InputStreamReader(System.in);
-		BufferedReader in = new BufferedReader(reader);
 		
 
 		
 		query = "$x(has_attribute:$y):- $x(lives: $y) ? $x=$z";
-		//query = ":- $a(lives: $x, married: I1, works: $y)";
 		
 		JEDao.open();
 		

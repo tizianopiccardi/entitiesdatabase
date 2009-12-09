@@ -120,20 +120,46 @@ public class JEDao {
 	}
 
 	
-	public void store(Record record) throws DaoException {
+	
+	public static boolean storeEntity(String entity) throws DaoException {
+		Record record = new Record(entity, "","");
 		try {
-			if (!existsRecord(record)) {
-				//if (!existsEntity(record.getEntityId())) //non esiste l'entità
-				//	recordsIndex.putNoReturn(new Record(record.getEntityId(),record.getAttribute(), record.getValue()));
-				recordsIndex.putNoReturn(record);
+			if (!dao.existsRecord(record)) {
+				dao.recordsIndex.putNoReturn(record);
+				return true;
 			}
+			return false;
+				//return dao.recordsIndex.putNoOverwrite(record);
+			//}
 		} catch (DatabaseException ex) {
 			throw new DaoException(ex);
 		}
 	}
 	
+	
+	
+	public static boolean storeAttribute(String e, String a, String v) throws DaoException {
+		return storeAttribute(new Record(e,a,v));
+	}
+	
+	public static boolean storeAttribute(Record record) throws DaoException {
+		try {
+			if (!dao.existsRecord(record)) {
+				if (!dao.existsRecord(new Record(record.getEntityId(),"","")))
+					storeEntity(record.getEntityId());
+				dao.recordsIndex.putNoReturn(record);
+				return true;
+			}
+			return false;
+
+		} catch (DatabaseException ex) {
+			throw new DaoException(ex);
+		}
+	}
+	
+
 	public boolean existsRecord(Record r) {
-		return false;
+		return getRecords(r).size()!=0;
 	}
 	
 	public boolean existsEntity(String string) {
@@ -147,7 +173,15 @@ public class JEDao {
 	
 	
 	
-	
+	public static boolean deleteAttribute(Record r) {
+		
+		ArrayList<Record> recordList = getRecords(r);
+		boolean out = true;
+		for (int i = 0 ; i < recordList.size() ; i++)
+			out = out && dao.recordsIndex.delete(recordList.get(i).getId());
+		
+		return out;
+	}
 	
 	
 	
