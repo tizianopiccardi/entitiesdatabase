@@ -13,6 +13,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import entitiesdb.dao.JEDao;
+import entitiesdb.types.Record;
+
 public class Delete extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -104,8 +107,9 @@ public class Delete extends JPanel {
             public void actionPerformed(ActionEvent e) {
             	String ename = enamedelete.getText();
             	
+            	JEDao.deleteAttribute(new Record(ename, null, null));
             	
-                String testo = "You want to delete an entity called "+ename;
+                String testo = "You have deleted an entity called "+ename;
                
                 text.setText(testo);
             }
@@ -118,7 +122,9 @@ public class Delete extends JPanel {
             	String aname = attributename.getText();
             	String avalue= attributevalue.getText();
             	
-                String testo = "You want to delete an attribute called "+aname+" with value "+avalue+" for the entity "+ename;
+            	JEDao.deleteAttribute(new Record(ename, aname, avalue));
+            	
+                String testo = "You have deleted an attribute called "+aname+" with value "+avalue+" for the entity "+ename;
                
                 text.setText(testo);
             }

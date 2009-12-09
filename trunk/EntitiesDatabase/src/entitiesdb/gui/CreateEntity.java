@@ -13,6 +13,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import entitiesdb.dao.DaoException;
+import entitiesdb.dao.JEDao;
+import entitiesdb.types.Record;
+
 public class CreateEntity extends JPanel {
 
 	private static final long serialVersionUID = -551478760542372081L;
@@ -56,6 +60,15 @@ public class CreateEntity extends JPanel {
     private void doStuff() {        
         text.setText("");
         String sq = entity.getText();
-        text.append("You want to create an entity with this name: "+sq);   
+        
+        try {
+			if (JEDao.storeEntity(sq))
+				text.append("You have created an entity with this ID: "+sq);
+			else 
+				text.append("The entity with ID "+sq+" already exists");
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}   
     }
 }
