@@ -3,6 +3,8 @@ package entitiesdb.gui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -12,6 +14,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import entitiesdb.dao.DaoException;
+import entitiesdb.dao.JEDao;
+import entitiesdb.types.*;
 
 public class QueryGUI extends JPanel {
 
@@ -27,6 +33,7 @@ public class QueryGUI extends JPanel {
         north.setBorder(new TitledBorder("Insert Your Query:"));
         JButton run = new JButton("OK");
         JButton clear = new JButton("Clear");
+        JButton dump = new JButton("DUMP!");
         query = new JTextField(40);
         north.add(Box.createHorizontalStrut(5));
         north.add(query);
@@ -34,6 +41,8 @@ public class QueryGUI extends JPanel {
         north.add(run);
         north.add(Box.createHorizontalStrut(5));
         north.add(clear);
+        north.add(Box.createHorizontalStrut(5));
+        north.add(dump);
         
         JPanel results = new JPanel(new BorderLayout());
         results.setBorder(new TitledBorder("Results"));
@@ -59,6 +68,11 @@ public class QueryGUI extends JPanel {
         clear.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e) {clearStuff();}	
         });
+        
+        dump.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent e) {dumpDb();}	
+        });
+        
         }
 
     private void doStuff() {        
@@ -70,5 +84,21 @@ public class QueryGUI extends JPanel {
     private void clearStuff(){
     	text.setText("");
     	query.setText("");
+    }
+    
+    private void dumpDb() {        
+        text.setText("");
+		Collection<? extends Record> records;
+		try {
+			records = JEDao.getInstance().getRecords();
+			for (Record r : records) {
+				text.append(r + "\n"); 
+			}
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+          
     }
 }

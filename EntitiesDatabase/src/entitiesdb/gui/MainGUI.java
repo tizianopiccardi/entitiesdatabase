@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 
+import entitiesdb.dao.JEDao;
+
 public class MainGUI extends JFrame{
 
 	private static final long serialVersionUID = -5514787605482372081L;
@@ -27,8 +29,10 @@ public class MainGUI extends JFrame{
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            JEDao.open();
         } catch (Exception e) {}
 
+       
         new MainGUI();
     }
 }
