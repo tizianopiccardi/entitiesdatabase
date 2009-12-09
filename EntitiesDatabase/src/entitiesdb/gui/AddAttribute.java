@@ -14,6 +14,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import entitiesdb.dao.DaoException;
+import entitiesdb.dao.JEDao;
+
 public class AddAttribute extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -21,7 +24,7 @@ public class AddAttribute extends JPanel {
     private JTextField entityname = null;
     private JTextField attributename = null;
     private JTextField attributevalue = null;
-    private JCheckBox  valueType = null;
+    //private JCheckBox  valueType = null;
 
     public AddAttribute() {
         this.setLayout(new BorderLayout());
@@ -32,7 +35,7 @@ public class AddAttribute extends JPanel {
         entityname = new JTextField(20);
         attributename = new JTextField(20);
         attributevalue = new JTextField(10);
-        valueType = new JCheckBox("isEntity");
+        //valueType = new JCheckBox("isEntity");
         JButton run = new JButton("Add");
 
         JPanel zero = new JPanel();
@@ -71,7 +74,7 @@ public class AddAttribute extends JPanel {
         due.add(Box.createVerticalStrut(18));
         due.add(run);
         due.add(Box.createVerticalStrut(1));
-        due.add(valueType);
+        //due.add(valueType);
 
         creation.add(zero,BorderLayout.WEST);
         creation.add(uno, BorderLayout.CENTER);
@@ -99,13 +102,20 @@ public class AddAttribute extends JPanel {
             	String ename = entityname.getText();
             	String aname = attributename.getText();
             	String avalue= attributevalue.getText();
-            	boolean entiytype = valueType.isSelected();
-            	String etype;
-            	if (entiytype) etype="";
-            	else etype="not ";
-                String testo = "You want to create an attribute called "+aname+" with value "+avalue+" for the entity "+ename+"\n"
-                			   + "The Attribute Value is "+etype+"an entity.";
+            	
+                String testo = "";
                
+                
+                try {
+        			if (JEDao.storeAttribute(ename, aname, avalue))
+        				testo = "You have created an attribute called "+aname+" with value "+avalue+" for the entity "+ename;
+        			else 
+        				testo ="Error... Are you sure that this attribute doesn't exist?";
+        		} catch (DaoException ex) {
+        			// TODO Auto-generated catch block
+        			ex.printStackTrace();
+        		}   
+                
                 text.setText(testo);
             }
         });
