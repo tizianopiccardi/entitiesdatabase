@@ -8,7 +8,7 @@ import entitiesdb.query.EntitiesArrayList;
 import entitiesdb.query.QueryEnvironment;
 import entitiesdb.query.QueryProperty;
 import entitiesdb.query.tables.DynamicTable;
-import entitiesdb.query.tables.QueryRecordTable;
+import entitiesdb.query.tables.QueryRecordMatrix;
 import entitiesdb.types.Variable;
 
 
@@ -88,8 +88,8 @@ public class QueryEngine extends DepthFirstAdapter {
 			Object attribute = propertyList.get(i).getAttribute();
 			Object value = propertyList.get(i).getValue();
 			
-			QueryRecordTable matchingRecords = new QueryRecordTable(entity, attribute, value);
-			
+			//QueryRecordTable matchingRecords = new QueryRecordTable(entity, attribute, value);
+			QueryRecordMatrix matchingRecords = new QueryRecordMatrix(entity, attribute, value);
 			//resultTable.process(matchingRecords);
 			
 			resultEnvironment.join(matchingRecords);
