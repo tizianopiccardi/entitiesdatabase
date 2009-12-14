@@ -7,60 +7,68 @@ import entitiesdb.dao.JEDao;
 import entitiesdb.types.Record;
 import entitiesdb.types.Variable;
 
-public class QueryRecordTable extends ArrayList<Record> {
+public class QueryRecordMatrix extends ArrayList<String[]>{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8671790673143331001L;
 
-	
-	public String idBound, attributeBound, valueBound = null;
-	public int boundCount = 0;
 
-	public ArrayList<String> entitiesSet = new ArrayList<String>();
+	//Area certa
+	ArrayList<VarsBounder> varBounder = new ArrayList<VarsBounder>();
 	
 	
-	public QueryRecordTable(Object e, Object a, Object v) {
+	public QueryRecordMatrix(Object e, Object a, Object v) {
 		
-		Record recordModel = new Record();
+		Record patternRecord = new Record();
 		
 		//L'entità è esplicita
 		if ( e instanceof String )
-			recordModel.setEntityId(e.toString());
+			patternRecord.setEntityId(e.toString());
 		else
-			this.setIdBound(((Variable) e).getName());
+			this.addBound(((Variable) e).getName(), 0);
 		
 		
 		//L'attributo è esplicito
 		if ( a instanceof String )
-			recordModel.setAttribute(a.toString());
+			patternRecord.setAttribute(a.toString());
 		else
-			this.setAttributeBound(((Variable) a).getName());
+			this.addBound(((Variable) a).getName(), 1);
 		
 		
 		//Il valore è esplicito
 		if ( v instanceof String )
-			recordModel.setValue(v.toString());
+			patternRecord.setValue(v.toString());
 		else
-			this.setValueBound(((Variable) v).getName());
+			this.addBound(((Variable) v).getName(), 2);
 		
 		
 		
-		this.addAll(JEDao.getRecords(recordModel));
+		this.fillMatrix(JEDao.getRecords(patternRecord));
 		
-		}
-	
-	
-	public boolean addAll(Collection<? extends Record> c) {
-		
-		for (Record rec: c ) {
-			if(!entitiesSet.contains(rec.getEntityId())) entitiesSet.add(rec.getEntityId());
-			this.add(rec);
-		}
-		return true;
 	}
 	
+
+	
+	public void addBound(String varName, int index) {
+		varBounder.add(new VarsBounder(varName, index));
+	}
+	
+	
+	
+	public void fillMatrix(Collection<? extends Record> c) {
+		String [] recArray;
+		for (Record r : c) {
+			recArray = new String[3];
+			recArray[0] = r.getEntityId();
+			recArray[1] = r.getAttribute();
+			recArray[2] = r.getValue();
+			this.add(recArray);
+		}
+	}
+	
+	/*
 	
 	public String getIdBound() {
 		return idBound;
@@ -92,11 +100,11 @@ public class QueryRecordTable extends ArrayList<Record> {
 	public void setValueBound(String valueBound) {
 		this.boundCount++;
 		this.valueBound = valueBound;
-	}
+	}*/
 	
 	
 	
-	
+	/*
 	
 	public ArrayList<String> getEntitiesSet() {
 		return entitiesSet;
@@ -105,9 +113,9 @@ public class QueryRecordTable extends ArrayList<Record> {
 
 	public void setEntitiesSet(ArrayList<String> entitiesSet) {
 		this.entitiesSet = entitiesSet;
-	}
+	}*/
 
-
+/*
 	public String toString() {
 		
 
@@ -121,9 +129,9 @@ public class QueryRecordTable extends ArrayList<Record> {
 		out+="-----------";
 		
 		return out;
-	}
+	}*/
 	
-	
+	/*
 	public String [][] getMatrix() {
 		
 		String [][] out = new String[size()][3]; 
@@ -134,8 +142,8 @@ public class QueryRecordTable extends ArrayList<Record> {
 		}
 		
 		return out;
-	}
-	
+	}*/
+	/*
 	public VarsBounder[] getBounds() {
 		VarsBounder [] out = new VarsBounder[boundCount];
 		
@@ -153,6 +161,11 @@ public class QueryRecordTable extends ArrayList<Record> {
 			i++;
 		}
 		return out;
+	}*/
+	
+	
+	public ArrayList<VarsBounder> getBounds() {
+		return this.varBounder;
 	}
 	
 	public class VarsBounder {

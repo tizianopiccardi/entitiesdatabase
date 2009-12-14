@@ -1,7 +1,8 @@
 package entitiesdb.query.tables;
 
 import java.util.ArrayList;
-import entitiesdb.query.tables.QueryRecordTable.VarsBounder;
+
+import entitiesdb.query.tables.QueryRecordMatrix.VarsBounder;
 
 
 public class DynamicTable {
@@ -19,50 +20,34 @@ public class DynamicTable {
 	public int colums = 0;
 	
 	
-	public void join(QueryRecordTable recordsListObject) {
-		
-		
-		
+	public void join(QueryRecordMatrix recordsMatrix) {
 		
 
-		//String [][] a = new String[10][10];
-		//arra
-		//table.get(0).set(1, "ciao");
-		
 		if (empty) {
 			//bla bla
 			this.empty = false;
 			
 			//primo inserimento
-			VarsBounder[] vb = recordsListObject.getBounds();
-			String[][] rMatrix = recordsListObject.getMatrix();
-			//Record r;
+			ArrayList<VarsBounder> vb = recordsMatrix.getBounds();
+
 			String tmp;
-			for (int i = 0 ; i < recordsListObject.size() ; i ++) {
+			for (int i = 0 ; i < recordsMatrix.size() ; i ++) {
 				
 				
-				this.entities.add(recordsListObject.get(i).getEntityId());
+				this.entities.add(recordsMatrix.get(i)[0]);
 				
-				for (int j = 0 ; j < vb.length ; j++) {
+				for (int j = 0 ; j < vb.size() ; j++) {
 					//vb[j].name; //nome 
 					//vb[j].index; //posizione in rMatrix
 					
-					tmp = rMatrix[i][vb[j].index];
-					System.out.println(vb[j].name);
+					tmp = recordsMatrix.get(i)[vb.get(j).index];
+					System.out.print(vb.get(j).name +" = ");
 					System.out.println(tmp);
-					System.out.println("----------");
-					//this.table.add(e)
+
 					
 				}
-				
-				/*r = recordsListObject.get(i);
-				
-				
-				
-				if (recordsListObject.idBound != null)
-					this.table.get(i).add(r.getEntityId());*/
-				
-				
+				System.out.println("----------");
+
 			}
 			
 			
