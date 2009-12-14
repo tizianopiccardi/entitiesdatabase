@@ -68,6 +68,11 @@ public class QueryRecordMatrix extends ArrayList<String[]>{
 		}
 	}
 	
+	
+	public String getEntity(int pos) {
+		return this.get(pos)[0];
+	}
+	
 	/*
 	
 	public String getIdBound() {

@@ -18,4 +18,8 @@ public class DynamicTableMetadata extends Hashtable<String, Integer> {
 		return super.get(k);
 	}
 	
+	public String toString() {
+		return super.toString();
+	}
+	
 }

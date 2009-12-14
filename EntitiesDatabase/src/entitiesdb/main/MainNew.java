@@ -1,11 +1,14 @@
 package entitiesdb.main;
 
 
+import java.io.File;
 import java.util.Collection;
+
+import entitiesdb.dao.EntitiesDAO;
 import entitiesdb.dao.JEDao;
 import entitiesdb.types.Record;
 
-public class Main {
+public class MainNew {
 
 	/**
 	 * @param args
@@ -15,7 +18,7 @@ public class Main {
 
 		
 		try {
-			JEDao.open();
+			/*JEDao.open();
 			JEDao dao = JEDao.getInstance();
 			
 
@@ -58,7 +61,18 @@ public class Main {
 			System.out.print("\n\n\n");
 
 			
-			JEDao.close();
+			JEDao.close();*/
+			
+			
+			EntitiesDAO dao = new EntitiesDAO(new File("db/"));
+			
+			dao.addEntity("I3");
+			
+			System.out.println(dao.entityExists("I3"));
+			
+			dao.close();
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
