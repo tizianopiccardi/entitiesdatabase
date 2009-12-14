@@ -89,14 +89,9 @@ public class QueryGUI extends JPanel {
     private void dumpDb() {        
         text.setText("");
 		Collection<? extends Record> records;
-		try {
-			records = JEDao.getInstance().getRecords();
-			for (Record r : records) {
-				text.append(r + "\n"); 
-			}
-		} catch (DaoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		records = JEDao.getInstance().getRecords();
+		for (Record r : records) {
+			text.append(r + "\n"); 
 		}
 
           

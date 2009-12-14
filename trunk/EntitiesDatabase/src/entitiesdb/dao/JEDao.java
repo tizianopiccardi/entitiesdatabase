@@ -2,7 +2,6 @@ package entitiesdb.dao;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import com.sleepycat.je.*;
 import com.sleepycat.persist.*;
 
@@ -95,7 +94,7 @@ public class JEDao {
 			databaseEnvironment.close();
 		}
 	}
-
+/*
 
 	public Collection<? extends Record> getRecords() throws DaoException {
 		try {
@@ -118,7 +117,7 @@ public class JEDao {
 			list.add(r);
 		}
 	}
-
+*/
 	
 	
 	public static boolean storeEntity(String entity) throws DaoException {
@@ -196,8 +195,12 @@ public class JEDao {
 	}
 	
 	public ArrayList<Record> getAllRecords() {
+		
 		EntityCursor<Record> cursor = recordsIndex.entities();
-		ArrayList<Record> out = getRecordsList(recordsIndex.entities());
+		ArrayList<Record> out = new ArrayList<Record>();
+		for (Record r : cursor) {
+				out.add(r);
+		}
 		cursor.close();
 		return out;
 	}	
@@ -231,6 +234,9 @@ public class JEDao {
 	}
 	
 	
-	
+	public static ArrayList<Record> getRecords() {
+		return getRecords(null,null,null);
+
+	}	
 
 }

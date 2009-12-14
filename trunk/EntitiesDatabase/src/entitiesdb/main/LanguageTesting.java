@@ -1,7 +1,5 @@
 package entitiesdb.main;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.PushbackReader;
 import java.io.StringReader;
 import entitiesdb.dao.JEDao;
