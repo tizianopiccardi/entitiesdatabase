@@ -57,6 +57,35 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAQueryMain(node);
     }
 
+    public void inAInsertMain(AInsertMain node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAInsertMain(AInsertMain node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAInsertMain(AInsertMain node)
+    {
+        inAInsertMain(node);
+        if(node.getEntitybody() != null)
+        {
+            node.getEntitybody().apply(this);
+        }
+        if(node.getIdentifier() != null)
+        {
+            node.getIdentifier().apply(this);
+        }
+        if(node.getGreater() != null)
+        {
+            node.getGreater().apply(this);
+        }
+        outAInsertMain(node);
+    }
+
     public void inASimpleQuery(ASimpleQuery node)
     {
         defaultIn(node);

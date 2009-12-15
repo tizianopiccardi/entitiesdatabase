@@ -17,7 +17,7 @@ public class QueryEnvironment {
 	
 	
 	public void dump() {
-		Enumeration keys = evaluatedNodes.keys();
+		Enumeration<Node> keys = evaluatedNodes.keys();
 		while( keys.hasMoreElements() ) {
 		  Object key = keys.nextElement();
 		  Object value = evaluatedNodes.get(key);
