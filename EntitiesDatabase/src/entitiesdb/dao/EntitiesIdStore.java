@@ -4,11 +4,12 @@ package entitiesdb.dao;
 import java.util.ArrayList;
 
 import com.sleepycat.je.Environment;
-import com.sleepycat.persist.*;
+import com.sleepycat.persist.EntityCursor;
+import com.sleepycat.persist.EntityStore;
+import com.sleepycat.persist.PrimaryIndex;
+import com.sleepycat.persist.StoreConfig;
 
-import entitiesdb.dao.RecordsStore.RecordsList;
 import entitiesdb.types.EntityId;
-import entitiesdb.types.Record;
 
 
 public class EntitiesIdStore {

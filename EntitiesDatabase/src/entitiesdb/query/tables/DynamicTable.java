@@ -17,7 +17,7 @@ public class DynamicTable {
 	public DynamicTableMetadata tableMetadata = new DynamicTableMetadata();
 	
 	public boolean empty = true;
-	public int colums = 0;
+	public int colums = 0;//?
 	
 	
 	public void join(QueryRecordMatrix recordsMatrix) {
@@ -60,7 +60,7 @@ public class DynamicTable {
 				
 				table.add(row);
 				//System.out.println("----------");
-
+				
 			}
 			
 			

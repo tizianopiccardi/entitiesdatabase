@@ -2,7 +2,6 @@ package entitiesdb.main;
 
 
 import java.io.File;
-import java.util.Collection;
 
 import entitiesdb.dao.EntitiesDAO;
 import entitiesdb.dao.EntitiesIdStore.EntityIdsList;
@@ -49,10 +48,10 @@ public class Main {
 			EntitiesDAO dao = new EntitiesDAO(new File("db/"));			
 			
 
-			if (dao.isEmpty()) {
+			//if (dao.isEmpty()) {
 				for (int i = 0 ; i < storeList.length ; i++)
 					dao.put(storeList[i]);
-			}
+			//}
 			
 
 			EntityIdsList ids = dao.getAllEntities();

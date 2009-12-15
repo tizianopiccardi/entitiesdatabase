@@ -59,7 +59,7 @@ Ignored Tokens
 Productions
 
 	main 		=   {query}  query
-				  //|	{insert} greater insert
+				  |	{insert} greater identifier entitybody
 				  ; 
 	
 	query		=   {simple} head definedby body
@@ -85,7 +85,7 @@ Productions
 				  ;
 	
 
-	entitybody		 =  lbracket attributes rbracket
+	entitybody	  =  lbracket attributes rbracket
 					;	
 					
 					
@@ -124,4 +124,5 @@ Productions
 	condition	=   {equal} 	variable equal value
 				  ;
 
+	//insert		= entitypattern
 	

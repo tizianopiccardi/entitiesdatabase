@@ -4,12 +4,30 @@ import java.util.ArrayList;
 
 import entitiesdb.dao.EntitiesDAO;
 import entitiesdb.language.analysis.DepthFirstAdapter;
-import entitiesdb.language.node.*;
+import entitiesdb.language.node.AAttribute;
+import entitiesdb.language.node.ABodyOptdefinition;
+import entitiesdb.language.node.AEntityValue;
+import entitiesdb.language.node.AEntitybody;
+import entitiesdb.language.node.AEntitypattern;
+import entitiesdb.language.node.AIdeAttributetype;
+import entitiesdb.language.node.AIdeEntitytype;
+import entitiesdb.language.node.AInsertMain;
+import entitiesdb.language.node.AListAttributes;
+import entitiesdb.language.node.AListBody;
+import entitiesdb.language.node.AQueryMain;
+import entitiesdb.language.node.ASimpleQuery;
+import entitiesdb.language.node.ASingleAttributes;
+import entitiesdb.language.node.ASingleBody;
+import entitiesdb.language.node.AStringValue;
+import entitiesdb.language.node.AVariableAttributetype;
+import entitiesdb.language.node.AVariableEntitytype;
+import entitiesdb.language.node.AVariableValue;
 import entitiesdb.query.EntitiesArrayList;
 import entitiesdb.query.QueryEnvironment;
 import entitiesdb.query.QueryProperty;
 import entitiesdb.query.tables.DynamicTable;
 import entitiesdb.query.tables.QueryRecordMatrix;
+import entitiesdb.types.Record;
 import entitiesdb.types.Variable;
 
 
@@ -26,6 +44,24 @@ public class QueryEngine extends DepthFirstAdapter {
 	public QueryEngine(EntitiesDAO d) {
 		super();
 		this.dao = d;
+	}
+	
+	
+	
+	
+	@SuppressWarnings("unchecked")
+	public void caseAInsertMain(AInsertMain node) {
+		node.getEntitybody().apply(this);
+		
+		ArrayList<QueryProperty> propertyList = (ArrayList<QueryProperty>) env.getNodeVal(node.getEntitybody());
+		
+		for (int i = 0 ; i < propertyList.size() ; i++) {
+			Record r = new Record(node.getIdentifier().getText(), 
+					(String)propertyList.get(i).getAttribute(), 
+					(String)propertyList.get(i).getValue());
+			dao.put(r);
+		}
+		
 	}
 	
 	
@@ -134,6 +170,7 @@ public class QueryEngine extends DepthFirstAdapter {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void caseAListAttributes(AListAttributes node) {
 		
 		System.out.println("QueryEngine.caseAListAttributes()");

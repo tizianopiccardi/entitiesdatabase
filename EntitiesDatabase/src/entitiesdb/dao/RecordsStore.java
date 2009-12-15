@@ -44,8 +44,12 @@ public class RecordsStore {
 		return recordsIndex.count();
 	}
 	
+	//by pattern
 	public boolean delete(Record r) {
-		ArrayList<Record> recordList = getRecords(r);
+		return delete(r.getEntityId(), r.getAttribute(), r.getValue());
+	}
+	public boolean delete(String e, String a, String v) {
+		ArrayList<Record> recordList = getRecords(e,a,v);
 		boolean out = true;
 		for (int i = 0 ; i < recordList.size() ; i++)
 			out = out && recordsIndex.delete(recordList.get(i).getId());

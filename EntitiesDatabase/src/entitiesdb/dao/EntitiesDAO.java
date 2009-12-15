@@ -29,12 +29,14 @@ public class EntitiesDAO {
 	
 	
 	public boolean deleteEntity(String id) {
-		return idStore.delete(id);
+		//SICURI??? Questa entità è disintegrata completamente, esistenza e relazioni
+		return idStore.delete(id) && recordStore.delete(id, null, null) && recordStore.delete(null, null, id);
 	}
 	
 	public boolean deleteRecord(Record r) {
 		return recordStore.delete(r);
-	}	
+	}
+	
 	
 	public boolean addEntity(String id) {
 		return idStore.addEntity(id);

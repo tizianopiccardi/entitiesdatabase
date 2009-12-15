@@ -3,7 +3,6 @@ package entitiesdb.gui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.swing.Box;
@@ -15,7 +14,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import entitiesdb.types.*;
+import entitiesdb.types.Record;
 
 public class QueryGUI extends JPanel {
 
