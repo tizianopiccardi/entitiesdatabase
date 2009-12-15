@@ -1,14 +1,19 @@
 package entitiesdb.gui;
 
+import java.io.File;
+
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 
-import entitiesdb.dao.JEDao;
+import entitiesdb.dao.EntitiesDAO;
 
 public class MainGUI extends JFrame{
 
 	private static final long serialVersionUID = -5514787605482372081L;
+	
+	public static EntitiesDAO dao = null;
+	
     public MainGUI() {
         super("Dynamic Querier");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,7 +34,7 @@ public class MainGUI extends JFrame{
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            JEDao.open();
+            dao = new EntitiesDAO(new File("db/"));
         } catch (Exception e) {}
 
        

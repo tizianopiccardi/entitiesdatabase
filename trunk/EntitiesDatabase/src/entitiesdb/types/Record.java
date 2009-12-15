@@ -69,8 +69,8 @@ public class Record {
 
 	
 	public String toString() {
-		return "ID: " + id+ (this.attribute.equals("") ? " definition of " +entityId : " | Entity: " + entityId + " | Attribute: " + attribute + 
-				" | Value: " + value);
+		return "ID: " + id+ " | Entity: " + entityId + " | Attribute: " + attribute + 
+				" | Value: " + value;
 	}
 
 	

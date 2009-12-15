@@ -8,8 +8,7 @@ public class EntityId {
 	
 	@PrimaryKey
 	private String id;
-	private String asd = "dffdf";
-	
+
 	public EntityId() {
 		
 	}
@@ -24,6 +23,10 @@ public class EntityId {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public String toString() {
+		return id;
 	}
 
 }

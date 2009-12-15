@@ -1,9 +1,14 @@
 package entitiesdb.dao;
 
 
+import java.util.ArrayList;
+
 import com.sleepycat.je.Environment;
 import com.sleepycat.persist.*;
+
+import entitiesdb.dao.RecordsStore.RecordsList;
 import entitiesdb.types.EntityId;
+import entitiesdb.types.Record;
 
 
 public class EntitiesIdStore {
@@ -26,11 +31,30 @@ public class EntitiesIdStore {
 		
 	}
 
+	public long count() {
+		return recordsIndex.count();
+	}
 	
 
 	public boolean addEntity(String id) {
 		return recordsIndex.putNoOverwrite(new EntityId(id));
 	}
+	
+	public boolean delete(String id) {
+		return recordsIndex.delete(id);
+	}
+	
+	
+	public EntityIdsList getAllEntities() {
+		EntityCursor<EntityId> cursor = recordsIndex.entities();
+		EntityIdsList out = new EntityIdsList();
+		for (EntityId r : cursor) {
+				out.add(r);
+		}
+		cursor.close();
+		return out;
+	}
+	
 	
 	
 	public boolean exists(String id) {
@@ -41,5 +65,13 @@ public class EntitiesIdStore {
 	public void close() {
 		store.close();
 	}
+
+	
+	
+	//definisco cosa restituiscono le query
+	public class EntityIdsList extends ArrayList<EntityId> {
+		private static final long serialVersionUID = 6456196145395912215L;
+	}
+	
 	
 }

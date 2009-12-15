@@ -1,6 +1,5 @@
 package entitiesdb.dao;
 
-import java.io.File;
 import java.util.ArrayList;
 import com.sleepycat.je.*;
 import com.sleepycat.persist.*;
@@ -41,9 +40,40 @@ public class RecordsStore {
 	}
 	
 	
+	public long count() {
+		return recordsIndex.count();
+	}
 	
+	public boolean delete(Record r) {
+		ArrayList<Record> recordList = getRecords(r);
+		boolean out = true;
+		for (int i = 0 ; i < recordList.size() ; i++)
+			out = out && recordsIndex.delete(recordList.get(i).getId());
+		return out;
+	}
+	
+	public boolean exists(Record r) {
+		RecordsList rL = this.getRecords(r);
+		return (rL.size() == 0) ? false : true;
+	}
+	
+	public boolean put(String e, String a, String v) {
+		return this.put(new Record(e,a,v));
+	}
+	
+	public boolean put(Record r) {
+		if (!exists(r)) {
+			this.recordsIndex.putNoReturn(r);
+			return true;
+		}
+		return false;	
+	}
 
-	public ArrayList<Record> getRecords(String e, String a, String v) {
+	
+	public RecordsList getRecords(Record r) {
+		return getRecords(r.getEntityId(), r.getAttribute(), r.getValue());
+	}
+	public RecordsList getRecords(String e, String a, String v) {
 
 		//no join required: select * from tbl
 		if(e == null && a == null && v == null)
@@ -60,7 +90,7 @@ public class RecordsStore {
 
 		ForwardCursor<Record> cursor = join.entities();
 	
-		ArrayList<Record> out = new ArrayList<Record>();
+		RecordsList out = new RecordsList();
 		for (Record r : cursor) {
 				out.add(r);
 		}
@@ -70,15 +100,19 @@ public class RecordsStore {
 	}
 	
 
-	public ArrayList<Record> getAllRecords() {
-		
+	public RecordsList getAllRecords() {	
 		EntityCursor<Record> cursor = recordsIndex.entities();
-		ArrayList<Record> out = new ArrayList<Record>();
+		RecordsList out = new RecordsList();
 		for (Record r : cursor) {
 				out.add(r);
 		}
 		cursor.close();
 		return out;
 	}	
+	
+	//definisco cosa restituiscono le query
+	public class RecordsList extends ArrayList<Record> {
+		private static final long serialVersionUID = -2666202436382791323L;
+	}
 	
 }

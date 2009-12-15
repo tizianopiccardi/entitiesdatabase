@@ -3,7 +3,7 @@ package entitiesdb.query.tables;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import entitiesdb.dao.JEDao;
+import entitiesdb.dao.EntitiesDAO;
 import entitiesdb.types.Record;
 import entitiesdb.types.Variable;
 
@@ -17,9 +17,10 @@ public class QueryRecordMatrix extends ArrayList<String[]>{
 
 	//Area certa
 	ArrayList<VarsBounder> varBounder = new ArrayList<VarsBounder>();
+	EntitiesDAO dao = null;
 	
-	
-	public QueryRecordMatrix(Object e, Object a, Object v) {
+	public QueryRecordMatrix(EntitiesDAO dao, Object e, Object a, Object v) {
+		this.dao = dao;
 		
 		Record patternRecord = new Record();
 		
@@ -45,7 +46,7 @@ public class QueryRecordMatrix extends ArrayList<String[]>{
 		
 		
 		
-		this.fillMatrix(JEDao.getRecords(patternRecord));
+		this.fillMatrix(dao.getRecords(patternRecord));
 		
 	}
 	
