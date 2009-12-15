@@ -1,127 +1,40 @@
 package entitiesdb.query.evaluators;
 
-import java.util.ArrayList;
-
 import entitiesdb.dao.EntitiesDAO;
 import entitiesdb.language.analysis.DepthFirstAdapter;
-import entitiesdb.language.node.AInsertMain;
-import entitiesdb.language.node.AListBody;
-import entitiesdb.language.node.AQueryMain;
-import entitiesdb.language.node.ASimpleQuery;
-import entitiesdb.language.node.ASingleBody;
+import entitiesdb.language.node.AAttribute;
+import entitiesdb.language.node.ABodyOptdefinition;
+import entitiesdb.language.node.AEntityValue;
+import entitiesdb.language.node.AEntitybody;
+import entitiesdb.language.node.AEntitypattern;
+import entitiesdb.language.node.AIdeAttributetype;
+import entitiesdb.language.node.AIdeEntitytype;
+import entitiesdb.language.node.AListAttributes;
+import entitiesdb.language.node.ASingleAttributes;
+import entitiesdb.language.node.AStringValue;
+import entitiesdb.language.node.AVariableAttributetype;
+import entitiesdb.language.node.AVariableEntitytype;
+import entitiesdb.language.node.AVariableValue;
 import entitiesdb.query.QueryEnvironment;
 import entitiesdb.query.StatementBody;
 import entitiesdb.query.StatementProperty;
-import entitiesdb.query.tables.DynamicTable;
-import entitiesdb.query.tables.QueryRecordMatrix;
-import entitiesdb.types.Record;
+import entitiesdb.query.StatementPropertyList;
+import entitiesdb.types.Variable;
 
+public class StatementEngine extends DepthFirstAdapter{
 
-
-
-public class QueryEngine extends DepthFirstAdapter {
-
+	EntitiesDAO dao = null;
+	QueryEnvironment env = null;
 	
-	private DynamicTable resultEnvironment = new DynamicTable();
-	private QueryEnvironment env = new QueryEnvironment();
-	
-	private EntitiesDAO dao = null;
-	
-	public QueryEngine(EntitiesDAO d) {
-		super();
+	public StatementEngine(EntitiesDAO d, QueryEnvironment env) {
 		this.dao = d;
+		this.env = env;
 	}
 	
 	
 	
 	
-	@SuppressWarnings("unchecked")
-	public void caseAInsertMain(AInsertMain node) {
-		node.getEntitybody().apply(this);
-		
-		ArrayList<StatementProperty> propertyList = (ArrayList<StatementProperty>) env.getNodeVal(node.getEntitybody());
-		
-		for (int i = 0 ; i < propertyList.size() ; i++) {
-			Record r = new Record(node.getIdentifier().getText(), 
-					(String)propertyList.get(i).getAttribute(), 
-					(String)propertyList.get(i).getValue());
-			dao.put(r);
-		}
-		
-	}
 	
-	
-	public void caseAQueryMain(AQueryMain node) {
-		node.getQuery().apply(this);
-		//System.out.println(this.resultEnvironment);
-	}
-	
-	
-
-	public void caseASimpleQuery(ASimpleQuery node) {
-		//Valuto il body
-		node.getBody().apply(this);
-	}
-	
-	
-	
-	public void caseASingleBody(ASingleBody node) {
-		
-		//(_ : _, ...)
-		System.out.println("QueryEngine.caseASingleBody()");
-		
-		
-		node.getEntitypattern().apply(new StatementEngine(dao, env));
-		
-		
-		StatementBody stmtBody = (StatementBody) env.getNodeVal(node.getEntitypattern());
-		
-		System.out.println(stmtBody);
-		
-		
-		/////////////////////////////////////////////////
-		//EntitiesArrayList matchingEntities = new EntitiesArrayList();
-		
-		for (int i = 0 ; i < stmtBody.getProperties().size() ; i++) {
-			System.out.println(i);
-			Object attribute = stmtBody.getProperties().get(i).getAttributeObject();
-			Object value = stmtBody.getProperties().get(i).getValueObject();
-			
-			//QueryRecordTable matchingRecords = new QueryRecordTable(entity, attribute, value);
-			QueryRecordMatrix matchingRecords = new QueryRecordMatrix(dao, stmtBody.getEntityObject(), attribute, value);
-			//resultTable.process(matchingRecords);
-		
-			resultEnvironment.join(matchingRecords);
-
-		}
-		
-		//env.setNodeVal(node, matchingEntities);
-		////////////////////////////////////////////////////////////////////////
-		System.out.println(resultEnvironment);
-		
-		
-		//EntityFinder entityF = (EntityFinder) env.getNodeVal(node.getEntitypattern());
-		//entityF.getMatchingEntities();
-		//System.out.println(entityF);
-	}	
-	
-	public void caseAListBody(AListBody node) {
-		
-		//(_ : _, ...), (_ : _, ...), ...
-		
-		node.getEntitypattern().apply(this);
-		
-		//EntityFinder entityF = (EntityFinder) env.getNodeVal(node.getEntitypattern());
-		
-		node.getEntitypattern().apply(this);
-		
-		
-		
-		
-	}	
-		
-	/*
-	@SuppressWarnings("unchecked")
 	public void caseAEntitypattern(AEntitypattern node) {
 		System.out.println("QueryEngine.caseAEntitypattern()");
 
@@ -132,34 +45,23 @@ public class QueryEngine extends DepthFirstAdapter {
 		Object entity = env.getNodeVal(node.getEntitytype());
 
 		//Ottengo la lista delle proprietà che deve avere
-		ArrayList<StatementProperty> propertyList = (ArrayList<StatementProperty>) env.getNodeVal(node.getEntitybody());
+		StatementPropertyList propertyList = (StatementPropertyList) env.getNodeVal(node.getEntitybody());
 		
-		EntitiesArrayList matchingEntities = new EntitiesArrayList();
-		
-		for (int i = 0 ; i < propertyList.size() ; i++) {
-			Object attribute = propertyList.get(i).getAttribute();
-			Object value = propertyList.get(i).getValue();
-			
-			//QueryRecordTable matchingRecords = new QueryRecordTable(entity, attribute, value);
-			QueryRecordMatrix matchingRecords = new QueryRecordMatrix(dao, entity, attribute, value);
-			//resultTable.process(matchingRecords);
-			
-			resultEnvironment.join(matchingRecords);
-
-		}
-		
-		env.setNodeVal(node, matchingEntities);
+		env.setNodeVal(node, new StatementBody(entity, propertyList));
 		
 
 		
-	}		
-	/*
+	}	
+	
+	
+	
+	
+	
 	
 	public void caseAEntitybody(AEntitybody node) {
 		System.out.println("QueryEngine.caseAEntitybody()");
 		
 		node.getAttributes().apply(this);
-		
 		env.setNodeVal(node, env.getNodeVal(node.getAttributes()));
 
 	}
@@ -176,20 +78,20 @@ public class QueryEngine extends DepthFirstAdapter {
 		StatementProperty p = (StatementProperty) env.getNodeVal(node.getAttribute());
 		
 		
-		ArrayList<StatementProperty> list = new ArrayList<StatementProperty>();
+		StatementPropertyList list = new StatementPropertyList();
 		list.add(p);
 		env.setNodeVal(node, list);
 
 		
 	}
 	
-	@SuppressWarnings("unchecked")
+
 	public void caseAListAttributes(AListAttributes node) {
 		
 		System.out.println("QueryEngine.caseAListAttributes()");
 		node.getList().apply(this);
 		
-		ArrayList<StatementProperty> list = (ArrayList<StatementProperty>) env.getNodeVal(node.getList());
+		StatementPropertyList list = (StatementPropertyList) env.getNodeVal(node.getList());
 		
 		node.getAttribute().apply(this);
 		
@@ -318,6 +220,6 @@ public class QueryEngine extends DepthFirstAdapter {
 		env.setNodeVal(node, node.getIdentifier().getText());
 		
 	}
-	*/
+	
 	
 }
