@@ -13,7 +13,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import entitiesdb.dao.JEDao;
 import entitiesdb.types.Record;
 
 public class Delete extends JPanel {
@@ -107,10 +106,12 @@ public class Delete extends JPanel {
             public void actionPerformed(ActionEvent e) {
             	String ename = enamedelete.getText();
             	
-            	JEDao.deleteAttribute(new Record(ename, null, null));
-            	
-                String testo = "You have deleted an entity called "+ename;
-               
+            	//JEDao.deleteAttribute(new Record(ename, null, null));
+            	String testo = "";
+            	if (MainGUI.dao.deleteEntity(ename))
+            		testo = "You have deleted an entity called "+ename;
+            	else
+            		testo = "The entity doesn't exist";
                 text.setText(testo);
             }
         });
@@ -122,10 +123,11 @@ public class Delete extends JPanel {
             	String aname = attributename.getText();
             	String avalue= attributevalue.getText();
             	
-            	JEDao.deleteAttribute(new Record(ename, aname, avalue));
-            	
-                String testo = "You have deleted an attribute called "+aname+" with value "+avalue+" for the entity "+ename;
-               
+            	String testo = "";
+            	if (MainGUI.dao.deleteRecord(new Record(ename, aname, avalue)))
+            		testo = "You have deleted an attribute called "+aname+" with value "+avalue+" for the entity "+ename;
+            	else
+            		testo = "The attribute doesn't exist";
                 text.setText(testo);
             }
         });

@@ -1,8 +1,13 @@
 package entitiesdb.main;
 
 
+import java.io.File;
 import java.util.Collection;
-import entitiesdb.dao.JEDao;
+
+import entitiesdb.dao.EntitiesDAO;
+import entitiesdb.dao.EntitiesIdStore.EntityIdsList;
+import entitiesdb.dao.RecordsStore.RecordsList;
+import entitiesdb.types.EntityId;
 import entitiesdb.types.Record;
 
 public class Main {
@@ -15,10 +20,7 @@ public class Main {
 
 		
 		try {
-			JEDao.open();
-			JEDao dao = JEDao.getInstance();
-			
-
+		
 			Record [] storeList = {
 					new Record("I1", "name", "'John'"),
 					new Record("I1", "works", "H1"),
@@ -41,24 +43,36 @@ public class Main {
 					new Record("TRC", "name", "'Trento'"),
 					new Record("TRC", "locatedIn", "TR"),
 					new Record("TRC", "country", "IT")
-			};
+			};			
+			
+			
+			EntitiesDAO dao = new EntitiesDAO(new File("db/"));			
+			
 
 			if (dao.isEmpty()) {
 				for (int i = 0 ; i < storeList.length ; i++)
-					JEDao.storeAttribute(storeList[i]);
+					dao.put(storeList[i]);
 			}
 			
+
+			EntityIdsList ids = dao.getAllEntities();
+			for (EntityId r : ids) {
+				System.out.println(r);
+			}
+			System.out.print("\n\n\n");	
 			
-			System.out.println("Contenuto completo:");
-			Collection<? extends Record> records;
-			records = JEDao.getRecords();
+			
+			
+			RecordsList records = dao.getAllRecords();
 			for (Record r : records) {
 				System.out.println(r);
 			}
-			System.out.print("\n\n\n");
-
+			System.out.print("\n\n\n");	
 			
-			JEDao.close();
+			
+			dao.close();
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

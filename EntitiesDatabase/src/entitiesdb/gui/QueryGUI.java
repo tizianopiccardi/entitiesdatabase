@@ -15,8 +15,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import entitiesdb.dao.DaoException;
-import entitiesdb.dao.JEDao;
 import entitiesdb.types.*;
 
 public class QueryGUI extends JPanel {
@@ -89,7 +87,7 @@ public class QueryGUI extends JPanel {
     private void dumpDb() {        
         text.setText("");
 		Collection<? extends Record> records;
-		records = JEDao.getInstance().getRecords();
+		records = MainGUI.dao.getAllRecords();
 		for (Record r : records) {
 			text.append(r + "\n"); 
 		}

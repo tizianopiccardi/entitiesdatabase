@@ -5,6 +5,10 @@ import java.io.File;
 import com.sleepycat.je.Environment;
 import com.sleepycat.je.EnvironmentConfig;
 
+import entitiesdb.dao.EntitiesIdStore.EntityIdsList;
+import entitiesdb.dao.RecordsStore.RecordsList;
+import entitiesdb.types.Record;
+
 public class EntitiesDAO {
 
 	
@@ -24,24 +28,52 @@ public class EntitiesDAO {
 	
 	
 	
+	public boolean deleteEntity(String id) {
+		return idStore.delete(id);
+	}
 	
-	
+	public boolean deleteRecord(Record r) {
+		return recordStore.delete(r);
+	}	
 	
 	public boolean addEntity(String id) {
 		return idStore.addEntity(id);
 	}
 	
-	
 	public boolean entityExists(String id) {
 		return idStore.exists(id);
 	}	
 	
+	public boolean isEmpty() {
+		return (recordStore.count() == 0 && idStore.count() == 0) ? true : false;
+	}
 	
 	
+	public EntityIdsList getAllEntities() {
+		return idStore.getAllEntities();
+	}
 	
 	
+	public RecordsList getAllRecords(){
+		return recordStore.getAllRecords();
+	}
 	
+	public RecordsList getRecords(String e, String a, String v){
+		return recordStore.getRecords(e, a, v);
+	}
 	
+	public RecordsList getRecords(Record r){
+		return recordStore.getRecords(r.getEntityId(), r.getAttribute(), r.getValue());
+	}
+	
+	public boolean put(String e, String a, String v) {
+		return this.put(new Record(e,a,v));
+	}
+	
+	public boolean put(Record r) {
+		if (!idStore.exists(r.getEntityId())) idStore.addEntity(r.getEntityId());
+		return recordStore.put(r);
+	}	
 	
 	
 	public void close() {

@@ -2,6 +2,7 @@ package entitiesdb.query.evaluators;
 
 import java.util.ArrayList;
 
+import entitiesdb.dao.EntitiesDAO;
 import entitiesdb.language.analysis.DepthFirstAdapter;
 import entitiesdb.language.node.*;
 import entitiesdb.query.EntitiesArrayList;
@@ -18,11 +19,13 @@ public class QueryEngine extends DepthFirstAdapter {
 
 	
 	private DynamicTable resultEnvironment = new DynamicTable();
-
 	private QueryEnvironment env = new QueryEnvironment();
 	
-	public QueryEngine() {
+	private EntitiesDAO dao = null;
+	
+	public QueryEngine(EntitiesDAO d) {
 		super();
+		this.dao = d;
 	}
 	
 	
@@ -89,88 +92,16 @@ public class QueryEngine extends DepthFirstAdapter {
 			Object value = propertyList.get(i).getValue();
 			
 			//QueryRecordTable matchingRecords = new QueryRecordTable(entity, attribute, value);
-			QueryRecordMatrix matchingRecords = new QueryRecordMatrix(entity, attribute, value);
+			QueryRecordMatrix matchingRecords = new QueryRecordMatrix(dao, entity, attribute, value);
 			//resultTable.process(matchingRecords);
 			
 			resultEnvironment.join(matchingRecords);
-			
-			//matchingEntities.doIntersection(matchingRecords.getEntitiesSet());
-			//System.out.println(matchingEntities);
+
 		}
 		
 		env.setNodeVal(node, matchingEntities);
 		
-		//System.out.println(matchingEntities);
-		
-		//System.out.println(resultTable);
-		/*if (entity instanceof String)
-			System.out.println(entity);*/
-		
-		
-		
-		
-		
-		
-		/*
-		QueryEntityElement entityElement = (QueryEntityElement) env.getNodeVal(node.getEntitytype());
-		ArrayList<QueryProperty> attributeList = (ArrayList<QueryProperty>) env.getNodeVal(node.getEntitybody());
-		
-		
-		EntityId entity = null;
-		if (entityElement.getType()==QueryElementTypes.IDE)
-			entity = (EntityId) entityElement.getEntity();
-		
-		//System.out.println("h: " +entity);
-		//System.out.println("b: " +attributeList);
-		
-		EntitiesArrayList matchingEntities = new EntitiesArrayList();
-		
-		for (int i = 0 ; i < attributeList.size() ; i ++) {
-			QueryProperty property = attributeList.get(i);
-			
-			QueryAttributeElement attributeElement = (QueryAttributeElement) property.getAttribute();
-			Attribute attribute = null;
-			if (property.getAttribute().getType() == QueryElementTypes.IDE)
-				attribute = (Attribute) attributeElement.getAttribute();
-			
-			
-			
-			QueryValueElement valueElement =  (QueryValueElement) property.getValue();
-			Value value = null;
-			if (property.getValue().getType() == QueryElementTypes.STRING ||
-					property.getValue().getType() == QueryElementTypes.IDE)
-				value = (Value) valueElement.getValue();
-			
-			//System.out.println(entity + " " + attribute+  " "+value);
-			//System.out.println(property.getValue());
-			//new Record(entity, attribute, value);
-			//);
-			
-			/*ArrayList<Record> records = JEDao.getRecords(new Record(entity, attribute, value));
-			
-			for (int j = 0 ; j < records.size() ; j++) {
-				if (!matchingEntities.contains(records.get(j).getEntityId())) {
-					matchingEntities.add(records.get(j).getEntityId());
-				}
-			}*/
-		//	EntitiesArrayList entities = JEDao.getEntities(new Record(entity.getId(), attribute.getLabel(), value.getValue(),ValueType.ATOM));
-			
-			
-			//matchingEntities.addAll(entities);
-			
-		//	matchingEntities.retainAll(entities);
-			
-			//System.out.println(new Record(entity, attribute, value));
-			
-			//System.out.println(entities);
-		/*}
-		System.out.println(matchingEntities);
-		/*EntityId e = (EntityId) env.getNodeVal(node.getEntitytype());
-		ArrayList<Property> b = (ArrayList<Property>) env.getNodeVal(node.getEntitybody());
-		
-		EntityFinder eF = new EntityFinder(e, b);
 
-		env.setNodeVal(node, eF);*/
 		
 	}		
 	

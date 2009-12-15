@@ -14,9 +14,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import entitiesdb.dao.DaoException;
-import entitiesdb.dao.JEDao;
-
 public class AddAttribute extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -96,29 +93,25 @@ public class AddAttribute extends JPanel {
 
 
         // Blocking for now...
-        run.addActionListener(new ActionListener() {
+		run.addActionListener(new ActionListener() {
 
-            public void actionPerformed(ActionEvent e) {
-            	String ename = entityname.getText();
-            	String aname = attributename.getText();
-            	String avalue= attributevalue.getText();
-            	
-                String testo = "";
-               
-                
-                try {
-        			if (JEDao.storeAttribute(ename, aname, avalue))
-        				testo = "You have created an attribute called "+aname+" with value "+avalue+" for the entity "+ename;
-        			else 
-        				testo ="Error... Are you sure that this attribute doesn't exist?";
-        		} catch (DaoException ex) {
-        			// TODO Auto-generated catch block
-        			ex.printStackTrace();
-        		}   
-                
-                text.setText(testo);
-            }
-        });
-    }
+			public void actionPerformed(ActionEvent e) {
+				String ename = entityname.getText();
+				String aname = attributename.getText();
+				String avalue = attributevalue.getText();
+
+				String testo = "";
+
+				if (MainGUI.dao.put(ename, aname, avalue))
+					testo = "You have created an attribute called " + aname
+							+ " with value " + avalue + " for the entity "
+							+ ename;
+				else
+					testo = "Error... Are you sure that this attribute doesn't exist?";
+
+				text.setText(testo);
+			}
+		});
+	}
 
 }
