@@ -37,9 +37,11 @@ public class QueryEngine extends DepthFirstAdapter {
 	
 	@SuppressWarnings("unchecked")
 	public void caseAInsertMain(AInsertMain node) {
-		node.getEntitybody().apply(this);
+		node.getEntitybody().apply(new StatementEngine(dao, env));
 		
 		ArrayList<StatementProperty> propertyList = (ArrayList<StatementProperty>) env.getNodeVal(node.getEntitybody());
+		
+		dao.addEntity(node.getIdentifier().getText());
 		
 		for (int i = 0 ; i < propertyList.size() ; i++) {
 			Record r = new Record(node.getIdentifier().getText(), 
@@ -83,7 +85,7 @@ public class QueryEngine extends DepthFirstAdapter {
 		//EntitiesArrayList matchingEntities = new EntitiesArrayList();
 		
 		for (int i = 0 ; i < stmtBody.getProperties().size() ; i++) {
-			System.out.println(i);
+			//System.out.println(i);
 			Object attribute = stmtBody.getProperties().get(i).getAttributeObject();
 			Object value = stmtBody.getProperties().get(i).getValueObject();
 			
@@ -99,7 +101,7 @@ public class QueryEngine extends DepthFirstAdapter {
 		////////////////////////////////////////////////////////////////////////
 		System.out.println(resultEnvironment);
 		
-		
+		System.out.println(dao);
 		//EntityFinder entityF = (EntityFinder) env.getNodeVal(node.getEntitypattern());
 		//entityF.getMatchingEntities();
 		//System.out.println(entityF);

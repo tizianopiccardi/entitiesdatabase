@@ -68,6 +68,13 @@ public class EntitiesIdStore {
 	}
 
 	
+	public String toString() {
+		String out = "Entities: ";
+		for (EntityId eId: this.getAllEntities())
+			out+= eId.getId()+" | ";
+		return out+"\n";
+	}
+	
 	
 	//definisco cosa restituiscono le query
 	public class EntityIdsList extends ArrayList<EntityId> {

@@ -119,4 +119,12 @@ public class RecordsStore {
 		private static final long serialVersionUID = -2666202436382791323L;
 	}
 	
+	
+	public String toString() {
+		String out = "Records\n";
+		for (Record eId: this.getAllRecords())
+			out+= eId.toString()+"\n";
+		return out+"\n";
+	}
+	
 }
