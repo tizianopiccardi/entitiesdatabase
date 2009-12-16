@@ -89,4 +89,11 @@ public class EntitiesDAO {
 	}
 	
 	
+	
+	public String toString() {
+		return "\nDATABASE DUMP:\n\n"+ idStore.toString() +
+				"========\n"+ recordStore.toString()+"========";
+	}
+	
+	
 }

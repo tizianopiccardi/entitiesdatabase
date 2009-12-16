@@ -3,7 +3,6 @@ package entitiesdb.gui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Collection;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -13,8 +12,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
-
-import entitiesdb.types.Record;
 
 public class QueryGUI extends JPanel {
 
@@ -84,13 +81,6 @@ public class QueryGUI extends JPanel {
     }
     
     private void dumpDb() {        
-        text.setText("");
-		Collection<? extends Record> records;
-		records = MainGUI.dao.getAllRecords();
-		for (Record r : records) {
-			text.append(r + "\n"); 
-		}
-
-          
+        text.setText(MainGUI.dao.toString());
     }
 }

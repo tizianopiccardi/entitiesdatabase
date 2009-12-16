@@ -23,6 +23,9 @@ public class DynamicTable {
 	public void join(QueryRecordMatrix recordsMatrix) {
 		
 
+		new ArrayList<String[]>();
+		
+		
 		if (empty) {
 			//bla bla
 			this.empty = false;
