@@ -16,9 +16,23 @@ public class QueryRecordMatrix extends ArrayList<String[]>{
 
 
 	//Area certa
-	ArrayList<VarsBounder> varBounder = new ArrayList<VarsBounder>();
+	VarsBounderList varBounder = new VarsBounderList();
 	EntitiesDAO dao = null;
 	
+	ResultSetInfo resultSetInfo = new ResultSetInfo();
+	
+	public ResultSetInfo getResultSetInfo() {
+		return resultSetInfo;
+	}
+
+
+
+	public void setResultSetInfo(ResultSetInfo resultSetInfo) {
+		this.resultSetInfo = resultSetInfo;
+	}
+
+
+
 	public QueryRecordMatrix(EntitiesDAO dao, Object e, Object a, Object v) {
 		this.dao = dao;
 		
@@ -66,6 +80,8 @@ public class QueryRecordMatrix extends ArrayList<String[]>{
 			recArray[1] = r.getAttribute();
 			recArray[2] = r.getValue();
 			this.add(recArray);
+			//l'entity
+			this.getResultSetInfo().add(recArray[0]);
 		}
 	}
 	
@@ -73,107 +89,13 @@ public class QueryRecordMatrix extends ArrayList<String[]>{
 	public String getEntity(int pos) {
 		return this.get(pos)[0];
 	}
+
 	
-	/*
-	
-	public String getIdBound() {
-		return idBound;
-	}
-
-
-	public void setIdBound(String idBound) {
-		this.boundCount++;
-		this.idBound = idBound;
-	}
-
-
-	public String getAttributeBound() {
-		return attributeBound;
-	}
-
-
-	public void setAttributeBound(String attributeBound) {
-		this.boundCount++;
-		this.attributeBound = attributeBound;
-	}
-
-
-	public String getValueBound() {
-		return valueBound;
-	}
-
-
-	public void setValueBound(String valueBound) {
-		this.boundCount++;
-		this.valueBound = valueBound;
-	}*/
-	
-	
-	
-	/*
-	
-	public ArrayList<String> getEntitiesSet() {
-		return entitiesSet;
-	}
-
-
-	public void setEntitiesSet(ArrayList<String> entitiesSet) {
-		this.entitiesSet = entitiesSet;
-	}*/
-
-/*
-	public String toString() {
-		
-
-		String out = "Id bound: " + idBound + " | Attribute Bound: "+ attributeBound + " | Value Bound: " +valueBound +"\n";
-
-		out += "Entity presenti: "+entitiesSet+"\n";
-		
-		for (int i = 0 ; i < this.size() ; i++)
-			out+= this.get(i) + "\n";
-		
-		out+="-----------";
-		
-		return out;
-	}*/
-	
-	/*
-	public String [][] getMatrix() {
-		
-		String [][] out = new String[size()][3]; 
-		for (int i = 0 ; i < size() ; i ++) {
-			out[i][0] = this.get(i).getEntityId();
-			out[i][1] = this.get(i).getAttribute();
-			out[i][2] = this.get(i).getValue();
-		}
-		
-		return out;
-	}*/
-	/*
-	public VarsBounder[] getBounds() {
-		VarsBounder [] out = new VarsBounder[boundCount];
-		
-		int i = 0; 
-		if (this.idBound != null){
-			out[i] = new VarsBounder(this.idBound, 0);
-			i++;
-		}
-		if (this.attributeBound != null){
-			out[i] = new VarsBounder(this.valueBound, 1);
-			i++;
-		}
-		if (this.valueBound != null){
-			out[i] = new VarsBounder(this.valueBound, 2);
-			i++;
-		}
-		return out;
-	}*/
-	
-	
-	public ArrayList<VarsBounder> getBounds() {
+	public VarsBounderList getBounds() {
 		return this.varBounder;
 	}
 	
+
 	public class VarsBounder {
 		
 		public int index;
@@ -184,8 +106,15 @@ public class QueryRecordMatrix extends ArrayList<String[]>{
 			name = n;
 		}
 		
+		
+	}
+	public class VarsBounderList extends ArrayList<VarsBounder> {
+		private static final long serialVersionUID = 9165442400150274840L;
+		public void cleanEntityBound() {
+			if (this.get(0).index==0)//entity is bounded
+				this.remove(0);
+		}
 	}
 	
-	
-	
 }
+

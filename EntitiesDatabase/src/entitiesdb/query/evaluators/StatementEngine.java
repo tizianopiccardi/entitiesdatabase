@@ -36,7 +36,7 @@ public class StatementEngine extends DepthFirstAdapter{
 	
 	
 	public void caseAEntitypattern(AEntitypattern node) {
-		System.out.println("QueryEngine.caseAEntitypattern()");
+		//System.out.println("QueryEngine.caseAEntitypattern()");
 
 		node.getEntitytype().apply(this);
 		node.getEntitybody().apply(this);
@@ -59,7 +59,7 @@ public class StatementEngine extends DepthFirstAdapter{
 	
 	
 	public void caseAEntitybody(AEntitybody node) {
-		System.out.println("QueryEngine.caseAEntitybody()");
+		//System.out.println("QueryEngine.caseAEntitybody()");
 		
 		node.getAttributes().apply(this);
 		env.setNodeVal(node, env.getNodeVal(node.getAttributes()));
@@ -71,7 +71,7 @@ public class StatementEngine extends DepthFirstAdapter{
 	
 	public void caseASingleAttributes(ASingleAttributes node) {
 		
-		System.out.println("QueryEngine.caseASingleAttributes()");
+		//System.out.println("QueryEngine.caseASingleAttributes()");
 		
 		node.getAttribute().apply(this);
 		
@@ -88,7 +88,7 @@ public class StatementEngine extends DepthFirstAdapter{
 
 	public void caseAListAttributes(AListAttributes node) {
 		
-		System.out.println("QueryEngine.caseAListAttributes()");
+		//System.out.println("QueryEngine.caseAListAttributes()");
 		node.getList().apply(this);
 		
 		StatementPropertyList list = (StatementPropertyList) env.getNodeVal(node.getList());
@@ -106,16 +106,16 @@ public class StatementEngine extends DepthFirstAdapter{
 	
 	public void caseAAttribute(AAttribute node) {
 		
-		System.out.println("QueryEngine.caseAAttribute()");
+		//System.out.println("QueryEngine.caseAAttribute()");
 		node.getAttributetype().apply(this);
 		node.getValue().apply(this);
 		
 		Object a = env.getNodeVal(node.getAttributetype());
 		Object v = env.getNodeVal(node.getValue());
-		//System.out.println("Value: " +v);
+		////System.out.println("Value: " +v);
 		
 		env.setNodeVal(node, new StatementProperty(a, v));
-		//System.out.println("Attribute: " + a);
+		////System.out.println("Attribute: " + a);
 		
 		
 	}	
@@ -126,13 +126,13 @@ public class StatementEngine extends DepthFirstAdapter{
 		
 		env.setNodeVal(node, node.getIdentifier().getText());
 		
-		System.out.println("QueryEngine.caseAIdeAttributetype()");
+		//System.out.println("QueryEngine.caseAIdeAttributetype()");
 		
 	}	
 	
 	public void caseAVariableAttributetype(AVariableAttributetype node) {
 		
-		System.out.println("QueryEngine.caseAVariableAttributetype()");
+		//System.out.println("QueryEngine.caseAVariableAttributetype()");
 		
 		String e = node.getVariable().getText();
 		env.setNodeVal(node, new Variable(e));
@@ -142,7 +142,7 @@ public class StatementEngine extends DepthFirstAdapter{
 	
 	public void caseAEntityValue(AEntityValue node) {
 		
-		System.out.println("QueryEngine.caseAEntityValue()");
+		//System.out.println("QueryEngine.caseAEntityValue()");
 		node.getOptdefinition().apply(this);
 		node.getIdentifier().apply(this);
 		
@@ -162,7 +162,7 @@ public class StatementEngine extends DepthFirstAdapter{
 	
 	public void caseAStringValue(AStringValue node) {
 		
-		System.out.println("QueryEngine.caseAStringValue()");
+		//System.out.println("QueryEngine.caseAStringValue()");
 
 		env.setNodeVal(node, node.getString().getText());
 		
@@ -172,7 +172,7 @@ public class StatementEngine extends DepthFirstAdapter{
 
 	public void caseAVariableValue(AVariableValue node) {
 		
-		System.out.println("QueryEngine.AVariableValue()");
+		//System.out.println("QueryEngine.AVariableValue()");
 		
 		node.getOptdefinition().apply(this);
 		
@@ -199,7 +199,7 @@ public class StatementEngine extends DepthFirstAdapter{
 	
 	public void caseABodyOptdefinition(ABodyOptdefinition node) {
 		
-		System.out.println("QueryEngine.caseABodyOptdefinition()");
+		//System.out.println("QueryEngine.caseABodyOptdefinition()");
 		
 		
 	}		
@@ -207,7 +207,7 @@ public class StatementEngine extends DepthFirstAdapter{
 	
 	public void caseAVariableEntitytype(AVariableEntitytype node) {
 		
-		System.out.println("QueryEngine.caseAVariableEntitytype()");
+		//System.out.println("QueryEngine.caseAVariableEntitytype()");
 		String e = node.getVariable().getText();
 		env.setNodeVal(node, new Variable(e));
 		
@@ -215,7 +215,7 @@ public class StatementEngine extends DepthFirstAdapter{
 	
 	public void caseAIdeEntitytype(AIdeEntitytype node) {
 		
-		System.out.println("QueryEngine.caseAIdeEntitytype()");
+		//System.out.println("QueryEngine.caseAIdeEntitytype()");
 		
 		env.setNodeVal(node, node.getIdentifier().getText());
 		
