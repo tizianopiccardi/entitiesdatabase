@@ -7,6 +7,7 @@ import entitiesdb.language.node.ABodyOptdefinition;
 import entitiesdb.language.node.AEntityValue;
 import entitiesdb.language.node.AEntitybody;
 import entitiesdb.language.node.AEntitypattern;
+import entitiesdb.language.node.AHead;
 import entitiesdb.language.node.AIdeAttributetype;
 import entitiesdb.language.node.AIdeEntitytype;
 import entitiesdb.language.node.AListAttributes;
@@ -33,6 +34,19 @@ public class StatementEngine extends DepthFirstAdapter{
 	
 	
 	
+	
+	public void caseAHead(AHead node) {
+		node.getEntitytype().apply(this);
+		node.getEntitybody().apply(this);
+		
+		//Ottengo il riferimento al entity
+		Object entity = env.getNodeVal(node.getEntitytype());
+
+		//Ottengo la lista delle proprietà che deve avere
+		StatementPropertyList propertyList = (StatementPropertyList) env.getNodeVal(node.getEntitybody());
+		
+		env.setNodeVal(node, new StatementBody(entity, propertyList));
+	}	
 	
 	
 	public void caseAEntitypattern(AEntitypattern node) {
