@@ -1,10 +1,9 @@
-package entitiesdb.query.process;
+package entitiesdb.query.tables;
 
 import java.util.Enumeration;
 
-import entitiesdb.query.tables.QueryRecordMatrix;
-import entitiesdb.query.tables.ResultSetInfo;
 import entitiesdb.query.tables.QueryRecordMatrix.VarsBounderList;
+
 
 public class BufferTable {
 
@@ -27,7 +26,7 @@ public class BufferTable {
 	String [][] table;
 	
 	//link: metadata.get("$x") -> 0
-	MetadataLinker metadata = new MetadataLinker();
+	Metadata metadata = new Metadata();
 	
 	ResultSetInfo rsInfo = new ResultSetInfo();
 	
@@ -50,7 +49,7 @@ public class BufferTable {
 		 */
 		for (int j = 0 ; j < cols ; j++) 
 			metadata.put(varBounds.get(j).name, j);
-		
+
 		/** Data
 		 * I2 | I2 TN 
 		 * JB | JB TRC 
@@ -73,7 +72,7 @@ public class BufferTable {
 	
 	public void merge(QueryRecordMatrix records) {
 		
-		this.checkDuplicateVar(records.getBounds());
+		//this.checkDuplicateVar(records.getBounds());
 		
 		int rows = getMatrixHeight(records.getResultSetInfo());
 		int cols = getMatrixCols(records.getBounds());
@@ -94,10 +93,10 @@ public class BufferTable {
 		
 		records.getBounds().cleanEntityBound();
 		//update metadata
-		for (int k = 0 ; k < records.getBounds().size() ; k++) {
+		for (int k = 0 ; k < records.getBounds().size() ; k++) 
 			this.metadata.put(records.getBounds().get(k).name, this.metadata.size());
 
-		}
+		
 		//if (true) return;
 		int rowCounter = 0;
 		rsInfo = new ResultSetInfo();
@@ -132,17 +131,13 @@ public class BufferTable {
 		this.index = newIndex;
 
 	}
-	
-	
-	private void checkDuplicateVar(VarsBounderList vbl) {
-		for (int i = 0; i < vbl.size() ; i++)
-			//non è l'entity (che si ripete) e non esiste
-			if (vbl.get(i).index!=0 && metadata.get(vbl.get(i).name)!=null)
-				throw new RuntimeException("Duplicate variable name: " + vbl.get(i).name);
-	}
-	
 
-	
+	/**
+	 * This function computes how many rows needs the new matrix.<br>
+	 * SUM [ if l.get(i).count==r[j] then (l[i].count * r[j].count) ]
+	 * @param rsI
+	 * @return
+	 */
 	private int getMatrixHeight(ResultSetInfo rsI) {
 		int rows = 0;
 	    Enumeration<String> keys = rsInfo.entityMap.keys();

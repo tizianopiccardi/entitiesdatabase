@@ -1,5 +1,7 @@
 package entitiesdb.query;
 
+import java.util.ArrayList;
+
 
 public class StatementProperty {
 
@@ -47,10 +49,7 @@ public class StatementProperty {
 		return "" + attribute + ":" + value + "";
 	}
 
-	
 
-	
-	
 }
 
 

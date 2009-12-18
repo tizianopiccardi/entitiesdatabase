@@ -32,7 +32,7 @@ public class LanguageTesting {
 		
 
 		
-		query = "$x(has_attribute:$y):- $x(lives: $y, works: $z) ";
+		query = "$x(has_attribute:$y):- $x(lives: $y, works:$z) ";
 		//query = ">ABC(p: 'fcdd', sdf: QWE, ds: 'ddfdf')";
 		
 		EntitiesDAO dao = new EntitiesDAO(new File("db/"));

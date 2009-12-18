@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import entitiesdb.dao.EntitiesDAO;
 import entitiesdb.language.analysis.DepthFirstAdapter;
+import entitiesdb.language.node.AHead;
 import entitiesdb.language.node.AInsertMain;
 import entitiesdb.language.node.AListBody;
 import entitiesdb.language.node.AQueryMain;
@@ -12,8 +13,7 @@ import entitiesdb.language.node.ASingleBody;
 import entitiesdb.query.QueryEnvironment;
 import entitiesdb.query.StatementBody;
 import entitiesdb.query.StatementProperty;
-import entitiesdb.query.process.BufferTable;
-import entitiesdb.query.tables.QueryRecordMatrix;
+import entitiesdb.query.tables.BufferTable;
 import entitiesdb.types.Record;
 
 
@@ -60,9 +60,17 @@ public class QueryEngine extends DepthFirstAdapter {
 	public void caseASimpleQuery(ASimpleQuery node) {
 		//Valuto il body
 		node.getBody().apply(this);
+		//env.setNodeVal(node, env.getNodeVal(node.getBody()));
+		BufferTable table = (BufferTable) env.getNodeVal(node.getBody());
+		
+		//
+		node.getHead().apply(new StatementEngine(dao, env));
+		
+		
+		System.out.println(env.getNodeVal(node.getBody()));
 	}
 	
-	
+
 	
 	public void caseASingleBody(ASingleBody node) {
 		
@@ -72,27 +80,12 @@ public class QueryEngine extends DepthFirstAdapter {
 		
 		node.getEntitypattern().apply(new StatementEngine(dao, env));
 		
-		
 		StatementBody stmtBody = (StatementBody) env.getNodeVal(node.getEntitypattern());
 
-		////////////////////////////////////////////////////////////////////////
-		//System.out.println(resultEnvironment);
-		Object attribute = stmtBody.getProperties().get(0).getAttributeObject();
-		Object value = stmtBody.getProperties().get(0).getValueObject();
-		QueryRecordMatrix matchingRecords = new QueryRecordMatrix(dao, stmtBody.getEntityObject(), attribute, value);
+		BufferTable table = BufferTablesManager.getNewTable(dao, stmtBody);
 		
-		
-		BufferTable table = new BufferTable(matchingRecords);
-		
-		for (int i = 1 ; i < stmtBody.getProperties().size() ; i++) {
-			attribute = stmtBody.getProperties().get(i).getAttributeObject();
-			value = stmtBody.getProperties().get(i).getValueObject();
-			matchingRecords = new QueryRecordMatrix(dao, stmtBody.getEntityObject(), attribute, value);
-
-			table.merge(matchingRecords);
-		}
-		
-		System.out.println(table);
+		env.setNodeVal(node, table);
+		//System.out.println(table);
 
 	}	
 	
@@ -100,9 +93,9 @@ public class QueryEngine extends DepthFirstAdapter {
 		
 		//(_ : _, ...), (_ : _, ...), ...
 		
-		node.getEntitypattern().apply(this);
+		node.getEntitypattern().apply(new StatementEngine(dao, env));
 
-		node.getEntitypattern().apply(this);
+		node.getBody().apply(this);
 		
 		
 		
