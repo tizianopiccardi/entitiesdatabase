@@ -19,6 +19,7 @@ public class BufferTable {
 	 * I1 |	I1	MI	MI
 	 * I3 |	I3	TO	TN
 	 * 
+	 * id: this.index
 	 */
 	
 	String [] index;
@@ -160,6 +161,18 @@ public class BufferTable {
 		return cols;
 	}
 	
+	
+	public String getEntity(int rowIndex) {		
+		return this.index[rowIndex];
+	}
+	
+	public String getField(int rowIndex, String rowName) {		
+		return table[rowIndex][metadata.get(rowName)];
+	}
+	
+	public int getRowsCount() {
+		return table.length;
+	}
 	
 	
 	public String toString() {

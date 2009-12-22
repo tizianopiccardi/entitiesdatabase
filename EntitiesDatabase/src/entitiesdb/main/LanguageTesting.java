@@ -31,8 +31,8 @@ public class LanguageTesting {
 		String query = "";
 		
 
-		
-		query = "$x(has_attribute:$y):- $x(lives: $y, works:$z) ";
+		//query = "$x(lives:$y, works:$z, alive: 'YES'):- $x(lives: $y, works:$z) ";
+		query = "$x(lives:$y, works:$z):- $x(lives: $y, works:$z) ";
 		//query = ">ABC(p: 'fcdd', sdf: QWE, ds: 'ddfdf')";
 		
 		EntitiesDAO dao = new EntitiesDAO(new File("db/"));

@@ -13,6 +13,9 @@ public class StatementBody {
 		entity = e;
 	}
 	
+	public StatementBody() {
+	}
+	
 	public StatementBody(Object e, ArrayList<StatementProperty> p) {
 		entity = e;
 		properties = p;

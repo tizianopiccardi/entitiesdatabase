@@ -1,6 +1,5 @@
 package entitiesdb.query;
 
-import java.util.ArrayList;
 
 
 public class StatementProperty {
@@ -8,6 +7,8 @@ public class StatementProperty {
 	Object attribute;
 	Object value;
 	
+	public StatementProperty() {
+	}
 
 	public StatementProperty(Object a, Object v) {
 		// TODO Auto-generated constructor stub
