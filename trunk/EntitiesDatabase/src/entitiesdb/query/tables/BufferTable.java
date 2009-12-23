@@ -1,10 +1,16 @@
 package entitiesdb.query.tables;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 
+import entitiesdb.query.conditions.Condition;
 import entitiesdb.query.tables.QueryRecordMatrix.VarsBounderList;
 
-
+/**
+ * This is a memory table that processes the resultSet
+ * @author Tiziano
+ *
+ */
 public class BufferTable {
 
 	/**
@@ -70,11 +76,12 @@ public class BufferTable {
 	
 	
 	
-	
+	/**
+	 * Merge this memory table with a new matrix gotten by query on the DB
+	 * @param records
+	 */
 	public void merge(QueryRecordMatrix records) {
-		
-		//this.checkDuplicateVar(records.getBounds());
-		
+
 		int rows = getMatrixHeight(records.getResultSetInfo());
 		int cols = getMatrixCols(records.getBounds());
 
@@ -98,7 +105,6 @@ public class BufferTable {
 			this.metadata.put(records.getBounds().get(k).name, this.metadata.size());
 
 		
-		//if (true) return;
 		int rowCounter = 0;
 		rsInfo = new ResultSetInfo();
 		for (int i = 0 ; i < table.length ; i ++) {
@@ -150,29 +156,108 @@ public class BufferTable {
 		return rows;
 	}
 	
+	
+	
+	/**
+	 * Computes how many columns needs the new table (after the join)
+	 * @param varB
+	 * @return
+	 */
 	private int getMatrixCols(VarsBounderList varB) {
 		int cols = this.metadata.size();
 		
 		for (int i = 0 ; i < varB.size() ; i ++)
-			//se l'oggetto non esiste aggiungo una colonna
+			//if the object doesn't exist I add a column
 			if (this.metadata.get(varB.get(i).name)==null)
 				cols++;
 		
 		return cols;
 	}
 	
-	
+	/**
+	 * Get the name of the entity at the passed row
+	 * @param rowIndex
+	 * @return
+	 */
 	public String getEntity(int rowIndex) {		
 		return this.index[rowIndex];
 	}
 	
+	/**
+	 * Get a String that is the value of a variable at a specified row
+	 * @param rowIndex
+	 * @param rowName
+	 * @return
+	 */
 	public String getField(int rowIndex, String rowName) {		
 		return table[rowIndex][metadata.get(rowName)];
 	}
 	
+	/**
+	 * Number of rows in the table
+	 * @return
+	 */
 	public int getRowsCount() {
 		return table.length;
 	}
+	
+	/**
+	 * Number of columns in the table
+	 * @return
+	 */
+	public int getColsCount() {
+		return metadata.size();
+	}
+	
+	
+	/**
+	 * This method refresh the table with the passed conditions
+	 * @param cList
+	 */
+	public void applyConditions(ArrayList<Condition> cList) {
+		String [][] newTable = new String[getRowsCount()][getColsCount()];
+		String [] newIndex = new String[getRowsCount()];
+		
+		int rowCounter = 0;
+		for (int i = 0 ; i < table.length ; i ++)
+			if (conditionsRespected(table[i], cList)) {
+				System.arraycopy(table[i], 0, newTable[rowCounter], 0, table[i].length);
+				newIndex[rowCounter]=index[i];
+				rowCounter++;
+			}
+		
+		
+		/**
+		 * Now the table is clean and I need to resize it
+		 */
+		String [][] resultTable = new String[rowCounter][getColsCount()];
+		String [] resultIndex = new String[getRowsCount()];
+		
+		System.arraycopy (newTable,0,resultTable,0,rowCounter);
+		System.arraycopy (newIndex,0,resultIndex,0,rowCounter);
+
+		this.table = resultTable;
+		this.index = resultIndex;
+		
+	}
+	
+	/**
+	 * Check if this row respects the conditions
+	 * @param row
+	 * @param cList
+	 * @return
+	 */
+	private boolean conditionsRespected(String [] row, ArrayList<Condition> cList) {
+		
+		boolean out = true;
+		for (int i = 0 ; i < cList.size() ; i++) {
+			Condition c = cList.get(i);
+			out &= row[metadata.get(c.left)].equals(c.right.toString());
+		}
+		
+		return out;
+	}
+	
 	
 	
 	public String toString() {
