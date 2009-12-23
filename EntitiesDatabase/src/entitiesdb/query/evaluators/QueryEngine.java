@@ -5,15 +5,19 @@ import java.util.ArrayList;
 import entitiesdb.dao.EntitiesDAO;
 import entitiesdb.language.analysis.DepthFirstAdapter;
 import entitiesdb.language.node.AComplexQuery;
+import entitiesdb.language.node.AEqualCondition;
 import entitiesdb.language.node.AInsertMain;
 import entitiesdb.language.node.AListBody;
+import entitiesdb.language.node.AListConditions;
 import entitiesdb.language.node.AQueryMain;
 import entitiesdb.language.node.ASimpleQuery;
 import entitiesdb.language.node.ASingleBody;
+import entitiesdb.language.node.ASingleConditions;
 import entitiesdb.query.QueryEnvironment;
 import entitiesdb.query.ResultSet;
 import entitiesdb.query.StatementBody;
 import entitiesdb.query.StatementProperty;
+import entitiesdb.query.conditions.Condition;
 import entitiesdb.query.tables.BufferTable;
 import entitiesdb.types.Record;
 
@@ -75,14 +79,23 @@ public class QueryEngine extends DepthFirstAdapter {
 
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void caseAComplexQuery(AComplexQuery node) {
 		
 		
-		node.getConditions().apply(this);
+
 		
 		//It's the same of caseASimpleQuery
 		node.getBody().apply(this);
 		BufferTable table = (BufferTable) env.getNodeVal(node.getBody());
+		
+		
+		//Here I have the table with no condition, so let's apply them :)
+		node.getConditions().apply(this);
+		
+		table.applyConditions((ArrayList<Condition>) env.getNodeVal(node.getConditions()));
+		
+		
 		node.getHead().apply(new StatementEngine(dao, env));
 		StatementBody head = (StatementBody) env.getNodeVal(node.getHead());
 		env.setNodeVal(node, new ResultSet(table, head));
@@ -92,9 +105,7 @@ public class QueryEngine extends DepthFirstAdapter {
 	public void caseASingleBody(ASingleBody node) {
 		
 		//(_ : _, ...)
-		//System.out.println("QueryEngine.caseASingleBody()");
-		
-		
+	
 		node.getEntitypattern().apply(new StatementEngine(dao, env));
 		
 		StatementBody stmtBody = (StatementBody) env.getNodeVal(node.getEntitypattern());
@@ -102,7 +113,7 @@ public class QueryEngine extends DepthFirstAdapter {
 		BufferTable table = BufferTablesManager.getNewTable(dao, stmtBody);
 		
 		env.setNodeVal(node, table);
-		//System.out.println(table);
+
 
 	}	
 	
@@ -113,10 +124,54 @@ public class QueryEngine extends DepthFirstAdapter {
 		node.getEntitypattern().apply(new StatementEngine(dao, env));
 
 		node.getBody().apply(this);
-		
-		
-		
-		
+
 	}	
+
+	////////////////////////////////////////////////////////////////////////////////
+	
+	/**
+	 * Conditions area
+	 */
+	
+	
+	
+	/**
+	 * This block return an ArrayList of condition
+	 */
+	public void caseASingleConditions(ASingleConditions node) {
+		node.getCondition().apply(this);
 		
+		ArrayList<Condition> cList = new ArrayList<Condition>();
+		cList.add((Condition) env.getNodeVal(node.getCondition()));
+		
+		env.setNodeVal(node, cList);
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void caseAListConditions(AListConditions node) {
+		
+		node.getConditions().apply(this);
+		node.getCondition().apply(this);
+		
+		
+		ArrayList<Condition> cList = new ArrayList<Condition>();
+		cList.add((Condition) env.getNodeVal(node.getCondition()));
+		cList.addAll((ArrayList<Condition>) env.getNodeVal(node.getConditions()));
+
+		env.setNodeVal(node, cList);
+	}
+
+	
+	public void caseAEqualCondition(AEqualCondition node) {
+		node.getValue().apply(new StatementEngine(dao, env));
+		Condition c = new Condition(node.getVariable().getText(), env.getNodeVal(node.getValue()));
+		env.setNodeVal(node, c);
+	}
+	
+	
+	
+	
+
+	
 }
