@@ -13,11 +13,10 @@ import entitiesdb.language.node.AQueryMain;
 import entitiesdb.language.node.ASimpleQuery;
 import entitiesdb.language.node.ASingleBody;
 import entitiesdb.language.node.ASingleConditions;
-import entitiesdb.query.QueryEnvironment;
 import entitiesdb.query.ResultSet;
-import entitiesdb.query.StatementBody;
-import entitiesdb.query.StatementProperty;
-import entitiesdb.query.conditions.Condition;
+import entitiesdb.query.objects.Condition;
+import entitiesdb.query.objects.StatementBody;
+import entitiesdb.query.objects.StatementProperty;
 import entitiesdb.query.tables.BufferTable;
 import entitiesdb.types.Record;
 
@@ -26,6 +25,7 @@ import entitiesdb.types.Record;
 
 public class QueryEngine extends DepthFirstAdapter {
 
+	public ResultSet resultSet = null;
 	
 	private QueryEnvironment env = new QueryEnvironment();
 	
@@ -36,28 +36,29 @@ public class QueryEngine extends DepthFirstAdapter {
 		this.dao = d;
 	}
 	
-	
-	
-	
+	public ResultSet getResultSet() {
+		return resultSet;
+	}
+
 	@SuppressWarnings("unchecked")
 	public void caseAInsertMain(AInsertMain node) {
-		node.getEntitybody().apply(this);
+		node.getEntitybody().apply(new StatementEngine(dao, env));
 		
 		ArrayList<StatementProperty> propertyList = (ArrayList<StatementProperty>) env.getNodeVal(node.getEntitybody());
-		
+
 		for (int i = 0 ; i < propertyList.size() ; i++) {
 			Record r = new Record(node.getIdentifier().getText(), 
 					(String)propertyList.get(i).getAttribute(), 
 					(String)propertyList.get(i).getValue());
 			dao.put(r);
 		}
-		
+		this.resultSet = new ResultSet();
 	}
 	
 	
 	public void caseAQueryMain(AQueryMain node) {
 		node.getQuery().apply(this);
-		System.out.println(env.getNodeVal(node.getQuery()));
+		this.resultSet = (ResultSet) env.getNodeVal(node.getQuery());
 	}
 	
 	
@@ -121,9 +122,18 @@ public class QueryEngine extends DepthFirstAdapter {
 		
 		//(_ : _, ...), (_ : _, ...), ...
 		
-		node.getEntitypattern().apply(new StatementEngine(dao, env));
-
 		node.getBody().apply(this);
+		BufferTable table = (BufferTable) env.getNodeVal(node.getBody());
+		
+
+		node.getEntitypattern().apply(new StatementEngine(dao, env));
+		StatementBody stmtBody = (StatementBody) env.getNodeVal(node.getEntitypattern());
+		BufferTable localTable = BufferTablesManager.getNewTable(dao, stmtBody);
+		
+		table.join(localTable);
+
+		env.setNodeVal(node, table);
+
 
 	}	
 

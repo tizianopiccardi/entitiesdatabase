@@ -212,17 +212,17 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseAListBody(AListBody node)
     {
         inAListBody(node);
-        if(node.getEntitypattern() != null)
+        if(node.getBody() != null)
         {
-            node.getEntitypattern().apply(this);
+            node.getBody().apply(this);
         }
         if(node.getComa() != null)
         {
             node.getComa().apply(this);
         }
-        if(node.getBody() != null)
+        if(node.getEntitypattern() != null)
         {
-            node.getBody().apply(this);
+            node.getEntitypattern().apply(this);
         }
         outAListBody(node);
     }

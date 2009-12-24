@@ -496,14 +496,14 @@ public class Parser
         PBody pbodyNode1;
         {
             // Block
-        PEntitypattern pentitypatternNode2;
+        PBody pbodyNode2;
         TComa tcomaNode3;
-        PBody pbodyNode4;
-        pentitypatternNode2 = (PEntitypattern)nodeArrayList1.get(0);
+        PEntitypattern pentitypatternNode4;
+        pbodyNode2 = (PBody)nodeArrayList1.get(0);
         tcomaNode3 = (TComa)nodeArrayList2.get(0);
-        pbodyNode4 = (PBody)nodeArrayList3.get(0);
+        pentitypatternNode4 = (PEntitypattern)nodeArrayList3.get(0);
 
-        pbodyNode1 = new AListBody(pentitypatternNode2, tcomaNode3, pbodyNode4);
+        pbodyNode1 = new AListBody(pbodyNode2, tcomaNode3, pentitypatternNode4);
         }
 	nodeList.add(pbodyNode1);
         return nodeList;
@@ -902,31 +902,31 @@ public class Parser
 			{{-1, ERROR, 10}, {5, SHIFT, 16}, {6, SHIFT, 17}, },
 			{{-1, REDUCE, 4}, },
 			{{-1, REDUCE, 1}, },
-			{{-1, REDUCE, 2}, {8, SHIFT, 21}, },
-			{{-1, REDUCE, 5}, {0, SHIFT, 22}, },
+			{{-1, REDUCE, 2}, {0, SHIFT, 21}, {8, SHIFT, 22}, },
+			{{-1, REDUCE, 5}, },
 			{{-1, ERROR, 15}, {3, SHIFT, 10}, },
 			{{-1, REDUCE, 14}, },
 			{{-1, REDUCE, 15}, },
 			{{-1, ERROR, 18}, {0, SHIFT, 24}, {4, SHIFT, 25}, },
 			{{-1, REDUCE, 11}, },
 			{{-1, ERROR, 20}, {1, SHIFT, 26}, },
-			{{-1, ERROR, 21}, {6, SHIFT, 27}, },
-			{{-1, ERROR, 22}, {5, SHIFT, 1}, {6, SHIFT, 2}, },
+			{{-1, ERROR, 21}, {5, SHIFT, 1}, {6, SHIFT, 2}, },
+			{{-1, ERROR, 22}, {6, SHIFT, 28}, },
 			{{-1, REDUCE, 7}, },
 			{{-1, ERROR, 24}, {5, SHIFT, 16}, {6, SHIFT, 17}, },
 			{{-1, REDUCE, 10}, },
 			{{-1, ERROR, 26}, {5, SHIFT, 32}, {6, SHIFT, 33}, {7, SHIFT, 34}, },
-			{{-1, ERROR, 27}, {9, SHIFT, 36}, },
+			{{-1, REDUCE, 6}, },
+			{{-1, ERROR, 28}, {9, SHIFT, 36}, },
 			{{-1, REDUCE, 3}, },
 			{{-1, REDUCE, 21}, {0, SHIFT, 37}, },
-			{{-1, REDUCE, 6}, },
 			{{-1, REDUCE, 12}, },
 			{{-1, REDUCE, 19}, {3, SHIFT, 10}, },
 			{{-1, REDUCE, 19}, {3, SHIFT, 10}, },
 			{{-1, REDUCE, 16}, },
 			{{-1, REDUCE, 13}, },
 			{{-1, ERROR, 36}, {5, SHIFT, 32}, {6, SHIFT, 33}, {7, SHIFT, 34}, },
-			{{-1, ERROR, 37}, {6, SHIFT, 27}, },
+			{{-1, ERROR, 37}, {6, SHIFT, 28}, },
 			{{-1, REDUCE, 20}, },
 			{{-1, REDUCE, 17}, },
 			{{-1, REDUCE, 18}, },
@@ -938,8 +938,8 @@ public class Parser
 			{{-1, 4}, },
 			{{-1, 5}, },
 			{{-1, 6}, },
-			{{-1, 13}, {22, 30}, },
-			{{-1, 14}, },
+			{{-1, 13}, },
+			{{-1, 14}, {21, 27}, },
 			{{-1, 15}, {0, 7}, },
 			{{-1, 38}, {7, 11}, {8, 12}, {15, 23}, },
 			{{-1, 18}, },
@@ -947,8 +947,8 @@ public class Parser
 			{{-1, 20}, },
 			{{-1, 35}, {36, 41}, },
 			{{-1, 39}, {33, 40}, },
-			{{-1, 28}, {37, 42}, },
-			{{-1, 29}, },
+			{{-1, 29}, {37, 42}, },
+			{{-1, 30}, },
         };*/
     private static String[] errorMessages;
 /*      {
@@ -958,7 +958,6 @@ public class Parser
 			"expecting: EOF",
 			"expecting: ':-'",
 			"expecting: identifier, variable",
-			"expecting: '?', EOF",
 			"expecting: ',', '?', EOF",
 			"expecting: ':'",
 			"expecting: ',', ')'",
@@ -972,7 +971,7 @@ public class Parser
         };*/
     private static int[] errors;
 /*      {
-			0, 1, 1, 2, 3, 3, 4, 1, 1, 5, 5, 4, 3, 6, 7, 1, 8, 8, 9, 9, 8, 10, 5, 7, 5, 11, 12, 13, 3, 14, 6, 9, 15, 15, 16, 9, 12, 10, 16, 16, 16, 14, 3, 
+			0, 1, 1, 2, 3, 3, 4, 1, 1, 5, 5, 4, 3, 6, 6, 1, 7, 7, 8, 8, 7, 5, 9, 6, 5, 10, 11, 6, 12, 3, 13, 8, 14, 14, 15, 8, 11, 9, 15, 15, 15, 13, 3, 
         };*/
 
     static 

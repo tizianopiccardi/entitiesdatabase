@@ -16,10 +16,9 @@ import entitiesdb.language.node.AStringValue;
 import entitiesdb.language.node.AVariableAttributetype;
 import entitiesdb.language.node.AVariableEntitytype;
 import entitiesdb.language.node.AVariableValue;
-import entitiesdb.query.QueryEnvironment;
-import entitiesdb.query.StatementBody;
-import entitiesdb.query.StatementProperty;
-import entitiesdb.query.StatementPropertyList;
+import entitiesdb.query.objects.StatementBody;
+import entitiesdb.query.objects.StatementProperty;
+import entitiesdb.query.objects.StatementPropertyList;
 import entitiesdb.types.Variable;
 
 public class StatementEngine extends DepthFirstAdapter{

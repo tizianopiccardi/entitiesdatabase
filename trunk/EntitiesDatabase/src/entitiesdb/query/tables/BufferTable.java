@@ -3,8 +3,9 @@ package entitiesdb.query.tables;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
-import entitiesdb.query.conditions.Condition;
+import entitiesdb.query.objects.Condition;
 import entitiesdb.query.tables.QueryRecordMatrix.VarsBounderList;
+import entitiesdb.types.Variable;
 
 /**
  * This is a memory table that processes the resultSet
@@ -82,8 +83,8 @@ public class BufferTable {
 	 */
 	public void merge(QueryRecordMatrix records) {
 
-		int rows = getMatrixHeight(records.getResultSetInfo());
-		int cols = getMatrixCols(records.getBounds());
+		int rows = getNewRowsCount(records.getResultSetInfo());
+		int cols = getNewColsCount(records.getBounds());
 
 		String [][] newTable = new String[rows][cols];
 		String [] newIndex = new String[rows];
@@ -145,7 +146,7 @@ public class BufferTable {
 	 * @param rsI
 	 * @return
 	 */
-	private int getMatrixHeight(ResultSetInfo rsI) {
+	private int getNewRowsCount(ResultSetInfo rsI) {
 		int rows = 0;
 	    Enumeration<String> keys = rsInfo.entityMap.keys();
 	    while (keys.hasMoreElements()) {
@@ -159,16 +160,16 @@ public class BufferTable {
 	
 	
 	/**
-	 * Computes how many columns needs the new table (after the join)
+	 * Computes how many columns needs the new table (after the merge)
 	 * @param varB
 	 * @return
 	 */
-	private int getMatrixCols(VarsBounderList varB) {
+	private int getNewColsCount(VarsBounderList varB) {
 		int cols = this.metadata.size();
 		
 		for (int i = 0 ; i < varB.size() ; i ++)
 			//if the object doesn't exist I add a column
-			if (this.metadata.get(varB.get(i).name)==null)
+			if (!this.metadata.exists(varB.get(i).name))
 				cols++;
 		
 		return cols;
@@ -189,7 +190,7 @@ public class BufferTable {
 	 * @param rowName
 	 * @return
 	 */
-	public String getField(int rowIndex, String rowName) {		
+	public String getField(int rowIndex, String rowName) {	
 		return table[rowIndex][metadata.get(rowName)];
 	}
 	
@@ -252,12 +253,76 @@ public class BufferTable {
 		boolean out = true;
 		for (int i = 0 ; i < cList.size() ; i++) {
 			Condition c = cList.get(i);
-			out &= row[metadata.get(c.left)].equals(c.right.toString());
+			if (c.right instanceof Variable)
+				out &= row[metadata.get(c.left)].equals( row[metadata.get(c.right.toString())]);
+			else
+				out &= row[metadata.get(c.left)].equals(c.right.toString());
 		}
 		
 		return out;
 	}
 	
+	
+	/**
+	 * Join the passed table: Cartesian product
+	 * @param joinTable
+	 */
+	public void join(BufferTable joinTable) {
+		/**
+		 * How may rows and columns need a cartesian product
+		 */
+		int rows = table.length * joinTable.getRowsCount();
+		int cols = metadata.size() + joinTable.metadata.size();
+		
+		String [][] newTable = new String[rows][cols];
+		String [] newIndex = new String[rows];
+		
+		/**
+		 * Update metadata.
+		 * For each entry in the right table metadata, I add it to the left part
+		 * with index: (old_right_index + number_of_variabiles_on_left_table)
+		 */
+		int metadataStartSize = metadata.size();
+		Enumeration<String> keys = joinTable.metadata.keys();
+		while( keys.hasMoreElements() ) {
+		  String key = keys.nextElement();
+		  metadata.put(key, joinTable.metadata.get(key) + metadataStartSize);
+		}
+		
+		/**
+		 * Fill the new table
+		 */
+		
+		for (int i = 0 ; i < table.length ; i++) {
+			int pageSize = i * joinTable.getRowsCount();
+			for(int j = 0 ; j < joinTable.getRowsCount() ; j++) {
+				
+				int offset = pageSize + j;
+				
+				/**
+				 * Index updated
+				 */
+				newIndex[offset] = index[i];
+				
+				/**
+				 * Copy the left part...
+				 */
+				System.arraycopy (table[i], 0, newTable[offset], 0, table[i].length);
+				
+				/**
+				 * ...and then the right one from the joined table
+				 */
+				System.arraycopy (joinTable.table[j], 0, newTable[offset], table[i].length, joinTable.table[j].length);
+				
+			}
+			
+		}
+		
+		
+		this.table = newTable;
+		this.index = newIndex;
+		
+	}
 	
 	
 	public String toString() {

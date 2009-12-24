@@ -1,7 +1,7 @@
 package entitiesdb.query.evaluators;
 
 import entitiesdb.dao.EntitiesDAO;
-import entitiesdb.query.StatementBody;
+import entitiesdb.query.objects.StatementBody;
 import entitiesdb.query.tables.BufferTable;
 import entitiesdb.query.tables.QueryRecordMatrix;
 

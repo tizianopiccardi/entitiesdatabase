@@ -1,4 +1,4 @@
-package entitiesdb.query;
+package entitiesdb.query.evaluators;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
