@@ -121,7 +121,7 @@ public class RecordsStore {
 	
 	
 	public String toString() {
-		String out = "Records\n";
+		String out = "Records:\n";
 		for (Record eId: this.getAllRecords())
 			out+= eId.toString()+"\n";
 		return out+"\n";

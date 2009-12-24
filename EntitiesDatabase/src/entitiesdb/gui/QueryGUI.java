@@ -13,6 +13,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import entitiesdb.query.QueryManager;
+
 public class QueryGUI extends JPanel {
 
 	private static final long serialVersionUID = -5514787605482372081L;
@@ -70,9 +72,9 @@ public class QueryGUI extends JPanel {
         }
 
     private void doStuff() {        
-        text.setText("");
-        String sq = query.getText();
-        text.append("Here it is your query: "+sq);   
+        text.setText(QueryManager.query(query.getText()).toString());
+        /*String sq = query.getText();
+        text.append("Here it is your query: "+sq);  */ 
     }
 
     private void clearStuff(){

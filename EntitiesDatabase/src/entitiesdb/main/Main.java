@@ -4,9 +4,6 @@ package entitiesdb.main;
 import java.io.File;
 
 import entitiesdb.dao.EntitiesDAO;
-import entitiesdb.dao.EntitiesIdStore.EntityIdsList;
-import entitiesdb.dao.RecordsStore.RecordsList;
-import entitiesdb.types.EntityId;
 import entitiesdb.types.Record;
 
 public class Main {
@@ -48,26 +45,13 @@ public class Main {
 			EntitiesDAO dao = new EntitiesDAO(new File("db/"));			
 			
 
-			//if (dao.isEmpty()) {
-				for (int i = 0 ; i < storeList.length ; i++)
-					dao.put(storeList[i]);
-			//}
-			
+			for (int i = 0 ; i < storeList.length ; i++)
+				dao.put(storeList[i]);
 
-			EntityIdsList ids = dao.getAllEntities();
-			for (EntityId r : ids) {
-				System.out.println(r);
-			}
-			System.out.print("\n\n\n");	
-			
-			
-			
-			RecordsList records = dao.getAllRecords();
-			for (Record r : records) {
-				System.out.println(r);
-			}
-			System.out.print("\n\n\n");	
-			
+		
+			System.out.println(dao.getEntityDatabase() + "\n");
+			System.out.println(dao.getRecordsDatabase());
+						
 			
 			dao.close();
 			

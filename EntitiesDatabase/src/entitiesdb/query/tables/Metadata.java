@@ -7,10 +7,23 @@ public class Metadata extends Hashtable<String, Integer>{
 
 	public Integer put(String key, Integer val) {
 		
-		if (this.get(key)!=null)
+		if (this.exists(key))
 			throw new RuntimeException("Duplicate variable name: " + key);
 		else
 		return super.put(key, val);
+	}
+	
+	@Override
+	public synchronized Integer get(Object key) {
+		Integer column = super.get(key);
+		if (column!=null)
+			return column;
+		else
+			throw new RuntimeException("No references to the variable: " + key);
+	}
+	
+	public boolean exists(String key) {
+		return (super.get(key)==null) ? false : true;
 	}
 	
 }

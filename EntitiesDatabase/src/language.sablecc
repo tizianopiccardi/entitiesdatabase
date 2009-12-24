@@ -73,7 +73,7 @@ Productions
 				  ;*/
 			
 	body 		=	{single} entitypattern
-				  | {list}	 entitypattern coma body
+				  | {list}	 body coma entitypattern
 				  ;
 				  
 				  

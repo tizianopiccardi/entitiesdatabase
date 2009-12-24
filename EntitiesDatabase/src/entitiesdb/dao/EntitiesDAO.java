@@ -90,6 +90,18 @@ public class EntitiesDAO {
 	
 	
 	
+	public EntitiesIdStore getEntityDatabase() {
+		return idStore;
+	}
+
+
+
+	public RecordsStore getRecordsDatabase() {
+		return recordStore;
+	}
+
+
+
 	public String toString() {
 		return "\nDATABASE DUMP:\n\n"+ idStore.toString() +
 				"========\n"+ recordStore.toString()+"========";

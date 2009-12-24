@@ -1,4 +1,4 @@
-package entitiesdb.query.conditions;
+package entitiesdb.query.objects;
 
 
 public class Condition {

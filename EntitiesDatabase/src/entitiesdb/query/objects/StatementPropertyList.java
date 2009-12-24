@@ -1,4 +1,4 @@
-package entitiesdb.query;
+package entitiesdb.query.objects;
 
 import java.util.ArrayList;
 

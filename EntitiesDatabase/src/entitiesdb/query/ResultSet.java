@@ -1,5 +1,7 @@
 package entitiesdb.query;
 
+import entitiesdb.query.objects.StatementBody;
+import entitiesdb.query.objects.StatementProperty;
 import entitiesdb.query.tables.BufferTable;
 import entitiesdb.types.Variable;
 
@@ -7,6 +9,12 @@ public class ResultSet {
 	
 
 	public StatementBody[] queryResult;
+	
+	public boolean noResultType = false;
+	
+	public ResultSet() {
+		noResultType = true;
+	}
 	
 	public ResultSet(BufferTable table, StatementBody head) {
 		queryResult = new StatementBody[table.getRowsCount()];
@@ -64,11 +72,12 @@ public class ResultSet {
 	public String toString() {
 		String out = "";
 		
+		if (queryResult!=null)
 		for (int i = 0 ; i < queryResult.length ; i++) {
 			out += queryResult[i].toString() + "\n";
 		}
 		
-		return out;
+		return (noResultType) ? "OK" : out;
 	}
 	
 	

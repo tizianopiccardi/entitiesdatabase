@@ -7,9 +7,9 @@ import entitiesdb.language.analysis.*;
 @SuppressWarnings("nls")
 public final class AListBody extends PBody
 {
-    private PEntitypattern _entitypattern_;
-    private TComa _coma_;
     private PBody _body_;
+    private TComa _coma_;
+    private PEntitypattern _entitypattern_;
 
     public AListBody()
     {
@@ -17,16 +17,16 @@ public final class AListBody extends PBody
     }
 
     public AListBody(
-        @SuppressWarnings("hiding") PEntitypattern _entitypattern_,
+        @SuppressWarnings("hiding") PBody _body_,
         @SuppressWarnings("hiding") TComa _coma_,
-        @SuppressWarnings("hiding") PBody _body_)
+        @SuppressWarnings("hiding") PEntitypattern _entitypattern_)
     {
         // Constructor
-        setEntitypattern(_entitypattern_);
+        setBody(_body_);
 
         setComa(_coma_);
 
-        setBody(_body_);
+        setEntitypattern(_entitypattern_);
 
     }
 
@@ -34,64 +34,14 @@ public final class AListBody extends PBody
     public Object clone()
     {
         return new AListBody(
-            cloneNode(this._entitypattern_),
+            cloneNode(this._body_),
             cloneNode(this._coma_),
-            cloneNode(this._body_));
+            cloneNode(this._entitypattern_));
     }
 
     public void apply(Switch sw)
     {
         ((Analysis) sw).caseAListBody(this);
-    }
-
-    public PEntitypattern getEntitypattern()
-    {
-        return this._entitypattern_;
-    }
-
-    public void setEntitypattern(PEntitypattern node)
-    {
-        if(this._entitypattern_ != null)
-        {
-            this._entitypattern_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._entitypattern_ = node;
-    }
-
-    public TComa getComa()
-    {
-        return this._coma_;
-    }
-
-    public void setComa(TComa node)
-    {
-        if(this._coma_ != null)
-        {
-            this._coma_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._coma_ = node;
     }
 
     public PBody getBody()
@@ -119,22 +69,72 @@ public final class AListBody extends PBody
         this._body_ = node;
     }
 
+    public TComa getComa()
+    {
+        return this._coma_;
+    }
+
+    public void setComa(TComa node)
+    {
+        if(this._coma_ != null)
+        {
+            this._coma_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._coma_ = node;
+    }
+
+    public PEntitypattern getEntitypattern()
+    {
+        return this._entitypattern_;
+    }
+
+    public void setEntitypattern(PEntitypattern node)
+    {
+        if(this._entitypattern_ != null)
+        {
+            this._entitypattern_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._entitypattern_ = node;
+    }
+
     @Override
     public String toString()
     {
         return ""
-            + toString(this._entitypattern_)
+            + toString(this._body_)
             + toString(this._coma_)
-            + toString(this._body_);
+            + toString(this._entitypattern_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._entitypattern_ == child)
+        if(this._body_ == child)
         {
-            this._entitypattern_ = null;
+            this._body_ = null;
             return;
         }
 
@@ -144,9 +144,9 @@ public final class AListBody extends PBody
             return;
         }
 
-        if(this._body_ == child)
+        if(this._entitypattern_ == child)
         {
-            this._body_ = null;
+            this._entitypattern_ = null;
             return;
         }
 
@@ -157,9 +157,9 @@ public final class AListBody extends PBody
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._entitypattern_ == oldChild)
+        if(this._body_ == oldChild)
         {
-            setEntitypattern((PEntitypattern) newChild);
+            setBody((PBody) newChild);
             return;
         }
 
@@ -169,9 +169,9 @@ public final class AListBody extends PBody
             return;
         }
 
-        if(this._body_ == oldChild)
+        if(this._entitypattern_ == oldChild)
         {
-            setBody((PBody) newChild);
+            setEntitypattern((PEntitypattern) newChild);
             return;
         }
 
