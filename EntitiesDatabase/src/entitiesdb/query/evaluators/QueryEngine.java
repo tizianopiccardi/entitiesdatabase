@@ -42,16 +42,22 @@ public class QueryEngine extends DepthFirstAdapter {
 
 	@SuppressWarnings("unchecked")
 	public void caseAInsertMain(AInsertMain node) {
-		node.getEntitybody().apply(new StatementEngine(dao, env));
 		
-		ArrayList<StatementProperty> propertyList = (ArrayList<StatementProperty>) env.getNodeVal(node.getEntitybody());
+		if(node.getEntitybody()!=null) {
+			node.getEntitybody().apply(new StatementEngine(dao, env));
 
-		for (int i = 0 ; i < propertyList.size() ; i++) {
-			Record r = new Record(node.getIdentifier().getText(), 
-					(String)propertyList.get(i).getAttribute(), 
-					(String)propertyList.get(i).getValue());
-			dao.put(r);
+			ArrayList<StatementProperty> propertyList = (ArrayList<StatementProperty>) env.getNodeVal(node.getEntitybody());
+	
+			for (int i = 0 ; i < propertyList.size() ; i++) {
+				Record r = new Record(node.getIdentifier().getText(), 
+						(String)propertyList.get(i).getAttribute(), 
+						(String)propertyList.get(i).getValue());
+				dao.put(r);
+			}
 		}
+		else
+			dao.addEntity(node.getIdentifier().getText());
+		
 		this.resultSet = new ResultSet();
 	}
 	
@@ -130,7 +136,7 @@ public class QueryEngine extends DepthFirstAdapter {
 		StatementBody stmtBody = (StatementBody) env.getNodeVal(node.getEntitypattern());
 		BufferTable localTable = BufferTablesManager.getNewTable(dao, stmtBody);
 		
-		table.join(localTable);
+		table.cartesian(localTable);
 
 		env.setNodeVal(node, table);
 

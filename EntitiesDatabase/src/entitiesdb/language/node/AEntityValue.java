@@ -8,7 +8,6 @@ import entitiesdb.language.analysis.*;
 public final class AEntityValue extends PValue
 {
     private TIdentifier _identifier_;
-    private POptdefinition _optdefinition_;
 
     public AEntityValue()
     {
@@ -16,13 +15,10 @@ public final class AEntityValue extends PValue
     }
 
     public AEntityValue(
-        @SuppressWarnings("hiding") TIdentifier _identifier_,
-        @SuppressWarnings("hiding") POptdefinition _optdefinition_)
+        @SuppressWarnings("hiding") TIdentifier _identifier_)
     {
         // Constructor
         setIdentifier(_identifier_);
-
-        setOptdefinition(_optdefinition_);
 
     }
 
@@ -30,8 +26,7 @@ public final class AEntityValue extends PValue
     public Object clone()
     {
         return new AEntityValue(
-            cloneNode(this._identifier_),
-            cloneNode(this._optdefinition_));
+            cloneNode(this._identifier_));
     }
 
     public void apply(Switch sw)
@@ -64,37 +59,11 @@ public final class AEntityValue extends PValue
         this._identifier_ = node;
     }
 
-    public POptdefinition getOptdefinition()
-    {
-        return this._optdefinition_;
-    }
-
-    public void setOptdefinition(POptdefinition node)
-    {
-        if(this._optdefinition_ != null)
-        {
-            this._optdefinition_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._optdefinition_ = node;
-    }
-
     @Override
     public String toString()
     {
         return ""
-            + toString(this._identifier_)
-            + toString(this._optdefinition_);
+            + toString(this._identifier_);
     }
 
     @Override
@@ -104,12 +73,6 @@ public final class AEntityValue extends PValue
         if(this._identifier_ == child)
         {
             this._identifier_ = null;
-            return;
-        }
-
-        if(this._optdefinition_ == child)
-        {
-            this._optdefinition_ = null;
             return;
         }
 
@@ -123,12 +86,6 @@ public final class AEntityValue extends PValue
         if(this._identifier_ == oldChild)
         {
             setIdentifier((TIdentifier) newChild);
-            return;
-        }
-
-        if(this._optdefinition_ == oldChild)
-        {
-            setOptdefinition((POptdefinition) newChild);
             return;
         }
 
