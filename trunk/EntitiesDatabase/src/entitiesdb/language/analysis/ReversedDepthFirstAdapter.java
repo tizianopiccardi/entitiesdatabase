@@ -100,6 +100,10 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseASimpleQuery(ASimpleQuery node)
     {
         inASimpleQuery(node);
+        if(node.getOrderby() != null)
+        {
+            node.getOrderby().apply(this);
+        }
         if(node.getBody() != null)
         {
             node.getBody().apply(this);
@@ -129,6 +133,10 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAComplexQuery(AComplexQuery node)
     {
         inAComplexQuery(node);
+        if(node.getOrderby() != null)
+        {
+            node.getOrderby().apply(this);
+        }
         if(node.getConditions() != null)
         {
             node.getConditions().apply(this);
@@ -526,6 +534,64 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
             node.getEntitypattern().apply(this);
         }
         outABodyValue(node);
+    }
+
+    public void inADesOrderby(ADesOrderby node)
+    {
+        defaultIn(node);
+    }
+
+    public void outADesOrderby(ADesOrderby node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseADesOrderby(ADesOrderby node)
+    {
+        inADesOrderby(node);
+        if(node.getMinus() != null)
+        {
+            node.getMinus().apply(this);
+        }
+        if(node.getVariable() != null)
+        {
+            node.getVariable().apply(this);
+        }
+        if(node.getPipe() != null)
+        {
+            node.getPipe().apply(this);
+        }
+        outADesOrderby(node);
+    }
+
+    public void inAAscOrderby(AAscOrderby node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAscOrderby(AAscOrderby node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAscOrderby(AAscOrderby node)
+    {
+        inAAscOrderby(node);
+        if(node.getPlus() != null)
+        {
+            node.getPlus().apply(this);
+        }
+        if(node.getVariable() != null)
+        {
+            node.getVariable().apply(this);
+        }
+        if(node.getPipe() != null)
+        {
+            node.getPipe().apply(this);
+        }
+        outAAscOrderby(node);
     }
 
     public void inASingleConditions(ASingleConditions node)

@@ -112,6 +112,10 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getBody().apply(this);
         }
+        if(node.getOrderby() != null)
+        {
+            node.getOrderby().apply(this);
+        }
         outASimpleQuery(node);
     }
 
@@ -148,6 +152,10 @@ public class DepthFirstAdapter extends AnalysisAdapter
         if(node.getConditions() != null)
         {
             node.getConditions().apply(this);
+        }
+        if(node.getOrderby() != null)
+        {
+            node.getOrderby().apply(this);
         }
         outAComplexQuery(node);
     }
@@ -526,6 +534,64 @@ public class DepthFirstAdapter extends AnalysisAdapter
             node.getEntitypattern().apply(this);
         }
         outABodyValue(node);
+    }
+
+    public void inADesOrderby(ADesOrderby node)
+    {
+        defaultIn(node);
+    }
+
+    public void outADesOrderby(ADesOrderby node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseADesOrderby(ADesOrderby node)
+    {
+        inADesOrderby(node);
+        if(node.getPipe() != null)
+        {
+            node.getPipe().apply(this);
+        }
+        if(node.getVariable() != null)
+        {
+            node.getVariable().apply(this);
+        }
+        if(node.getMinus() != null)
+        {
+            node.getMinus().apply(this);
+        }
+        outADesOrderby(node);
+    }
+
+    public void inAAscOrderby(AAscOrderby node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAscOrderby(AAscOrderby node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAscOrderby(AAscOrderby node)
+    {
+        inAAscOrderby(node);
+        if(node.getPipe() != null)
+        {
+            node.getPipe().apply(this);
+        }
+        if(node.getVariable() != null)
+        {
+            node.getVariable().apply(this);
+        }
+        if(node.getPlus() != null)
+        {
+            node.getPlus().apply(this);
+        }
+        outAAscOrderby(node);
     }
 
     public void inASingleConditions(ASingleConditions node)

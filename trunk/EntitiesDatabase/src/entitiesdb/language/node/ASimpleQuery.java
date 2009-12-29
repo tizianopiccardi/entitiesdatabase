@@ -10,6 +10,7 @@ public final class ASimpleQuery extends PQuery
     private PHead _head_;
     private TDefinedby _definedby_;
     private PBody _body_;
+    private POrderby _orderby_;
 
     public ASimpleQuery()
     {
@@ -19,7 +20,8 @@ public final class ASimpleQuery extends PQuery
     public ASimpleQuery(
         @SuppressWarnings("hiding") PHead _head_,
         @SuppressWarnings("hiding") TDefinedby _definedby_,
-        @SuppressWarnings("hiding") PBody _body_)
+        @SuppressWarnings("hiding") PBody _body_,
+        @SuppressWarnings("hiding") POrderby _orderby_)
     {
         // Constructor
         setHead(_head_);
@@ -27,6 +29,8 @@ public final class ASimpleQuery extends PQuery
         setDefinedby(_definedby_);
 
         setBody(_body_);
+
+        setOrderby(_orderby_);
 
     }
 
@@ -36,7 +40,8 @@ public final class ASimpleQuery extends PQuery
         return new ASimpleQuery(
             cloneNode(this._head_),
             cloneNode(this._definedby_),
-            cloneNode(this._body_));
+            cloneNode(this._body_),
+            cloneNode(this._orderby_));
     }
 
     public void apply(Switch sw)
@@ -119,13 +124,39 @@ public final class ASimpleQuery extends PQuery
         this._body_ = node;
     }
 
+    public POrderby getOrderby()
+    {
+        return this._orderby_;
+    }
+
+    public void setOrderby(POrderby node)
+    {
+        if(this._orderby_ != null)
+        {
+            this._orderby_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._orderby_ = node;
+    }
+
     @Override
     public String toString()
     {
         return ""
             + toString(this._head_)
             + toString(this._definedby_)
-            + toString(this._body_);
+            + toString(this._body_)
+            + toString(this._orderby_);
     }
 
     @Override
@@ -147,6 +178,12 @@ public final class ASimpleQuery extends PQuery
         if(this._body_ == child)
         {
             this._body_ = null;
+            return;
+        }
+
+        if(this._orderby_ == child)
+        {
+            this._orderby_ = null;
             return;
         }
 
@@ -172,6 +209,12 @@ public final class ASimpleQuery extends PQuery
         if(this._body_ == oldChild)
         {
             setBody((PBody) newChild);
+            return;
+        }
+
+        if(this._orderby_ == oldChild)
+        {
+            setOrderby((POrderby) newChild);
             return;
         }
 

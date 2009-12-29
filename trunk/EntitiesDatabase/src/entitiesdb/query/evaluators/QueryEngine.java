@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import entitiesdb.dao.EntitiesDAO;
 import entitiesdb.language.analysis.DepthFirstAdapter;
+import entitiesdb.language.node.AAscOrderby;
 import entitiesdb.language.node.AComplexQuery;
+import entitiesdb.language.node.ADesOrderby;
 import entitiesdb.language.node.AEqualCondition;
 import entitiesdb.language.node.AInsertMain;
 import entitiesdb.language.node.AListBody;
@@ -15,8 +17,10 @@ import entitiesdb.language.node.ASingleBody;
 import entitiesdb.language.node.ASingleConditions;
 import entitiesdb.query.ResultSet;
 import entitiesdb.query.objects.Condition;
+import entitiesdb.query.objects.OrderBy;
 import entitiesdb.query.objects.StatementBody;
 import entitiesdb.query.objects.StatementProperty;
+import entitiesdb.query.objects.OrderBy.OrderDirection;
 import entitiesdb.query.tables.BufferTable;
 import entitiesdb.types.Record;
 
@@ -76,6 +80,10 @@ public class QueryEngine extends DepthFirstAdapter {
 		//Table
 		BufferTable table = (BufferTable) env.getNodeVal(node.getBody());
 
+		node.getOrderby().apply(this);
+		OrderBy orderBy = (OrderBy) env.getNodeVal(node.getOrderby());
+		if (orderBy != null)
+			table.sort(orderBy.getVarName(), (orderBy.getDirection()==OrderDirection.ASC ? true : false) );
 		
 		//head is: $x(has: $y, ...) :- ...
 		node.getHead().apply(new StatementEngine(dao, env));
@@ -101,6 +109,13 @@ public class QueryEngine extends DepthFirstAdapter {
 		node.getConditions().apply(this);
 		
 		table.applyConditions((ArrayList<Condition>) env.getNodeVal(node.getConditions()));
+		
+		
+		node.getOrderby().apply(this);
+		OrderBy orderBy = (OrderBy) env.getNodeVal(node.getOrderby());
+		if (orderBy != null)
+			table.sort(orderBy.getVarName(), (orderBy.getDirection()==OrderDirection.ASC ? true : false) );
+	
 		
 		
 		node.getHead().apply(new StatementEngine(dao, env));
@@ -187,7 +202,11 @@ public class QueryEngine extends DepthFirstAdapter {
 	
 	
 	
-	
+	public void caseAAscOrderby(AAscOrderby node) {
+		env.setNodeVal(node, new OrderBy(node.getVariable().getText(), OrderDirection.ASC));
+	}
 
-	
+	public void caseADesOrderby(ADesOrderby node) {
+		env.setNodeVal(node, new OrderBy(node.getVariable().getText(), OrderDirection.DESC));
+	}
 }

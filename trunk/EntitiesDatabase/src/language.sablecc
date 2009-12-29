@@ -48,6 +48,9 @@ Tokens
   qmark = '?';
   
  // nsight = '#';
+  pipe = '|';
+  plus = '+';
+  minus = '-';
   
   equal = '=';
   different = '!=';
@@ -64,8 +67,8 @@ Productions
 				  |	{insert} less identifier entitybody?
 				  ; 
 	
-	query		=   {simple} head definedby body
-				  | {complex} head definedby body qmark conditions
+	query		=   {simple} head definedby body orderby?
+				  | {complex} head definedby body qmark conditions orderby?
 				  ;
 	
 	head 		=	entitytype entitybody
@@ -116,6 +119,12 @@ Productions
 				  | {variable}	variable
 				  | {body}		entitypattern
 				  ;
+				  
+	
+	orderby		= 	{des}		pipe variable minus
+				  |	{asc}		pipe variable plus
+				  ;
+				  
 /*
 	optdefinition = {empty} //is a simple var
 				   | {body}   entitybody
