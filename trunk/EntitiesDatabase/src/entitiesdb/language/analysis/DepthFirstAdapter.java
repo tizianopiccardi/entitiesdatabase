@@ -71,9 +71,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseAInsertMain(AInsertMain node)
     {
         inAInsertMain(node);
-        if(node.getGreater() != null)
+        if(node.getLess() != null)
         {
-            node.getGreater().apply(this);
+            node.getLess().apply(this);
         }
         if(node.getIdentifier() != null)
         {

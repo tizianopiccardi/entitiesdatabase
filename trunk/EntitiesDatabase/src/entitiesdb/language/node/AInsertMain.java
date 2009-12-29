@@ -7,7 +7,7 @@ import entitiesdb.language.analysis.*;
 @SuppressWarnings("nls")
 public final class AInsertMain extends PMain
 {
-    private TGreater _greater_;
+    private TLess _less_;
     private TIdentifier _identifier_;
     private PEntitybody _entitybody_;
 
@@ -17,12 +17,12 @@ public final class AInsertMain extends PMain
     }
 
     public AInsertMain(
-        @SuppressWarnings("hiding") TGreater _greater_,
+        @SuppressWarnings("hiding") TLess _less_,
         @SuppressWarnings("hiding") TIdentifier _identifier_,
         @SuppressWarnings("hiding") PEntitybody _entitybody_)
     {
         // Constructor
-        setGreater(_greater_);
+        setLess(_less_);
 
         setIdentifier(_identifier_);
 
@@ -34,7 +34,7 @@ public final class AInsertMain extends PMain
     public Object clone()
     {
         return new AInsertMain(
-            cloneNode(this._greater_),
+            cloneNode(this._less_),
             cloneNode(this._identifier_),
             cloneNode(this._entitybody_));
     }
@@ -44,16 +44,16 @@ public final class AInsertMain extends PMain
         ((Analysis) sw).caseAInsertMain(this);
     }
 
-    public TGreater getGreater()
+    public TLess getLess()
     {
-        return this._greater_;
+        return this._less_;
     }
 
-    public void setGreater(TGreater node)
+    public void setLess(TLess node)
     {
-        if(this._greater_ != null)
+        if(this._less_ != null)
         {
-            this._greater_.parent(null);
+            this._less_.parent(null);
         }
 
         if(node != null)
@@ -66,7 +66,7 @@ public final class AInsertMain extends PMain
             node.parent(this);
         }
 
-        this._greater_ = node;
+        this._less_ = node;
     }
 
     public TIdentifier getIdentifier()
@@ -123,7 +123,7 @@ public final class AInsertMain extends PMain
     public String toString()
     {
         return ""
-            + toString(this._greater_)
+            + toString(this._less_)
             + toString(this._identifier_)
             + toString(this._entitybody_);
     }
@@ -132,9 +132,9 @@ public final class AInsertMain extends PMain
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._greater_ == child)
+        if(this._less_ == child)
         {
-            this._greater_ = null;
+            this._less_ = null;
             return;
         }
 
@@ -157,9 +157,9 @@ public final class AInsertMain extends PMain
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._greater_ == oldChild)
+        if(this._less_ == oldChild)
         {
-            setGreater((TGreater) newChild);
+            setLess((TLess) newChild);
             return;
         }
 

@@ -368,13 +368,13 @@ public class Parser
         PMain pmainNode1;
         {
             // Block
-        TGreater tgreaterNode2;
+        TLess tlessNode2;
         TIdentifier tidentifierNode3;
         @SuppressWarnings("unused") Object nullNode4 = null;
-        tgreaterNode2 = (TGreater)nodeArrayList1.get(0);
+        tlessNode2 = (TLess)nodeArrayList1.get(0);
         tidentifierNode3 = (TIdentifier)nodeArrayList2.get(0);
 
-        pmainNode1 = new AInsertMain(tgreaterNode2, tidentifierNode3, null);
+        pmainNode1 = new AInsertMain(tlessNode2, tidentifierNode3, null);
         }
 	nodeList.add(pmainNode1);
         return nodeList;
@@ -393,14 +393,14 @@ public class Parser
         PMain pmainNode1;
         {
             // Block
-        TGreater tgreaterNode2;
+        TLess tlessNode2;
         TIdentifier tidentifierNode3;
         PEntitybody pentitybodyNode4;
-        tgreaterNode2 = (TGreater)nodeArrayList1.get(0);
+        tlessNode2 = (TLess)nodeArrayList1.get(0);
         tidentifierNode3 = (TIdentifier)nodeArrayList2.get(0);
         pentitybodyNode4 = (PEntitybody)nodeArrayList3.get(0);
 
-        pmainNode1 = new AInsertMain(tgreaterNode2, tidentifierNode3, pentitybodyNode4);
+        pmainNode1 = new AInsertMain(tlessNode2, tidentifierNode3, pentitybodyNode4);
         }
 	nodeList.add(pmainNode1);
         return nodeList;
@@ -894,7 +894,7 @@ public class Parser
 			{{-1, REDUCE, 9}, },
 			{{-1, REDUCE, 10}, },
 			{{-1, ERROR, 3}, {5, SHIFT, 8}, },
-			{{-1, ERROR, 4}, {13, ACCEPT, -1}, },
+			{{-1, ERROR, 4}, {12, ACCEPT, -1}, },
 			{{-1, REDUCE, 0}, },
 			{{-1, ERROR, 6}, {2, SHIFT, 9}, },
 			{{-1, ERROR, 7}, {3, SHIFT, 10}, },
@@ -950,7 +950,7 @@ public class Parser
         };*/
     private static String[] errorMessages;
 /*      {
-			"expecting: identifier, variable, '>'",
+			"expecting: identifier, variable, '<'",
 			"expecting: '('",
 			"expecting: identifier",
 			"expecting: EOF",

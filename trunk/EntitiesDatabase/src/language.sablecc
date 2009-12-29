@@ -51,7 +51,7 @@ Tokens
   
   equal = '=';
   different = '!=';
-  greater = '>';
+
   less = '<';
   
 Ignored Tokens
@@ -61,7 +61,7 @@ Ignored Tokens
 Productions
 
 	main 		=   {query}  query
-				  |	{insert} greater identifier entitybody?
+				  |	{insert} less identifier entitybody?
 				  ; 
 	
 	query		=   {simple} head definedby body

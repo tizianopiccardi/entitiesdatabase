@@ -76,20 +76,14 @@ class TokenIndex extends AnalysisAdapter
     }
 
     @Override
-    public void caseTGreater(@SuppressWarnings("unused") TGreater node)
+    public void caseTLess(@SuppressWarnings("unused") TLess node)
     {
         this.index = 11;
     }
 
     @Override
-    public void caseTLess(@SuppressWarnings("unused") TLess node)
-    {
-        this.index = 12;
-    }
-
-    @Override
     public void caseEOF(@SuppressWarnings("unused") EOF node)
     {
-        this.index = 13;
+        this.index = 12;
     }
 }

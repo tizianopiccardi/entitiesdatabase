@@ -249,11 +249,6 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
-    public void caseTGreater(TGreater node)
-    {
-        defaultCase(node);
-    }
-
     public void caseTLess(TLess node)
     {
         defaultCase(node);
