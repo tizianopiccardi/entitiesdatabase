@@ -18,7 +18,10 @@ public class Main {
 		try {
 		
 			Record [] storeList = {
+					new Record("TR", "name", "'Trentino'"),
+					new Record("IT", "name", "'Italia'"),
 					new Record("I1", "name", "'John'"),
+					new Record("CC", "name", "'Mike'"),
 					new Record("I1", "works", "H1"),
 					new Record("H1", "name", "'Hospital 123'"),					
 					new Record("H1", "city", "TN"),	
