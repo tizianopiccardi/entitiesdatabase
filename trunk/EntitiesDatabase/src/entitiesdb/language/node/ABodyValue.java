@@ -5,45 +5,45 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AVariableValue extends PValue
+public final class ABodyValue extends PValue
 {
-    private TVariable _variable_;
+    private PEntitypattern _entitypattern_;
 
-    public AVariableValue()
+    public ABodyValue()
     {
         // Constructor
     }
 
-    public AVariableValue(
-        @SuppressWarnings("hiding") TVariable _variable_)
+    public ABodyValue(
+        @SuppressWarnings("hiding") PEntitypattern _entitypattern_)
     {
         // Constructor
-        setVariable(_variable_);
+        setEntitypattern(_entitypattern_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AVariableValue(
-            cloneNode(this._variable_));
+        return new ABodyValue(
+            cloneNode(this._entitypattern_));
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAVariableValue(this);
+        ((Analysis) sw).caseABodyValue(this);
     }
 
-    public TVariable getVariable()
+    public PEntitypattern getEntitypattern()
     {
-        return this._variable_;
+        return this._entitypattern_;
     }
 
-    public void setVariable(TVariable node)
+    public void setEntitypattern(PEntitypattern node)
     {
-        if(this._variable_ != null)
+        if(this._entitypattern_ != null)
         {
-            this._variable_.parent(null);
+            this._entitypattern_.parent(null);
         }
 
         if(node != null)
@@ -56,23 +56,23 @@ public final class AVariableValue extends PValue
             node.parent(this);
         }
 
-        this._variable_ = node;
+        this._entitypattern_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._variable_);
+            + toString(this._entitypattern_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._variable_ == child)
+        if(this._entitypattern_ == child)
         {
-            this._variable_ = null;
+            this._entitypattern_ = null;
             return;
         }
 
@@ -83,9 +83,9 @@ public final class AVariableValue extends PValue
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._variable_ == oldChild)
+        if(this._entitypattern_ == oldChild)
         {
-            setVariable((TVariable) newChild);
+            setEntitypattern((PEntitypattern) newChild);
             return;
         }
 

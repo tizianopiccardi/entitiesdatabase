@@ -15,7 +15,7 @@ public class QueryRecordMatrix extends ArrayList<String[]>{
 	private static final long serialVersionUID = 8671790673143331001L;
 
 
-	//Area certa
+
 	VarsBounderList varBounder = new VarsBounderList();
 	EntitiesDAO dao = null;
 	
@@ -37,7 +37,7 @@ public class QueryRecordMatrix extends ArrayList<String[]>{
 		this.dao = dao;
 		
 		Record patternRecord = new Record();
-		
+
 		//L'entità è esplicita
 		if ( e instanceof String )
 			patternRecord.setEntityId(e.toString());
@@ -52,7 +52,9 @@ public class QueryRecordMatrix extends ArrayList<String[]>{
 			this.addBound(((Variable) a).getName(), 1);
 		
 		
+		
 		//Il valore è esplicito
+		if (v!=null)
 		if ( v instanceof String )
 			patternRecord.setValue(v.toString());
 		else
@@ -89,13 +91,19 @@ public class QueryRecordMatrix extends ArrayList<String[]>{
 	public String getEntity(int pos) {
 		return this.get(pos)[0];
 	}
-
+	public String getAttribute(int pos) {
+		return this.get(pos)[1];
+	}
+	public String getValue(int pos) {
+		return this.get(pos)[2];
+	}
 	
 	public VarsBounderList getBounds() {
 		return this.varBounder;
 	}
 	
 
+	
 	public class VarsBounder {
 		
 		public int index;
@@ -114,6 +122,36 @@ public class QueryRecordMatrix extends ArrayList<String[]>{
 			if (this.get(0).index==0)//entity is bounded
 				this.remove(0);
 		}
+		public boolean isAttributeBounded() {
+			for (VarsBounder v : this)
+				if (v.index==1) return true;
+			return false;
+		}
+		public boolean isEntityBounded() {
+			for (VarsBounder v : this)
+				if (v.index==0) return true;
+			return false;
+		}
+		public boolean isValueyBounded() {
+			for (VarsBounder v : this)
+				if (v.index==2) return true;
+			return false;
+		}
+		public String getAttributeBound() {
+			for (VarsBounder v : this)
+				if (v.index==1) return v.name;
+			return null;
+		}
+	}
+	
+	
+	
+	@Override
+	public String toString() {
+		String out = "";
+		for (int i = 0; i < this.size() ; i++)
+			out += this.get(i)[0] + "| " + this.get(i)[1] + " : "+this.get(i)[2]+"\n";
+		return out;
 	}
 	
 }

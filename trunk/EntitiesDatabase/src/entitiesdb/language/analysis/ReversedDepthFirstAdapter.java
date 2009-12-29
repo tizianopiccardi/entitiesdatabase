@@ -479,10 +479,6 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAEntityValue(AEntityValue node)
     {
         inAEntityValue(node);
-        if(node.getOptdefinition() != null)
-        {
-            node.getOptdefinition().apply(this);
-        }
         if(node.getIdentifier() != null)
         {
             node.getIdentifier().apply(this);
@@ -504,15 +500,32 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAVariableValue(AVariableValue node)
     {
         inAVariableValue(node);
-        if(node.getOptdefinition() != null)
-        {
-            node.getOptdefinition().apply(this);
-        }
         if(node.getVariable() != null)
         {
             node.getVariable().apply(this);
         }
         outAVariableValue(node);
+    }
+
+    public void inABodyValue(ABodyValue node)
+    {
+        defaultIn(node);
+    }
+
+    public void outABodyValue(ABodyValue node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseABodyValue(ABodyValue node)
+    {
+        inABodyValue(node);
+        if(node.getEntitypattern() != null)
+        {
+            node.getEntitypattern().apply(this);
+        }
+        outABodyValue(node);
     }
 
     public void inAEmptyOptdefinition(AEmptyOptdefinition node)

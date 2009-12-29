@@ -26,8 +26,17 @@ public class LanguageTesting {
 		//query = "$x(lives:$y, works:$z):- $x(lives: $y, works:$z) ";
 		//query = ">ABC(p: 'fcdd', sdf: QWE, ds: 'ddfdf')";
 		//query = ">I2(works: TN)";
-		query = "ENTRIES(id:$x, attribute: $y, value: $z):-  $x($y:$z)";
 		
+		
+		//query = "$x(lives:$y, is_director_of: $z) :-  $x( works: $z(director_is: $j), lives:$y ) ? $j=$x";
+		//query = "$x(lives:$y, is_director_of: $z) :-  $x( lives:$y, $w: $z(director_is: $j(married:I2)) )";
+		//query = "$x(lives:$y, is_director_of: $z) :-  $x( works: $z(director_is: $j), lives:$y ) ? $j=$x";
+		//query = "I2($x:$y) :- I2($x:$y)";
+		//query = "ENTRIES(id:$x, attribute: $y, value: $z):-  $x($y:$z)";
+
+		query = "$x(lives:$y, is_director_of: $z) :-  $x( works: $z(director_is: $j), lives:$y ) ? $j=$x";
+		//query = "$x(is_director_of: $z) :-  $x( works: $z(director_is: $j) ) ? $j=$x";
+
 		System.out.println(QueryManager.query(query));
 		
 		QueryManager.dao.close();
@@ -35,4 +44,14 @@ public class LanguageTesting {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
 

@@ -8,26 +8,29 @@ import entitiesdb.query.tables.QueryRecordMatrix.VarsBounderList;
 import entitiesdb.types.Variable;
 
 /**
- * This is a memory table that processes the resultSet
+ * This is a memory table that processes the resultSet<br>
+ * This class is the core of the query system
  * @author Tiziano
  *
  */
 public class BufferTable {
 
 	/**
-	 * This table, contains the data in this format:
-	 * 
-	 * Query: $x(lives: $y, works: $z)
-	 * 
-	 * id	$x	$y	$z
-	 * ---------------
-	 * I1 | I1	TN	MI
-	 * I2 |	I2	TN	TN
-	 * I1 |	I1	MI	MI
-	 * I3 |	I3	TO	TN
-	 * 
-	 * id: this.index
+	 * This table, contains the data in this format:<br>
+	 * <br>
+	 * Query: $x(lives: $y, works: $z)<br>
+	 * <br>
+	 * id	$x	$y	$z<br>
+	 * ---------------<br>
+	 * I1 | I1	TN	MI<br>
+	 * I2 |	I2	TN	TN<br>
+	 * I1 |	I1	MI	MI<br>
+	 * I3 |	I3	TO	TN<br>
+	 * <br>
+	 * id: this.index<br>
 	 */
+	
+	public boolean initialized = false;
 	
 	String [] index;
 	
@@ -38,9 +41,23 @@ public class BufferTable {
 	
 	ResultSetInfo rsInfo = new ResultSetInfo();
 	
-	
+	public BufferTable() {}
 	//constructor
 	public BufferTable(QueryRecordMatrix records) {
+		this.allocate(records);
+	}
+	
+	
+	public boolean isInitialized() {
+		return initialized;
+	}
+	/**
+	 * Allocate the table by a resultSet
+	 * @param records
+	 */
+	public void allocate(QueryRecordMatrix records) {
+		
+		this.initialized = true;
 		
 		VarsBounderList varBounds = records.getBounds();
 		
@@ -71,8 +88,6 @@ public class BufferTable {
 			for (int j = 0 ; j < cols ; j++) 
 				table[i][j] = records.get(i)[varBounds.get(j).index];
 		}
-		
-		
 	}
 	
 	
@@ -88,6 +103,7 @@ public class BufferTable {
 
 		String [][] newTable = new String[rows][cols];
 		String [] newIndex = new String[rows];
+		rsInfo = new ResultSetInfo();
 		
 		/**
 		 * print(newIndex | newTable);
@@ -107,7 +123,6 @@ public class BufferTable {
 
 		
 		int rowCounter = 0;
-		rsInfo = new ResultSetInfo();
 		for (int i = 0 ; i < table.length ; i ++) {
 			
 			
@@ -142,7 +157,7 @@ public class BufferTable {
 
 	/**
 	 * This function computes how many rows needs the new matrix.<br>
-	 * SUM [ if l.get(i).count==r[j] then (l[i].count * r[j].count) ]
+	 * SUM [ if l.get(i)==r[j] then (l[i].count * r[j].count) ]
 	 * @param rsI
 	 * @return
 	 */
@@ -156,7 +171,6 @@ public class BufferTable {
 	    }
 		return rows;
 	}
-	
 	
 	
 	/**
@@ -262,12 +276,26 @@ public class BufferTable {
 		return out;
 	}
 	
+	/**
+	 * Update metadata.
+	 * For each entry in the right table metadata, I add it to the left part
+	 * with index: (old_right_index + number_of_variabiles_on_left_table)
+	 * @param md
+	 */
+	private void joinMetadata(Metadata md) {
+		int metadataStartSize = metadata.size();
+		Enumeration<String> keys = md.keys();
+		while( keys.hasMoreElements() ) {
+		  String key = keys.nextElement();
+		  metadata.put(key, md.get(key) + metadataStartSize);
+		}
+	}
 	
 	/**
 	 * Join the passed table: Cartesian product
 	 * @param joinTable
 	 */
-	public void join(BufferTable joinTable) {
+	public void cartesian(BufferTable joinTable) {
 		/**
 		 * How may rows and columns need a cartesian product
 		 */
@@ -277,17 +305,10 @@ public class BufferTable {
 		String [][] newTable = new String[rows][cols];
 		String [] newIndex = new String[rows];
 		
-		/**
-		 * Update metadata.
-		 * For each entry in the right table metadata, I add it to the left part
-		 * with index: (old_right_index + number_of_variabiles_on_left_table)
-		 */
-		int metadataStartSize = metadata.size();
-		Enumeration<String> keys = joinTable.metadata.keys();
-		while( keys.hasMoreElements() ) {
-		  String key = keys.nextElement();
-		  metadata.put(key, joinTable.metadata.get(key) + metadataStartSize);
-		}
+		rsInfo = new ResultSetInfo();
+
+		this.joinMetadata(joinTable.metadata);
+
 		
 		/**
 		 * Fill the new table
@@ -303,7 +324,7 @@ public class BufferTable {
 				 * Index updated
 				 */
 				newIndex[offset] = index[i];
-				
+				rsInfo.add(index[i]);
 				/**
 				 * Copy the left part...
 				 */
@@ -324,9 +345,163 @@ public class BufferTable {
 		
 	}
 	
+	/**
+	 * This method join a table using 2 conditions: <br>
+	 * 	- where records[i].value == joinTable[j].id<br>
+	 * 	- AND 	table[k].ID == records[i].ID <br>
+	 * 
+	 * @param records
+	 * @param joinTable
+	 */
+	public void mergeAndJoin(QueryRecordMatrix records, BufferTable joinTable) {
+		
+		/**
+		 * Current columns + columns of new table + if the attribute (of the link stmt) is a var, another one
+		 */
+		boolean isAttributeBounded = records.getBounds().isAttributeBounded();
+		int cols = metadata.size() + joinTable.metadata.size() + (isAttributeBounded?1:0);
+
+		rsInfo = new ResultSetInfo();
+
+		
+		
+		/**
+		 * Metadata UPDATE
+		 */
+		if (isAttributeBounded) this.metadata.put(records.getBounds().getAttributeBound(), this.metadata.size());
+		this.joinMetadata(joinTable.metadata);
+
+		/**
+		 * Table filling using a aux table
+		 */
+		ArrayList<String[]> tempTable = new ArrayList<String[]>();
+		ArrayList<String> tempIndex = new ArrayList<String>();
+		for (int i = 0 ; i < records.size() ; i++) 
+			for (int j = 0 ; j < joinTable.table.length ; j++) 
+				/**
+				 * If we can join the records with the new table on:
+				 * record.value = joinTable.id ...
+				 */
+				if (records.get(i)[2].equals(joinTable.index[j])) 
+					for (int k = 0 ; k < this.table.length ; k++)
+						/**
+						 * ... and if we can join the records with the current table on:
+						 * table[k].id = record.id then...
+						 */
+						if (records.getEntity(i).equals(this.index[k])) {
+							
+							/**
+							 * ... we have found a new row to add.
+							 */
+							
+							/**
+							 * Indexes updating
+							 */
+							int currentLenght = table[k].length;
+							tempIndex.add(index[k]);
+							rsInfo.add(index[k]);
+							
+							String[] row = new String[cols];
+							
+							/**
+							 * I copy the left part from the current table...
+							 */
+							System.arraycopy(table[k], 0, row, 0, currentLenght);
+
+							/**
+							 * ... and if the attribute is a variable, I'll copy it.
+							 */
+							if (isAttributeBounded) {
+								row[currentLenght] = records.get(i)[1];
+								currentLenght++;
+							}
+							
+							/**
+							 * Eventually, i copy the right side!
+							 */
+							System.arraycopy(joinTable.table[j], 0, row, currentLenght, joinTable.table[j].length);
+							
+							tempTable.add(row);
+
+						}
+	
+
+		String [][] newTable = new String[tempTable.size()][cols];
+		String [] newIndex = new String[tempTable.size()];
+		
+		newIndex = tempIndex.toArray(newIndex);
+		newTable = tempTable.toArray(newTable);
+		
+		this.table = newTable;
+		this.index = newIndex;
+
+		
+	}
+	
+	
+	/**
+	 * Used in the particular case that the table is empty and is needed
+	 * to join a table in this way: $x(lives: $y(name: 'Trento'))<br>
+	 * The current table is obtained by the evaluation of $y(name: 'Trento'), 
+	 * while the result table in is joined with the set obtained by the query:<br>
+	 * $x(lives: $y)
+	 * @param records
+	 */
+	public void joinOnRecordValue(QueryRecordMatrix records) {
+
+		int cols = metadata.size() + records.getBounds().size() ;
+
+		for (int k = 0 ; k < records.getBounds().size() ; k++) 
+			this.metadata.put(records.getBounds().get(k).name, this.metadata.size());
+		rsInfo = new ResultSetInfo();
+
+		ArrayList<String[]> tempTable = new ArrayList<String[]>();
+		ArrayList<String> tempIndex = new ArrayList<String>();
+		for (int i = 0 ; i < records.size() ; i++) 
+					for (int k = 0 ; k < this.table.length ; k++)
+						/**
+						 * Join on record.value == index[k]
+						 */
+						if (records.getValue(i).equals(this.index[k])) {
+							
+							/**
+							 * The new index is obtained by the record.<br>
+							 * At the moment this table is one level lower
+							 */
+							tempIndex.add(records.getEntity(i));
+							rsInfo.add(records.getEntity(i));
+							
+							String[] row = new String[cols];
+							System.arraycopy(table[k], 0, row, 0, table[k].length);
+
+							/**
+							 * Like in merge method...
+							 */
+							for (int j = 0 ; j < records.getBounds().size() ; j++)
+								row[table[k].length+j] = records.get(i)[records.getBounds().get(j).index];
+							
+							tempTable.add(row);
+
+						}
+	
+
+
+		String [][] newTable = new String[tempTable.size()][cols];
+		String [] newIndex = new String[tempTable.size()];
+		
+		newIndex = tempIndex.toArray(newIndex);
+		newTable = tempTable.toArray(newTable);
+
+		this.table = newTable;
+		this.index = newIndex;
+
+
+	}
+	
 	
 	public String toString() {
-		String out="Metadata: "+metadata.toString() + "\n";
+		String out = "\nResultSet Info: "+rsInfo.toString();
+		out+="\nMetadata: "+metadata.toString() + "\n";
 		for (int i = 0; i < table.length ; i++){
 			out += index[i] + " | ";
 			for (int j = 0 ; j < table[i].length ; j ++)

@@ -35,15 +35,15 @@ public class QueryManager {
 			} 
 			catch (ParserException e) {
 				System.out.println("Parser ERROR ON: \n\t" +e.getMessage());
-				//e.printStackTrace();
+				e.printStackTrace();
 			}
 			catch (LexerException e) {
 				System.out.println("Lexer ERROR ON: \n\t" +e.getMessage());
-				//e.printStackTrace();
+				e.printStackTrace();
 			}
 			catch (Exception e) {
 				System.out.println("Error: "+e.getMessage());
-				//e.printStackTrace();
+				e.printStackTrace();
 			}
 		
 		return out;
