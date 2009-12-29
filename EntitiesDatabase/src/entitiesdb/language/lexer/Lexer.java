@@ -300,16 +300,6 @@ public class Lexer
                             this.line = accept_line;
                             return token;
                         }
-                    case 14:
-                        {
-                            @SuppressWarnings("hiding") Token token = new14(
-                                start_line + 1,
-                                start_pos + 1);
-                            pushBack(accept_length);
-                            this.pos = accept_pos;
-                            this.line = accept_line;
-                            return token;
-                        }
                     }
                 }
                 else
@@ -343,8 +333,7 @@ public class Lexer
     Token new10(@SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TQmark(line, pos); }
     Token new11(@SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TEqual(line, pos); }
     Token new12(@SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TDifferent(line, pos); }
-    Token new13(@SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TGreater(line, pos); }
-    Token new14(@SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TLess(line, pos); }
+    Token new13(@SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TLess(line, pos); }
 
     private int getChar() throws IOException
     {
@@ -404,42 +393,41 @@ public class Lexer
     private static int[][][][] gotoTable;
 /*  {
         { // INITIAL
-            {{9, 9, 1}, {10, 10, 2}, {13, 13, 3}, {32, 32, 4}, {33, 33, 5}, {36, 36, 6}, {39, 39, 7}, {40, 40, 8}, {41, 41, 9}, {44, 44, 10}, {58, 58, 11}, {60, 60, 12}, {61, 61, 13}, {62, 62, 14}, {63, 63, 15}, {65, 90, 16}, {97, 122, 16}, },
+            {{9, 9, 1}, {10, 10, 2}, {13, 13, 3}, {32, 32, 4}, {33, 33, 5}, {36, 36, 6}, {39, 39, 7}, {40, 40, 8}, {41, 41, 9}, {44, 44, 10}, {58, 58, 11}, {60, 60, 12}, {61, 61, 13}, {63, 63, 14}, {65, 90, 15}, {97, 122, 15}, },
             {},
             {},
-            {{10, 10, 17}, },
+            {{10, 10, 16}, },
             {{32, 32, 4}, },
-            {{61, 61, 18}, },
-            {{65, 90, 19}, {97, 122, 19}, },
-            {{0, 38, 20}, {39, 39, 21}, {40, 65535, 20}, },
+            {{61, 61, 17}, },
+            {{65, 90, 18}, {97, 122, 18}, },
+            {{0, 38, 19}, {39, 39, 20}, {40, 65535, 19}, },
             {},
             {},
             {},
-            {{45, 45, 22}, },
+            {{45, 45, 21}, },
             {},
             {},
             {},
+            {{48, 57, 22}, {65, 90, 23}, {95, 95, 24}, {97, 122, 23}, },
             {},
-            {{48, 57, 23}, {65, 90, 24}, {95, 95, 25}, {97, 122, 24}, },
             {},
-            {},
-            {{48, 57, 26}, {65, 90, 27}, {95, 95, 28}, {97, 122, 27}, },
+            {{48, 57, 25}, {65, 90, 26}, {95, 95, 27}, {97, 122, 26}, },
             {{0, 65535, -9}, },
             {},
             {},
-            {{48, 122, -18}, },
-            {{48, 122, -18}, },
-            {{48, 122, -18}, },
-            {{48, 122, -21}, },
-            {{48, 122, -21}, },
-            {{48, 122, -21}, },
+            {{48, 122, -17}, },
+            {{48, 122, -17}, },
+            {{48, 122, -17}, },
+            {{48, 122, -20}, },
+            {{48, 122, -20}, },
+            {{48, 122, -20}, },
         }
     };*/
 
     private static int[][] accept;
 /*  {
         // INITIAL
-        {1, 1, 0, 0, 1, -1, -1, -1, 5, 6, 2, 3, 14, 11, 13, 10, 7, 0, 12, 8, -1, 9, 4, 7, 7, 7, 8, 8, 8, },
+        {1, 1, 0, 0, 1, -1, -1, -1, 5, 6, 2, 3, 13, 11, 10, 7, 0, 12, 8, -1, 9, 4, 7, 7, 7, 8, 8, 8, },
 
     };*/
 

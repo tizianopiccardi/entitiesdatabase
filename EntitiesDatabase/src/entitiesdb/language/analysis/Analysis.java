@@ -49,7 +49,6 @@ public interface Analysis extends Switch
     void caseTQmark(TQmark node);
     void caseTEqual(TEqual node);
     void caseTDifferent(TDifferent node);
-    void caseTGreater(TGreater node);
     void caseTLess(TLess node);
     void caseEOF(EOF node);
 }
