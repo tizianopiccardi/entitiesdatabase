@@ -12,6 +12,7 @@ public final class AComplexQuery extends PQuery
     private PBody _body_;
     private TQmark _qmark_;
     private PConditions _conditions_;
+    private POrderby _orderby_;
 
     public AComplexQuery()
     {
@@ -23,7 +24,8 @@ public final class AComplexQuery extends PQuery
         @SuppressWarnings("hiding") TDefinedby _definedby_,
         @SuppressWarnings("hiding") PBody _body_,
         @SuppressWarnings("hiding") TQmark _qmark_,
-        @SuppressWarnings("hiding") PConditions _conditions_)
+        @SuppressWarnings("hiding") PConditions _conditions_,
+        @SuppressWarnings("hiding") POrderby _orderby_)
     {
         // Constructor
         setHead(_head_);
@@ -36,6 +38,8 @@ public final class AComplexQuery extends PQuery
 
         setConditions(_conditions_);
 
+        setOrderby(_orderby_);
+
     }
 
     @Override
@@ -46,7 +50,8 @@ public final class AComplexQuery extends PQuery
             cloneNode(this._definedby_),
             cloneNode(this._body_),
             cloneNode(this._qmark_),
-            cloneNode(this._conditions_));
+            cloneNode(this._conditions_),
+            cloneNode(this._orderby_));
     }
 
     public void apply(Switch sw)
@@ -179,6 +184,31 @@ public final class AComplexQuery extends PQuery
         this._conditions_ = node;
     }
 
+    public POrderby getOrderby()
+    {
+        return this._orderby_;
+    }
+
+    public void setOrderby(POrderby node)
+    {
+        if(this._orderby_ != null)
+        {
+            this._orderby_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._orderby_ = node;
+    }
+
     @Override
     public String toString()
     {
@@ -187,7 +217,8 @@ public final class AComplexQuery extends PQuery
             + toString(this._definedby_)
             + toString(this._body_)
             + toString(this._qmark_)
-            + toString(this._conditions_);
+            + toString(this._conditions_)
+            + toString(this._orderby_);
     }
 
     @Override
@@ -221,6 +252,12 @@ public final class AComplexQuery extends PQuery
         if(this._conditions_ == child)
         {
             this._conditions_ = null;
+            return;
+        }
+
+        if(this._orderby_ == child)
+        {
+            this._orderby_ = null;
             return;
         }
 
@@ -258,6 +295,12 @@ public final class AComplexQuery extends PQuery
         if(this._conditions_ == oldChild)
         {
             setConditions((PConditions) newChild);
+            return;
+        }
+
+        if(this._orderby_ == oldChild)
+        {
+            setOrderby((POrderby) newChild);
             return;
         }
 

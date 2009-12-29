@@ -169,6 +169,16 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
+    public void caseADesOrderby(ADesOrderby node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAAscOrderby(AAscOrderby node)
+    {
+        defaultCase(node);
+    }
+
     public void caseASingleConditions(ASingleConditions node)
     {
         defaultCase(node);
@@ -235,6 +245,21 @@ public class AnalysisAdapter implements Analysis
     }
 
     public void caseTQmark(TQmark node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTPipe(TPipe node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTPlus(TPlus node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseTMinus(TMinus node)
     {
         defaultCase(node);
     }

@@ -1,6 +1,10 @@
 package entitiesdb.query.tables;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Enumeration;
 
 import entitiesdb.query.objects.Condition;
@@ -497,6 +501,35 @@ public class BufferTable {
 
 
 	}
+	
+	
+	/**
+	 * Sort the table by variable name
+	 * @param var
+	 */
+	public void sort(String var) {
+		this.sort(var, true);
+	}
+
+	public void sort(String var, boolean asc) {
+		int index = metadata.get(var);
+		Arrays.sort(table, new tableFieldComparator(index, asc));
+	}
+	
+	private class tableFieldComparator implements Comparator<String[]> {
+		int index = 0; boolean asc = true;
+		public tableFieldComparator(int i, boolean a) {
+			super(); index = i;	asc = a;
+		}
+		@Override
+		public int compare(String[] o1, String[] o2) {
+			return o1[index].compareTo(o2[index]) * (asc ? 1 : -1);
+		}
+	}
+	
+	
+	
+	
 	
 	
 	public String toString() {

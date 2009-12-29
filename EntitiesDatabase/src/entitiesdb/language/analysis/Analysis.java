@@ -32,6 +32,8 @@ public interface Analysis extends Switch
     void caseAEntityValue(AEntityValue node);
     void caseAVariableValue(AVariableValue node);
     void caseABodyValue(ABodyValue node);
+    void caseADesOrderby(ADesOrderby node);
+    void caseAAscOrderby(AAscOrderby node);
     void caseASingleConditions(ASingleConditions node);
     void caseAListConditions(AListConditions node);
     void caseAEqualCondition(AEqualCondition node);
@@ -47,6 +49,9 @@ public interface Analysis extends Switch
     void caseTVariable(TVariable node);
     void caseTString(TString node);
     void caseTQmark(TQmark node);
+    void caseTPipe(TPipe node);
+    void caseTPlus(TPlus node);
+    void caseTMinus(TMinus node);
     void caseTEqual(TEqual node);
     void caseTDifferent(TDifferent node);
     void caseTLess(TLess node);
