@@ -3,7 +3,6 @@ package entitiesdb.query.evaluators;
 import entitiesdb.dao.EntitiesDAO;
 import entitiesdb.language.analysis.DepthFirstAdapter;
 import entitiesdb.language.node.AAttribute;
-import entitiesdb.language.node.ABodyOptdefinition;
 import entitiesdb.language.node.ABodyValue;
 import entitiesdb.language.node.AEntityValue;
 import entitiesdb.language.node.AEntitybody;
@@ -178,14 +177,7 @@ public class StatementEngine extends DepthFirstAdapter{
 
 	}		
 	
-	
-	public void caseABodyOptdefinition(ABodyOptdefinition node) {
 
-		node.getEntitybody().apply(this);
-		env.setNodeVal(node, env.getNodeVal(node.getEntitybody()));
-		
-	}		
-	
 	
 	public void caseAVariableEntitytype(AVariableEntitytype node) {
 		

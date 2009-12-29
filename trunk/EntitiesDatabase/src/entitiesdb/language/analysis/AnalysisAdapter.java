@@ -169,16 +169,6 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
-    public void caseAEmptyOptdefinition(AEmptyOptdefinition node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseABodyOptdefinition(ABodyOptdefinition node)
-    {
-        defaultCase(node);
-    }
-
     public void caseASingleConditions(ASingleConditions node)
     {
         defaultCase(node);
@@ -245,11 +235,6 @@ public class AnalysisAdapter implements Analysis
     }
 
     public void caseTQmark(TQmark node)
-    {
-        defaultCase(node);
-    }
-
-    public void caseTNsight(TNsight node)
     {
         defaultCase(node);
     }

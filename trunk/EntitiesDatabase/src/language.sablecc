@@ -47,7 +47,7 @@ Tokens
   
   qmark = '?';
   
-  nsight = '#';
+ // nsight = '#';
   
   equal = '=';
   different = '!=';
@@ -116,11 +116,11 @@ Productions
 				  | {variable}	variable
 				  | {body}		entitypattern
 				  ;
-
+/*
 	optdefinition = {empty} //is a simple var
 				   | {body}   entitybody
 				   ;
-				   
+				   */
 
 
 					

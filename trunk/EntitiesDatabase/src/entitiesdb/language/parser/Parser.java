@@ -301,34 +301,22 @@ public class Parser
 			push(goTo(10), list, false);
 		    }
 		    break;
-                    case 21: /* reduce AEmptyOptdefinition */
+                    case 21: /* reduce ASingleConditions */
 		    {
 			ArrayList list = new21();
 			push(goTo(11), list, false);
 		    }
 		    break;
-                    case 22: /* reduce ABodyOptdefinition */
+                    case 22: /* reduce AListConditions */
 		    {
 			ArrayList list = new22();
 			push(goTo(11), list, false);
 		    }
 		    break;
-                    case 23: /* reduce ASingleConditions */
+                    case 23: /* reduce AEqualCondition */
 		    {
 			ArrayList list = new23();
 			push(goTo(12), list, false);
-		    }
-		    break;
-                    case 24: /* reduce AListConditions */
-		    {
-			ArrayList list = new24();
-			push(goTo(12), list, false);
-		    }
-		    break;
-                    case 25: /* reduce AEqualCondition */
-		    {
-			ArrayList list = new25();
-			push(goTo(13), list, false);
 		    }
 		    break;
                     }
@@ -829,44 +817,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new21() /* reduce AEmptyOptdefinition */
-    {
-        @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
-
-        POptdefinition poptdefinitionNode1;
-        {
-            // Block
-
-        poptdefinitionNode1 = new AEmptyOptdefinition();
-        }
-	nodeList.add(poptdefinitionNode1);
-        return nodeList;
-    }
-
-
-
-    @SuppressWarnings("unchecked")
-    ArrayList new22() /* reduce ABodyOptdefinition */
-    {
-        @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
-
-        @SuppressWarnings("unused") ArrayList nodeArrayList1 = pop();
-        POptdefinition poptdefinitionNode1;
-        {
-            // Block
-        PEntitybody pentitybodyNode2;
-        pentitybodyNode2 = (PEntitybody)nodeArrayList1.get(0);
-
-        poptdefinitionNode1 = new ABodyOptdefinition(pentitybodyNode2);
-        }
-	nodeList.add(poptdefinitionNode1);
-        return nodeList;
-    }
-
-
-
-    @SuppressWarnings("unchecked")
-    ArrayList new23() /* reduce ASingleConditions */
+    ArrayList new21() /* reduce ASingleConditions */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -886,7 +837,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new24() /* reduce AListConditions */
+    ArrayList new22() /* reduce AListConditions */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -912,7 +863,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new25() /* reduce AEqualCondition */
+    ArrayList new23() /* reduce AEqualCondition */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -939,11 +890,11 @@ public class Parser
 
     private static int[][][] actionTable;
 /*      {
-			{{-1, ERROR, 0}, {5, SHIFT, 1}, {6, SHIFT, 2}, {12, SHIFT, 3}, },
+			{{-1, ERROR, 0}, {5, SHIFT, 1}, {6, SHIFT, 2}, {11, SHIFT, 3}, },
 			{{-1, REDUCE, 9}, },
 			{{-1, REDUCE, 10}, },
 			{{-1, ERROR, 3}, {5, SHIFT, 8}, },
-			{{-1, ERROR, 4}, {14, ACCEPT, -1}, },
+			{{-1, ERROR, 4}, {13, ACCEPT, -1}, },
 			{{-1, REDUCE, 0}, },
 			{{-1, ERROR, 6}, {2, SHIFT, 9}, },
 			{{-1, ERROR, 7}, {3, SHIFT, 10}, },
@@ -967,9 +918,9 @@ public class Parser
 			{{-1, REDUCE, 11}, },
 			{{-1, ERROR, 26}, {5, SHIFT, 32}, {6, SHIFT, 33}, {7, SHIFT, 34}, },
 			{{-1, REDUCE, 7}, },
-			{{-1, ERROR, 28}, {10, SHIFT, 37}, },
+			{{-1, ERROR, 28}, {9, SHIFT, 37}, },
 			{{-1, REDUCE, 4}, },
-			{{-1, REDUCE, 23}, {0, SHIFT, 38}, },
+			{{-1, REDUCE, 21}, {0, SHIFT, 38}, },
 			{{-1, REDUCE, 13}, },
 			{{-1, REDUCE, 18}, {3, REDUCE, 9}, },
 			{{-1, REDUCE, 19}, {3, REDUCE, 10}, },
@@ -978,8 +929,8 @@ public class Parser
 			{{-1, REDUCE, 14}, },
 			{{-1, ERROR, 37}, {5, SHIFT, 32}, {6, SHIFT, 33}, {7, SHIFT, 34}, },
 			{{-1, ERROR, 38}, {6, SHIFT, 28}, },
-			{{-1, REDUCE, 25}, },
-			{{-1, REDUCE, 24}, },
+			{{-1, REDUCE, 23}, },
+			{{-1, REDUCE, 22}, },
         };*/
     private static int[][][] gotoTable;
 /*      {
@@ -994,7 +945,6 @@ public class Parser
 			{{-1, 19}, {24, 31}, },
 			{{-1, 20}, },
 			{{-1, 36}, {37, 39}, },
-			{{-1, -1}, },
 			{{-1, 29}, {38, 40}, },
 			{{-1, 30}, },
         };*/
