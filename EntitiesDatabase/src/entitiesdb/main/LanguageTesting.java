@@ -24,8 +24,8 @@ public class LanguageTesting {
 		//query = "$x(lives:$y, works:$z, alive: 'YES'):- $x(lives: $y, works:$z) ? $y = TN, $z = H1";
 		//query = "$x(lives:$y, works:$z, alive: $t):-  $x(lives: $y, works:$z), $a($c:$k), $g(lives:$t) ? $y=$t";
 		//query = "$x(lives:$y, works:$z):- $x(lives: $y, works:$z) ";
-		//query = "<ABC(p: 'fcdd', sdf: QWE, ds: 'ddfdf')";
-		//query = "<I2(works: TN)";
+		//query = "< ABC(p: 'fcdd', sdf: QWE, ds: 'ddfdf')";
+		//query = "< I2(works: TN)";
 		
 		
 		//query = "$x(lives:$y, is_director_of: $z) :-  $x( works: $z(director_is: $j), lives:$y ) ? $j=$x";
@@ -37,6 +37,7 @@ public class LanguageTesting {
 		query = "$x(lives:$y, is_director_of: $z) :-  $x( works: $z(director_is: $j), lives:$y ) ? $j=$x";
 		//query = "$x(is_director_of: $z) :-  $x( works: $z(director_is: $j) ) ? $j=$x";
 
+		
 		System.out.println(QueryManager.query(query));
 		
 		QueryManager.dao.close();

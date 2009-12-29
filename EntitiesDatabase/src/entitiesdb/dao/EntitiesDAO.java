@@ -73,7 +73,19 @@ public class EntitiesDAO {
 	}
 	
 	public boolean put(Record r) {
+		
+		/**
+		 * If the entity doesn't exist, i add it
+		 */
 		if (!idStore.exists(r.getEntityId())) idStore.addEntity(r.getEntityId());
+		
+		/**
+		 * If the value is an entity and doesn't exist: error!
+		 */
+		if (r.getValue().charAt(0)!='\'' && !entityExists(r.getValue())) 
+			throw new RuntimeException("You are tring to refer a value to a missing entity: " + r.getValue() );
+		
+		
 		return recordStore.put(r);
 	}	
 	
