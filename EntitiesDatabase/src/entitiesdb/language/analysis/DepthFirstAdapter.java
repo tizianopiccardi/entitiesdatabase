@@ -528,44 +528,6 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outABodyValue(node);
     }
 
-    public void inAEmptyOptdefinition(AEmptyOptdefinition node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAEmptyOptdefinition(AEmptyOptdefinition node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAEmptyOptdefinition(AEmptyOptdefinition node)
-    {
-        inAEmptyOptdefinition(node);
-        outAEmptyOptdefinition(node);
-    }
-
-    public void inABodyOptdefinition(ABodyOptdefinition node)
-    {
-        defaultIn(node);
-    }
-
-    public void outABodyOptdefinition(ABodyOptdefinition node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseABodyOptdefinition(ABodyOptdefinition node)
-    {
-        inABodyOptdefinition(node);
-        if(node.getEntitybody() != null)
-        {
-            node.getEntitybody().apply(this);
-        }
-        outABodyOptdefinition(node);
-    }
-
     public void inASingleConditions(ASingleConditions node)
     {
         defaultIn(node);
