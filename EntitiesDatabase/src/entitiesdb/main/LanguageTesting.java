@@ -19,7 +19,7 @@ public class LanguageTesting {
 		String query = "";
 		
 
-		//query = "$x(lives:$y, works:$z, alive: 'YES'):- $x(lives: $y, works:$z) ? $y = $z";
+		query = "$x(lives:$y, works:$z, alive: 'YES'):- $x(lives: $y, works:$z) ? $y = $z";
 		//query = "$x(lives:$y, works:$z, alive: 'YES'):- $x(lives: $y, works:$z) ? $y = TN";
 		//query = "$x(lives:$y, works:$z, alive: 'YES'):- $x(lives: $y, works:$z) ? $y = TN, $z = H1";
 		//query = "$x(lives:$y, works:$z, alive: $t):-  $x(lives: $y, works:$z), $a($c:$k), $g(lives:$t) ? $y=$t";
@@ -32,7 +32,7 @@ public class LanguageTesting {
 		//query = "$x(lives:$y, is_director_of: $z) :-  $x( lives:$y, $w: $z(director_is: $j(married:I2)) )";
 		//query = "$x(lives:$y, is_director_of: $z) :-  $x( works: $z(director_is: $j), lives:$y ) ? $j=$x";
 		//query = "I2($x:$y) :- I2($x:$y)";
-		query = "ENTRIES(id:$x, attribute: $y, value: $z):-  $x($y:$z) | $x+";
+		//query = "ENTRIES(id:$x, attribute: $y, value: $z):-  $x($y:$z) | $x+";
 
 		//query = "$x(lives:$y, is_director_of: $z) :-  $x( works: $z(director_is: $j), lives:$y ) ? $j=$x";
 		//query = "$x(is_director_of: $z) :-  $x( works: $z(director_is: $j) ) ? $j=$x";
