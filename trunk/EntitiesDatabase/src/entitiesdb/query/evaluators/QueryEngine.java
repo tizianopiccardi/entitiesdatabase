@@ -80,10 +80,12 @@ public class QueryEngine extends DepthFirstAdapter {
 		//Table
 		BufferTable table = (BufferTable) env.getNodeVal(node.getBody());
 
-		node.getOrderby().apply(this);
-		OrderBy orderBy = (OrderBy) env.getNodeVal(node.getOrderby());
-		if (orderBy != null)
-			table.sort(orderBy.getVarName(), (orderBy.getDirection()==OrderDirection.ASC ? true : false) );
+		if (node.getOrderby()!=null) {
+			node.getOrderby().apply(this);
+			OrderBy orderBy = (OrderBy) env.getNodeVal(node.getOrderby());
+			if (orderBy != null)
+				table.sort(orderBy.getVarName(), (orderBy.getDirection()==OrderDirection.ASC ? true : false) );
+		}
 		
 		//head is: $x(has: $y, ...) :- ...
 		node.getHead().apply(new StatementEngine(dao, env));
@@ -105,17 +107,16 @@ public class QueryEngine extends DepthFirstAdapter {
 		BufferTable table = (BufferTable) env.getNodeVal(node.getBody());
 		
 		
-		//Here I have the table with no condition, so let's apply them :)
+		//For the moment the table is without condition, so let's apply them :)
 		node.getConditions().apply(this);
-		
 		table.applyConditions((ArrayList<Condition>) env.getNodeVal(node.getConditions()));
 		
-		
-		node.getOrderby().apply(this);
-		OrderBy orderBy = (OrderBy) env.getNodeVal(node.getOrderby());
-		if (orderBy != null)
-			table.sort(orderBy.getVarName(), (orderBy.getDirection()==OrderDirection.ASC ? true : false) );
-	
+		if (node.getOrderby()!=null) {
+			node.getOrderby().apply(this);
+			OrderBy orderBy = (OrderBy) env.getNodeVal(node.getOrderby());
+			if (orderBy != null)
+				table.sort(orderBy.getVarName(), (orderBy.getDirection()==OrderDirection.ASC ? true : false) );
+		}
 		
 		
 		node.getHead().apply(new StatementEngine(dao, env));
