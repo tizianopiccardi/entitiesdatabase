@@ -47,7 +47,10 @@ Tokens
   
   qmark = '?';
   
-  nsight = '#';
+  
+  excmark = '!';
+  
+  //nsight = '#';
   pipe = '|';
   plus = '+';
   minus = '-';
@@ -63,12 +66,12 @@ Ignored Tokens
   
 Productions
 
-	main 		=   {query}  nsight? query 
+	main 		=   {query}  query 
 				  |	{insert} less identifier entitybody?
 				  ; 
 	
-	query		=   {simple} head definedby body orderby?
-				  | {complex} head definedby body qmark conditions orderby?
+	query		=   {simple} head [distinct]:excmark? definedby body orderby? 
+				  | {complex} head [distinct]:excmark? definedby body qmark conditions orderby?
 				  ;
 	
 	head 		=	entitytype entitybody

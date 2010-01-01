@@ -19,7 +19,7 @@ public class LanguageTesting {
 		String query = "";
 		
 
-		query = "$x($a:$b):- $x(lives: $y, works:$z, $a:$b)";
+		query = " $x($a:$b)! :- $x(lives: $y, works:$z, $a:$b) | $b+";
 		//query = "$x(lives:$y, works:$z, alive: 'YES'):- $x(lives: $y, works:$z) ? $y = TN";
 		//query = "$x(lives:$y, works:$z, alive: 'YES'):- $x(lives: $y, works:$z) ? $y = TN, $z = H1";
 		//query = "$x(lives:$y, works:$z, alive: $t):-  $x(lives: $y, works:$z), $a($c:$k), $g(lives:$t) ? $y=$t";

@@ -64,7 +64,7 @@ class TokenIndex extends AnalysisAdapter
     }
 
     @Override
-    public void caseTNsight(@SuppressWarnings("unused") TNsight node)
+    public void caseTExcmark(@SuppressWarnings("unused") TExcmark node)
     {
         this.index = 9;
     }

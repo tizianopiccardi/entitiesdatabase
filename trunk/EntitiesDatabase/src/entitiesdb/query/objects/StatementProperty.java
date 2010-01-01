@@ -49,8 +49,16 @@ public class StatementProperty {
 	public String toString() {
 		return "" + attribute + ":" + value + "";
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return equals((StatementProperty)obj);
+	}
 
-
+	public boolean equals(StatementProperty obj) {
+		return (obj.attribute.equals(this.attribute) && obj.value.equals(this.value));
+	}
+	
 }
 
 

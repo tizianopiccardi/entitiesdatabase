@@ -48,4 +48,27 @@ public class StatementBody {
 	}
 	
 	
+	@Override
+	public int hashCode() {
+		return this.toString().hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return equals((StatementBody)obj);
+	}
+	
+	public boolean equals(StatementBody obj) {
+		
+		if (obj.properties.size()!=this.properties.size())
+			return false;
+		
+		boolean out = (obj.entity.equals(this.entity));
+		
+		for(int i = 0 ; i < obj.properties.size() ; i++) 
+			out&=obj.properties.get(i).equals(this.properties.get(i));
+		
+		return out;
+	}	
+	
 }

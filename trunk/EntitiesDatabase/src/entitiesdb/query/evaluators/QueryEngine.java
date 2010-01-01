@@ -70,10 +70,6 @@ public class QueryEngine extends DepthFirstAdapter {
 		node.getQuery().apply(this);
 		this.resultSet = (ResultSet) env.getNodeVal(node.getQuery());
 		
-		if (node.getNsight()!=null) {
-			this.resultSet.distinct();
-		}
-		
 	}
 	
 	
@@ -85,6 +81,7 @@ public class QueryEngine extends DepthFirstAdapter {
 		//Table
 		BufferTable table = (BufferTable) env.getNodeVal(node.getBody());
 
+		
 		if (node.getOrderby()!=null) {
 			node.getOrderby().apply(this);
 			OrderBy orderBy = (OrderBy) env.getNodeVal(node.getOrderby());
@@ -97,15 +94,15 @@ public class QueryEngine extends DepthFirstAdapter {
 		StatementBody head = (StatementBody) env.getNodeVal(node.getHead());
 		
 		//Set this node as a new result set
-		env.setNodeVal(node, new ResultSet(table, head));
+		ResultSet queryRes = new ResultSet(table, head);
+		if (node.getDistinct()!=null) 
+			queryRes.distinct();
+		env.setNodeVal(node, queryRes);
 
 	}
 	
 	@SuppressWarnings("unchecked")
 	public void caseAComplexQuery(AComplexQuery node) {
-		
-		
-
 		
 		//It's the same of caseASimpleQuery
 		node.getBody().apply(this);
@@ -116,6 +113,7 @@ public class QueryEngine extends DepthFirstAdapter {
 		node.getConditions().apply(this);
 		table.applyConditions((ArrayList<Condition>) env.getNodeVal(node.getConditions()));
 		
+
 		if (node.getOrderby()!=null) {
 			node.getOrderby().apply(this);
 			OrderBy orderBy = (OrderBy) env.getNodeVal(node.getOrderby());
@@ -126,6 +124,10 @@ public class QueryEngine extends DepthFirstAdapter {
 		
 		node.getHead().apply(new StatementEngine(dao, env));
 		StatementBody head = (StatementBody) env.getNodeVal(node.getHead());
+		
+		ResultSet queryRes = new ResultSet(table, head);
+		if (node.getDistinct()!=null) 
+			queryRes.distinct();
 		env.setNodeVal(node, new ResultSet(table, head));
 
 	}
