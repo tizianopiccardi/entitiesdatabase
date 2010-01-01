@@ -47,7 +47,7 @@ Tokens
   
   qmark = '?';
   
- // nsight = '#';
+  nsight = '#';
   pipe = '|';
   plus = '+';
   minus = '-';
@@ -63,7 +63,7 @@ Ignored Tokens
   
 Productions
 
-	main 		=   {query}  query
+	main 		=   {query}  nsight? query 
 				  |	{insert} less identifier entitybody?
 				  ; 
 	

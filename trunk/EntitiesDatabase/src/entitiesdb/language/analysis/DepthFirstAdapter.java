@@ -50,6 +50,10 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseAQueryMain(AQueryMain node)
     {
         inAQueryMain(node);
+        if(node.getNsight() != null)
+        {
+            node.getNsight().apply(this);
+        }
         if(node.getQuery() != null)
         {
             node.getQuery().apply(this);

@@ -249,6 +249,11 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
+    public void caseTNsight(TNsight node)
+    {
+        defaultCase(node);
+    }
+
     public void caseTPipe(TPipe node)
     {
         defaultCase(node);
