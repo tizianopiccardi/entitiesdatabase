@@ -1,6 +1,7 @@
 package entitiesdb.query;
 
-import java.util.Hashtable;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 import entitiesdb.query.objects.StatementBody;
 import entitiesdb.query.objects.StatementProperty;
@@ -72,14 +73,22 @@ public class ResultSet {
 	
 	
 	public void distinct() {
+
+		ArrayList<StatementBody> tmp = new ArrayList<StatementBody>();
 		
-		Hashtable<Object, StatementBody[]> tempTable = new Hashtable<Object, StatementBody[]>();
+		HashSet<Integer> rowHashBag = new HashSet<Integer>();
+		for (StatementBody sb : queryResult) {
+			int hash = sb.hashCode();
+			if (!rowHashBag.contains(hash)) {
+				rowHashBag.add(hash);
+				tmp.add(sb);
+			}
+		}
 		
-		
-		
-		
+		queryResult = tmp.toArray(new StatementBody[rowHashBag.size()]);
+
 	}
-	
+
 	
 	
 	@Override

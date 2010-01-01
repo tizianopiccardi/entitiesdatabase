@@ -249,7 +249,7 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
-    public void caseTNsight(TNsight node)
+    public void caseTExcmark(TExcmark node)
     {
         defaultCase(node);
     }

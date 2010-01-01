@@ -8,6 +8,7 @@ import entitiesdb.language.analysis.*;
 public final class AComplexQuery extends PQuery
 {
     private PHead _head_;
+    private TExcmark _distinct_;
     private TDefinedby _definedby_;
     private PBody _body_;
     private TQmark _qmark_;
@@ -21,6 +22,7 @@ public final class AComplexQuery extends PQuery
 
     public AComplexQuery(
         @SuppressWarnings("hiding") PHead _head_,
+        @SuppressWarnings("hiding") TExcmark _distinct_,
         @SuppressWarnings("hiding") TDefinedby _definedby_,
         @SuppressWarnings("hiding") PBody _body_,
         @SuppressWarnings("hiding") TQmark _qmark_,
@@ -29,6 +31,8 @@ public final class AComplexQuery extends PQuery
     {
         // Constructor
         setHead(_head_);
+
+        setDistinct(_distinct_);
 
         setDefinedby(_definedby_);
 
@@ -47,6 +51,7 @@ public final class AComplexQuery extends PQuery
     {
         return new AComplexQuery(
             cloneNode(this._head_),
+            cloneNode(this._distinct_),
             cloneNode(this._definedby_),
             cloneNode(this._body_),
             cloneNode(this._qmark_),
@@ -82,6 +87,31 @@ public final class AComplexQuery extends PQuery
         }
 
         this._head_ = node;
+    }
+
+    public TExcmark getDistinct()
+    {
+        return this._distinct_;
+    }
+
+    public void setDistinct(TExcmark node)
+    {
+        if(this._distinct_ != null)
+        {
+            this._distinct_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._distinct_ = node;
     }
 
     public TDefinedby getDefinedby()
@@ -214,6 +244,7 @@ public final class AComplexQuery extends PQuery
     {
         return ""
             + toString(this._head_)
+            + toString(this._distinct_)
             + toString(this._definedby_)
             + toString(this._body_)
             + toString(this._qmark_)
@@ -228,6 +259,12 @@ public final class AComplexQuery extends PQuery
         if(this._head_ == child)
         {
             this._head_ = null;
+            return;
+        }
+
+        if(this._distinct_ == child)
+        {
+            this._distinct_ = null;
             return;
         }
 
@@ -271,6 +308,12 @@ public final class AComplexQuery extends PQuery
         if(this._head_ == oldChild)
         {
             setHead((PHead) newChild);
+            return;
+        }
+
+        if(this._distinct_ == oldChild)
+        {
+            setDistinct((TExcmark) newChild);
             return;
         }
 

@@ -175,177 +175,195 @@ public class Parser
                 case REDUCE:
                     switch(this.action[1])
                     {
-                    case 0: /* reduce AAquerymain1Main */
+                    case 0: /* reduce AQueryMain */
 		    {
 			ArrayList list = new0();
 			push(goTo(0), list, false);
 		    }
 		    break;
-                    case 1: /* reduce AAquerymain2Main */
+                    case 1: /* reduce AAinsertmain1Main */
 		    {
 			ArrayList list = new1();
 			push(goTo(0), list, false);
 		    }
 		    break;
-                    case 2: /* reduce AAinsertmain1Main */
+                    case 2: /* reduce AAinsertmain2Main */
 		    {
 			ArrayList list = new2();
 			push(goTo(0), list, false);
 		    }
 		    break;
-                    case 3: /* reduce AAinsertmain2Main */
+                    case 3: /* reduce AAsimplequery1Query */
 		    {
 			ArrayList list = new3();
-			push(goTo(0), list, false);
+			push(goTo(1), list, false);
 		    }
 		    break;
-                    case 4: /* reduce AAsimplequery1Query */
+                    case 4: /* reduce AAsimplequery2Query */
 		    {
 			ArrayList list = new4();
 			push(goTo(1), list, false);
 		    }
 		    break;
-                    case 5: /* reduce AAsimplequery2Query */
+                    case 5: /* reduce AAsimplequery3Query */
 		    {
 			ArrayList list = new5();
 			push(goTo(1), list, false);
 		    }
 		    break;
-                    case 6: /* reduce AAcomplexquery1Query */
+                    case 6: /* reduce AAsimplequery4Query */
 		    {
 			ArrayList list = new6();
 			push(goTo(1), list, false);
 		    }
 		    break;
-                    case 7: /* reduce AAcomplexquery2Query */
+                    case 7: /* reduce AAcomplexquery1Query */
 		    {
 			ArrayList list = new7();
 			push(goTo(1), list, false);
 		    }
 		    break;
-                    case 8: /* reduce AHead */
+                    case 8: /* reduce AAcomplexquery2Query */
 		    {
 			ArrayList list = new8();
+			push(goTo(1), list, false);
+		    }
+		    break;
+                    case 9: /* reduce AAcomplexquery3Query */
+		    {
+			ArrayList list = new9();
+			push(goTo(1), list, false);
+		    }
+		    break;
+                    case 10: /* reduce AAcomplexquery4Query */
+		    {
+			ArrayList list = new10();
+			push(goTo(1), list, false);
+		    }
+		    break;
+                    case 11: /* reduce AHead */
+		    {
+			ArrayList list = new11();
 			push(goTo(2), list, false);
 		    }
 		    break;
-                    case 9: /* reduce ASingleBody */
+                    case 12: /* reduce ASingleBody */
 		    {
-			ArrayList list = new9();
+			ArrayList list = new12();
 			push(goTo(3), list, false);
 		    }
 		    break;
-                    case 10: /* reduce AListBody */
+                    case 13: /* reduce AListBody */
 		    {
-			ArrayList list = new10();
+			ArrayList list = new13();
 			push(goTo(3), list, false);
 		    }
 		    break;
-                    case 11: /* reduce AEntitypattern */
+                    case 14: /* reduce AEntitypattern */
 		    {
-			ArrayList list = new11();
+			ArrayList list = new14();
 			push(goTo(4), list, false);
 		    }
 		    break;
-                    case 12: /* reduce AIdeEntitytype */
+                    case 15: /* reduce AIdeEntitytype */
 		    {
-			ArrayList list = new12();
+			ArrayList list = new15();
 			push(goTo(5), list, false);
 		    }
 		    break;
-                    case 13: /* reduce AVariableEntitytype */
+                    case 16: /* reduce AVariableEntitytype */
 		    {
-			ArrayList list = new13();
+			ArrayList list = new16();
 			push(goTo(5), list, false);
 		    }
 		    break;
-                    case 14: /* reduce AEntitybody */
+                    case 17: /* reduce AEntitybody */
 		    {
-			ArrayList list = new14();
+			ArrayList list = new17();
 			push(goTo(6), list, false);
 		    }
 		    break;
-                    case 15: /* reduce ASingleAttributes */
+                    case 18: /* reduce ASingleAttributes */
 		    {
-			ArrayList list = new15();
+			ArrayList list = new18();
 			push(goTo(7), list, false);
 		    }
 		    break;
-                    case 16: /* reduce AListAttributes */
+                    case 19: /* reduce AListAttributes */
 		    {
-			ArrayList list = new16();
+			ArrayList list = new19();
 			push(goTo(7), list, false);
 		    }
 		    break;
-                    case 17: /* reduce AAttribute */
+                    case 20: /* reduce AAttribute */
 		    {
-			ArrayList list = new17();
+			ArrayList list = new20();
 			push(goTo(8), list, false);
 		    }
 		    break;
-                    case 18: /* reduce AIdeAttributetype */
-		    {
-			ArrayList list = new18();
-			push(goTo(9), list, false);
-		    }
-		    break;
-                    case 19: /* reduce AVariableAttributetype */
-		    {
-			ArrayList list = new19();
-			push(goTo(9), list, false);
-		    }
-		    break;
-                    case 20: /* reduce AStringValue */
-		    {
-			ArrayList list = new20();
-			push(goTo(10), list, false);
-		    }
-		    break;
-                    case 21: /* reduce AEntityValue */
+                    case 21: /* reduce AIdeAttributetype */
 		    {
 			ArrayList list = new21();
-			push(goTo(10), list, false);
+			push(goTo(9), list, false);
 		    }
 		    break;
-                    case 22: /* reduce AVariableValue */
+                    case 22: /* reduce AVariableAttributetype */
 		    {
 			ArrayList list = new22();
-			push(goTo(10), list, false);
+			push(goTo(9), list, false);
 		    }
 		    break;
-                    case 23: /* reduce ABodyValue */
+                    case 23: /* reduce AStringValue */
 		    {
 			ArrayList list = new23();
 			push(goTo(10), list, false);
 		    }
 		    break;
-                    case 24: /* reduce ADesOrderby */
+                    case 24: /* reduce AEntityValue */
 		    {
 			ArrayList list = new24();
-			push(goTo(11), list, false);
+			push(goTo(10), list, false);
 		    }
 		    break;
-                    case 25: /* reduce AAscOrderby */
+                    case 25: /* reduce AVariableValue */
 		    {
 			ArrayList list = new25();
+			push(goTo(10), list, false);
+		    }
+		    break;
+                    case 26: /* reduce ABodyValue */
+		    {
+			ArrayList list = new26();
+			push(goTo(10), list, false);
+		    }
+		    break;
+                    case 27: /* reduce ADesOrderby */
+		    {
+			ArrayList list = new27();
 			push(goTo(11), list, false);
 		    }
 		    break;
-                    case 26: /* reduce ASingleConditions */
-		    {
-			ArrayList list = new26();
-			push(goTo(12), list, false);
-		    }
-		    break;
-                    case 27: /* reduce AListConditions */
-		    {
-			ArrayList list = new27();
-			push(goTo(12), list, false);
-		    }
-		    break;
-                    case 28: /* reduce AEqualCondition */
+                    case 28: /* reduce AAscOrderby */
 		    {
 			ArrayList list = new28();
+			push(goTo(11), list, false);
+		    }
+		    break;
+                    case 29: /* reduce ASingleConditions */
+		    {
+			ArrayList list = new29();
+			push(goTo(12), list, false);
+		    }
+		    break;
+                    case 30: /* reduce AListConditions */
+		    {
+			ArrayList list = new30();
+			push(goTo(12), list, false);
+		    }
+		    break;
+                    case 31: /* reduce AEqualCondition */
+		    {
+			ArrayList list = new31();
 			push(goTo(13), list, false);
 		    }
 		    break;
@@ -369,7 +387,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new0() /* reduce AAquerymain1Main */
+    ArrayList new0() /* reduce AQueryMain */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -377,11 +395,10 @@ public class Parser
         PMain pmainNode1;
         {
             // Block
-        @SuppressWarnings("unused") Object nullNode2 = null;
-        PQuery pqueryNode3;
-        pqueryNode3 = (PQuery)nodeArrayList1.get(0);
+        PQuery pqueryNode2;
+        pqueryNode2 = (PQuery)nodeArrayList1.get(0);
 
-        pmainNode1 = new AQueryMain(null, pqueryNode3);
+        pmainNode1 = new AQueryMain(pqueryNode2);
         }
 	nodeList.add(pmainNode1);
         return nodeList;
@@ -390,30 +407,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new1() /* reduce AAquerymain2Main */
-    {
-        @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
-
-        @SuppressWarnings("unused") ArrayList nodeArrayList2 = pop();
-        @SuppressWarnings("unused") ArrayList nodeArrayList1 = pop();
-        PMain pmainNode1;
-        {
-            // Block
-        TNsight tnsightNode2;
-        PQuery pqueryNode3;
-        tnsightNode2 = (TNsight)nodeArrayList1.get(0);
-        pqueryNode3 = (PQuery)nodeArrayList2.get(0);
-
-        pmainNode1 = new AQueryMain(tnsightNode2, pqueryNode3);
-        }
-	nodeList.add(pmainNode1);
-        return nodeList;
-    }
-
-
-
-    @SuppressWarnings("unchecked")
-    ArrayList new2() /* reduce AAinsertmain1Main */
+    ArrayList new1() /* reduce AAinsertmain1Main */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -437,7 +431,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new3() /* reduce AAinsertmain2Main */
+    ArrayList new2() /* reduce AAinsertmain2Main */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -463,7 +457,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new4() /* reduce AAsimplequery1Query */
+    ArrayList new3() /* reduce AAsimplequery1Query */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -474,14 +468,15 @@ public class Parser
         {
             // Block
         PHead pheadNode2;
-        TDefinedby tdefinedbyNode3;
-        PBody pbodyNode4;
-        @SuppressWarnings("unused") Object nullNode5 = null;
+        @SuppressWarnings("unused") Object nullNode3 = null;
+        TDefinedby tdefinedbyNode4;
+        PBody pbodyNode5;
+        @SuppressWarnings("unused") Object nullNode6 = null;
         pheadNode2 = (PHead)nodeArrayList1.get(0);
-        tdefinedbyNode3 = (TDefinedby)nodeArrayList2.get(0);
-        pbodyNode4 = (PBody)nodeArrayList3.get(0);
+        tdefinedbyNode4 = (TDefinedby)nodeArrayList2.get(0);
+        pbodyNode5 = (PBody)nodeArrayList3.get(0);
 
-        pqueryNode1 = new ASimpleQuery(pheadNode2, tdefinedbyNode3, pbodyNode4, null);
+        pqueryNode1 = new ASimpleQuery(pheadNode2, null, tdefinedbyNode4, pbodyNode5, null);
         }
 	nodeList.add(pqueryNode1);
         return nodeList;
@@ -490,7 +485,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new5() /* reduce AAsimplequery2Query */
+    ArrayList new4() /* reduce AAsimplequery2Query */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -502,15 +497,16 @@ public class Parser
         {
             // Block
         PHead pheadNode2;
-        TDefinedby tdefinedbyNode3;
-        PBody pbodyNode4;
-        POrderby porderbyNode5;
+        TExcmark texcmarkNode3;
+        TDefinedby tdefinedbyNode4;
+        PBody pbodyNode5;
+        @SuppressWarnings("unused") Object nullNode6 = null;
         pheadNode2 = (PHead)nodeArrayList1.get(0);
-        tdefinedbyNode3 = (TDefinedby)nodeArrayList2.get(0);
-        pbodyNode4 = (PBody)nodeArrayList3.get(0);
-        porderbyNode5 = (POrderby)nodeArrayList4.get(0);
+        texcmarkNode3 = (TExcmark)nodeArrayList2.get(0);
+        tdefinedbyNode4 = (TDefinedby)nodeArrayList3.get(0);
+        pbodyNode5 = (PBody)nodeArrayList4.get(0);
 
-        pqueryNode1 = new ASimpleQuery(pheadNode2, tdefinedbyNode3, pbodyNode4, porderbyNode5);
+        pqueryNode1 = new ASimpleQuery(pheadNode2, texcmarkNode3, tdefinedbyNode4, pbodyNode5, null);
         }
 	nodeList.add(pqueryNode1);
         return nodeList;
@@ -519,7 +515,37 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new6() /* reduce AAcomplexquery1Query */
+    ArrayList new5() /* reduce AAsimplequery3Query */
+    {
+        @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
+
+        @SuppressWarnings("unused") ArrayList nodeArrayList4 = pop();
+        @SuppressWarnings("unused") ArrayList nodeArrayList3 = pop();
+        @SuppressWarnings("unused") ArrayList nodeArrayList2 = pop();
+        @SuppressWarnings("unused") ArrayList nodeArrayList1 = pop();
+        PQuery pqueryNode1;
+        {
+            // Block
+        PHead pheadNode2;
+        @SuppressWarnings("unused") Object nullNode3 = null;
+        TDefinedby tdefinedbyNode4;
+        PBody pbodyNode5;
+        POrderby porderbyNode6;
+        pheadNode2 = (PHead)nodeArrayList1.get(0);
+        tdefinedbyNode4 = (TDefinedby)nodeArrayList2.get(0);
+        pbodyNode5 = (PBody)nodeArrayList3.get(0);
+        porderbyNode6 = (POrderby)nodeArrayList4.get(0);
+
+        pqueryNode1 = new ASimpleQuery(pheadNode2, null, tdefinedbyNode4, pbodyNode5, porderbyNode6);
+        }
+	nodeList.add(pqueryNode1);
+        return nodeList;
+    }
+
+
+
+    @SuppressWarnings("unchecked")
+    ArrayList new6() /* reduce AAsimplequery4Query */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -532,18 +558,17 @@ public class Parser
         {
             // Block
         PHead pheadNode2;
-        TDefinedby tdefinedbyNode3;
-        PBody pbodyNode4;
-        TQmark tqmarkNode5;
-        PConditions pconditionsNode6;
-        @SuppressWarnings("unused") Object nullNode7 = null;
+        TExcmark texcmarkNode3;
+        TDefinedby tdefinedbyNode4;
+        PBody pbodyNode5;
+        POrderby porderbyNode6;
         pheadNode2 = (PHead)nodeArrayList1.get(0);
-        tdefinedbyNode3 = (TDefinedby)nodeArrayList2.get(0);
-        pbodyNode4 = (PBody)nodeArrayList3.get(0);
-        tqmarkNode5 = (TQmark)nodeArrayList4.get(0);
-        pconditionsNode6 = (PConditions)nodeArrayList5.get(0);
+        texcmarkNode3 = (TExcmark)nodeArrayList2.get(0);
+        tdefinedbyNode4 = (TDefinedby)nodeArrayList3.get(0);
+        pbodyNode5 = (PBody)nodeArrayList4.get(0);
+        porderbyNode6 = (POrderby)nodeArrayList5.get(0);
 
-        pqueryNode1 = new AComplexQuery(pheadNode2, tdefinedbyNode3, pbodyNode4, tqmarkNode5, pconditionsNode6, null);
+        pqueryNode1 = new ASimpleQuery(pheadNode2, texcmarkNode3, tdefinedbyNode4, pbodyNode5, porderbyNode6);
         }
 	nodeList.add(pqueryNode1);
         return nodeList;
@@ -552,7 +577,41 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new7() /* reduce AAcomplexquery2Query */
+    ArrayList new7() /* reduce AAcomplexquery1Query */
+    {
+        @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
+
+        @SuppressWarnings("unused") ArrayList nodeArrayList5 = pop();
+        @SuppressWarnings("unused") ArrayList nodeArrayList4 = pop();
+        @SuppressWarnings("unused") ArrayList nodeArrayList3 = pop();
+        @SuppressWarnings("unused") ArrayList nodeArrayList2 = pop();
+        @SuppressWarnings("unused") ArrayList nodeArrayList1 = pop();
+        PQuery pqueryNode1;
+        {
+            // Block
+        PHead pheadNode2;
+        @SuppressWarnings("unused") Object nullNode3 = null;
+        TDefinedby tdefinedbyNode4;
+        PBody pbodyNode5;
+        TQmark tqmarkNode6;
+        PConditions pconditionsNode7;
+        @SuppressWarnings("unused") Object nullNode8 = null;
+        pheadNode2 = (PHead)nodeArrayList1.get(0);
+        tdefinedbyNode4 = (TDefinedby)nodeArrayList2.get(0);
+        pbodyNode5 = (PBody)nodeArrayList3.get(0);
+        tqmarkNode6 = (TQmark)nodeArrayList4.get(0);
+        pconditionsNode7 = (PConditions)nodeArrayList5.get(0);
+
+        pqueryNode1 = new AComplexQuery(pheadNode2, null, tdefinedbyNode4, pbodyNode5, tqmarkNode6, pconditionsNode7, null);
+        }
+	nodeList.add(pqueryNode1);
+        return nodeList;
+    }
+
+
+
+    @SuppressWarnings("unchecked")
+    ArrayList new8() /* reduce AAcomplexquery2Query */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -566,19 +625,20 @@ public class Parser
         {
             // Block
         PHead pheadNode2;
-        TDefinedby tdefinedbyNode3;
-        PBody pbodyNode4;
-        TQmark tqmarkNode5;
-        PConditions pconditionsNode6;
-        POrderby porderbyNode7;
+        TExcmark texcmarkNode3;
+        TDefinedby tdefinedbyNode4;
+        PBody pbodyNode5;
+        TQmark tqmarkNode6;
+        PConditions pconditionsNode7;
+        @SuppressWarnings("unused") Object nullNode8 = null;
         pheadNode2 = (PHead)nodeArrayList1.get(0);
-        tdefinedbyNode3 = (TDefinedby)nodeArrayList2.get(0);
-        pbodyNode4 = (PBody)nodeArrayList3.get(0);
-        tqmarkNode5 = (TQmark)nodeArrayList4.get(0);
-        pconditionsNode6 = (PConditions)nodeArrayList5.get(0);
-        porderbyNode7 = (POrderby)nodeArrayList6.get(0);
+        texcmarkNode3 = (TExcmark)nodeArrayList2.get(0);
+        tdefinedbyNode4 = (TDefinedby)nodeArrayList3.get(0);
+        pbodyNode5 = (PBody)nodeArrayList4.get(0);
+        tqmarkNode6 = (TQmark)nodeArrayList5.get(0);
+        pconditionsNode7 = (PConditions)nodeArrayList6.get(0);
 
-        pqueryNode1 = new AComplexQuery(pheadNode2, tdefinedbyNode3, pbodyNode4, tqmarkNode5, pconditionsNode6, porderbyNode7);
+        pqueryNode1 = new AComplexQuery(pheadNode2, texcmarkNode3, tdefinedbyNode4, pbodyNode5, tqmarkNode6, pconditionsNode7, null);
         }
 	nodeList.add(pqueryNode1);
         return nodeList;
@@ -587,7 +647,81 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new8() /* reduce AHead */
+    ArrayList new9() /* reduce AAcomplexquery3Query */
+    {
+        @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
+
+        @SuppressWarnings("unused") ArrayList nodeArrayList6 = pop();
+        @SuppressWarnings("unused") ArrayList nodeArrayList5 = pop();
+        @SuppressWarnings("unused") ArrayList nodeArrayList4 = pop();
+        @SuppressWarnings("unused") ArrayList nodeArrayList3 = pop();
+        @SuppressWarnings("unused") ArrayList nodeArrayList2 = pop();
+        @SuppressWarnings("unused") ArrayList nodeArrayList1 = pop();
+        PQuery pqueryNode1;
+        {
+            // Block
+        PHead pheadNode2;
+        @SuppressWarnings("unused") Object nullNode3 = null;
+        TDefinedby tdefinedbyNode4;
+        PBody pbodyNode5;
+        TQmark tqmarkNode6;
+        PConditions pconditionsNode7;
+        POrderby porderbyNode8;
+        pheadNode2 = (PHead)nodeArrayList1.get(0);
+        tdefinedbyNode4 = (TDefinedby)nodeArrayList2.get(0);
+        pbodyNode5 = (PBody)nodeArrayList3.get(0);
+        tqmarkNode6 = (TQmark)nodeArrayList4.get(0);
+        pconditionsNode7 = (PConditions)nodeArrayList5.get(0);
+        porderbyNode8 = (POrderby)nodeArrayList6.get(0);
+
+        pqueryNode1 = new AComplexQuery(pheadNode2, null, tdefinedbyNode4, pbodyNode5, tqmarkNode6, pconditionsNode7, porderbyNode8);
+        }
+	nodeList.add(pqueryNode1);
+        return nodeList;
+    }
+
+
+
+    @SuppressWarnings("unchecked")
+    ArrayList new10() /* reduce AAcomplexquery4Query */
+    {
+        @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
+
+        @SuppressWarnings("unused") ArrayList nodeArrayList7 = pop();
+        @SuppressWarnings("unused") ArrayList nodeArrayList6 = pop();
+        @SuppressWarnings("unused") ArrayList nodeArrayList5 = pop();
+        @SuppressWarnings("unused") ArrayList nodeArrayList4 = pop();
+        @SuppressWarnings("unused") ArrayList nodeArrayList3 = pop();
+        @SuppressWarnings("unused") ArrayList nodeArrayList2 = pop();
+        @SuppressWarnings("unused") ArrayList nodeArrayList1 = pop();
+        PQuery pqueryNode1;
+        {
+            // Block
+        PHead pheadNode2;
+        TExcmark texcmarkNode3;
+        TDefinedby tdefinedbyNode4;
+        PBody pbodyNode5;
+        TQmark tqmarkNode6;
+        PConditions pconditionsNode7;
+        POrderby porderbyNode8;
+        pheadNode2 = (PHead)nodeArrayList1.get(0);
+        texcmarkNode3 = (TExcmark)nodeArrayList2.get(0);
+        tdefinedbyNode4 = (TDefinedby)nodeArrayList3.get(0);
+        pbodyNode5 = (PBody)nodeArrayList4.get(0);
+        tqmarkNode6 = (TQmark)nodeArrayList5.get(0);
+        pconditionsNode7 = (PConditions)nodeArrayList6.get(0);
+        porderbyNode8 = (POrderby)nodeArrayList7.get(0);
+
+        pqueryNode1 = new AComplexQuery(pheadNode2, texcmarkNode3, tdefinedbyNode4, pbodyNode5, tqmarkNode6, pconditionsNode7, porderbyNode8);
+        }
+	nodeList.add(pqueryNode1);
+        return nodeList;
+    }
+
+
+
+    @SuppressWarnings("unchecked")
+    ArrayList new11() /* reduce AHead */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -610,7 +744,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new9() /* reduce ASingleBody */
+    ArrayList new12() /* reduce ASingleBody */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -630,7 +764,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new10() /* reduce AListBody */
+    ArrayList new13() /* reduce AListBody */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -656,7 +790,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new11() /* reduce AEntitypattern */
+    ArrayList new14() /* reduce AEntitypattern */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -679,7 +813,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new12() /* reduce AIdeEntitytype */
+    ArrayList new15() /* reduce AIdeEntitytype */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -699,7 +833,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new13() /* reduce AVariableEntitytype */
+    ArrayList new16() /* reduce AVariableEntitytype */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -719,7 +853,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new14() /* reduce AEntitybody */
+    ArrayList new17() /* reduce AEntitybody */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -745,7 +879,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new15() /* reduce ASingleAttributes */
+    ArrayList new18() /* reduce ASingleAttributes */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -765,7 +899,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new16() /* reduce AListAttributes */
+    ArrayList new19() /* reduce AListAttributes */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -791,7 +925,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new17() /* reduce AAttribute */
+    ArrayList new20() /* reduce AAttribute */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -817,7 +951,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new18() /* reduce AIdeAttributetype */
+    ArrayList new21() /* reduce AIdeAttributetype */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -837,7 +971,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new19() /* reduce AVariableAttributetype */
+    ArrayList new22() /* reduce AVariableAttributetype */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -857,7 +991,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new20() /* reduce AStringValue */
+    ArrayList new23() /* reduce AStringValue */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -877,7 +1011,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new21() /* reduce AEntityValue */
+    ArrayList new24() /* reduce AEntityValue */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -897,7 +1031,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new22() /* reduce AVariableValue */
+    ArrayList new25() /* reduce AVariableValue */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -917,7 +1051,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new23() /* reduce ABodyValue */
+    ArrayList new26() /* reduce ABodyValue */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -937,7 +1071,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new24() /* reduce ADesOrderby */
+    ArrayList new27() /* reduce ADesOrderby */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -963,7 +1097,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new25() /* reduce AAscOrderby */
+    ArrayList new28() /* reduce AAscOrderby */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -989,7 +1123,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new26() /* reduce ASingleConditions */
+    ArrayList new29() /* reduce ASingleConditions */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -1009,7 +1143,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new27() /* reduce AListConditions */
+    ArrayList new30() /* reduce AListConditions */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -1035,7 +1169,7 @@ public class Parser
 
 
     @SuppressWarnings("unchecked")
-    ArrayList new28() /* reduce AEqualCondition */
+    ArrayList new31() /* reduce AEqualCondition */
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
@@ -1062,88 +1196,94 @@ public class Parser
 
     private static int[][][] actionTable;
 /*      {
-			{{-1, ERROR, 0}, {5, SHIFT, 1}, {6, SHIFT, 2}, {9, SHIFT, 3}, {15, SHIFT, 4}, },
-			{{-1, REDUCE, 12}, },
-			{{-1, REDUCE, 13}, },
-			{{-1, ERROR, 3}, {5, SHIFT, 1}, {6, SHIFT, 2}, },
-			{{-1, ERROR, 4}, {5, SHIFT, 10}, },
-			{{-1, ERROR, 5}, {16, ACCEPT, -1}, },
-			{{-1, REDUCE, 0}, },
-			{{-1, ERROR, 7}, {2, SHIFT, 11}, },
-			{{-1, ERROR, 8}, {3, SHIFT, 12}, },
-			{{-1, REDUCE, 1}, },
-			{{-1, REDUCE, 2}, {3, SHIFT, 12}, },
-			{{-1, ERROR, 11}, {5, SHIFT, 1}, {6, SHIFT, 2}, },
-			{{-1, ERROR, 12}, {5, SHIFT, 18}, {6, SHIFT, 19}, },
-			{{-1, REDUCE, 8}, },
-			{{-1, REDUCE, 3}, },
-			{{-1, REDUCE, 4}, {0, SHIFT, 23}, {8, SHIFT, 24}, {10, SHIFT, 25}, },
-			{{-1, REDUCE, 9}, },
-			{{-1, ERROR, 17}, {3, SHIFT, 12}, },
-			{{-1, REDUCE, 18}, },
-			{{-1, REDUCE, 19}, },
-			{{-1, ERROR, 20}, {0, SHIFT, 28}, {4, SHIFT, 29}, },
+			{{-1, ERROR, 0}, {5, SHIFT, 1}, {6, SHIFT, 2}, {15, SHIFT, 3}, },
 			{{-1, REDUCE, 15}, },
-			{{-1, ERROR, 22}, {1, SHIFT, 30}, },
-			{{-1, ERROR, 23}, {5, SHIFT, 1}, {6, SHIFT, 2}, },
-			{{-1, ERROR, 24}, {6, SHIFT, 32}, },
-			{{-1, ERROR, 25}, {6, SHIFT, 35}, },
-			{{-1, REDUCE, 5}, },
-			{{-1, REDUCE, 11}, },
-			{{-1, ERROR, 28}, {5, SHIFT, 18}, {6, SHIFT, 19}, },
-			{{-1, REDUCE, 14}, },
-			{{-1, ERROR, 30}, {5, SHIFT, 37}, {6, SHIFT, 38}, {7, SHIFT, 39}, },
-			{{-1, REDUCE, 10}, },
-			{{-1, ERROR, 32}, {13, SHIFT, 42}, },
-			{{-1, REDUCE, 6}, {10, SHIFT, 25}, },
-			{{-1, REDUCE, 26}, {0, SHIFT, 44}, },
-			{{-1, ERROR, 35}, {11, SHIFT, 45}, {12, SHIFT, 46}, },
 			{{-1, REDUCE, 16}, },
-			{{-1, REDUCE, 21}, {3, REDUCE, 12}, },
-			{{-1, REDUCE, 22}, {3, REDUCE, 13}, },
-			{{-1, REDUCE, 20}, },
-			{{-1, REDUCE, 23}, },
+			{{-1, ERROR, 3}, {5, SHIFT, 8}, },
+			{{-1, ERROR, 4}, {16, ACCEPT, -1}, },
+			{{-1, REDUCE, 0}, },
+			{{-1, ERROR, 6}, {2, SHIFT, 9}, {9, SHIFT, 10}, },
+			{{-1, ERROR, 7}, {3, SHIFT, 11}, },
+			{{-1, REDUCE, 1}, {3, SHIFT, 11}, },
+			{{-1, ERROR, 9}, {5, SHIFT, 1}, {6, SHIFT, 2}, },
+			{{-1, ERROR, 10}, {2, SHIFT, 17}, },
+			{{-1, ERROR, 11}, {5, SHIFT, 18}, {6, SHIFT, 19}, },
+			{{-1, REDUCE, 11}, },
+			{{-1, REDUCE, 2}, },
+			{{-1, REDUCE, 3}, {0, SHIFT, 23}, {8, SHIFT, 24}, {10, SHIFT, 25}, },
+			{{-1, REDUCE, 12}, },
+			{{-1, ERROR, 16}, {3, SHIFT, 11}, },
+			{{-1, ERROR, 17}, {5, SHIFT, 1}, {6, SHIFT, 2}, },
+			{{-1, REDUCE, 21}, },
+			{{-1, REDUCE, 22}, },
+			{{-1, ERROR, 20}, {0, SHIFT, 29}, {4, SHIFT, 30}, },
+			{{-1, REDUCE, 18}, },
+			{{-1, ERROR, 22}, {1, SHIFT, 31}, },
+			{{-1, ERROR, 23}, {5, SHIFT, 1}, {6, SHIFT, 2}, },
+			{{-1, ERROR, 24}, {6, SHIFT, 33}, },
+			{{-1, ERROR, 25}, {6, SHIFT, 36}, },
+			{{-1, REDUCE, 5}, },
+			{{-1, REDUCE, 14}, },
+			{{-1, REDUCE, 4}, {0, SHIFT, 23}, {8, SHIFT, 37}, {10, SHIFT, 25}, },
+			{{-1, ERROR, 29}, {5, SHIFT, 18}, {6, SHIFT, 19}, },
 			{{-1, REDUCE, 17}, },
-			{{-1, ERROR, 42}, {5, SHIFT, 37}, {6, SHIFT, 38}, {7, SHIFT, 39}, },
-			{{-1, REDUCE, 7}, },
-			{{-1, ERROR, 44}, {6, SHIFT, 32}, },
-			{{-1, REDUCE, 25}, },
-			{{-1, REDUCE, 24}, },
+			{{-1, ERROR, 31}, {5, SHIFT, 40}, {6, SHIFT, 41}, {7, SHIFT, 42}, },
+			{{-1, REDUCE, 13}, },
+			{{-1, ERROR, 33}, {13, SHIFT, 45}, },
+			{{-1, REDUCE, 7}, {10, SHIFT, 25}, },
+			{{-1, REDUCE, 29}, {0, SHIFT, 47}, },
+			{{-1, ERROR, 36}, {11, SHIFT, 48}, {12, SHIFT, 49}, },
+			{{-1, ERROR, 37}, {6, SHIFT, 33}, },
+			{{-1, REDUCE, 6}, },
+			{{-1, REDUCE, 19}, },
+			{{-1, REDUCE, 24}, {3, REDUCE, 15}, },
+			{{-1, REDUCE, 25}, {3, REDUCE, 16}, },
+			{{-1, REDUCE, 23}, },
+			{{-1, REDUCE, 26}, },
+			{{-1, REDUCE, 20}, },
+			{{-1, ERROR, 45}, {5, SHIFT, 40}, {6, SHIFT, 41}, {7, SHIFT, 42}, },
+			{{-1, REDUCE, 9}, },
+			{{-1, ERROR, 47}, {6, SHIFT, 33}, },
 			{{-1, REDUCE, 28}, },
 			{{-1, REDUCE, 27}, },
+			{{-1, REDUCE, 8}, {10, SHIFT, 25}, },
+			{{-1, REDUCE, 31}, },
+			{{-1, REDUCE, 30}, },
+			{{-1, REDUCE, 10}, },
         };*/
     private static int[][][] gotoTable;
 /*      {
+			{{-1, 4}, },
 			{{-1, 5}, },
-			{{-1, 6}, {3, 9}, },
-			{{-1, 7}, },
-			{{-1, 15}, },
-			{{-1, 40}, {11, 16}, {23, 31}, },
-			{{-1, 17}, {0, 8}, {3, 8}, },
-			{{-1, 13}, {10, 14}, {17, 27}, },
+			{{-1, 6}, },
+			{{-1, 14}, {17, 28}, },
+			{{-1, 15}, {23, 32}, {31, 43}, {45, 43}, },
+			{{-1, 16}, {0, 7}, },
+			{{-1, 12}, {8, 13}, {16, 27}, },
 			{{-1, 20}, },
-			{{-1, 21}, {28, 36}, },
+			{{-1, 21}, {29, 39}, },
 			{{-1, 22}, },
-			{{-1, 41}, {42, 47}, },
-			{{-1, 26}, {33, 43}, },
-			{{-1, 33}, {44, 48}, },
-			{{-1, 34}, },
+			{{-1, 44}, {45, 51}, },
+			{{-1, 26}, {28, 38}, {34, 46}, {50, 53}, },
+			{{-1, 34}, {37, 50}, {47, 52}, },
+			{{-1, 35}, },
         };*/
     private static String[] errorMessages;
 /*      {
-			"expecting: identifier, variable, '#', '<'",
+			"expecting: identifier, variable, '<'",
 			"expecting: '('",
-			"expecting: identifier, variable",
 			"expecting: identifier",
 			"expecting: EOF",
-			"expecting: ':-'",
+			"expecting: ':-', '!'",
 			"expecting: '(', EOF",
+			"expecting: identifier, variable",
+			"expecting: ':-'",
 			"expecting: ',', '?', '|', EOF",
 			"expecting: ':'",
 			"expecting: ',', ')'",
 			"expecting: variable",
 			"expecting: ',', ')', '?', '|', EOF",
-			"expecting: ',', ':-', ')', '?', '|', EOF",
+			"expecting: ',', ':-', ')', '?', '!', '|', EOF",
 			"expecting: identifier, variable, string",
 			"expecting: '='",
 			"expecting: '|', EOF",
@@ -1154,7 +1294,7 @@ public class Parser
         };*/
     private static int[] errors;
 /*      {
-			0, 1, 1, 2, 3, 4, 4, 5, 1, 4, 6, 2, 2, 5, 4, 7, 7, 1, 8, 8, 9, 9, 8, 2, 10, 10, 4, 11, 2, 12, 13, 7, 14, 15, 16, 17, 9, 18, 18, 19, 19, 9, 13, 4, 10, 4, 4, 16, 15, 
+			0, 1, 1, 2, 3, 3, 4, 1, 5, 6, 7, 6, 4, 3, 8, 8, 1, 6, 9, 9, 10, 10, 9, 6, 11, 11, 3, 12, 8, 6, 13, 14, 8, 15, 16, 17, 18, 11, 3, 10, 19, 19, 20, 20, 10, 14, 3, 11, 3, 3, 16, 17, 16, 3, 
         };*/
 
     static 

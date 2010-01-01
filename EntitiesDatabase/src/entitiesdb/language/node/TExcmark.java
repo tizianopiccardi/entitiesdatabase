@@ -5,16 +5,16 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TNsight extends Token
+public final class TExcmark extends Token
 {
-    public TNsight()
+    public TExcmark()
     {
-        super.setText("#");
+        super.setText("!");
     }
 
-    public TNsight(int line, int pos)
+    public TExcmark(int line, int pos)
     {
-        super.setText("#");
+        super.setText("!");
         setLine(line);
         setPos(pos);
     }
@@ -22,17 +22,17 @@ public final class TNsight extends Token
     @Override
     public Object clone()
     {
-      return new TNsight(getLine(), getPos());
+      return new TExcmark(getLine(), getPos());
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTNsight(this);
+        ((Analysis) sw).caseTExcmark(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TNsight text.");
+        throw new RuntimeException("Cannot change TExcmark text.");
     }
 }
