@@ -7,6 +7,7 @@ import entitiesdb.language.analysis.*;
 @SuppressWarnings("nls")
 public final class AQueryMain extends PMain
 {
+    private TNsight _nsight_;
     private PQuery _query_;
 
     public AQueryMain()
@@ -15,9 +16,12 @@ public final class AQueryMain extends PMain
     }
 
     public AQueryMain(
+        @SuppressWarnings("hiding") TNsight _nsight_,
         @SuppressWarnings("hiding") PQuery _query_)
     {
         // Constructor
+        setNsight(_nsight_);
+
         setQuery(_query_);
 
     }
@@ -26,12 +30,38 @@ public final class AQueryMain extends PMain
     public Object clone()
     {
         return new AQueryMain(
+            cloneNode(this._nsight_),
             cloneNode(this._query_));
     }
 
     public void apply(Switch sw)
     {
         ((Analysis) sw).caseAQueryMain(this);
+    }
+
+    public TNsight getNsight()
+    {
+        return this._nsight_;
+    }
+
+    public void setNsight(TNsight node)
+    {
+        if(this._nsight_ != null)
+        {
+            this._nsight_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._nsight_ = node;
     }
 
     public PQuery getQuery()
@@ -63,6 +93,7 @@ public final class AQueryMain extends PMain
     public String toString()
     {
         return ""
+            + toString(this._nsight_)
             + toString(this._query_);
     }
 
@@ -70,6 +101,12 @@ public final class AQueryMain extends PMain
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
+        if(this._nsight_ == child)
+        {
+            this._nsight_ = null;
+            return;
+        }
+
         if(this._query_ == child)
         {
             this._query_ = null;
@@ -83,6 +120,12 @@ public final class AQueryMain extends PMain
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
+        if(this._nsight_ == oldChild)
+        {
+            setNsight((TNsight) newChild);
+            return;
+        }
+
         if(this._query_ == oldChild)
         {
             setQuery((PQuery) newChild);

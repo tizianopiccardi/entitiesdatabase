@@ -69,6 +69,11 @@ public class QueryEngine extends DepthFirstAdapter {
 	public void caseAQueryMain(AQueryMain node) {
 		node.getQuery().apply(this);
 		this.resultSet = (ResultSet) env.getNodeVal(node.getQuery());
+		
+		if (node.getNsight()!=null) {
+			this.resultSet.distinct();
+		}
+		
 	}
 	
 	

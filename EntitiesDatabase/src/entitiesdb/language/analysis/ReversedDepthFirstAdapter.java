@@ -54,6 +54,10 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getQuery().apply(this);
         }
+        if(node.getNsight() != null)
+        {
+            node.getNsight().apply(this);
+        }
         outAQueryMain(node);
     }
 

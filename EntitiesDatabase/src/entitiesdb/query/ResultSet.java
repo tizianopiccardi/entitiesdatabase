@@ -1,5 +1,7 @@
 package entitiesdb.query;
 
+import java.util.Hashtable;
+
 import entitiesdb.query.objects.StatementBody;
 import entitiesdb.query.objects.StatementProperty;
 import entitiesdb.query.tables.BufferTable;
@@ -67,6 +69,18 @@ public class ResultSet {
 		
 		
 	}
+	
+	
+	public void distinct() {
+		
+		Hashtable<Object, StatementBody[]> tempTable = new Hashtable<Object, StatementBody[]>();
+		
+		
+		
+		
+	}
+	
+	
 	
 	@Override
 	public String toString() {
