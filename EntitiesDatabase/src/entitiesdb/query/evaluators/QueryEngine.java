@@ -17,6 +17,8 @@ import entitiesdb.language.node.ASimpleQuery;
 import entitiesdb.language.node.ASingleBody;
 import entitiesdb.language.node.ASingleConditions;
 import entitiesdb.query.ResultSet;
+import entitiesdb.query.approximate.ApproximateResultSet;
+import entitiesdb.query.approximate.ApproximationManager;
 import entitiesdb.query.objects.Condition;
 import entitiesdb.query.objects.OrderBy;
 import entitiesdb.query.objects.StatementBody;
@@ -227,7 +229,10 @@ public class QueryEngine extends DepthFirstAdapter {
 		
 		StatementBody stmtBody = (StatementBody) env.getNodeVal(node.getEntitypattern());
 		
-		System.out.println(stmtBody);
+	
+		ApproximateResultSet resultSet = ApproximationManager.getApproximateResultSet(dao, stmtBody);
+		
+		System.out.println(resultSet);
 		
 	}
 }
