@@ -42,7 +42,10 @@ public class LanguageTesting {
 		//query = "$x(lives:$y, is_director_of: $z) :-  $x( works: $z(director_is: $j), lives:$y ) ? $j=$x | $x+";
 		
 		
+		//query = "$x :- $x(year: '1983', author: 'Miller', title:'Entity model for dummies') ";
+		//query = "$x :- $x(year: '1978', author: 'Miller', title:'Entity model for dummies') ";
 		query = "$x :- $x(year: '1978', author: 'Miller') ";
+		
 		
 		System.out.println(QueryManager.query(query));
 		
