@@ -13,6 +13,7 @@ public interface Analysis extends Switch
 
     void caseStart(Start node);
     void caseAQueryMain(AQueryMain node);
+    void caseAApproxMain(AApproxMain node);
     void caseAInsertMain(AInsertMain node);
     void caseASimpleQuery(ASimpleQuery node);
     void caseAComplexQuery(AComplexQuery node);

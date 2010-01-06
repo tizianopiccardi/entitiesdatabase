@@ -41,7 +41,28 @@ public class Main {
 					new Record("JB", "lives", "TRC"),
 					new Record("TRC", "name", "'Trento'"),
 					new Record("TRC", "locatedIn", "TR"),
-					new Record("TRC", "country", "IT")
+					new Record("TRC", "country", "IT"),
+					
+					
+					new Record("P1", "year", "'1978'"),
+					new Record("P1", "author", "'Porky Pig'"),
+					new Record("P1", "title", "'For sure P=NP'"),
+					
+					new Record("P2", "year", "'1983'"),			
+					new Record("P2", "author", "'Miller'"),
+					new Record("P2", "title", "'Entity model for dummies'"),
+					new Record("P2", "extrainfo", "'Bla bla bla'"),
+					
+					new Record("P3", "year", "'1978'"),						
+					new Record("P3", "author", "'Miller'"),						
+					new Record("P3", "title", "'Something of interesting'"),	
+					
+					new Record("P4", "year", "'1980'"),						
+					new Record("P4", "author", "'Mr. X'"),						
+					new Record("P4", "title", "'A rubbish article'"),
+										
+					
+					
 			};			
 			
 			

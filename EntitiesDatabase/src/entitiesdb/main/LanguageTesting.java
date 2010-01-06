@@ -19,7 +19,7 @@ public class LanguageTesting {
 		String query = "";
 		
 
-		query = " $x($a:$b)! :- $x(lives: $y, works:$z, $a:$b) | $b+";
+		query = "$x($a:$b):- $x(lives: $y, works:$z, $a:$b)";
 		//query = "$x(lives:$y, works:$z, alive: 'YES'):- $x(lives: $y, works:$z) ? $y = TN";
 		//query = "$x(lives:$y, works:$z, alive: 'YES'):- $x(lives: $y, works:$z) ? $y = TN, $z = H1";
 		//query = "$x(lives:$y, works:$z, alive: $t):-  $x(lives: $y, works:$z), $a($c:$k), $g(lives:$t) ? $y=$t";
@@ -27,8 +27,9 @@ public class LanguageTesting {
 		//query = "< ABC(p: 'fcdd', sdf: QWE, ds: 'ddfdf')";
 		//query = "< I2(works: TN)";
 		
+		query = "$x :- $x(year: '1978', author: 'Miller')";
 		
-		//query = "$x(lives:$y, is_director_of: $z) :-  $x( works: $z(director_is: $j), lives:$y ) ? $j=$x";
+		query = "$x(lives:$y, is_director_of: $z) :-  $x( works: $z(director_is: $j), lives:$y ) ? $j=$x";
 		//query = "$x(lives:$y, is_director_of: $z) :-  $x( lives:$y, $w: $z(director_is: $j(married:I2)) )";
 		//query = "$x(lives:$y, is_director_of: $z) :-  $x( works: $z(director_is: $j), lives:$y ) ? $j=$x";
 		//query = "I2($x:$y) :- I2($x:$y)";
@@ -39,6 +40,9 @@ public class LanguageTesting {
 		//query = "$x(lives:$y, is_director_of: $z) :-  $x( lives:$y, works: $z(director_is: $j(married:I2)) )";
 		
 		//query = "$x(lives:$y, is_director_of: $z) :-  $x( works: $z(director_is: $j), lives:$y ) ? $j=$x | $x+";
+		
+		
+		query = "$x :- $x(year: '1978', author: 'Miller') ";
 		
 		System.out.println(QueryManager.query(query));
 		

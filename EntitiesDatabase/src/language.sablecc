@@ -47,10 +47,7 @@ Tokens
   
   qmark = '?';
   
-  
   excmark = '!';
-  
-  //nsight = '#';
   pipe = '|';
   plus = '+';
   minus = '-';
@@ -67,11 +64,12 @@ Ignored Tokens
 Productions
 
 	main 		=   {query}  query 
+				  | {approx} variable definedby entitypattern
 				  |	{insert} less identifier entitybody?
 				  ; 
 	
-	query		=   {simple} head [distinct]:excmark? definedby body orderby? 
-				  | {complex} head [distinct]:excmark? definedby body qmark conditions orderby?
+	query		=   {simple} head  [distinct]:excmark? definedby body orderby?
+				  | {complex} head  [distinct]:excmark? definedby body qmark conditions orderby?
 				  ;
 	
 	head 		=	entitytype entitybody
