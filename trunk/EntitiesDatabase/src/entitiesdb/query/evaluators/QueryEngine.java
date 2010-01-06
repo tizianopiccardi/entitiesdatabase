@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import entitiesdb.dao.EntitiesDAO;
 import entitiesdb.language.analysis.DepthFirstAdapter;
+import entitiesdb.language.node.AApproxMain;
 import entitiesdb.language.node.AAscOrderby;
 import entitiesdb.language.node.AComplexQuery;
 import entitiesdb.language.node.ADesOrderby;
@@ -216,5 +217,17 @@ public class QueryEngine extends DepthFirstAdapter {
 
 	public void caseADesOrderby(ADesOrderby node) {
 		env.setNodeVal(node, new OrderBy(node.getVariable().getText(), OrderDirection.DESC));
+	}
+	
+	///////////////////////////////////////////////////////
+	
+	public void caseAApproxMain(AApproxMain node) {
+		
+		node.getEntitypattern().apply(new StatementEngine(dao, env));
+		
+		StatementBody stmtBody = (StatementBody) env.getNodeVal(node.getEntitypattern());
+		
+		System.out.println(stmtBody);
+		
 	}
 }
