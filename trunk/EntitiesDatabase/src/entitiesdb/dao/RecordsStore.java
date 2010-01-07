@@ -103,7 +103,20 @@ public class RecordsStore {
 		return out;
 	}
 	
-
+	public RecordsList getRecords(String e) {
+		
+		EntityJoin<Long, Record> join = new EntityJoin<Long, Record>(recordsIndex);
+		join.addCondition(recordByEntityIndex, e);
+		ForwardCursor<Record> cursor = join.entities();
+		RecordsList out = new RecordsList();
+		
+		for (Record r : cursor)
+				out.add(r);
+		
+		cursor.close();
+		return out;
+	}
+	
 	public RecordsList getAllRecords() {	
 		EntityCursor<Record> cursor = recordsIndex.entities();
 		RecordsList out = new RecordsList();

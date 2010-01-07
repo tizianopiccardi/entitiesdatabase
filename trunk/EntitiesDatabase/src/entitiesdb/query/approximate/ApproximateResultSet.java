@@ -51,7 +51,7 @@ public class ApproximateResultSet {
 	 * @return
 	 */
 	public ArrayList<EntityAndAccuracy> getResultsList(int limit) {
-		
+
 		ArrayList<EntityAndAccuracy> out = new ArrayList<EntityAndAccuracy>(entities.size());
 		Enumeration<String> keys = entities.keys();
 		while( keys.hasMoreElements() ) {
@@ -60,6 +60,11 @@ public class ApproximateResultSet {
 		}
 
 		Collections.sort(out);
+		
+		//da ottimizzare
+		if (limit > 0)
+			out = new ArrayList<EntityAndAccuracy>(out.subList(0, limit));
+		
 		return out;
 	}
 
