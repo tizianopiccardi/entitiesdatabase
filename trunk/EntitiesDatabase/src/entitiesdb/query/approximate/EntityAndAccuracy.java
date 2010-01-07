@@ -1,6 +1,11 @@
 package entitiesdb.query.approximate;
 
-public class EntityAndAccuracy {
+/**
+ * Simple Object that contains an ID and his accuracy
+ * @author Tiziano
+ *
+ */
+public class EntityAndAccuracy implements Comparable<EntityAndAccuracy>{
 
 	public String entity;
 	public float accuracy;
@@ -18,5 +23,14 @@ public class EntityAndAccuracy {
 		return accuracy;
 	}
 	
+	@Override
+	public String toString() {
+		return entity + ": " + accuracy + "%";
+	}
+
+	@Override
+	public int compareTo(EntityAndAccuracy o) {
+		return (accuracy == o.accuracy) ? 0 : (accuracy > o.accuracy?-1:1);
+	}
 	
 }

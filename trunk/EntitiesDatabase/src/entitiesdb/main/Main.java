@@ -43,19 +43,28 @@ public class Main {
 					new Record("TRC", "locatedIn", "TR"),
 					new Record("TRC", "country", "IT"),
 					
+					new Record("MI", "name", "'Milano'"),
+					
+					new Record("PUB1", "name", "'Apogeo'"),
+					new Record("PUB1", "city", "MI"),
+					new Record("PUB1", "owner", "I2"),
 					
 					new Record("P1", "year", "'1978'"),
 					new Record("P1", "author", "'Porky Pig'"),
 					new Record("P1", "title", "'For sure P=NP'"),
+					new Record("P1", "pages", "'1'"),
 					
 					new Record("P2", "year", "'1983'"),			
 					new Record("P2", "author", "'Miller'"),
 					new Record("P2", "title", "'Entity model for dummies'"),
 					new Record("P2", "extrainfo", "'Bla bla bla'"),
+					new Record("P2", "publisher", "PUB1"),
 					
 					new Record("P3", "year", "'1978'"),						
 					new Record("P3", "author", "'Miller'"),						
 					new Record("P3", "title", "'Something of interesting'"),	
+					new Record("P3", "author", "'Smith'"),
+					new Record("P3", "publisher", "PUB1"),
 					
 					new Record("P4", "year", "'1980'"),						
 					new Record("P4", "author", "'Mr. X'"),						

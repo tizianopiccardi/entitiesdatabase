@@ -10,6 +10,7 @@ public final class AApproxMain extends PMain
     private TVariable _variable_;
     private TDefinedby _definedby_;
     private PEntitypattern _entitypattern_;
+    private TNumber _limit_;
 
     public AApproxMain()
     {
@@ -19,7 +20,8 @@ public final class AApproxMain extends PMain
     public AApproxMain(
         @SuppressWarnings("hiding") TVariable _variable_,
         @SuppressWarnings("hiding") TDefinedby _definedby_,
-        @SuppressWarnings("hiding") PEntitypattern _entitypattern_)
+        @SuppressWarnings("hiding") PEntitypattern _entitypattern_,
+        @SuppressWarnings("hiding") TNumber _limit_)
     {
         // Constructor
         setVariable(_variable_);
@@ -27,6 +29,8 @@ public final class AApproxMain extends PMain
         setDefinedby(_definedby_);
 
         setEntitypattern(_entitypattern_);
+
+        setLimit(_limit_);
 
     }
 
@@ -36,7 +40,8 @@ public final class AApproxMain extends PMain
         return new AApproxMain(
             cloneNode(this._variable_),
             cloneNode(this._definedby_),
-            cloneNode(this._entitypattern_));
+            cloneNode(this._entitypattern_),
+            cloneNode(this._limit_));
     }
 
     public void apply(Switch sw)
@@ -119,13 +124,39 @@ public final class AApproxMain extends PMain
         this._entitypattern_ = node;
     }
 
+    public TNumber getLimit()
+    {
+        return this._limit_;
+    }
+
+    public void setLimit(TNumber node)
+    {
+        if(this._limit_ != null)
+        {
+            this._limit_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._limit_ = node;
+    }
+
     @Override
     public String toString()
     {
         return ""
             + toString(this._variable_)
             + toString(this._definedby_)
-            + toString(this._entitypattern_);
+            + toString(this._entitypattern_)
+            + toString(this._limit_);
     }
 
     @Override
@@ -147,6 +178,12 @@ public final class AApproxMain extends PMain
         if(this._entitypattern_ == child)
         {
             this._entitypattern_ = null;
+            return;
+        }
+
+        if(this._limit_ == child)
+        {
+            this._limit_ = null;
             return;
         }
 
@@ -172,6 +209,12 @@ public final class AApproxMain extends PMain
         if(this._entitypattern_ == oldChild)
         {
             setEntitypattern((PEntitypattern) newChild);
+            return;
+        }
+
+        if(this._limit_ == oldChild)
+        {
+            setLimit((TNumber) newChild);
             return;
         }
 

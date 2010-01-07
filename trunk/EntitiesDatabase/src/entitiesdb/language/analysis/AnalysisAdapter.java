@@ -249,6 +249,11 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
+    public void caseTNumber(TNumber node)
+    {
+        defaultCase(node);
+    }
+
     public void caseTQmark(TQmark node)
     {
         defaultCase(node);

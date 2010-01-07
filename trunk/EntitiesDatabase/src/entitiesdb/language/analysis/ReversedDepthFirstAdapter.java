@@ -71,6 +71,10 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAApproxMain(AApproxMain node)
     {
         inAApproxMain(node);
+        if(node.getLimit() != null)
+        {
+            node.getLimit().apply(this);
+        }
         if(node.getEntitypattern() != null)
         {
             node.getEntitypattern().apply(this);

@@ -49,6 +49,7 @@ public interface Analysis extends Switch
     void caseTIdentifier(TIdentifier node);
     void caseTVariable(TVariable node);
     void caseTString(TString node);
+    void caseTNumber(TNumber node);
     void caseTQmark(TQmark node);
     void caseTExcmark(TExcmark node);
     void caseTPipe(TPipe node);
