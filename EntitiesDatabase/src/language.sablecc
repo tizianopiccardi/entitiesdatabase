@@ -47,6 +47,8 @@ Tokens
   
   qmark = '?';
   
+  //nsign = '#';
+  
   excmark = '!';
   pipe = '|';
   plus = '+';

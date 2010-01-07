@@ -64,6 +64,10 @@ public class EntitiesDAO {
 		return recordStore.getRecords(e, a, v);
 	}
 	
+	public RecordsList getRecords(String e){
+		return recordStore.getRecords(e);
+	}
+	
 	public RecordsList getRecords(Record r){
 		return recordStore.getRecords(r.getEntityId(), r.getAttribute(), r.getValue());
 	}

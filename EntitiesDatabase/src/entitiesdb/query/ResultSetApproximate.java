@@ -8,18 +8,35 @@ import entitiesdb.query.approximate.EntityAndAccuracy;
 import entitiesdb.query.objects.StatementBody;
 import entitiesdb.query.objects.StatementProperty;
 
+/**
+ * ResultSet of an approximate query
+ * @author Tiziano
+ *
+ */
 public class ResultSetApproximate implements ResultSet {
 
+	/**
+	 * The result array
+	 */
 	public ResultSetApproximateElement[] entities;
 	
 	public ResultSetApproximate(EntitiesDAO dao, ArrayList<EntityAndAccuracy> resultSet) {
 		
 		entities = new ResultSetApproximateElement[resultSet.size()];
 		
+		/**
+		 * For each entity in the result set I get the body with all its attributes
+		 */
 		for (int i = 0; i  < resultSet.size() ; i++) {
 			
-			RecordsList rList = dao.getRecords(resultSet.get(i).getEntity(), null, null);
+			/**
+			 * Get all records with the current entity ID
+			 */
+			RecordsList rList = dao.getRecords(resultSet.get(i).getEntity());
 			
+			/**
+			 * I create a body for this row...
+			 */
 			StatementBody sb = new StatementBody(resultSet.get(i).entity);
 			for (int j = 0 ; j < rList.size() ; j++) {
 				String attribute = rList.get(j).getAttribute();
@@ -27,6 +44,9 @@ public class ResultSetApproximate implements ResultSet {
 				sb.addProperties(new StatementProperty(attribute, value));
 			}
 			
+			/**
+			 * ...and I add it to the result array with the percentage
+			 */
 			entities[i] = new ResultSetApproximateElement(sb, resultSet.get(i).accuracy);
 			
 		}
@@ -49,6 +69,11 @@ public class ResultSetApproximate implements ResultSet {
 	}
 	
 	
+	/**
+	 * This is a single element of the result set
+	 * @author Tiziano
+	 *
+	 */
 	public class ResultSetApproximateElement {
 		float percentage;
 		StatementBody body;
