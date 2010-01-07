@@ -17,8 +17,10 @@ import entitiesdb.language.node.ASimpleQuery;
 import entitiesdb.language.node.ASingleBody;
 import entitiesdb.language.node.ASingleConditions;
 import entitiesdb.query.ResultSet;
-import entitiesdb.query.approximate.ApproximateResultSet;
+import entitiesdb.query.ResultSetApproximate;
+import entitiesdb.query.ResultSetStandard;
 import entitiesdb.query.approximate.ApproximationManager;
+import entitiesdb.query.approximate.EntityAndAccuracy;
 import entitiesdb.query.objects.Condition;
 import entitiesdb.query.objects.OrderBy;
 import entitiesdb.query.objects.StatementBody;
@@ -65,13 +67,13 @@ public class QueryEngine extends DepthFirstAdapter {
 		else
 			dao.addEntity(node.getIdentifier().getText());
 		
-		this.resultSet = new ResultSet();
+		this.resultSet = new ResultSetStandard();
 	}
 	
 	
 	public void caseAQueryMain(AQueryMain node) {
 		node.getQuery().apply(this);
-		this.resultSet = (ResultSet) env.getNodeVal(node.getQuery());
+		this.resultSet = (ResultSetStandard) env.getNodeVal(node.getQuery());
 		
 	}
 	
@@ -97,7 +99,7 @@ public class QueryEngine extends DepthFirstAdapter {
 		StatementBody head = (StatementBody) env.getNodeVal(node.getHead());
 		
 		//Set this node as a new result set
-		ResultSet queryRes = new ResultSet(table, head);
+		ResultSetStandard queryRes = new ResultSetStandard(table, head);
 		if (node.getDistinct()!=null) 
 			queryRes.distinct();
 		env.setNodeVal(node, queryRes);
@@ -128,10 +130,10 @@ public class QueryEngine extends DepthFirstAdapter {
 		node.getHead().apply(new StatementEngine(dao, env));
 		StatementBody head = (StatementBody) env.getNodeVal(node.getHead());
 		
-		ResultSet queryRes = new ResultSet(table, head);
+		ResultSetStandard queryRes = new ResultSetStandard(table, head);
 		if (node.getDistinct()!=null) 
 			queryRes.distinct();
-		env.setNodeVal(node, new ResultSet(table, head));
+		env.setNodeVal(node, new ResultSetStandard(table, head));
 
 	}
 	
@@ -229,10 +231,17 @@ public class QueryEngine extends DepthFirstAdapter {
 		
 		StatementBody stmtBody = (StatementBody) env.getNodeVal(node.getEntitypattern());
 		
+		int limit = -1;
+		if (node.getLimit()!=null)
+			limit = Integer.parseInt(node.getLimit().getText());
 	
-		ApproximateResultSet resultSet = ApproximationManager.getApproximateResultSet(dao, stmtBody);
+		ArrayList<EntityAndAccuracy> resultSet = ApproximationManager.
+													getApproximateResultSet(dao, stmtBody).
+													getResultsList(limit);
 		
-		System.out.println(resultSet);
+		ResultSetApproximate rs = new ResultSetApproximate(dao, resultSet);
+		
+		this.resultSet = rs;
 		
 	}
 }

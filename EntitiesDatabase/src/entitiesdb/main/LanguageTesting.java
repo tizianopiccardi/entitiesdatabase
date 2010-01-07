@@ -44,7 +44,7 @@ public class LanguageTesting {
 		
 		//query = "$x :- $x(year: '1983', author: 'Miller', title:'Entity model for dummies') ";
 		//query = "$x :- $x(year: '1978', author: 'Miller', title:'Entity model for dummies') ";
-		query = "$x :- $x(year: '1978', author: 'Miller') ";
+		query = "$x :- $x(year: '1978', author: 'Miller', publisher: $z(city:MI, owner: $a(married:$s, name:'abc'))) ";
 		
 		
 		System.out.println(QueryManager.query(query));

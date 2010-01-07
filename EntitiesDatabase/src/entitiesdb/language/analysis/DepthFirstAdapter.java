@@ -83,6 +83,10 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getEntitypattern().apply(this);
         }
+        if(node.getLimit() != null)
+        {
+            node.getLimit().apply(this);
+        }
         outAApproxMain(node);
     }
 

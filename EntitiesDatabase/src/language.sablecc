@@ -43,7 +43,7 @@ Tokens
   
   string = ''' s_char_sequence? '''; 
   
-  //number = digit+;
+  number = digit+;
   
   qmark = '?';
   
@@ -63,8 +63,8 @@ Ignored Tokens
   
 Productions
 
-	main 		=   {query}  query 
-				  | {approx} variable definedby entitypattern
+	main 		=   {query}  query
+				  | {approx} variable definedby entitypattern [limit]:number?
 				  |	{insert} less identifier entitybody?
 				  ; 
 	

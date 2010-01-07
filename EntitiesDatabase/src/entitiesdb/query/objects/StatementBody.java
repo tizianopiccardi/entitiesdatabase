@@ -43,6 +43,10 @@ public class StatementBody {
 		this.properties = properties;
 	}
 	
+	public void addProperties(StatementProperty property) {
+		this.properties.add(property);
+	}
+	
 	public String toString() {
 		return entity.toString() + " | " + properties.toString();
 	}
