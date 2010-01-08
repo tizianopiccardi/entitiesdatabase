@@ -27,9 +27,9 @@ public class LanguageTesting {
 		//query = "< ABC(p: 'fcdd', sdf: QWE, ds: 'ddfdf')";
 		//query = "< I2(works: TN)";
 		
-		query = "$x :- $x(year: '1978', author: 'Miller')";
+		//query = "$x :- $x(year: '1978', author: 'Miller')";
 		
-		query = "$x(lives:$y, is_director_of: $z) :-  $x( works: $z(director_is: $j), lives:$y ) ? $j=$x";
+		//query = "$x(lives:$y, is_director_of: $z) :-  $x( works: $z(director_is: $j), lives:$y ) ? $j=$x";
 		//query = "$x(lives:$y, is_director_of: $z) :-  $x( lives:$y, $w: $z(director_is: $j(married:I2)) )";
 		//query = "$x(lives:$y, is_director_of: $z) :-  $x( works: $z(director_is: $j), lives:$y ) ? $j=$x";
 		//query = "I2($x:$y) :- I2($x:$y)";
@@ -44,7 +44,11 @@ public class LanguageTesting {
 		
 		//query = "$x :- $x(year: '1983', author: 'Miller', title:'Entity model for dummies') ";
 		//query = "$x :- $x(year: '1978', author: 'Miller', title:'Entity model for dummies') ";
-		query = "$x :- $x(year: '1978', author: 'Miller', publisher: $z(city:MI, owner: $a(married:$s, name:'abc'))) 2";
+		//query = "$x :- $x(year: '1978', author: 'Miller', publisher: $z(city:MI, owner: $a(married:$s, name:'abc')))";
+		
+		//query = "$x():- $x(lives: $y, works:$y) ";
+		//query = "$x :- $x(year: '1978', author: 'Miller')";
+		
 		
 		
 		System.out.println(QueryManager.query(query));
