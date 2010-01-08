@@ -102,6 +102,7 @@ public class QueryEngine extends DepthFirstAdapter {
 		ResultSetStandard queryRes = new ResultSetStandard(table, head);
 		if (node.getDistinct()!=null) 
 			queryRes.distinct();
+		
 		env.setNodeVal(node, queryRes);
 
 	}

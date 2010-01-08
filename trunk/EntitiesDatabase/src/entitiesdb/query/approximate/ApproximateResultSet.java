@@ -62,7 +62,7 @@ public class ApproximateResultSet {
 		Collections.sort(out);
 		
 		//da ottimizzare
-		if (limit > 0)
+		if (limit > 0 && limit<=out.size())
 			out = new ArrayList<EntityAndAccuracy>(out.subList(0, limit));
 		
 		return out;
