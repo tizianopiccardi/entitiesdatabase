@@ -71,6 +71,10 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseAApproxMain(AApproxMain node)
     {
         inAApproxMain(node);
+        if(node.getPercent() != null)
+        {
+            node.getPercent().apply(this);
+        }
         if(node.getVariable() != null)
         {
             node.getVariable().apply(this);

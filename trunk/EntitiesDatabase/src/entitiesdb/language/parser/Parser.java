@@ -423,21 +423,24 @@ public class Parser
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
+        @SuppressWarnings("unused") ArrayList nodeArrayList4 = pop();
         @SuppressWarnings("unused") ArrayList nodeArrayList3 = pop();
         @SuppressWarnings("unused") ArrayList nodeArrayList2 = pop();
         @SuppressWarnings("unused") ArrayList nodeArrayList1 = pop();
         PMain pmainNode1;
         {
             // Block
-        TVariable tvariableNode2;
-        TDefinedby tdefinedbyNode3;
-        PEntitypattern pentitypatternNode4;
-        @SuppressWarnings("unused") Object nullNode5 = null;
-        tvariableNode2 = (TVariable)nodeArrayList1.get(0);
-        tdefinedbyNode3 = (TDefinedby)nodeArrayList2.get(0);
-        pentitypatternNode4 = (PEntitypattern)nodeArrayList3.get(0);
+        TPercent tpercentNode2;
+        TVariable tvariableNode3;
+        TDefinedby tdefinedbyNode4;
+        PEntitypattern pentitypatternNode5;
+        @SuppressWarnings("unused") Object nullNode6 = null;
+        tpercentNode2 = (TPercent)nodeArrayList1.get(0);
+        tvariableNode3 = (TVariable)nodeArrayList2.get(0);
+        tdefinedbyNode4 = (TDefinedby)nodeArrayList3.get(0);
+        pentitypatternNode5 = (PEntitypattern)nodeArrayList4.get(0);
 
-        pmainNode1 = new AApproxMain(tvariableNode2, tdefinedbyNode3, pentitypatternNode4, null);
+        pmainNode1 = new AApproxMain(tpercentNode2, tvariableNode3, tdefinedbyNode4, pentitypatternNode5, null);
         }
 	nodeList.add(pmainNode1);
         return nodeList;
@@ -450,6 +453,7 @@ public class Parser
     {
         @SuppressWarnings("hiding") ArrayList nodeList = new ArrayList();
 
+        @SuppressWarnings("unused") ArrayList nodeArrayList5 = pop();
         @SuppressWarnings("unused") ArrayList nodeArrayList4 = pop();
         @SuppressWarnings("unused") ArrayList nodeArrayList3 = pop();
         @SuppressWarnings("unused") ArrayList nodeArrayList2 = pop();
@@ -457,16 +461,18 @@ public class Parser
         PMain pmainNode1;
         {
             // Block
-        TVariable tvariableNode2;
-        TDefinedby tdefinedbyNode3;
-        PEntitypattern pentitypatternNode4;
-        TNumber tnumberNode5;
-        tvariableNode2 = (TVariable)nodeArrayList1.get(0);
-        tdefinedbyNode3 = (TDefinedby)nodeArrayList2.get(0);
-        pentitypatternNode4 = (PEntitypattern)nodeArrayList3.get(0);
-        tnumberNode5 = (TNumber)nodeArrayList4.get(0);
+        TPercent tpercentNode2;
+        TVariable tvariableNode3;
+        TDefinedby tdefinedbyNode4;
+        PEntitypattern pentitypatternNode5;
+        TNumber tnumberNode6;
+        tpercentNode2 = (TPercent)nodeArrayList1.get(0);
+        tvariableNode3 = (TVariable)nodeArrayList2.get(0);
+        tdefinedbyNode4 = (TDefinedby)nodeArrayList3.get(0);
+        pentitypatternNode5 = (PEntitypattern)nodeArrayList4.get(0);
+        tnumberNode6 = (TNumber)nodeArrayList5.get(0);
 
-        pmainNode1 = new AApproxMain(tvariableNode2, tdefinedbyNode3, pentitypatternNode4, tnumberNode5);
+        pmainNode1 = new AApproxMain(tpercentNode2, tvariableNode3, tdefinedbyNode4, pentitypatternNode5, tnumberNode6);
         }
 	nodeList.add(pmainNode1);
         return nodeList;
@@ -1264,48 +1270,49 @@ public class Parser
 
     private static int[][][] actionTable;
 /*      {
-			{{-1, ERROR, 0}, {5, SHIFT, 1}, {6, SHIFT, 2}, {16, SHIFT, 3}, },
+			{{-1, ERROR, 0}, {5, SHIFT, 1}, {6, SHIFT, 2}, {10, SHIFT, 3}, {17, SHIFT, 4}, },
 			{{-1, REDUCE, 17}, },
-			{{-1, REDUCE, 18}, {2, SHIFT, 8}, },
-			{{-1, ERROR, 3}, {5, SHIFT, 9}, },
-			{{-1, ERROR, 4}, {17, ACCEPT, -1}, },
-			{{-1, REDUCE, 0}, },
-			{{-1, ERROR, 6}, {2, SHIFT, 10}, {10, SHIFT, 11}, },
-			{{-1, ERROR, 7}, {3, SHIFT, 12}, },
-			{{-1, ERROR, 8}, {5, SHIFT, 1}, {6, SHIFT, 14}, },
-			{{-1, REDUCE, 3}, {3, SHIFT, 12}, },
-			{{-1, ERROR, 10}, {5, SHIFT, 1}, {6, SHIFT, 14}, },
-			{{-1, ERROR, 11}, {2, SHIFT, 20}, },
-			{{-1, ERROR, 12}, {5, SHIFT, 21}, {6, SHIFT, 22}, },
-			{{-1, REDUCE, 13}, },
 			{{-1, REDUCE, 18}, },
-			{{-1, REDUCE, 1}, {8, SHIFT, 26}, },
-			{{-1, ERROR, 16}, {3, SHIFT, 12}, },
+			{{-1, ERROR, 3}, {6, SHIFT, 9}, },
+			{{-1, ERROR, 4}, {5, SHIFT, 10}, },
+			{{-1, ERROR, 5}, {18, ACCEPT, -1}, },
+			{{-1, REDUCE, 0}, },
+			{{-1, ERROR, 7}, {2, SHIFT, 11}, {11, SHIFT, 12}, },
+			{{-1, ERROR, 8}, {3, SHIFT, 13}, },
+			{{-1, ERROR, 9}, {2, SHIFT, 15}, },
+			{{-1, REDUCE, 3}, {3, SHIFT, 13}, },
+			{{-1, ERROR, 11}, {5, SHIFT, 1}, {6, SHIFT, 2}, },
+			{{-1, ERROR, 12}, {2, SHIFT, 20}, },
+			{{-1, ERROR, 13}, {5, SHIFT, 21}, {6, SHIFT, 22}, },
+			{{-1, REDUCE, 13}, },
+			{{-1, ERROR, 15}, {5, SHIFT, 1}, {6, SHIFT, 2}, },
 			{{-1, REDUCE, 4}, },
-			{{-1, REDUCE, 5}, {0, SHIFT, 28}, {9, SHIFT, 29}, {11, SHIFT, 30}, },
+			{{-1, REDUCE, 5}, {0, SHIFT, 27}, {9, SHIFT, 28}, {12, SHIFT, 29}, },
 			{{-1, REDUCE, 14}, },
-			{{-1, ERROR, 20}, {5, SHIFT, 1}, {6, SHIFT, 14}, },
+			{{-1, ERROR, 19}, {3, SHIFT, 13}, },
+			{{-1, ERROR, 20}, {5, SHIFT, 1}, {6, SHIFT, 2}, },
 			{{-1, REDUCE, 23}, },
 			{{-1, REDUCE, 24}, },
 			{{-1, ERROR, 23}, {0, SHIFT, 33}, {4, SHIFT, 34}, },
 			{{-1, REDUCE, 20}, },
 			{{-1, ERROR, 25}, {1, SHIFT, 35}, },
-			{{-1, REDUCE, 2}, },
-			{{-1, REDUCE, 16}, },
-			{{-1, ERROR, 28}, {5, SHIFT, 1}, {6, SHIFT, 14}, },
-			{{-1, ERROR, 29}, {6, SHIFT, 37}, },
-			{{-1, ERROR, 30}, {6, SHIFT, 40}, },
+			{{-1, REDUCE, 1}, {8, SHIFT, 36}, },
+			{{-1, ERROR, 27}, {5, SHIFT, 1}, {6, SHIFT, 2}, },
+			{{-1, ERROR, 28}, {6, SHIFT, 38}, },
+			{{-1, ERROR, 29}, {6, SHIFT, 41}, },
 			{{-1, REDUCE, 7}, },
-			{{-1, REDUCE, 6}, {0, SHIFT, 28}, {9, SHIFT, 41}, {11, SHIFT, 30}, },
+			{{-1, REDUCE, 16}, },
+			{{-1, REDUCE, 6}, {0, SHIFT, 27}, {9, SHIFT, 42}, {12, SHIFT, 29}, },
 			{{-1, ERROR, 33}, {5, SHIFT, 21}, {6, SHIFT, 22}, },
 			{{-1, REDUCE, 19}, },
-			{{-1, ERROR, 35}, {5, SHIFT, 44}, {6, SHIFT, 45}, {7, SHIFT, 46}, },
+			{{-1, ERROR, 35}, {5, SHIFT, 45}, {6, SHIFT, 46}, {7, SHIFT, 47}, },
+			{{-1, REDUCE, 2}, },
 			{{-1, REDUCE, 15}, },
-			{{-1, ERROR, 37}, {14, SHIFT, 49}, },
-			{{-1, REDUCE, 9}, {11, SHIFT, 30}, },
-			{{-1, REDUCE, 31}, {0, SHIFT, 51}, },
-			{{-1, ERROR, 40}, {12, SHIFT, 52}, {13, SHIFT, 53}, },
-			{{-1, ERROR, 41}, {6, SHIFT, 37}, },
+			{{-1, ERROR, 38}, {15, SHIFT, 50}, },
+			{{-1, REDUCE, 9}, {12, SHIFT, 29}, },
+			{{-1, REDUCE, 31}, {0, SHIFT, 52}, },
+			{{-1, ERROR, 41}, {13, SHIFT, 53}, {14, SHIFT, 54}, },
+			{{-1, ERROR, 42}, {6, SHIFT, 38}, },
 			{{-1, REDUCE, 8}, },
 			{{-1, REDUCE, 21}, },
 			{{-1, REDUCE, 26}, {3, REDUCE, 17}, },
@@ -1313,50 +1320,49 @@ public class Parser
 			{{-1, REDUCE, 25}, },
 			{{-1, REDUCE, 28}, },
 			{{-1, REDUCE, 22}, },
-			{{-1, ERROR, 49}, {5, SHIFT, 44}, {6, SHIFT, 45}, {7, SHIFT, 46}, },
+			{{-1, ERROR, 50}, {5, SHIFT, 45}, {6, SHIFT, 46}, {7, SHIFT, 47}, },
 			{{-1, REDUCE, 11}, },
-			{{-1, ERROR, 51}, {6, SHIFT, 37}, },
+			{{-1, ERROR, 52}, {6, SHIFT, 38}, },
 			{{-1, REDUCE, 30}, },
 			{{-1, REDUCE, 29}, },
-			{{-1, REDUCE, 10}, {11, SHIFT, 30}, },
+			{{-1, REDUCE, 10}, {12, SHIFT, 29}, },
 			{{-1, REDUCE, 33}, },
 			{{-1, REDUCE, 32}, },
 			{{-1, REDUCE, 12}, },
         };*/
     private static int[][][] gotoTable;
 /*      {
-			{{-1, 4}, },
 			{{-1, 5}, },
 			{{-1, 6}, },
-			{{-1, 18}, {20, 32}, },
-			{{-1, 19}, {8, 15}, {28, 36}, {35, 47}, {49, 47}, },
-			{{-1, 16}, {0, 7}, },
-			{{-1, 13}, {9, 17}, {16, 27}, },
+			{{-1, 7}, },
+			{{-1, 17}, {20, 32}, },
+			{{-1, 18}, {15, 26}, {27, 37}, {35, 48}, {50, 48}, },
+			{{-1, 19}, {0, 8}, },
+			{{-1, 14}, {10, 16}, {19, 31}, },
 			{{-1, 23}, },
-			{{-1, 24}, {33, 43}, },
+			{{-1, 24}, {33, 44}, },
 			{{-1, 25}, },
-			{{-1, 48}, {49, 55}, },
-			{{-1, 31}, {32, 42}, {38, 50}, {54, 57}, },
-			{{-1, 38}, {41, 54}, {51, 56}, },
-			{{-1, 39}, },
+			{{-1, 49}, {50, 56}, },
+			{{-1, 30}, {32, 43}, {39, 51}, {55, 58}, },
+			{{-1, 39}, {42, 55}, {52, 57}, },
+			{{-1, 40}, },
         };*/
     private static String[] errorMessages;
 /*      {
-			"expecting: identifier, variable, '<'",
+			"expecting: identifier, variable, '%', '<'",
 			"expecting: '('",
-			"expecting: ':-', '('",
+			"expecting: variable",
 			"expecting: identifier",
 			"expecting: EOF",
 			"expecting: ':-', '!'",
-			"expecting: identifier, variable",
-			"expecting: '(', EOF",
 			"expecting: ':-'",
-			"expecting: number, EOF",
+			"expecting: '(', EOF",
+			"expecting: identifier, variable",
 			"expecting: ',', '?', '|', EOF",
 			"expecting: ':'",
 			"expecting: ',', ')'",
+			"expecting: number, EOF",
 			"expecting: ',', ')', number, '?', '|', EOF",
-			"expecting: variable",
 			"expecting: ',', ':-', ')', number, '?', '!', '|', EOF",
 			"expecting: identifier, variable, string",
 			"expecting: '='",
@@ -1368,7 +1374,7 @@ public class Parser
         };*/
     private static int[] errors;
 /*      {
-			0, 1, 2, 3, 4, 4, 5, 1, 6, 7, 6, 8, 6, 5, 1, 9, 1, 4, 10, 10, 6, 11, 11, 12, 12, 11, 4, 13, 6, 14, 14, 4, 10, 6, 15, 16, 10, 17, 18, 19, 20, 14, 4, 12, 21, 21, 22, 22, 12, 16, 4, 14, 4, 4, 18, 19, 18, 4, 
+			0, 1, 1, 2, 3, 4, 4, 5, 1, 6, 7, 8, 6, 8, 5, 8, 4, 9, 9, 1, 8, 10, 10, 11, 11, 10, 12, 8, 2, 2, 4, 13, 9, 8, 14, 15, 4, 9, 16, 17, 18, 19, 2, 4, 11, 20, 20, 21, 21, 11, 15, 4, 2, 4, 4, 17, 18, 17, 4, 
         };*/
 
     static 

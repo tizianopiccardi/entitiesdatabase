@@ -259,6 +259,11 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
+    public void caseTPercent(TPercent node)
+    {
+        defaultCase(node);
+    }
+
     public void caseTExcmark(TExcmark node)
     {
         defaultCase(node);

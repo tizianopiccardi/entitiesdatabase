@@ -51,6 +51,7 @@ public interface Analysis extends Switch
     void caseTString(TString node);
     void caseTNumber(TNumber node);
     void caseTQmark(TQmark node);
+    void caseTPercent(TPercent node);
     void caseTExcmark(TExcmark node);
     void caseTPipe(TPipe node);
     void caseTPlus(TPlus node);
