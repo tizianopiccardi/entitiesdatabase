@@ -7,6 +7,7 @@ import entitiesdb.language.analysis.*;
 @SuppressWarnings("nls")
 public final class AApproxMain extends PMain
 {
+    private TPercent _percent_;
     private TVariable _variable_;
     private TDefinedby _definedby_;
     private PEntitypattern _entitypattern_;
@@ -18,12 +19,15 @@ public final class AApproxMain extends PMain
     }
 
     public AApproxMain(
+        @SuppressWarnings("hiding") TPercent _percent_,
         @SuppressWarnings("hiding") TVariable _variable_,
         @SuppressWarnings("hiding") TDefinedby _definedby_,
         @SuppressWarnings("hiding") PEntitypattern _entitypattern_,
         @SuppressWarnings("hiding") TNumber _limit_)
     {
         // Constructor
+        setPercent(_percent_);
+
         setVariable(_variable_);
 
         setDefinedby(_definedby_);
@@ -38,6 +42,7 @@ public final class AApproxMain extends PMain
     public Object clone()
     {
         return new AApproxMain(
+            cloneNode(this._percent_),
             cloneNode(this._variable_),
             cloneNode(this._definedby_),
             cloneNode(this._entitypattern_),
@@ -47,6 +52,31 @@ public final class AApproxMain extends PMain
     public void apply(Switch sw)
     {
         ((Analysis) sw).caseAApproxMain(this);
+    }
+
+    public TPercent getPercent()
+    {
+        return this._percent_;
+    }
+
+    public void setPercent(TPercent node)
+    {
+        if(this._percent_ != null)
+        {
+            this._percent_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._percent_ = node;
     }
 
     public TVariable getVariable()
@@ -153,6 +183,7 @@ public final class AApproxMain extends PMain
     public String toString()
     {
         return ""
+            + toString(this._percent_)
             + toString(this._variable_)
             + toString(this._definedby_)
             + toString(this._entitypattern_)
@@ -163,6 +194,12 @@ public final class AApproxMain extends PMain
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
+        if(this._percent_ == child)
+        {
+            this._percent_ = null;
+            return;
+        }
+
         if(this._variable_ == child)
         {
             this._variable_ = null;
@@ -194,6 +231,12 @@ public final class AApproxMain extends PMain
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
+        if(this._percent_ == oldChild)
+        {
+            setPercent((TPercent) newChild);
+            return;
+        }
+
         if(this._variable_ == oldChild)
         {
             setVariable((TVariable) newChild);

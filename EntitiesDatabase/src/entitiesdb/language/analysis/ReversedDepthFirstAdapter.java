@@ -87,6 +87,10 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getVariable().apply(this);
         }
+        if(node.getPercent() != null)
+        {
+            node.getPercent().apply(this);
+        }
         outAApproxMain(node);
     }
 

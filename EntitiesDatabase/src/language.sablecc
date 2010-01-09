@@ -47,6 +47,7 @@ Tokens
   
   qmark = '?';
   
+  percent = '%';
   //nsign = '#';
   
   excmark = '!';
@@ -66,7 +67,7 @@ Ignored Tokens
 Productions
 
 	main 		=   {query}  query
-				  | {approx} variable definedby entitypattern [limit]:number?
+				  | {approx} percent variable definedby entitypattern [limit]:number?
 				  |	{insert} less identifier entitybody?
 				  ; 
 	

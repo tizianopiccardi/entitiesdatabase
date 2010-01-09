@@ -1,15 +1,15 @@
 cd src\entitiesdb\language\analysis\
 rm *.*
-del *.*
+del *.* /Q
 cd ..\lexer
 rm *.*
-del *.*
+del *.* /Q
 cd ..\node
 rm *.*
-del *.*
+del *.* /Q
 cd ..\parser
 rm *.*
-del *.*
+del *.* /Q
 
 cd ..\..\..\..
 
