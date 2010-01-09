@@ -23,7 +23,8 @@ public interface Analysis extends Switch
     void caseAEntitypattern(AEntitypattern node);
     void caseAIdeEntitytype(AIdeEntitytype node);
     void caseAVariableEntitytype(AVariableEntitytype node);
-    void caseAEntitybody(AEntitybody node);
+    void caseAElementEntitybody(AElementEntitybody node);
+    void caseAEmptyEntitybody(AEmptyEntitybody node);
     void caseASingleAttributes(ASingleAttributes node);
     void caseAListAttributes(AListAttributes node);
     void caseAAttribute(AAttribute node);

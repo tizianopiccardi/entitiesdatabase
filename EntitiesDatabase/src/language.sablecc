@@ -94,8 +94,9 @@ Productions
 				  ;
 	
 
-	entitybody	  =  lbracket attributes rbracket
-					;	
+	entitybody	  = {element} lbracket attributes rbracket
+				  | {empty} lbracket rbracket
+				  ;	
 					
 					
 

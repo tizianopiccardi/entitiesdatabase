@@ -347,20 +347,20 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAVariableEntitytype(node);
     }
 
-    public void inAEntitybody(AEntitybody node)
+    public void inAElementEntitybody(AElementEntitybody node)
     {
         defaultIn(node);
     }
 
-    public void outAEntitybody(AEntitybody node)
+    public void outAElementEntitybody(AElementEntitybody node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAEntitybody(AEntitybody node)
+    public void caseAElementEntitybody(AElementEntitybody node)
     {
-        inAEntitybody(node);
+        inAElementEntitybody(node);
         if(node.getLbracket() != null)
         {
             node.getLbracket().apply(this);
@@ -373,7 +373,32 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getRbracket().apply(this);
         }
-        outAEntitybody(node);
+        outAElementEntitybody(node);
+    }
+
+    public void inAEmptyEntitybody(AEmptyEntitybody node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAEmptyEntitybody(AEmptyEntitybody node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAEmptyEntitybody(AEmptyEntitybody node)
+    {
+        inAEmptyEntitybody(node);
+        if(node.getLbracket() != null)
+        {
+            node.getLbracket().apply(this);
+        }
+        if(node.getRbracket() != null)
+        {
+            node.getRbracket().apply(this);
+        }
+        outAEmptyEntitybody(node);
     }
 
     public void inASingleAttributes(ASingleAttributes node)
