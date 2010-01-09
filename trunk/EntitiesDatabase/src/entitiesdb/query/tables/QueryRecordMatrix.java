@@ -35,7 +35,7 @@ public class QueryRecordMatrix extends ArrayList<String[]>{
 
 	public QueryRecordMatrix(EntitiesDAO dao, Object e, Object a, Object v) {
 		this.dao = dao;
-		
+
 		Record patternRecord = new Record();
 
 		//L'entità è esplicita
@@ -46,6 +46,7 @@ public class QueryRecordMatrix extends ArrayList<String[]>{
 		
 		
 		//L'attributo è esplicito
+		if (a!=null)
 		if ( a instanceof String )
 			patternRecord.setAttribute(a.toString());
 		else

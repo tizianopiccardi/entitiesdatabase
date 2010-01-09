@@ -5,26 +5,22 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AEntitybody extends PEntitybody
+public final class AEmptyEntitybody extends PEntitybody
 {
     private TLbracket _lbracket_;
-    private PAttributes _attributes_;
     private TRbracket _rbracket_;
 
-    public AEntitybody()
+    public AEmptyEntitybody()
     {
         // Constructor
     }
 
-    public AEntitybody(
+    public AEmptyEntitybody(
         @SuppressWarnings("hiding") TLbracket _lbracket_,
-        @SuppressWarnings("hiding") PAttributes _attributes_,
         @SuppressWarnings("hiding") TRbracket _rbracket_)
     {
         // Constructor
         setLbracket(_lbracket_);
-
-        setAttributes(_attributes_);
 
         setRbracket(_rbracket_);
 
@@ -33,15 +29,14 @@ public final class AEntitybody extends PEntitybody
     @Override
     public Object clone()
     {
-        return new AEntitybody(
+        return new AEmptyEntitybody(
             cloneNode(this._lbracket_),
-            cloneNode(this._attributes_),
             cloneNode(this._rbracket_));
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAEntitybody(this);
+        ((Analysis) sw).caseAEmptyEntitybody(this);
     }
 
     public TLbracket getLbracket()
@@ -67,31 +62,6 @@ public final class AEntitybody extends PEntitybody
         }
 
         this._lbracket_ = node;
-    }
-
-    public PAttributes getAttributes()
-    {
-        return this._attributes_;
-    }
-
-    public void setAttributes(PAttributes node)
-    {
-        if(this._attributes_ != null)
-        {
-            this._attributes_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._attributes_ = node;
     }
 
     public TRbracket getRbracket()
@@ -124,7 +94,6 @@ public final class AEntitybody extends PEntitybody
     {
         return ""
             + toString(this._lbracket_)
-            + toString(this._attributes_)
             + toString(this._rbracket_);
     }
 
@@ -135,12 +104,6 @@ public final class AEntitybody extends PEntitybody
         if(this._lbracket_ == child)
         {
             this._lbracket_ = null;
-            return;
-        }
-
-        if(this._attributes_ == child)
-        {
-            this._attributes_ = null;
             return;
         }
 
@@ -160,12 +123,6 @@ public final class AEntitybody extends PEntitybody
         if(this._lbracket_ == oldChild)
         {
             setLbracket((TLbracket) newChild);
-            return;
-        }
-
-        if(this._attributes_ == oldChild)
-        {
-            setAttributes((PAttributes) newChild);
             return;
         }
 

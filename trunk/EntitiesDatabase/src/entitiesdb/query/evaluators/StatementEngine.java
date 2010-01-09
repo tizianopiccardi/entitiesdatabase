@@ -4,8 +4,9 @@ import entitiesdb.dao.EntitiesDAO;
 import entitiesdb.language.analysis.DepthFirstAdapter;
 import entitiesdb.language.node.AAttribute;
 import entitiesdb.language.node.ABodyValue;
+import entitiesdb.language.node.AElementEntitybody;
+import entitiesdb.language.node.AEmptyEntitybody;
 import entitiesdb.language.node.AEntityValue;
-import entitiesdb.language.node.AEntitybody;
 import entitiesdb.language.node.AEntitypattern;
 import entitiesdb.language.node.AHead;
 import entitiesdb.language.node.AIdeAttributetype;
@@ -76,7 +77,7 @@ public class StatementEngine extends DepthFirstAdapter{
 		
 	}
 	
-	public void caseAEntitybody(AEntitybody node) {
+	public void caseAElementEntitybody(AElementEntitybody node) {
 		//System.out.println("QueryEngine.caseAEntitybody()");
 		
 		node.getAttributes().apply(this);
@@ -84,7 +85,9 @@ public class StatementEngine extends DepthFirstAdapter{
 
 	}
 	
-	
+	public void caseAEmptyEntitybody(AEmptyEntitybody node) {
+		env.setNodeVal(node, new StatementPropertyList());
+	}
 
 	
 	public void caseASingleAttributes(ASingleAttributes node) {

@@ -124,7 +124,12 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
-    public void caseAEntitybody(AEntitybody node)
+    public void caseAElementEntitybody(AElementEntitybody node)
+    {
+        defaultCase(node);
+    }
+
+    public void caseAEmptyEntitybody(AEmptyEntitybody node)
     {
         defaultCase(node);
     }
