@@ -5,24 +5,24 @@ package entitiesdb.language.node;
 import entitiesdb.language.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AInsertMain extends PMain
+public final class ADeleteMain extends PMain
 {
-    private TPlus _plus_;
+    private TMinus _minus_;
     private TIdentifier _identifier_;
     private PEntitybody _entitybody_;
 
-    public AInsertMain()
+    public ADeleteMain()
     {
         // Constructor
     }
 
-    public AInsertMain(
-        @SuppressWarnings("hiding") TPlus _plus_,
+    public ADeleteMain(
+        @SuppressWarnings("hiding") TMinus _minus_,
         @SuppressWarnings("hiding") TIdentifier _identifier_,
         @SuppressWarnings("hiding") PEntitybody _entitybody_)
     {
         // Constructor
-        setPlus(_plus_);
+        setMinus(_minus_);
 
         setIdentifier(_identifier_);
 
@@ -33,27 +33,27 @@ public final class AInsertMain extends PMain
     @Override
     public Object clone()
     {
-        return new AInsertMain(
-            cloneNode(this._plus_),
+        return new ADeleteMain(
+            cloneNode(this._minus_),
             cloneNode(this._identifier_),
             cloneNode(this._entitybody_));
     }
 
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAInsertMain(this);
+        ((Analysis) sw).caseADeleteMain(this);
     }
 
-    public TPlus getPlus()
+    public TMinus getMinus()
     {
-        return this._plus_;
+        return this._minus_;
     }
 
-    public void setPlus(TPlus node)
+    public void setMinus(TMinus node)
     {
-        if(this._plus_ != null)
+        if(this._minus_ != null)
         {
-            this._plus_.parent(null);
+            this._minus_.parent(null);
         }
 
         if(node != null)
@@ -66,7 +66,7 @@ public final class AInsertMain extends PMain
             node.parent(this);
         }
 
-        this._plus_ = node;
+        this._minus_ = node;
     }
 
     public TIdentifier getIdentifier()
@@ -123,7 +123,7 @@ public final class AInsertMain extends PMain
     public String toString()
     {
         return ""
-            + toString(this._plus_)
+            + toString(this._minus_)
             + toString(this._identifier_)
             + toString(this._entitybody_);
     }
@@ -132,9 +132,9 @@ public final class AInsertMain extends PMain
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._plus_ == child)
+        if(this._minus_ == child)
         {
-            this._plus_ = null;
+            this._minus_ = null;
             return;
         }
 
@@ -157,9 +157,9 @@ public final class AInsertMain extends PMain
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._plus_ == oldChild)
+        if(this._minus_ == oldChild)
         {
-            setPlus((TPlus) newChild);
+            setMinus((TMinus) newChild);
             return;
         }
 

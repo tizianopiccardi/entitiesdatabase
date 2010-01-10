@@ -108,9 +108,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseAInsertMain(AInsertMain node)
     {
         inAInsertMain(node);
-        if(node.getLess() != null)
+        if(node.getPlus() != null)
         {
-            node.getLess().apply(this);
+            node.getPlus().apply(this);
         }
         if(node.getIdentifier() != null)
         {
@@ -121,6 +121,35 @@ public class DepthFirstAdapter extends AnalysisAdapter
             node.getEntitybody().apply(this);
         }
         outAInsertMain(node);
+    }
+
+    public void inADeleteMain(ADeleteMain node)
+    {
+        defaultIn(node);
+    }
+
+    public void outADeleteMain(ADeleteMain node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseADeleteMain(ADeleteMain node)
+    {
+        inADeleteMain(node);
+        if(node.getMinus() != null)
+        {
+            node.getMinus().apply(this);
+        }
+        if(node.getIdentifier() != null)
+        {
+            node.getIdentifier().apply(this);
+        }
+        if(node.getEntitybody() != null)
+        {
+            node.getEntitybody().apply(this);
+        }
+        outADeleteMain(node);
     }
 
     public void inASimpleQuery(ASimpleQuery node)

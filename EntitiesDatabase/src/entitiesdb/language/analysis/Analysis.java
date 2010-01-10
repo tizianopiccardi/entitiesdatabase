@@ -15,6 +15,7 @@ public interface Analysis extends Switch
     void caseAQueryMain(AQueryMain node);
     void caseAApproxMain(AApproxMain node);
     void caseAInsertMain(AInsertMain node);
+    void caseADeleteMain(ADeleteMain node);
     void caseASimpleQuery(ASimpleQuery node);
     void caseAComplexQuery(AComplexQuery node);
     void caseAHead(AHead node);
