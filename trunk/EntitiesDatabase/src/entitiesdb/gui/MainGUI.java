@@ -29,7 +29,11 @@ public class MainGUI extends JFrame{
     
     private void createWindow() {
        
-
+    	try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} 
+    	catch (Exception e) {} 
+    	
         JTabbedPane tabs = new JTabbedPane();
         tabs.addTab("Query System", new QueryGUI());
         tabs.addTab("Create new Entity", new CreateEntity());

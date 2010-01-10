@@ -17,6 +17,10 @@ public class EntitiesDAO {
 	private RecordsStore recordStore;
 	
 	public EntitiesDAO (File databaseDirectory) {
+		
+		if (!databaseDirectory.exists())
+			databaseDirectory.mkdir();
+		
 		EnvironmentConfig environmentConfig = new EnvironmentConfig();
 		environmentConfig.setAllowCreate(true);
 		environmentConfig.setTransactional(true);

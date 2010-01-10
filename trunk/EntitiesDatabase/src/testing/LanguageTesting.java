@@ -47,7 +47,7 @@ public class LanguageTesting {
 		//query = "$x :- $x(year: '1978', author: 'Miller', publisher: $z(city:MI, owner: $a(married:$s, name:'abc')))";
 		
 		//query = "$x():- $x(lives: $y, works:$y) ";
-		//query = "$x :- $x(year: '1978', author: 'Miller')";
+		//query = "%$x :- $x(year: '1978', author: 'Miller')";
 		
 		//query = "- I2";
 		//System.out.println(QueryManager.query(query));
