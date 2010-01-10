@@ -68,7 +68,8 @@ Productions
 
 	main 		=   {query}  query
 				  | {approx} percent variable definedby entitypattern [limit]:number?
-				  |	{insert} less identifier entitybody?
+				  |	{insert} plus identifier entitybody?
+				  | {delete} minus identifier entitybody?
 				  ; 
 	
 	query		=   {simple} head  [distinct]:excmark? definedby body orderby?

@@ -84,6 +84,11 @@ public class AnalysisAdapter implements Analysis
         defaultCase(node);
     }
 
+    public void caseADeleteMain(ADeleteMain node)
+    {
+        defaultCase(node);
+    }
+
     public void caseASimpleQuery(ASimpleQuery node)
     {
         defaultCase(node);

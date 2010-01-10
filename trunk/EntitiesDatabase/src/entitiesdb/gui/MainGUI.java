@@ -1,4 +1,5 @@
-package entitiesdb.gui;
+
+	package entitiesdb.gui;
 
 import java.io.File;
 
@@ -14,9 +15,20 @@ public class MainGUI extends JFrame{
 	
 	public static EntitiesDAO dao = null;
 	
+    public MainGUI(EntitiesDAO d) {
+    	super("Dynamic Querier");
+    	MainGUI.dao = d;
+    	this.createWindow();
+    }
+	
     public MainGUI() {
-        super("Dynamic Querier");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	super("Dynamic Querier");
+    	this.createWindow();
+    	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
+    private void createWindow() {
+       
 
         JTabbedPane tabs = new JTabbedPane();
         tabs.addTab("Query System", new QueryGUI());
@@ -30,6 +42,7 @@ public class MainGUI extends JFrame{
         this.setSize(600, 400);
         this.setVisible(true);
     }
+    
 
     public static void main(String[] args) {
         try {

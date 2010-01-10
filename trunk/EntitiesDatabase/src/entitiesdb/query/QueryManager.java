@@ -17,6 +17,9 @@ public class QueryManager {
 
 	public static EntitiesDAO dao = new EntitiesDAO(new File("db/"));
 	
+	public static EntitiesDAO getDao() {
+		return dao;
+	}
 	public static ResultSet query(String datalog) {
 		
 		ResultSet out = null;

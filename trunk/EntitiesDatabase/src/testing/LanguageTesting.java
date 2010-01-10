@@ -1,4 +1,4 @@
-package entitiesdb.main;
+package testing;
 
 import entitiesdb.language.lexer.LexerException;
 import entitiesdb.language.parser.ParserException;
@@ -19,13 +19,13 @@ public class LanguageTesting {
 		String query = "";
 		
 
-		//query = "$x($a:$b):- $x(lives: $y, works:$z, $a:$b)";
+		query = "$x($a:$b):- $x(lives: $y, works:$z, $a:$b)";
 		//query = "$x(lives:$y, works:$z, alive: 'YES'):- $x(lives: $y, works:$z) ? $y = TN";
 		//query = "$x(lives:$y, works:$z, alive: 'YES'):- $x(lives: $y, works:$z) ? $y = TN, $z = H1";
-		query = "$x(lives:$y, works:$z, alive: $t):-  $x(lives: $y, works:$z), $a($c:$k), $g(lives:$t) ? $y=$t";
+		//query = "$x(lives:$y, works:$z, alive: $t):-  $x(lives: $y, works:$z), $a($c:$k), $g(lives:$t) ? $y=$t";
 		//query = "$x(lives:$y, works:$z):- $x(lives: $y, works:$z) ";
-		//query = "< ABC(p: 'fcdd', sdf: QWE, ds: 'ddfdf')";
-		//query = "< I2(works: TN)";
+		//query = "+ ABC(p: 'fcdd', sdf: QWE, ds: 'ddfdf')";
+		//query = "+ I2(works: TN)";
 		
 		//query = "$x :- $x(year: '1978', author: 'Miller')";
 		
@@ -46,14 +46,14 @@ public class LanguageTesting {
 		//query = "$x :- $x(year: '1978', author: 'Miller', title:'Entity model for dummies') ";
 		//query = "$x :- $x(year: '1978', author: 'Miller', publisher: $z(city:MI, owner: $a(married:$s, name:'abc')))";
 		
-		query = "$x()! :- $x() ";
+		//query = "$x():- $x(lives: $y, works:$y) ";
+		//query = "$x :- $x(year: '1978', author: 'Miller')";
 		
-		//Approximate
-		//query = "% $x :- $x(year: '1978', author: 'Miller')";
-		
-		
-		
+		query = "- I2";
 		System.out.println(QueryManager.query(query));
+		
+		query = "$x()! :- $x()";
+		System.out.println(QueryManager.query(query));	
 		
 		QueryManager.dao.close();
 		

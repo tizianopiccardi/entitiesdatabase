@@ -7,6 +7,7 @@ import entitiesdb.language.analysis.DepthFirstAdapter;
 import entitiesdb.language.node.AApproxMain;
 import entitiesdb.language.node.AAscOrderby;
 import entitiesdb.language.node.AComplexQuery;
+import entitiesdb.language.node.ADeleteMain;
 import entitiesdb.language.node.ADesOrderby;
 import entitiesdb.language.node.AEqualCondition;
 import entitiesdb.language.node.AInsertMain;
@@ -66,6 +67,31 @@ public class QueryEngine extends DepthFirstAdapter {
 		}
 		else
 			dao.addEntity(node.getIdentifier().getText());
+		
+		this.resultSet = new ResultSetStandard();
+	}
+	
+	
+	
+	
+	
+	@SuppressWarnings("unchecked")
+	public void caseADeleteMain(ADeleteMain node) {
+		
+		if(node.getEntitybody()!=null) {
+			node.getEntitybody().apply(new StatementEngine(dao, env));
+
+			ArrayList<StatementProperty> propertyList = (ArrayList<StatementProperty>) env.getNodeVal(node.getEntitybody());
+	
+			for (int i = 0 ; i < propertyList.size() ; i++) {
+				Record r = new Record(node.getIdentifier().getText(), 
+						(String)propertyList.get(i).getAttribute(), 
+						(String)propertyList.get(i).getValue());
+				dao.deleteRecord(r);
+			}
+		}
+		else
+			dao.deleteEntity(node.getIdentifier().getText());
 		
 		this.resultSet = new ResultSetStandard();
 	}
