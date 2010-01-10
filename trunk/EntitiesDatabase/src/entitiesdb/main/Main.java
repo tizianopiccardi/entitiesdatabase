@@ -48,6 +48,7 @@ public class Main {
 			
 		}
 		
+		QueryManager.dao.close();
 		System.out.println("Bye...");
 		
 	}
