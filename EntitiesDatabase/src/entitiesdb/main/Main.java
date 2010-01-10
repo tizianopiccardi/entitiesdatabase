@@ -23,7 +23,7 @@ public class Main {
 		try {
 			Main.consoleInterface();
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 	}
@@ -43,6 +43,7 @@ public class Main {
 			
 			System.out.print("> ");
 			query = br.readLine();
+			if (!query.equals(""))
 			switch (Commands.toEnum(query)) {
 				case GUI:			new MainGUI(QueryManager.getDao()); break;
 				case HELP:			System.out.println(Commands.getString());break;
