@@ -49,8 +49,8 @@ public class LanguageTesting {
 		//query = "$x():- $x(lives: $y, works:$y) ";
 		//query = "$x :- $x(year: '1978', author: 'Miller')";
 		
-		query = "- I2";
-		System.out.println(QueryManager.query(query));
+		//query = "- I2";
+		//System.out.println(QueryManager.query(query));
 		
 		query = "$x()! :- $x()";
 		System.out.println(QueryManager.query(query));	
