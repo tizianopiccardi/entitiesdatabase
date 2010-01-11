@@ -1,13 +1,10 @@
 package entitiesdb.main;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 import testing.PutExamples;
-
 import entitiesdb.gui.MainGUI;
 import entitiesdb.query.QueryManager;
 
@@ -36,7 +33,8 @@ public class Main {
 		
 	    System.out.println("=======================");
 	    System.out.println("Entities DB - Console");
-	    System.out.println("=======================\n");
+	    System.out.println("=======================");
+	    System.out.println("Type help for the commands list\n");
 	    
 		boolean exit = false;
 		while (!exit) {
@@ -78,7 +76,7 @@ public class Main {
 		}
 		
 		public static String getString() {
-			String out = "List of the commands:\n";
+			String out = "Commands list:\n";
 			Commands [] cList = Commands.values();
 			for (int i = 0 ; i < cList.length ; i++)
 				if (cList[i]!=_QUERY)
