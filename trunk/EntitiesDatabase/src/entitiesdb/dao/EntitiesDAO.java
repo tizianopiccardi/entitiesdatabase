@@ -15,6 +15,7 @@ public class EntitiesDAO {
 	private Environment databaseEnvironment;
 	private EntitiesIdStore idStore;
 	private RecordsStore recordStore;
+	private ApproximateQueryStore approximateStore;
 	
 	public EntitiesDAO (File databaseDirectory) {
 		
@@ -28,10 +29,22 @@ public class EntitiesDAO {
 		
 		idStore = new EntitiesIdStore(databaseEnvironment);
 		recordStore = new RecordsStore(databaseEnvironment);
+		
+		approximateStore = new ApproximateQueryStore(databaseEnvironment);
+		this.resetApproximateStore();
+		
+		/*for (String s: databaseEnvironment.getDatabaseNames())
+			System.out.println(s);*/
+		
+		//System.out.println("E: " + approximateStore.getAllEntities());
+		//System.out.println("A: " +approximateStore.getAllEntitiesByAccuracy());
+		
+		
+		//System.out.println(approximateStore.getDatabaseName());
+		//System.out.println(approximateStore.getSecondaryDatabaseName());
 	}
 	
-	
-	
+
 	public boolean deleteEntity(String id) {
 		//SICURI??? Questa entità è disintegrata completamente, esistenza e relazioni
 		return idStore.delete(id) && recordStore.delete(id, null, null) && recordStore.delete(null, null, id);
@@ -102,6 +115,7 @@ public class EntitiesDAO {
 		try {
 			idStore.close();
 			recordStore.close();
+			approximateStore.close();
 		} finally {
 			databaseEnvironment.cleanLog();
 			databaseEnvironment.close();
@@ -114,13 +128,21 @@ public class EntitiesDAO {
 		return idStore;
 	}
 
-
-
 	public RecordsStore getRecordsDatabase() {
 		return recordStore;
 	}
 
-
+	public ApproximateQueryStore getApproximateStore() {
+		return approximateStore;
+	}
+	
+	public void resetApproximateStore() {
+		//approximateStore.close();
+		approximateStore.reset();
+		//databaseEnvironment.removeDatabase(null, approximateStore.getDatabaseName());
+		//approximateStore = new ApproximateQueryStore(databaseEnvironment);
+	}
+	
 
 	public String toString() {
 		return "\nDATABASE DUMP:\n\n"+ idStore.toString() +

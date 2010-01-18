@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Enumeration;
 
 import entitiesdb.query.tables.QueryRecordMatrix;
+import entitiesdb.types.EntityAndAccuracy;
 
 /**
  * This is the core of the approximate query system

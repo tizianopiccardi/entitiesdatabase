@@ -19,6 +19,8 @@ public class LanguageTesting {
 		String query = "";
 		
 
+		PutExamples.putExamples(QueryManager.getDao());
+		
 		query = "$x($a:$b):- $x(lives: $y, works:$z, $a:$b)";
 		//query = "$x(lives:$y, works:$z, alive: 'YES'):- $x(lives: $y, works:$z) ? $y = TN";
 		//query = "$x(lives:$y, works:$z, alive: 'YES'):- $x(lives: $y, works:$z) ? $y = TN, $z = H1";
@@ -47,12 +49,12 @@ public class LanguageTesting {
 		//query = "$x :- $x(year: '1978', author: 'Miller', publisher: $z(city:MI, owner: $a(married:$s, name:'abc')))";
 		
 		//query = "$x():- $x(lives: $y, works:$y) ";
-		//query = "%$x :- $x(year: '1978', author: 'Miller')";
+		query = "%$x :- $x(year: '1978', author: 'Miller', title: $x)";
 		
 		//query = "- I2";
 		//System.out.println(QueryManager.query(query));
 		
-		query = "$x()! :- $x()";
+		//query = "$x()! :- $x()";
 		System.out.println(QueryManager.query(query));	
 		
 		QueryManager.dao.close();

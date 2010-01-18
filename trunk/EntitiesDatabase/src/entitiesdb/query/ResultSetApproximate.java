@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import entitiesdb.dao.EntitiesDAO;
 import entitiesdb.dao.RecordsStore.RecordsList;
-import entitiesdb.query.approximate.EntityAndAccuracy;
 import entitiesdb.query.objects.StatementBody;
 import entitiesdb.query.objects.StatementProperty;
+import entitiesdb.types.EntityAndAccuracy;
 
 /**
  * ResultSet of an approximate query
