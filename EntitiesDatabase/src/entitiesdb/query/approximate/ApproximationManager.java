@@ -1,6 +1,7 @@
 package entitiesdb.query.approximate;
 
 import entitiesdb.dao.EntitiesDAO;
+import entitiesdb.dao.ApproximateQueryStore.EntityAndAccuracyList;
 import entitiesdb.query.objects.StatementBody;
 import entitiesdb.query.tables.QueryRecordMatrix;
 
@@ -12,7 +13,8 @@ public class ApproximationManager {
 	 * @param stmtBody
 	 * @return
 	 */
-	public static ApproximateResultSet getApproximateResultSet(EntitiesDAO dao, StatementBody stmtBody) {
+	//not used -> work in memory
+	public static ApproximateResultSet getApproximateResultSetInMemory(EntitiesDAO dao, StatementBody stmtBody) {
 		
 		Object attribute = null;
 		Object value = null;
@@ -41,7 +43,7 @@ public class ApproximationManager {
 				/**
 				 * The sublist and the matching records with the current body field
 				 */
-				ApproximateResultSet subList = ApproximationManager.getApproximateResultSet(dao, (StatementBody) value);
+				ApproximateResultSet subList = ApproximationManager.getApproximateResultSetInMemory(dao, (StatementBody) value);
 				matchingRecords = new QueryRecordMatrix(dao, stmtBody.getEntityObject(), attribute, null);
 				
 				/**
@@ -75,6 +77,36 @@ public class ApproximationManager {
 		return aResultSet;
 		
 	}
+
 	
+	
+	public static EntityAndAccuracyList getApproximateResultSet(EntitiesDAO dao, StatementBody stmtBody, int limit) {
+		getApproximateResultSetAux(dao, stmtBody);
+		EntityAndAccuracyList out = dao.getApproximateStore().getEntity(limit);
+		dao.resetApproximateStore();
+		return out;
+	}
+	
+	public static void getApproximateResultSetAux(EntitiesDAO dao, StatementBody stmtBody) {
+
+		Object attribute = null;
+		Object value = null;
+		QueryRecordMatrix matchingRecords = null;
+		
+		
+		int fieldsCount = stmtBody.properties.size();
+		float percentValue = (float) (100.0 / fieldsCount);
+		
+		for (int i = 0 ; i < fieldsCount ; i++ ) {
+			attribute = stmtBody.getProperties().get(i).getAttributeObject();
+			value = stmtBody.getProperties().get(i).getValueObject();
+			
+			matchingRecords = new QueryRecordMatrix(dao, stmtBody.getEntityObject(), attribute, value);
+			dao.getApproximateStore().add(matchingRecords, percentValue);
+			//System.out.println(matchingRecords);
+		}
+		
+		//System.out.println(dao.getApproximateStore());
+	}
 	
 }

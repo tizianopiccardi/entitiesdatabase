@@ -3,6 +3,7 @@ package entitiesdb.query.evaluators;
 import java.util.ArrayList;
 
 import entitiesdb.dao.EntitiesDAO;
+import entitiesdb.dao.ApproximateQueryStore.EntityAndAccuracyList;
 import entitiesdb.language.analysis.DepthFirstAdapter;
 import entitiesdb.language.node.AApproxMain;
 import entitiesdb.language.node.AAscOrderby;
@@ -21,7 +22,6 @@ import entitiesdb.query.ResultSet;
 import entitiesdb.query.ResultSetApproximate;
 import entitiesdb.query.ResultSetStandard;
 import entitiesdb.query.approximate.ApproximationManager;
-import entitiesdb.query.approximate.EntityAndAccuracy;
 import entitiesdb.query.objects.Condition;
 import entitiesdb.query.objects.OrderBy;
 import entitiesdb.query.objects.StatementBody;
@@ -261,14 +261,19 @@ public class QueryEngine extends DepthFirstAdapter {
 		int limit = -1;
 		if (node.getLimit()!=null)
 			limit = Integer.parseInt(node.getLimit().getText());
-	
-		ArrayList<EntityAndAccuracy> resultSet = ApproximationManager.
+	/*
+		 resultSet = ApproximationManager.
 													getApproximateResultSet(dao, stmtBody).
 													getResultsList(limit);
 		
 		ResultSetApproximate rs = new ResultSetApproximate(dao, resultSet);
 		
+		this.resultSet = rs;*/
+		EntityAndAccuracyList resultSet = ApproximationManager.getApproximateResultSet(dao, stmtBody, limit);
+		ResultSetApproximate rs = new ResultSetApproximate(dao, resultSet);
 		this.resultSet = rs;
+		//ApproximationManager.getApproximateResultSet(dao, stmtBody);
+		
 		
 	}
 }
