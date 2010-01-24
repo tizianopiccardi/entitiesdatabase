@@ -4,9 +4,11 @@ import java.io.File;
 
 import com.sleepycat.je.Environment;
 import com.sleepycat.je.EnvironmentConfig;
+import com.sleepycat.persist.ForwardCursor;
 
 import entitiesdb.dao.EntitiesIdStore.EntityIdsList;
 import entitiesdb.dao.RecordsStore.RecordsList;
+import entitiesdb.types.EntityAndAccuracy;
 import entitiesdb.types.Record;
 
 public class EntitiesDAO {
@@ -137,10 +139,37 @@ public class EntitiesDAO {
 	}
 	
 	public void resetApproximateStore() {
-		//approximateStore.close();
 		approximateStore.reset();
-		//databaseEnvironment.removeDatabase(null, approximateStore.getDatabaseName());
-		//approximateStore = new ApproximateQueryStore(databaseEnvironment);
+	}
+	
+	public void copyToApproximate(Object e, Object a, Object v, float p, String prefix) {
+		if ( !(e instanceof String) ) e = null;
+		if ( !(a instanceof String) ) a = null;
+		if ( !(v instanceof String) ) v = null;
+
+		ForwardCursor<Record> cursor = recordStore.getRecordsCursor(e, a, v);
+		for (Record r : cursor)
+			this.getApproximateStore().put(prefix + r.getEntityId(), p);
+	
+		cursor.close();
+	}
+	
+	
+	public void joinOnValuesToApproximate(Object e, Object a, float p, String prefix, String subPrefix) {
+		if ( !(e instanceof String) ) e = null;
+		if ( !(a instanceof String) ) a = null;
+		
+		ForwardCursor<Record> cursor = recordStore.getRecordsCursor(e, a, null);
+		EntityAndAccuracy eac = null;
+		for (Record r : cursor) {
+			if ((eac=approximateStore.get(subPrefix+r.getValue()))!=null) {
+				float newWeight = eac.getAccuracy()*(p/100.0f);
+				//System.out.println(newWeight);
+				approximateStore.put(prefix+r.getEntityId(), newWeight);	
+			}
+		}
+		
+		cursor.close();
 	}
 	
 

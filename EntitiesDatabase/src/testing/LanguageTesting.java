@@ -46,15 +46,18 @@ public class LanguageTesting {
 		
 		//query = "$x :- $x(year: '1983', author: 'Miller', title:'Entity model for dummies') ";
 		//query = "$x :- $x(year: '1978', author: 'Miller', title:'Entity model for dummies') ";
-		//query = "$x :- $x(year: '1978', author: 'Miller', publisher: $z(city:MI, owner: $a(married:$s, name:'abc')))";
+		//query = "%$x :- $x(year: '1978', author: 'Miller', publisher: $z(city:MI, owner: $a(married:$s, name:'abc',z:a)))";
+		query = "%$x :- $x(year: '1978', author: 'Miller', publisher: $z(city:MI, a:asd))";
 		
 		//query = "$x():- $x(lives: $y, works:$y) ";
-		query = "%$x :- $x(year: '1978', author: 'Miller', title: $x)";
 		
+		//query = "%$x :- $x(year: '1978', author: 'Miller', title: $x)";
+		//query = "%$x :- $x(year: '1978', author: 'Miller', publisher: $z(city:MI, owner: $a(married:$s)))";
 		//query = "- I2";
 		//System.out.println(QueryManager.query(query));
-		
+		//query = "%$x :- $x(name: $a, city: $a, married:$d)";
 		//query = "$x()! :- $x()";
+		//System.out.println(query);
 		System.out.println(QueryManager.query(query));	
 		
 		QueryManager.dao.close();
