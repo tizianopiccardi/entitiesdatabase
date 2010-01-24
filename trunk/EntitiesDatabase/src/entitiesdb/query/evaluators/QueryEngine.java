@@ -273,7 +273,7 @@ public class QueryEngine extends DepthFirstAdapter {
 		ResultSetApproximate rs = new ResultSetApproximate(dao, resultSet);
 		this.resultSet = rs;
 		//ApproximationManager.getApproximateResultSet(dao, stmtBody);
-		
+		//System.out.println(dao.getApproximateStore());
 		
 	}
 }

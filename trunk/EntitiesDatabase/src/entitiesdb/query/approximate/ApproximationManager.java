@@ -81,18 +81,20 @@ public class ApproximationManager {
 	
 	
 	public static EntityAndAccuracyList getApproximateResultSet(EntitiesDAO dao, StatementBody stmtBody, int limit) {
-		getApproximateResultSetAux(dao, stmtBody);
+		getApproximateResultSetAux2(dao, stmtBody,0);
 		EntityAndAccuracyList out = dao.getApproximateStore().getEntity(limit);
 		dao.resetApproximateStore();
 		return out;
 	}
 	
-	public static void getApproximateResultSetAux(EntitiesDAO dao, StatementBody stmtBody) {
 
+	
+	
+	public static String getApproximateResultSetAux2(EntitiesDAO dao, StatementBody stmtBody, int level) {
+
+		String prefix=(level==0)?"":String.valueOf(stmtBody.hashCode());
 		Object attribute = null;
 		Object value = null;
-		QueryRecordMatrix matchingRecords = null;
-		
 		
 		int fieldsCount = stmtBody.properties.size();
 		float percentValue = (float) (100.0 / fieldsCount);
@@ -101,12 +103,27 @@ public class ApproximationManager {
 			attribute = stmtBody.getProperties().get(i).getAttributeObject();
 			value = stmtBody.getProperties().get(i).getValueObject();
 			
-			matchingRecords = new QueryRecordMatrix(dao, stmtBody.getEntityObject(), attribute, value);
-			dao.getApproximateStore().add(matchingRecords, percentValue);
-			//System.out.println(matchingRecords);
+			
+			if (value instanceof StatementBody) {
+
+				String subPrefix = getApproximateResultSetAux2(dao, (StatementBody)value, level+1);
+				dao.joinOnValuesToApproximate(stmtBody.getEntityObject(), attribute, percentValue, prefix, subPrefix);
+				dao.getApproximateStore().deleteByPrefix(subPrefix);
+
+			}
+			else
+				dao.copyToApproximate(stmtBody.getEntityObject(), attribute, value, percentValue, prefix);
 		}
+
+		return prefix;
 		
-		//System.out.println(dao.getApproximateStore());
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 }

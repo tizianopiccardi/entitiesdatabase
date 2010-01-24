@@ -74,9 +74,14 @@ public class RecordsStore {
 	}
 
 	
+	public PrimaryIndex<Long, Record> getPrimaryIndex() {
+		return recordsIndex;
+	}
+	
 	public RecordsList getRecords(Record r) {
 		return getRecords(r.getEntityId(), r.getAttribute(), r.getValue());
 	}
+	
 	public RecordsList getRecords(String e, String a, String v) {
 
 		//no join required: select * from tbl
@@ -101,6 +106,31 @@ public class RecordsStore {
 		
 		cursor.close();
 		return out;
+	}
+	
+	
+	
+	public ForwardCursor<Record> getRecordsCursor(Object e, Object a, Object v) {
+		
+		
+		if(e == null && a == null && v == null) {
+			return recordsIndex.entities();
+		}
+			
+		
+		EntityJoin<Long, Record> join = new EntityJoin<Long, Record>(recordsIndex);
+			
+		if (e!=null)
+			join.addCondition(recordByEntityIndex, e.toString());
+		if (a!=null)
+			join.addCondition(recordByAttributeIndex, a.toString());
+		if (v!=null)
+			join.addCondition(recordByValueIndex, v.toString());
+		/*
+		for (Record r : join.entities()) 
+			System.out.println(r);
+		*/
+		return join.entities();
 	}
 	
 	public RecordsList getRecords(String e) {

@@ -47,27 +47,43 @@ public class ApproximateQueryStore {
 		 }
 	}
 	
-	
-	/*
-	public String getDatabaseName() {
-		String out = "persist#" + store.getStoreName() + "#";
-		out += entitiesIndex.getEntityClass().getName();
-		return out;
+	public boolean contains(String id) {
+		return entitiesIndex.contains(id);
 	}
 	
-	public String getSecondaryDatabaseName() {
-		return percentageIndex.getDatabase().getDatabaseName();
-	}*/
+	public EntityAndAccuracy get(String id) {
+		return entitiesIndex.get(id);
+	}
 	
 	
+	public void delete(String id) {
+		 entitiesIndex.delete(id);
+	}
+	
+	public void deleteByPrefix(String prefix) {
+		
+		char[] ca = prefix.toCharArray();
+		final int lastCharIndex = ca.length - 1;
+		ca[lastCharIndex]++;
+		
+		EntityCursor<EntityAndAccuracy> cursor = entitiesIndex.entities(prefix, true, String.valueOf(ca), false);
+		 try {
+		     for (EntityAndAccuracy entity : cursor) {
+		         cursor.delete();
+		     }
+		 } finally {
+		     cursor.close();
+		 }
+	}
+
 	
 	public void add(QueryRecordMatrix qrm, float p) {
 		for (int i = 0 ; i < qrm.size() ; i++) {
 			this.put(qrm.getEntity(i), p);
 		}
 
-	}
-	
+	}	
+
 	
 	public void put(EntityAndAccuracy e) {
 		this.put(e.getEntity(), e.getAccuracy());
@@ -75,14 +91,17 @@ public class ApproximateQueryStore {
 	
 	public void put(String entity, float p) {
 		EntityAndAccuracy tmp = entitiesIndex.get(entity);
+		
+		
 		if (tmp != null) 
 			p+=tmp.getAccuracy();
+
 		entitiesIndex.put(new EntityAndAccuracy(entity, p));
 	}
-	
+	/*
 	public void simplePut(String entity, float p) {
 		entitiesIndex.put(new EntityAndAccuracy(entity, p));
-	}
+	}*/
 	
 	public long count() {
 		return entitiesIndex.count();
@@ -100,12 +119,13 @@ public class ApproximateQueryStore {
 		EntityAndAccuracyList out = new EntityAndAccuracyList();
 		int couter = 0;
 		for (EntityAndAccuracy r : cursor) {
-			if (couter < limit || limit < 0)
+			if (couter < limit || limit < 0) {
 				out.add(r);
+				couter++;
+			}
 			else break;
 		}
 		cursor.close();
-		//System.out.println(out);
 		return out;
 	}
 	
@@ -128,6 +148,8 @@ public class ApproximateQueryStore {
 		cursor.close();
 		return out;
 	}
+	
+
 	
 	@Override
 	public String toString() {
