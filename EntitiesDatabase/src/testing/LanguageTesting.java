@@ -46,10 +46,10 @@ public class LanguageTesting {
 		
 		//query = "$x :- $x(year: '1983', author: 'Miller', title:'Entity model for dummies') ";
 		//query = "$x :- $x(year: '1978', author: 'Miller', title:'Entity model for dummies') ";
-		//query = "%$x :- $x(year: '1978', author: 'Miller', publisher: $z(city:MI, owner: $a(married:$s, name:'abc',z:a)))";
-		query = "%$x :- $x(year: '1978', author: 'Miller', publisher: $z(city:MI, a:asd))";
+		query = "%$x :- $x(year: '1978', author: 'Miller', publisher: $z(city:MI, owner: $a(married:$s, name:'abc')))";
+		//query = "%$x :- $x(year: '1978', author: 'Miller', publisher: $z(city:MI, a:asd))";
 		
-		//query = "$x():- $x(lives: $y, works:$y) ";
+		//query = "%$x:- $x(lives: $y, works:$z) ";
 		
 		//query = "%$x :- $x(year: '1978', author: 'Miller', title: $x)";
 		//query = "%$x :- $x(year: '1978', author: 'Miller', publisher: $z(city:MI, owner: $a(married:$s)))";
