@@ -114,19 +114,25 @@ public class ApproximateQueryStore {
 	
 	
 	
-	public EntityAndAccuracyList getEntity(int limit) {
+	public EntityAndAccuracyList getEntities(int limit) {
 		EntityCursor<EntityAndAccuracy> cursor = percentageIndex.entities();
 		EntityAndAccuracyList out = new EntityAndAccuracyList();
+		EntityAndAccuracy r = null;
+		
 		int couter = 0;
-		for (EntityAndAccuracy r : cursor) {
-			if (couter < limit || limit < 0) {
-				out.add(r);
-				couter++;
+		if ((r = cursor.last())!=null) 
+			while (r != null) {
+				if (couter < limit || limit < 0) {
+					out.add(r);
+					couter++;
+				}
+				else break;
+				r = cursor.prev();
 			}
-			else break;
-		}
+		
 		cursor.close();
 		return out;
+
 	}
 	
 	public EntityAndAccuracyList getAllEntities() {

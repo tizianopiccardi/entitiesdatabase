@@ -82,7 +82,7 @@ public class ApproximationManager {
 	
 	public static EntityAndAccuracyList getApproximateResultSet(EntitiesDAO dao, StatementBody stmtBody, int limit) {
 		getApproximateResultSetAux2(dao, stmtBody,0);
-		EntityAndAccuracyList out = dao.getApproximateStore().getEntity(limit);
+		EntityAndAccuracyList out = dao.getApproximateStore().getEntities(limit);
 		dao.resetApproximateStore();
 		return out;
 	}

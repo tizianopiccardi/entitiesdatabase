@@ -126,10 +126,7 @@ public class RecordsStore {
 			join.addCondition(recordByAttributeIndex, a.toString());
 		if (v!=null)
 			join.addCondition(recordByValueIndex, v.toString());
-		/*
-		for (Record r : join.entities()) 
-			System.out.println(r);
-		*/
+
 		return join.entities();
 	}
 	
