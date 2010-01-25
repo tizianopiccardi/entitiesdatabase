@@ -164,7 +164,6 @@ public class EntitiesDAO {
 		for (Record r : cursor) {
 			if ((eac=approximateStore.get(subPrefix+r.getValue()))!=null) {
 				float newWeight = eac.getAccuracy()*(p/100.0f);
-				//System.out.println(newWeight);
 				approximateStore.put(prefix+r.getEntityId(), newWeight);	
 			}
 		}

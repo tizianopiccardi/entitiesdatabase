@@ -120,6 +120,15 @@ public class ApproximateQueryStore {
 		EntityAndAccuracy r = null;
 		
 		int couter = 0;
+		while ((r = cursor.prev())!=null) {
+			if (couter < limit || limit < 0) {
+				out.add(r);
+				couter++;
+			}
+			else break;
+		}
+		
+		/*int couter = 0;
 		if ((r = cursor.last())!=null) 
 			while (r != null) {
 				if (couter < limit || limit < 0) {
@@ -128,7 +137,7 @@ public class ApproximateQueryStore {
 				}
 				else break;
 				r = cursor.prev();
-			}
+			}*/
 		
 		cursor.close();
 		return out;

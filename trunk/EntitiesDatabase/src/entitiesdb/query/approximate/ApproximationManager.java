@@ -81,7 +81,7 @@ public class ApproximationManager {
 	
 	
 	public static EntityAndAccuracyList getApproximateResultSet(EntitiesDAO dao, StatementBody stmtBody, int limit) {
-		getApproximateResultSetAux2(dao, stmtBody,0);
+		getApproximateResultSetAux2(dao, stmtBody, 0);
 		EntityAndAccuracyList out = dao.getApproximateStore().getEntities(limit);
 		dao.resetApproximateStore();
 		return out;
@@ -109,7 +109,7 @@ public class ApproximationManager {
 				String subPrefix = getApproximateResultSetAux2(dao, (StatementBody)value, level+1);
 				dao.joinOnValuesToApproximate(stmtBody.getEntityObject(), attribute, percentValue, prefix, subPrefix);
 				dao.getApproximateStore().deleteByPrefix(subPrefix);
-
+				
 			}
 			else
 				dao.copyToApproximate(stmtBody.getEntityObject(), attribute, value, percentValue, prefix);

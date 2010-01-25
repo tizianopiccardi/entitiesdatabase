@@ -261,19 +261,11 @@ public class QueryEngine extends DepthFirstAdapter {
 		int limit = -1;
 		if (node.getLimit()!=null)
 			limit = Integer.parseInt(node.getLimit().getText());
-	/*
-		 resultSet = ApproximationManager.
-													getApproximateResultSet(dao, stmtBody).
-													getResultsList(limit);
-		
-		ResultSetApproximate rs = new ResultSetApproximate(dao, resultSet);
-		
-		this.resultSet = rs;*/
+
 		EntityAndAccuracyList resultSet = ApproximationManager.getApproximateResultSet(dao, stmtBody, limit);
 		ResultSetApproximate rs = new ResultSetApproximate(dao, resultSet);
 		this.resultSet = rs;
-		//ApproximationManager.getApproximateResultSet(dao, stmtBody);
-		//System.out.println(dao.getApproximateStore());
+
 		
 	}
 }
