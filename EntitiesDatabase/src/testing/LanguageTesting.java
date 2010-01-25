@@ -42,11 +42,10 @@ public class LanguageTesting {
 		//query = "$x(lives:$y, is_director_of: $z) :-  $x( lives:$y, works: $z(director_is: $j(married:I2)) )";
 		
 		//query = "$x(lives:$y, is_director_of: $z) :-  $x( works: $z(director_is: $j), lives:$y ) ? $j=$x | $x+";
-		
-		
+
 		//query = "$x :- $x(year: '1983', author: 'Miller', title:'Entity model for dummies') ";
 		//query = "$x :- $x(year: '1978', author: 'Miller', title:'Entity model for dummies') ";
-		query = "%$x :- $x(year: '1978', author: 'Miller', publisher: $z(city:MI, owner: $a(married:$s, name:'abc')))";
+		//query = "%$x :- $x(year: '1978', author: 'Miller', publisher: $z(city:MI, owner: $a(married:$s, name:'abc')))";
 		//query = "%$x :- $x(year: '1978', author: 'Miller', publisher: $z(city:MI, a:asd))";
 		
 		//query = "%$x:- $x(lives: $y, works:$z) ";
@@ -58,7 +57,12 @@ public class LanguageTesting {
 		//query = "%$x :- $x(name: $a, city: $a, married:$d)";
 		//query = "$x()! :- $x()";
 		//System.out.println(query);
+		
+		long start = System.currentTimeMillis();
+		
 		System.out.println(QueryManager.query(query));	
+		
+		System.out.println("Time: " + (System.currentTimeMillis()-start) + "ms");
 		
 		QueryManager.dao.close();
 		
