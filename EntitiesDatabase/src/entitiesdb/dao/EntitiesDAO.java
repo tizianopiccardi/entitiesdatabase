@@ -143,11 +143,22 @@ public class EntitiesDAO {
 	}
 	
 	public void copyToApproximate(Object e, Object a, Object v, float p, String prefix) {
+		/**
+		 * I prepare the query
+		 */
 		if ( !(e instanceof String) ) e = null;
 		if ( !(a instanceof String) ) a = null;
 		if ( !(v instanceof String) ) v = null;
 
+		/**
+		 * This cursor is an iterator on the list of results.<br>
+		 * The datasource is the central database (records).
+		 */
 		ForwardCursor<Record> cursor = recordStore.getRecordsCursor(e, a, v);
+		
+		/**
+		 * For each record, I add it in the approximate database (table)
+		 */
 		for (Record r : cursor)
 			this.getApproximateStore().put(prefix + r.getEntityId(), p);
 	
@@ -156,12 +167,30 @@ public class EntitiesDAO {
 	
 	
 	public void joinOnValuesToApproximate(Object e, Object a, float p, String prefix, String subPrefix) {
+		/**
+		 * Prepare the query
+		 */
 		if ( !(e instanceof String) ) e = null;
 		if ( !(a instanceof String) ) a = null;
 		
+		/**
+		 * Get the matching records
+		 */
 		ForwardCursor<Record> cursor = recordStore.getRecordsCursor(e, a, null);
+		
+		/**
+		 * For each record in the result...
+		 */
 		EntityAndAccuracy eac = null;
 		for (Record r : cursor) {
+			/**
+			 * If the value of the current record prefixed with the string of the sublevel
+			 * is in the approximate table, this means that the current entityId match with 
+			 * the query.
+			 * So, I compute the new weight (ie. 33% of the current level * 50% of the sublevel),
+			 * and i put the entityID in this level.
+			 * Remember that the put method will sum the weight if the entity already exists.
+			 */
 			if ((eac=approximateStore.get(subPrefix+r.getValue()))!=null) {
 				float newWeight = eac.getAccuracy()*(p/100.0f);
 				approximateStore.put(prefix+r.getEntityId(), newWeight);	
