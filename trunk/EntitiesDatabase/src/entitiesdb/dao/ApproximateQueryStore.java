@@ -91,13 +91,13 @@ public class ApproximateQueryStore {
 	
 	public void put(String entity, float p) {
 		EntityAndAccuracy tmp = entitiesIndex.get(entity);
-		
-		
+
 		if (tmp != null) 
 			p+=tmp.getAccuracy();
 
 		entitiesIndex.put(new EntityAndAccuracy(entity, p));
 	}
+	
 	/*
 	public void simplePut(String entity, float p) {
 		entitiesIndex.put(new EntityAndAccuracy(entity, p));

@@ -81,7 +81,7 @@ public class ApproximationManager {
 	
 	
 	public static EntityAndAccuracyList getApproximateResultSet(EntitiesDAO dao, StatementBody stmtBody, int limit) {
-		getApproximateResultSetAux2(dao, stmtBody, 0);
+		getApproximateResultSetAux(dao, stmtBody, 0);
 		EntityAndAccuracyList out = dao.getApproximateStore().getEntities(limit);
 		dao.resetApproximateStore();
 		return out;
@@ -90,31 +90,56 @@ public class ApproximationManager {
 
 	
 	
-	public static String getApproximateResultSetAux2(EntitiesDAO dao, StatementBody stmtBody, int level) {
+	public static String getApproximateResultSetAux(EntitiesDAO dao, StatementBody stmtBody, int level) {
 
+		/**
+		 * If it's the first level, no prefix
+		 */
 		String prefix=(level==0)?"":String.valueOf(stmtBody.hashCode());
-		Object attribute = null;
-		Object value = null;
 		
+		/**
+		 * Number of fields in this level
+		 */
 		int fieldsCount = stmtBody.properties.size();
+		/**
+		 * Weight of each field
+		 */
 		float percentValue = (float) (100.0 / fieldsCount);
 		
+		
 		for (int i = 0 ; i < fieldsCount ; i++ ) {
-			attribute = stmtBody.getProperties().get(i).getAttributeObject();
-			value = stmtBody.getProperties().get(i).getValueObject();
+			Object attribute = stmtBody.getProperties().get(i).getAttributeObject();
+			Object value = stmtBody.getProperties().get(i).getValueObject();
 			
-			
+			/**
+			 * If the value is a Statement, ...
+			 */
 			if (value instanceof StatementBody) {
-
-				String subPrefix = getApproximateResultSetAux2(dao, (StatementBody)value, level+1);
+				/**
+				 * ...I Process recursively the sublevel
+				 */
+				String subPrefix = getApproximateResultSetAux(dao, (StatementBody)value, level+1);
+				/**
+				 * Now I have the prefix of the records that match with the sublevel...
+				 */
 				dao.joinOnValuesToApproximate(stmtBody.getEntityObject(), attribute, percentValue, prefix, subPrefix);
+				/**
+				 * ...and I can clean the useless records.
+				 */
 				dao.getApproximateStore().deleteByPrefix(subPrefix);
 				
 			}
 			else
+				/**
+				 * If the value is an Entity or a String, I copy from the central table the records that
+				 * match.
+				 */
 				dao.copyToApproximate(stmtBody.getEntityObject(), attribute, value, percentValue, prefix);
 		}
 
+		/**
+		 * Return the prefix used in this level
+		 */
 		return prefix;
 		
 	}
