@@ -48,7 +48,10 @@ public class Main {
 				case EXIT:			exit = true; break;
 				case ADD_EXAMPLES:	PutExamples.putExamples(QueryManager.getDao()); break;
 				case DUMP: 			System.out.println(QueryManager.getDao().toString()); break;
-				default:			System.out.println("\n"+QueryManager.query(query));
+				default:			
+					long start = System.currentTimeMillis();
+					System.out.println("\n"+QueryManager.query(query));
+					System.out.println("Response in: " + (System.currentTimeMillis()-start) + "ms");
 			}	
 			
 			
