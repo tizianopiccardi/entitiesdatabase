@@ -27,7 +27,7 @@ public class FillDb {
 		
 		
 		EntitiesDAO dao = new EntitiesDAO(new File("db/"));			
-		putExamples(dao, attributi_fissi, valori_fissi);
+		putExamples(dao, attributi_fissi, valori_fissi, NUMERO_DI_ENTITY, NUMERO_DI_ATTRIBUTI);
 		//System.out.println(dao.getEntityDatabase() + "\n"+dao.getRecordsDatabase());
 		System.out.println("OK");
 		dao.close();
@@ -52,18 +52,18 @@ public class FillDb {
 		return out;
 	}
 	
-	public static void putExamples(EntitiesDAO dao, String[] attributes, String [] values) {
+	public static void putExamples(EntitiesDAO dao, String[] attributes, String [] values, int eCount, int aCount) {
 		
 		Random rnd = new Random();
 		
 		ArrayList<String> entityHistory = new ArrayList<String>();
 		
-		for (int i = 0 ; i < 200; i++) {
+		for (int i = 0 ; i < eCount; i++) {
 			
 			String entity = FillDb.getRandomStringUpper();
 			entityHistory.add(entity);
 			
-			for(int j = 0 ; j < 5 ; j++) {
+			for(int j = 0 ; j < aCount ; j++) {
 				
 				
 				int attributeIndex = rnd.nextInt(attributes.length*2);
