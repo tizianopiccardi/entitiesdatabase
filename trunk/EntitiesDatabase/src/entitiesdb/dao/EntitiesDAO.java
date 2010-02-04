@@ -201,6 +201,15 @@ public class EntitiesDAO {
 	}
 	
 
+	public String countToString() {
+		String out = "";
+		
+		out +="Number of entity: " + idStore.count();
+		out +="\nTotal number of Attribute: " + recordStore.count();
+		return out;
+	}
+	
+	
 	public String toString() {
 		return "\nDATABASE DUMP:\n\n"+ idStore.toString() +
 				"========\n"+ recordStore.toString()+"========";

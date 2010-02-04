@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import testing.FillDb;
 import testing.PutExamples;
 import entitiesdb.gui.MainGUI;
 import entitiesdb.query.QueryManager;
@@ -34,8 +35,12 @@ public class Main {
 	    System.out.println("=======================");
 	    System.out.println("Entities DB - Console");
 	    System.out.println("=======================");
-	    System.out.println("Type help for the commands list\n");
 	    
+	    
+	    System.out.print("Opening DB... ");
+	    QueryManager.getDao();
+	    System.out.println("Done!");
+	    System.out.println("Type help for the commands list\n");
 		boolean exit = false;
 		while (!exit) {
 			
@@ -48,6 +53,13 @@ public class Main {
 				case EXIT:			exit = true; break;
 				case ADD_EXAMPLES:	PutExamples.putExamples(QueryManager.getDao()); break;
 				case DUMP: 			System.out.println(QueryManager.getDao().toString()); break;
+				case PUT_RANDOM: 	System.out.print("\tNumber of entity? ");
+									int entityNumber = Integer.valueOf(br.readLine());
+									System.out.print("\tNumber of attribute for each entity? ");
+									int attributeNumber = Integer.valueOf(br.readLine());
+									FillDb.putExamples(QueryManager.getDao(), entityNumber, attributeNumber);
+									break;
+				case COUNT:			System.out.println(QueryManager.getDao().countToString()); break;
 				default:			
 					long start = System.currentTimeMillis();
 					System.out.println("\n"+QueryManager.query(query));
@@ -68,7 +80,7 @@ public class Main {
 	
 	public static enum Commands {
 
-		GUI, EXIT, DUMP, HELP, ADD_EXAMPLES, _QUERY;
+		GUI, EXIT, DUMP, HELP, ADD_EXAMPLES, PUT_RANDOM, COUNT, _QUERY;
 
 		public static Commands toEnum(String str) {
 			try {
