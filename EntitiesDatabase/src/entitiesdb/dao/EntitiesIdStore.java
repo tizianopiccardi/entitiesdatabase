@@ -67,7 +67,7 @@ public class EntitiesIdStore {
 		store.close();
 	}
 
-	
+
 	public String toString() {
 		String out = "Entities: ";
 		for (EntityId eId: this.getAllEntities())
